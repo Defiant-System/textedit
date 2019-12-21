@@ -2,6 +2,7 @@
 	<Head>
 		<meta name="id" value="textEdit"/>
 		<meta name="title" value="Text Edit" version="1.0"/>
+		<meta name="license" value="AGPL-3.0-or-later"/>
 		<meta name="width" value="750" min="500"/>
 		<meta name="height" value="420" min="300"/>
 		<meta name="top" value="260"/>
