@@ -1,0 +1,21 @@
+<ToolBar>
+	<Group>
+		<Options>
+			<Tool symbol="icon-undo" click="history" arg="undo" state="disabled"/>
+			<Tool symbol="icon-redo" click="history" arg="redo" state="disabled"/>
+		</Options>
+		<Select name="Times New Roman" width="89" menu="font-family"></Select>
+		<Select name="12" width="21" menu="font-size"></Select>
+		<Options>
+			<Tool symbol="icon-bold" click="format" arg="bold"/>
+			<Tool symbol="icon-italic" click="format" arg="italic"/>
+			<Tool symbol="icon-underline" click="format" arg="underline"/>
+		</Options>
+		<Options>
+			<Tool symbol="icon-justify-left" click="format" arg="justifyLeft"/>
+			<Tool symbol="icon-justify-center" click="format" arg="justifyCenter" state="active"/>
+			<Tool symbol="icon-justify-right" click="format" arg="justifyRight"/>
+			<Tool symbol="icon-justify-full" click="format" arg="justifyFull"/>
+		</Options>
+	</Group>
+</ToolBar>

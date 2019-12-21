@@ -1,0 +1,222 @@
+
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<rect id="notes-path-1" x="31.5153527" y="24.4235663" width="341.938516" height="419.341935"></rect>
+		<filter x="-7.9%" y="-4.3%" width="115.8%" height="112.9%" filterUnits="objectBoundingBox" id="notes-filter-2">
+			<feOffset dx="0" dy="9" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+			<feGaussianBlur stdDeviation="7.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+			<feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.123358243 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+		</filter>
+		<linearGradient x1="50%" y1="91.6316699%" x2="50%" y2="100%" id="notes-linearGradient-3">
+			<stop stop-color="#FFFFFF" offset="0%"></stop>
+			<stop stop-color="#BEBEBE" offset="100%"></stop>
+		</linearGradient>
+		<rect id="notes-path-4" x="33.3573777" y="27.1491255" width="337.439325" height="414.92669"></rect>
+		<filter x="-10.7%" y="-5.8%" width="117.8%" height="114.5%" filterUnits="objectBoundingBox" id="notes-filter-5">
+			<feOffset dx="-6" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+			<feGaussianBlur stdDeviation="9" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+			<feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.333814538 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+		</filter>
+		<linearGradient x1="50%" y1="-26.2455076%" x2="50%" y2="100%" id="notes-linearGradient-6">
+			<stop stop-color="#100E169" offset="0%"></stop>
+			<stop stop-color="#100E169" offset="0%"></stop>
+			<stop stop-color="#FFE068" offset="0%"></stop>
+			<stop stop-color="#FAC900" offset="93.9105602%"></stop>
+			<stop stop-color="#A68A17" offset="100%"></stop>
+		</linearGradient>
+		<linearGradient x1="50%" y1="0%" x2="75.0678306%" y2="100%" id="notes-linearGradient-7">
+			<stop stop-color="#A1A1A1" offset="0%"></stop>
+			<stop stop-color="#D6D6D6" offset="100%"></stop>
+		</linearGradient>
+		<ellipse id="notes-path-8" cx="13.7984343" cy="52.5658196" rx="2.92447404" ry="2.96274183"></ellipse>
+		<filter x="0.0%" y="0.0%" width="100.0%" height="100.0%" filterUnits="objectBoundingBox" id="notes-filter-9">
+			<feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+			<feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+			<feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.726902174 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+		</filter>
+	</defs>
+	<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(30, 10) scale(0.95)">
+		<ellipse id="notes-path-10" cx="24.4010811" cy="50.9071782" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-12" cx="35.1256541" cy="49.3676073" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-14" cx="45.5761107" cy="47.741695" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-16" cx="56.4011906" cy="45.911681" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-18" cx="67.0038374" cy="44.2530396" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-20" cx="77.7284105" cy="42.3673853" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-22" cx="88.0872614" cy="40.8462745" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-24" cx="98.9123413" cy="39.040186" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-26" cx="109.514988" cy="37.3815446" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-28" cx="120.239561" cy="35.8419737" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-30" cx="130.543377" cy="34.0936524" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-32" cx="141.515098" cy="32.3860475" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-34" cx="152.117744" cy="30.7274061" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-36" cx="162.842317" cy="28.8973921" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-38" cx="172.880149" cy="27.3267614" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-40" cx="183.705228" cy="25.458912" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-42" cx="194.307875" cy="23.8002706" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-44" cx="205.032448" cy="22.2606997" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-46" cx="215.482905" cy="20.4250229" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-48" cx="226.307985" cy="18.8047734" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-50" cx="236.910632" cy="17.146132" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-52" cx="247.635205" cy="15.6065612" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-54" cx="257.994056" cy="13.8506478" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-56" cx="268.819136" cy="11.9332784" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-58" cx="279.421782" cy="10.274637" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-60" cx="290.146355" cy="8.73506612" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-62" cx="300.596812" cy="6.70742985" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-64" cx="311.421892" cy="5.27913985" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-66" cx="322.024539" cy="3.62049846" rx="2.92447404" ry="2.96274183"></ellipse>
+		<ellipse id="notes-path-68" cx="2.97335441" cy="54.4765121" rx="2.92447404" ry="2.96274183"></ellipse>
+		<g id="Notes" transform="translate(-34.000000, -16.000000)">
+			<g id="Icon" transform="translate(53.000000, 22.000000)">
+				<g id="Base" transform="translate(202.484611, 234.094534) rotate(-9.000000) translate(-202.484611, -234.094534) ">
+					<use fill="black" fill-opacity="1" filter="url(#notes-filter-2)" href="#notes-path-1"></use>
+					<use fill="#FFD42B" fill-rule="evenodd" href="#notes-path-1"></use>
+				</g>
+				<g id="Shadow" transform="translate(202.077040, 234.612470) rotate(-9.000000) translate(-202.077040, -234.612470) ">
+					<use fill="black" fill-opacity="1" filter="url(#notes-filter-5)" href="#notes-path-4"></use>
+					<use fill="url(#notes-linearGradient-3)" fill-rule="evenodd" href="#notes-path-4"></use>
+				</g>
+				<path d="M38.9481207,96.5263823 L376.387445,96.5263823 L376.387445,434.45164 C376.387445,434.45164 277.450667,437.651776 172.966182,436.924415 C169.379839,436.899449 138.556981,437.710781 109.501408,436.924415 C73.7813217,435.95768 38.9481207,434.45165 38.9481207,434.45165 L38.9481207,96.5263823 Z" id="Paper" fill="#F6F6F6" transform="translate(207.667783, 266.897406) rotate(-9.000000) translate(-207.667783, -266.897406) "></path>
+				<rect id="Top" fill="url(#notes-linearGradient-6)" transform="translate(175.485191, 63.177565) rotate(-9.000000) translate(-175.485191, -63.177565) " x="4.51593355" y="26.7130491" width="341.938516" height="72.9290323"></rect>
+				<g id="Line" transform="translate(20.025565, 105.354839)" stroke-width="1.74193548" stroke="#979797" stroke-linecap="square">
+					<path d="M0.68099628,54.2197502 L332.208542,0.878377016"></path>
+					<path d="M5.4361227,84.0775209 L337.10317,30.6131824"></path>
+					<path d="M10.3334965,114.300293 L341.622682,60.861549"></path>
+					<path d="M14.9489043,144.340361 L346.308767,90.7763845"></path>
+					<path d="M19.7040307,174.198132 L350.982987,120.500863"></path>
+					<path d="M24.6014045,204.420904 L355.748549,150.956212"></path>
+					<path d="M29.6786585,234.406343 L360.366382,180.821216"></path>
+					<path d="M34.2940663,264.446412 L365.146761,210.880962"></path>
+					<path d="M39.0491928,294.304182 C39.0491928,294.304182 131.628814,280.730841 178.019683,273.241706 C241.357192,263.016781 369.786552,240.850013 369.786552,240.850013"></path>
+					<path d="M41.7416063,324.825339 C41.7416063,324.825339 130.596263,312.55775 175.809548,305.266574 C241.059627,294.744228 374.49226,271.058319 374.49226,271.058319"></path>
+				</g>
+				<g id="Holes" transform="translate(20.538837, 80.687699)">
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-8"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-8"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-10"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-10"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-12"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-12"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-14"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-14"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-16"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-16"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-18"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-18"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-20"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-20"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-22"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-22"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-24"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-24"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-26"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-26"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-28"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-28"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-30"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-30"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-32"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-32"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-34"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-34"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-36"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-36"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-38"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-38"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-40"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-40"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-42"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-42"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-44"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-44"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-46"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-46"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-48"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-48"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-50"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-50"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-52"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-52"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-54"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-54"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-56"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-56"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-58"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-58"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-60"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-60"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-62"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-62"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-64"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-64"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-66"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-66"></use>
+					</g>
+					<g>
+						<use fill="url(#notes-linearGradient-7)" fill-rule="evenodd" href="#notes-path-68"></use>
+						<use fill="black" fill-opacity="1" filter="url(#notes-filter-9)" href="#notes-path-68"></use>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

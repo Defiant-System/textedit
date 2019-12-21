@@ -1,0 +1,69 @@
+<MenuBar>
+	<Menu name="Text Edit">
+		<Menu name="About Text Edit"/>
+		<Menu type="divider"/>
+		<Menu name="Preferences"/>
+		<Menu type="divider"/>
+		<Menu name="Emptry Trash"/>
+		<Menu type="divider"/>
+		<Menu name="Services">
+			<Menu name="Open"/>
+			<Menu name="Close"/>
+		</Menu>
+		<Menu type="divider"/>
+		<Menu name="Hide Text Edit"/>
+		<Menu name="Hide Others"/>
+		<Menu name="Show All" disabled="1"/>
+		<Menu type="divider"/>
+		<Menu name="Quit Text Edit" shell="win -c"/>
+	</Menu>
+	<Menu name="Edit">
+		<Menu name="Undo" click="history" arg="undo" hotkey="meta+z"/>
+		<Menu name="Redo" click="history" arg="redo" hotkey="meta+shift+z"/>
+		<Menu type="divider"/>
+		<Menu name="Cut"/>
+		<Menu name="Copy"/>
+		<Menu name="Paste"/>
+	</Menu>
+	<Menu name="Format">
+		<Menu name="Font Family" for="font-family">
+			<Menu name="Arial" click="format-fontName" arg="Arial" check-group="textEdit-font-family"/>
+			<Menu name="Times New Roman" click="format-fontName" arg="Times New Roman" check-group="textEdit-font-family" is-checked="1"/>
+			<Menu name="Menlo" click="format-fontName" arg="Menlo" check-group="textEdit-font-family"/>
+			<Menu name="Monaco" click="format-fontName" arg="Monaco" check-group="textEdit-font-family"/>
+			<Menu type="divider"/>
+			<Menu name="Show Fonts"/>
+		</Menu>
+		<Menu name="Font Size" for="font-size" type="thin">
+			<Menu name="9" click="format-fontSize" arg="9px"/>
+			<Menu name="10" click="format-fontSize" arg="10px"/>
+			<Menu name="11" click="format-fontSize" arg="11px"/>
+			<Menu name="12" click="format-fontSize" arg="12px"/>
+			<Menu name="13" click="format-fontSize" arg="13px"/>
+			<Menu name="14" click="format-fontSize" arg="14px"/>
+			<Menu name="18" click="format-fontSize" arg="18px"/>
+			<Menu name="24" click="format-fontSize" arg="24px"/>
+			<Menu name="36" click="format-fontSize" arg="36px"/>
+			<Menu name="48" click="format-fontSize" arg="48px"/>
+		</Menu>
+		<Menu type="divider"/>
+		<Menu name="Bold" click="format" arg="bold"/>
+		<Menu name="Italic" click="format" arg="italic"/>
+		<Menu name="Underline" click="format" arg="underline"/>
+		<Menu type="divider"/>
+		<Menu name="Clear Formatting" click="format" arg="removeFormat"/>
+	</Menu>
+	<Menu name="Window">
+		<Menu name="Minimize" shell="win -s min"/>
+		<Menu name="Maximize" shell="win -s max"/>
+		<Menu type="divider"/>
+		<Menu name="Close Window" shell="win -c"/>
+	</Menu>
+	<Menu name="Help">
+		<Menu name="Send Text Edit Feedback"/>
+		<Menu type="divider"/>
+		<Menu name="Text Edit Help"/>
+		<Menu type="divider"/>
+		<Menu name="License"/>
+	</Menu>
+</MenuBar>
