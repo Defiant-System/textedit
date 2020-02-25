@@ -8,22 +8,15 @@
 		<meta name="height" value="420" min="300"/>
 		<meta name="top" value="260"/>
 		<meta name="left" value="180"/>
+		<meta name="clones" value="true"/>
 		<meta name="minimize"/>
 		<meta name="maximize"/>
 		<meta name="resize"/>
-		<meta name="statusbar"/>
 		<meta name="script" value="src/js/main.js"/>
 		<meta name="style" value="src/css/main.less"/>
 		<meta name="icons" value="src/svg/icons.svg"/>
 		<meta name="content" value="src/partials/content.htm"/>
 
-		<TabBar>
-			<i name="Some document"/>
-			<i name="Another document"/>
-			<i name="One more doc"/>
-			<i name="Last file"/>
-		</TabBar>
-		
 		@import "src/partials/toolbar.xml"
 		@import "src/partials/menubar.xml"
 	</Head>
