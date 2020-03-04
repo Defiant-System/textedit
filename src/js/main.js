@@ -22,6 +22,9 @@ const textEdit = {
 
 		//this.dispatch({type: "new-tab"});
 
+		//setTimeout(() => window.save(), 1000);
+		window.save();
+
 		/*
 		let clone = window.clone();
 		//console.log(clone);
@@ -42,6 +45,9 @@ const textEdit = {
 				this.editor.focus();
 
 				undoStack.init(this.editor);
+				break;
+			case "save-file":
+				window.save();
 				break;
 			case "history":
 				undoStack.dispatch(event);

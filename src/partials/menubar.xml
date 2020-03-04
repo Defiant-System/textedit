@@ -17,6 +17,9 @@
 		<Menu type="divider"/>
 		<Menu name="Quit Text Edit" shell="win -c"/>
 	</Menu>
+	<Menu name="File">
+		<Menu name="Save" click="save-file" hotkey="alt+s"/>
+	</Menu>
 	<Menu name="Edit">
 		<Menu name="Undo" click="history-undo" hotkey="meta+z"/>
 		<Menu name="Redo" click="history-redo" hotkey="meta+shift+z"/>
