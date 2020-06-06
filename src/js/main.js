@@ -1,6 +1,6 @@
 
-ant_require("./undoStack.js");
-ant_require("./queryCommand.js");
+defiant.require("./undoStack.js");
+defiant.require("./queryCommand.js");
 
 const textEdit = {
 	init() {
@@ -23,7 +23,7 @@ const textEdit = {
 		//this.dispatch({type: "new-tab"});
 
 		//setTimeout(() => window.save(), 1000);
-		window.save();
+		//window.save();
 
 		/*
 		let clone = window.clone();

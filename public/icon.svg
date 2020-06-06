@@ -1,7 +1,6 @@
 
 <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
 	<defs>
-		<rect id="notes-path-1" x="31.5153527" y="24.4235663" width="341.938516" height="419.341935"></rect>
 		<filter x="-7.9%" y="-4.3%" width="115.8%" height="112.9%" filterUnits="objectBoundingBox" id="notes-filter-2">
 			<feOffset dx="0" dy="9" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
 			<feGaussianBlur stdDeviation="7.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
@@ -11,7 +10,6 @@
 			<stop stop-color="#FFFFFF" offset="0%"></stop>
 			<stop stop-color="#BEBEBE" offset="100%"></stop>
 		</linearGradient>
-		<rect id="notes-path-4" x="33.3573777" y="27.1491255" width="337.439325" height="414.92669"></rect>
 		<filter x="-10.7%" y="-5.8%" width="117.8%" height="114.5%" filterUnits="objectBoundingBox" id="notes-filter-5">
 			<feOffset dx="-6" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
 			<feGaussianBlur stdDeviation="9" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
@@ -28,13 +26,15 @@
 			<stop stop-color="#A1A1A1" offset="0%"></stop>
 			<stop stop-color="#D6D6D6" offset="100%"></stop>
 		</linearGradient>
-		<ellipse id="notes-path-8" cx="13.7984343" cy="52.5658196" rx="2.92447404" ry="2.96274183"></ellipse>
 		<filter x="0.0%" y="0.0%" width="100.0%" height="100.0%" filterUnits="objectBoundingBox" id="notes-filter-9">
 			<feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
 			<feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
 			<feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.726902174 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
 		</filter>
 	</defs>
+	<rect id="notes-path-1" x="31.5153527" y="24.4235663" width="341.938516" height="419.341935"></rect>
+	<rect id="notes-path-4" x="33.3573777" y="27.1491255" width="337.439325" height="414.92669"></rect>
+	<ellipse id="notes-path-8" cx="13.7984343" cy="52.5658196" rx="2.92447404" ry="2.96274183"></ellipse>
 	<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(30, 10) scale(0.95)">
 		<ellipse id="notes-path-10" cx="24.4010811" cy="50.9071782" rx="2.92447404" ry="2.96274183"></ellipse>
 		<ellipse id="notes-path-12" cx="35.1256541" cy="49.3676073" rx="2.92447404" ry="2.96274183"></ellipse>
