@@ -25,7 +25,7 @@ const queryCommand = {
 		});
 		
 		let state = document.queryCommandValue("fontName").replace(/"/g, "");
-		window.updateMenu(`name="${state}"`, {"is-checked": 1});
+		window.menuBar.update(`//Menu[@name="${state}"]`, {"is-checked": 1});
 	},
 	format(command, value) {
 		document.execCommand(command, false, value || null);
