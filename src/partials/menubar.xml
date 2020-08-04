@@ -1,6 +1,6 @@
 <MenuBar>
 	<Menu name="Text Edit">
-		<Menu name="About Text Edit"/>
+		<Menu name="About Text Edit" shell="win -a"/>
 		<Menu type="divider"/>
 		<Menu name="Preferences"/>
 		<Menu type="divider"/>

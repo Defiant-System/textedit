@@ -20,10 +20,11 @@ const textEdit = {
 		//this.editor.focus();
 		//undoStack.init(this.editor);
 
-		//this.dispatch({type: "new-tab"});
+		this.dispatch({type: "new-tab"});
 
 		//setTimeout(() => window.save(), 1000);
-		//window.save();
+		window.save();
+		//window.dialog.alert("hello");
 
 		/*
 		let clone = window.clone();
@@ -72,7 +73,7 @@ const textEdit = {
 				window.close();
 				break;
 			case "new-tab":
-				tab = window.addTab("New Document");
+				tab = window.tabs.add("New Document");
 				
 				// hide current editor element
 				self.current.el.addClass("hidden");
@@ -90,9 +91,10 @@ const textEdit = {
 				self.editors[index].el.removeClass("hidden");
 				break;
 			case "close-tab":
-				index = event.el.index();
-				isDirty = self.editors[index].isDirty;
-				return !isDirty;
+				// index = event.el.index();
+				// isDirty = self.editors[index].isDirty;
+				// return !isDirty;
+				break;
 		}
 	}
 };
