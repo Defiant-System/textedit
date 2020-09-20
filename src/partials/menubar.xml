@@ -2,19 +2,6 @@
 	<Menu name="Text Edit">
 		<Menu name="About Text Edit" shell="win -a"/>
 		<Menu type="divider"/>
-		<Menu name="Preferences"/>
-		<Menu type="divider"/>
-		<Menu name="Emptry Trash"/>
-		<Menu type="divider"/>
-		<Menu name="Services">
-			<Menu name="Open"/>
-			<Menu name="Close"/>
-		</Menu>
-		<Menu type="divider"/>
-		<Menu name="Hide Text Edit"/>
-		<Menu name="Hide Others"/>
-		<Menu name="Show All" disabled="1"/>
-		<Menu type="divider"/>
 		<Menu name="Quit Text Edit" shell="win -c"/>
 	</Menu>
 	<Menu name="File">

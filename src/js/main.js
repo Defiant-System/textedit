@@ -22,8 +22,7 @@ const textEdit = {
 
 		this.dispatch({type: "new-tab"});
 
-		//setTimeout(() => window.save(), 1000);
-		window.save();
+		setTimeout(() => window.dialog.save(), 400);
 		//window.dialog.alert("hello");
 
 		/*
