@@ -17,7 +17,7 @@ const undoStack = {
 		this.toolRedo = window.find(".toolbar-tool[data-click='redo']");
 
 		this.startValue = el.html();
-		this.stack = new UndoStack(el[0]);
+		this.stack = new window.UndoStack(el[0]);
 		this.stack.changed = this.changed.bind(this);
 		this.observer = new MutationObserver(this.flush.bind(this));
 		this.observer.observe(el[0], this.options);

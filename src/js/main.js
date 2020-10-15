@@ -14,15 +14,15 @@ const textEdit = {
 
 		this.current = this.editors[0];
 
-		el.html("test <b>text</b> banan");
+		// el.html("test <b>text</b> banan");
 
 		//this.format("styleWithCSS", true);
 		//this.editor.focus();
 		//undoStack.init(this.editor);
 
-		this.dispatch({type: "new-tab"});
+		// this.dispatch({type: "new-tab"});
 
-		setTimeout(() => window.dialog.save(), 400);
+		// setTimeout(() => window.dialog.save(), 400);
 		//window.dialog.alert("hello");
 
 		/*
@@ -32,7 +32,7 @@ const textEdit = {
 		*/
 	},
 	async dispatch(event) {
-		let self = textEdit,
+		let Self = textEdit,
 			isDirty,
 			index,
 			clone,
@@ -41,16 +41,17 @@ const textEdit = {
 		switch (event.type) {
 			case "open.file":
 				let file = await event.open();
-				this.editor.html(file.text);
-				this.editor.focus();
 
-				undoStack.init(this.editor);
+				Self.current.el.html(file.text);
+				Self.current.el.focus();
+
+				// undoStack.init(Self.current.el);
 				break;
 			case "save-file":
 				window.save();
 				break;
 			case "history":
-				undoStack.dispatch(event);
+				// undoStack.dispatch(event);
 				break;
 			case "query-command-state":
 			case "format":
@@ -75,23 +76,23 @@ const textEdit = {
 				tab = window.tabs.add("New Document");
 				
 				// hide current editor element
-				self.current.el.addClass("hidden");
+				Self.current.el.addClass("hidden");
 
-				clone = self.template.clone();
-				el = self.content.append(clone);
+				clone = Self.template.clone();
+				el = Self.content.append(clone);
 				
-				self.editors.push({ el, isDirty: false });
-				self.current = self.editors[self.editors.length - 1];
+				Self.editors.push({ el, isDirty: false });
+				Self.current = Self.editors[Self.editors.length - 1];
 				break;
 			case "active-tab":
-				self.current.el.addClass("hidden");
+				Self.current.el.addClass("hidden");
 
 				index = event.el.index();
-				self.editors[index].el.removeClass("hidden");
+				Self.editors[index].el.removeClass("hidden");
 				break;
 			case "close-tab":
 				// index = event.el.index();
-				// isDirty = self.editors[index].isDirty;
+				// isDirty = Self.editors[index].isDirty;
 				// return !isDirty;
 				break;
 		}
