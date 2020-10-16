@@ -1,26 +1,33 @@
 
-const queryCommand = {
+// textEdit.queryCommand
+
+{
+	init() {
+		// fast references
+		this.tools = window.find("[data-click='format']");
+	},
 	dispatch(event) {
-		let self = queryCommand;
+		let APP = textEdit,
+			Self = APP.queryCommand;
 		switch (event.type) {
 			case "query-command-state":
-				self.state();
+				Self.state();
 				break;
 			case "format":
-				self.format(event.arg);
+				Self.format(event.arg);
 				break;
 			case "format-fontSize":
-				self.format("fontSize", event.arg);
+				Self.format("fontSize", event.arg);
 				break;
 			case "format-fontName":
-				self.format("fontName", event.arg);
+				Self.format("fontName", event.arg);
 				break;
 		}
 	},
 	state() {
-		textEdit.tools.map(tool => {
-			const command = tool.getAttribute("data-arg");
-			const state = document.queryCommandState(command);
+		this.tools.map(tool => {
+			let command = tool.getAttribute("data-arg");
+			let state = document.queryCommandState(command);
 			$(tool).toggleClass("down", !state).removeClass("active");
 		});
 		
@@ -31,4 +38,4 @@ const queryCommand = {
 		document.execCommand(command, false, value || null);
 		this.state();
 	}
-};
+}
