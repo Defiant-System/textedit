@@ -54,7 +54,8 @@
 				Self.currentFile.editor.removeClass("hidden");
 				break;
 			case "tab-close":
-				console.log(event);
+				let index = event.el.index();
+				Self.files.splice(index, 1);
 				break;
 		}
 	}
