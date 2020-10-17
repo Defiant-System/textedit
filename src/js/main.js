@@ -6,6 +6,8 @@ const textEdit = {
 
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
+
+		this.dispatch({ type: "tab-new" });
 	},
 	async openFile(event) {
 		// let file = await event.open();
@@ -25,6 +27,7 @@ const textEdit = {
 				break;
 			// custom events
 			case "save-file":
+				console.log( Self.tabs.active.editor.html() );
 				// window.dialog.save();
 				break;
 			case "tab-new":

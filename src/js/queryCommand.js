@@ -5,6 +5,8 @@
 	init() {
 		// fast references
 		this.tools = window.find("[data-click='format']");
+
+		this.format("styleWithCSS", true);
 	},
 	dispatch(event) {
 		let APP = textEdit,

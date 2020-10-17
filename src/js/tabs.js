@@ -14,7 +14,7 @@
 		// default file
 		this.file = {
 			name: "New Document",
-			text: "",
+			text: `<b>Lorem</b> <i>ipsum</i> <u>dolor</u> <strike>sit</strike> amet, consectetur <i>adipisicing elit. Necessi</i>tatibus natus vero voluptatem aliquam molestias dicta aperiam dignissimos laudantium accusamus saepe!`,
 		};
 	},
 	dispatch(event) {
@@ -23,7 +23,8 @@
 			file,
 			editor,
 			history,
-			tab;
+			tab,
+			index;
 		switch (event.type) {
 			case "tab-new":
 				file = {
@@ -43,18 +44,27 @@
 				// add file text to editor
 				editor.html(file.text);
 				// save to files array
-				Self.files.push({ tab, editor, file, history });
+				Self.files.push({ editor, file, history });
+
+				Self.dispatch({
+					type: "tab-clicked",
+					el: tab || { index: () => 0 },
+				});
 				break;
 			case "tab-clicked":
-				if (Self.currentFile) {
-					Self.currentFile.editor.addClass("hidden");
+				if (Self.active) {
+					Self.active.editor.addClass("hidden");
 				}
-				// update "currentFile"
-				Self.currentFile = Self.files[event.el.index()];
-				Self.currentFile.editor.removeClass("hidden");
+				// update "active"
+				index = event.el.index();
+				Self.active = Self.files[index];
+				Self.active.editor.removeClass("hidden");
+
+				// set window title to active file name
+				window.title = Self.active.file.name;
 				break;
 			case "tab-close":
-				let index = event.el.index();
+				index = event.el.index();
 				Self.files.splice(index, 1);
 				break;
 		}
