@@ -10,14 +10,8 @@ const textEdit = {
 	async openFile(event) {
 		// let file = await event.open();
 		let file = {
-			"file-1.txt": {
-				"name": "file-1.txt",
-				"text": "text 1."
-			},
-			"file-2.txt": {
-				"name": "file-2.txt",
-				"text": "text 2."
-			}
+			"file-1.txt": { "name": "file-1.txt", "text": "Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+			"file-2.txt": { "name": "file-2.txt", "text": "text 2" }
 		};
 		this.dispatch({ type: "tab-new", file: file[event.name] });
 	},
