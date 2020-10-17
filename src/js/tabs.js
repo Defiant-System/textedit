@@ -59,6 +59,7 @@
 				index = event.el.index();
 				Self.active = Self.files[index];
 				Self.active.editor.removeClass("hidden");
+				Self.active.editor.focus();
 
 				// set window title to active file name
 				window.title = Self.active.file.name;

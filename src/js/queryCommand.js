@@ -12,6 +12,7 @@
 		let APP = textEdit,
 			Self = APP.queryCommand;
 		switch (event.type) {
+			case "window.keyup":
 			case "query-command-state":
 				Self.state();
 				break;
@@ -30,7 +31,7 @@
 		this.tools.map(tool => {
 			let command = tool.getAttribute("data-arg");
 			let state = document.queryCommandState(command);
-			$(tool).toggleClass("down", !state).removeClass("active");
+			$(tool).toggleClass("tool-active_", !state);
 		});
 		
 		let state = document.queryCommandValue("fontName").replace(/"/g, "");

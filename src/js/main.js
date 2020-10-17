@@ -39,6 +39,7 @@ const textEdit = {
 			case "format":
 			case "format-fontSize":
 			case "format-fontName":
+			case "window.keyup":
 				Self.queryCommand.dispatch(event);
 				break;
 		}
