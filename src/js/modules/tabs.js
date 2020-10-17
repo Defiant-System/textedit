@@ -42,7 +42,7 @@
 				// editor
 				editor = APP.content.append(Self.template.clone());
 				// add file text to editor
-				editor.html(file.text);
+				editor.html( file.ext === "txt" ? file.text : $.md(file.text) );
 				// save to files array
 				Self.files.push({ editor, file, history });
 

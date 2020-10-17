@@ -1,4 +1,15 @@
 
+let file = {
+	"file-1.txt": { "name": "file-1.txt", ext: "txt", "text": "Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+	"file-2.md": { "name": "file-2.md", ext: "md", "text": `
+## How to play
+Othello is a simple game that you play on an 8 by 8 in checkered board with 64 double-sided black and white discs. The game is easy to learn, but it takes time to master and develop your strategies for winning the game.
+
+### Object of the Game
+The goal is to get the majority of colour discs on the board at the end of the game.
+`}
+};
+
 const textEdit = {
 	init() {
 		// fast references
@@ -11,10 +22,6 @@ const textEdit = {
 	},
 	async openFile(event) {
 		// let file = await event.open();
-		let file = {
-			"file-1.txt": { "name": "file-1.txt", "text": "Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
-			"file-2.txt": { "name": "file-2.txt", "text": "text 2" }
-		};
 		this.dispatch({ type: "tab-new", file: file[event.name] });
 	},
 	dispatch(event) {
@@ -44,8 +51,8 @@ const textEdit = {
 				break;
 		}
 	},
-	tabs: defiant.require("./tabs.js"),
-	queryCommand: defiant.require("./queryCommand.js"),
+	tabs: defiant.require("./modules/tabs.js"),
+	queryCommand: defiant.require("./modules/queryCommand.js"),
 };
 
 window.exports = textEdit;
