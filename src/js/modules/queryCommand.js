@@ -14,6 +14,9 @@
 		switch (event.type) {
 			case "window.keyup":
 			case "query-command-state":
+				// save selection
+				APP.tabs.selection.save();
+				// update toolbar item based on state
 				Self.state();
 				break;
 			case "format":
