@@ -34,8 +34,8 @@ const textEdit = {
 				break;
 			// custom events
 			case "save-file":
-				console.log( Self.tabs.active.editor.html() );
-				// window.dialog.save();
+				// console.log( Self.tabs.active.editor.html() );
+				window.dialog.save();
 				break;
 			case "tab-new":
 			case "tab-clicked":
@@ -52,6 +52,7 @@ const textEdit = {
 		}
 	},
 	tabs: defiant.require("./modules/tabs.js"),
+	undoStack: defiant.require("./modules/undoStack.js"),
 	queryCommand: defiant.require("./modules/queryCommand.js"),
 };
 

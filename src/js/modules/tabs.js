@@ -14,7 +14,7 @@
 		// default file
 		this.file = {
 			name: "New Document",
-			text: `<b>Lorem</b> <i>ipsum</i> <u>dolor</u> <strike>sit</strike> amet, consectetur <i>adipisicing elit. Necessi</i>tatibus natus vero voluptatem aliquam molestias dicta aperiam dignissimos laudantium accusamus saepe!`,
+			text: `<b>Lorem</b> <i>ipsum</i> <u>dolor</u> <strike>sit</strike> amet, consectetur <i>adipisicing elit. Necessi</i><br>tatibus natus vero voluptatem aliquam molestias dicta <br>aperiam dignissimos laudantium accusamus saepe!`,
 		};
 	},
 	dispatch(event) {
@@ -22,7 +22,7 @@
 			Self = APP.tabs,
 			file,
 			editor,
-			history,
+			undoStack,
 			tab,
 			index;
 		switch (event.type) {
@@ -31,8 +31,8 @@
 					...Self.file,
 					...event.file,
 				};
-				// undo history
-				history = new window.History;
+				// undo stack
+				undoStack = new window.History;
 
 				// create new tab if needed
 				if (Self.files.length) {
@@ -44,7 +44,7 @@
 				// add file text to editor
 				editor.html( file.ext === "txt" ? file.text : $.md(file.text) );
 				// save to files array
-				Self.files.push({ editor, file, history });
+				Self.files.push({ editor, file, undoStack });
 
 				Self.dispatch({
 					type: "tab-clicked",
@@ -63,6 +63,7 @@
 
 				let selection = Self.active.selection;
 				if (selection) {
+					// restore selection
 					APP.queryCommand.selection.restore(Self.active.editor[0], selection);
 				}
 

@@ -46,9 +46,11 @@
 	},
 	selection: {
 		save() {
+			let selection = document.getSelection();
+			if (selection.rangeCount === 0) return;
 			let Active = textEdit.tabs.active,
 				editor = Active.editor[0],
-				range = document.getSelection().getRangeAt(0),
+				range = selection.getRangeAt(0),
 				preSelectionRange = range.cloneRange();
 			
 			preSelectionRange.selectNodeContents(editor);
@@ -59,10 +61,11 @@
 			Active.selection = { start, end: start + range.toString().length };
 		},
 		restore(editor, saved) {
-			let charIndex = 0, range = document.createRange(),
+			let range = document.createRange(),
 				nodeStack = [editor],
 				foundStart = false,
 				stop = false,
+				charIndex = 0,
 				node;
 
 			range.setStart(editor, 0);
