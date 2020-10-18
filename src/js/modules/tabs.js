@@ -63,7 +63,7 @@
 
 				let selection = Self.active.selection;
 				if (selection) {
-					Self.selection.restore(selection);
+					APP.queryCommand.selection.restore(Self.active.editor[0], selection);
 				}
 
 				// set window title to active file name
@@ -73,59 +73,6 @@
 				index = event.el.index();
 				Self.files.splice(index, 1);
 				break;
-		}
-	},
-	selection: {
-		save() {
-			let Active = textEdit.tabs.active,
-				editor = Active.editor[0],
-				range = document.getSelection().getRangeAt(0),
-				preSelectionRange = range.cloneRange();
-			
-			preSelectionRange.selectNodeContents(editor);
-			preSelectionRange.setEnd(range.startContainer, range.startOffset);
-			
-			let start = preSelectionRange.toString().length;
-
-			Active.selection = {
-				start,
-				end: start + range.toString().length
-			};
-		},
-		restore(saved) {
-			let editor = textEdit.tabs.active.editor[0],
-				charIndex = 0, range = document.createRange(),
-				nodeStack = [editor],
-				foundStart = false,
-				stop = false,
-				node;
-
-			range.setStart(editor, 0);
-			range.collapse(true);
-
-			while (!stop && (node = nodeStack.pop())) {
-				if (node.nodeType == 3) {
-					let nextCharIndex = charIndex + node.length;
-					if (!foundStart && saved.start >= charIndex && saved.start <= nextCharIndex) {
-						range.setStart(node, saved.start - charIndex);
-						foundStart = true;
-					}
-					if (foundStart && saved.end >= charIndex && saved.end <= nextCharIndex) {
-						range.setEnd(node, saved.end - charIndex);
-						stop = true;
-					}
-					charIndex = nextCharIndex;
-				} else {
-					let i = node.childNodes.length;
-					while (i--) {
-						nodeStack.push(node.childNodes[i]);
-					}
-				}
-			}
-
-			let sel = document.getSelection();
-			sel.removeAllRanges();
-			sel.addRange(range);
 		}
 	}
 }

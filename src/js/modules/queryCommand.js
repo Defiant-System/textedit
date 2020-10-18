@@ -15,7 +15,7 @@
 			case "window.keyup":
 			case "query-command-state":
 				// save selection
-				APP.tabs.selection.save();
+				Self.selection.save();
 				// update toolbar item based on state
 				Self.state();
 				break;
@@ -43,5 +43,54 @@
 	format(command, value) {
 		document.execCommand(command, false, value || null);
 		this.state();
+	},
+	selection: {
+		save() {
+			let Active = textEdit.tabs.active,
+				editor = Active.editor[0],
+				range = document.getSelection().getRangeAt(0),
+				preSelectionRange = range.cloneRange();
+			
+			preSelectionRange.selectNodeContents(editor);
+			preSelectionRange.setEnd(range.startContainer, range.startOffset);
+			
+			let start = preSelectionRange.toString().length;
+			// store selection
+			Active.selection = { start, end: start + range.toString().length };
+		},
+		restore(editor, saved) {
+			let charIndex = 0, range = document.createRange(),
+				nodeStack = [editor],
+				foundStart = false,
+				stop = false,
+				node;
+
+			range.setStart(editor, 0);
+			range.collapse(true);
+
+			while (!stop && (node = nodeStack.pop())) {
+				if (node.nodeType == 3) {
+					let nextCharIndex = charIndex + node.length;
+					if (!foundStart && saved.start >= charIndex && saved.start <= nextCharIndex) {
+						range.setStart(node, saved.start - charIndex);
+						foundStart = true;
+					}
+					if (foundStart && saved.end >= charIndex && saved.end <= nextCharIndex) {
+						range.setEnd(node, saved.end - charIndex);
+						stop = true;
+					}
+					charIndex = nextCharIndex;
+				} else {
+					let i = node.childNodes.length;
+					while (i--) {
+						nodeStack.push(node.childNodes[i]);
+					}
+				}
+			}
+
+			let sel = document.getSelection();
+			sel.removeAllRanges();
+			sel.addRange(range);
+		}
 	}
 }
