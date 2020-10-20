@@ -5,7 +5,12 @@
 		<Menu name="Quit Text Edit" shell="win -c"/>
 	</Menu>
 	<Menu name="File">
+		<Menu name="New"/>
+		<Menu name="Open"/>
+		<Menu type="divider"/>
+		<Menu name="Close"/>
 		<Menu name="Save" click="save-file" hotkey="alt+s"/>
+		<Menu name="Save as&#8230;"/>
 	</Menu>
 	<Menu name="Edit">
 		<Menu name="Undo" click="history-undo" hotkey="meta+z"/>
