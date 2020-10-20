@@ -1,7 +1,7 @@
 
 let file = {
-	"file-1.txt": { name: "file-1", ext: "txt", path: "/fs/Documents/file-1.txt", text: "Lorem ipsum dolor sit amet." },
-	"file-2.md": { name: "file-2", ext: "md", path: "/fs/Desktop/file-2.md", text: `
+	"file-1.txt": { name: "file-1", ext: "txt", base: "file-1.txt", dir: "/fs/Desktop/test/", path: "/fs/Desktop/test/file-1.txt", text: "Lorem ipsum dolor sit amet." },
+	"file-2.md": { name: "file-2", ext: "md", base: "file-2.md", dir: "/fs/Desktop/", path: "/fs/Desktop/file-2.md", text: `
 ## How to play
 Othello is a simple game that you play on an 8 by 8 in checkered board with 64 double-sided black and white discs. The game is easy to learn, but it takes time to master and develop your strategies for winning the game.
 
