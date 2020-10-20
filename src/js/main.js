@@ -43,18 +43,20 @@ const textEdit = {
 			// custom events
 			case "save-file":
 				file = Self.tabs.active.file;
+				// update file
 				file.text = Self.tabs.active.editor.html();
-
-				file.types = {
-					txt: () => file.text.stripHtml(),
-					html: () => file.text,
-					md: () => {
-						let service = new TurndownService();
-						return service.turndown(file.text);
-					},
-				};
-
-				window.dialog.save(file);
+				// pass on available file types
+				window.dialog.save({
+					...file,
+					types: {
+						txt: () => file.text.stripHtml(),
+						html: () => file.text,
+						md: () => {
+							let service = new TurndownService();
+							return service.turndown(file.text);
+						},
+					}
+				});
 				break;
 			case "tab-new":
 			case "tab-clicked":
