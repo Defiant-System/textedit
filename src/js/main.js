@@ -1,7 +1,7 @@
 
 let file = {
-	"file-1.txt": { name: "file-1", ext: "txt", text: "Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
-	"file-2.md": { name: "file-2", ext: "md", text: `
+	"file-1.txt": { name: "file-1", ext: "txt", path: "/fs/Documents/file-1.txt", text: "Lorem ipsum dolor sit amet." },
+	"file-2.md": { name: "file-2", ext: "md", path: "/fs/Desktop/file-2.md", text: `
 ## How to play
 Othello is a simple game that you play on an 8 by 8 in checkered board with 64 double-sided black and white discs. The game is easy to learn, but it takes time to master and develop your strategies for winning the game.
 
@@ -46,7 +46,8 @@ const textEdit = {
 				file.text = Self.tabs.active.editor.html();
 
 				file.types = {
-					txt: () => file.text,
+					txt: () => file.text.stripHtml(),
+					html: () => file.text,
 					md: () => {
 						let service = new TurndownService();
 						return service.turndown(file.text);
