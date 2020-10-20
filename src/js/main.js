@@ -24,7 +24,7 @@ const textEdit = {
 
 		this.dispatch({ type: "tab-new" });
 
-		setTimeout(() => this.dispatch({ type: "save-file" }), 500);
+		// setTimeout(() => this.dispatch({ type: "save-file" }), 500);
 	},
 	async openFile(event) {
 		// let file = await event.open();
@@ -37,7 +37,7 @@ const textEdit = {
 		switch (event.type) {
 			// system events
 			case "open.file":
-				console.log(event);
+				// console.log(event);
 				Self.openFile(event);
 				break;
 			// custom events
