@@ -1,15 +1,4 @@
 
-let file = {
-	"file-1.txt": { name: "file-1", ext: "txt", base: "file-1.txt", dir: "/fs/Desktop/test/", path: "/fs/Desktop/test/file-1.txt", text: "Lorem ipsum dolor sit amet." },
-	"file-2.md": { name: "file-2", ext: "md", base: "file-2.md", dir: "/fs/Desktop/", path: "/fs/Desktop/file-2.md", text: `
-## How to play
-Othello is a simple game that you play on an 8 by 8 in checkered board with 64 double-sided black and white discs. The game is easy to learn, but it takes time to master and develop your strategies for winning the game.
-
-### Object of the Game
-The goal is to get the majority of colour discs on the board at the end of the game.
-`}
-};
-
 // https://github.com/domchristie/turndown
 defiant.require("./modules/turnDown.js");
 
@@ -22,13 +11,9 @@ const textEdit = {
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 
-		this.dispatch({ type: "tab-new" });
+		// this.dispatch({ type: "tab-new" });
 
-		// setTimeout(() => this.dispatch({ type: "save-file" }), 500);
-	},
-	async openFile(event) {
-		// let file = await event.open();
-		this.dispatch({ type: "tab-new", file: file[event.name] });
+		// setTimeout(() => this.dispatch({ type: "save-file-as" }), 500);
 	},
 	dispatch(event) {
 		let Self = textEdit,
@@ -37,11 +22,18 @@ const textEdit = {
 		switch (event.type) {
 			// system events
 			case "open.file":
-				// console.log(event);
-				Self.openFile(event);
+				event.open().then(file =>
+					Self.dispatch({ type: "tab-new", file }));
 				break;
 			// custom events
 			case "save-file":
+				file = Self.tabs.active.file;
+				// update file
+				file.text = Self.tabs.active.editor.html();
+				file.save();
+				// window.dialog.save({ ...file, silent: true });
+				break;
+			case "save-file-as":
 				file = Self.tabs.active.file;
 				// update file
 				file.text = Self.tabs.active.editor.html();
@@ -67,6 +59,7 @@ const textEdit = {
 			case "format":
 			case "format-fontSize":
 			case "format-fontName":
+			case "select-all":
 			case "window.keyup":
 				Self.queryCommand.dispatch(event);
 				break;

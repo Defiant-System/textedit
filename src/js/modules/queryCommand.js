@@ -19,6 +19,7 @@
 				// update toolbar item based on state
 				Self.state();
 				break;
+			case "select-all":
 			case "format":
 				Self.format(event.arg);
 				break;

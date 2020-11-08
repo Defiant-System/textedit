@@ -10,12 +10,6 @@
 		this.template = editor.clone();
 
 		editor.remove();
-
-		// default file
-		this.file = {
-			name: "New Document",
-			text: `<b>Lorem</b> <i>ipsum</i> <u>dolor</u> <strike>sit</strike> amet, consectetur <i>adipisicing elit. Necessi</i><br>tatibus natus vero voluptatem aliquam molestias dicta <br>aperiam dignissimos laudantium accusamus saepe!`,
-		};
 	},
 	dispatch(event) {
 		let APP = textEdit,
@@ -28,7 +22,8 @@
 		switch (event.type) {
 			case "tab-new":
 				file = {
-					...Self.file,
+					name: "New Document",
+					digest: (event.file ? event.file.text : "").sha1(),
 					...event.file,
 				};
 				// undo stack
@@ -42,7 +37,7 @@
 				// editor
 				editor = APP.content.append(Self.template.clone());
 				// add file text to editor
-				editor.html( file.ext === "txt" ? file.text : $.md(file.text) );
+				editor.html( file.kind === "txt" ? file.text : $.md(file.text) );
 				// save to files array
 				Self.files.push({ editor, file, undoStack });
 
