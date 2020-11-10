@@ -31,7 +31,7 @@
 
 				// create new tab if needed
 				if (Self.files.length) {
-					tab = window.tabs.add(file.name);
+					tab = window.tabs.add(file.base);
 					requestAnimationFrame(() => tab.trigger("click"));
 				}
 				// editor
@@ -63,7 +63,7 @@
 				}
 
 				// set window title to active file name
-				window.title = Self.active.file.name;
+				window.title = Self.active.file.base;
 				break;
 			case "tab-close":
 				index = event.el.index();
