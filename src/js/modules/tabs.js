@@ -20,9 +20,10 @@
 			tab,
 			index;
 		switch (event.type) {
+			case "new-file":
 			case "tab-new":
 				file = {
-					name: "New Document",
+					base: "New Document",
 					digest: (event.file ? event.file.text : "").sha1(),
 					...event.file,
 				};

@@ -1,6 +1,6 @@
 
 // https://github.com/domchristie/turndown
-defiant.require("./modules/turnDown.js");
+@import "./modules/turnDown.js";
 
 
 const textEdit = {
@@ -13,7 +13,7 @@ const textEdit = {
 
 		// this.dispatch({ type: "tab-new" });
 
-		// setTimeout(() => this.dispatch({ type: "save-file-as" }), 500);
+		setTimeout(() => this.dispatch({ type: "save-file-as" }), 500);
 	},
 	dispatch(event) {
 		let Self = textEdit,
@@ -50,6 +50,7 @@ const textEdit = {
 					}
 				});
 				break;
+			case "new-file":
 			case "tab-new":
 			case "tab-clicked":
 			case "tab-close":
@@ -65,9 +66,9 @@ const textEdit = {
 				break;
 		}
 	},
-	tabs: defiant.require("./modules/tabs.js"),
-	undoStack: defiant.require("./modules/undoStack.js"),
-	queryCommand: defiant.require("./modules/queryCommand.js"),
+	tabs:         @import "./modules/tabs.js",
+	undoStack:    @import "./modules/undoStack.js",
+	queryCommand: @import "./modules/queryCommand.js",
 };
 
 window.exports = textEdit;

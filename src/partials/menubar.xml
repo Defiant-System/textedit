@@ -5,7 +5,7 @@
 		<Menu name="Quit Text Edit" shell="win -c"/>
 	</Menu>
 	<Menu name="File">
-		<Menu name="New"/>
+		<Menu name="New" click="new-file" hotkey="alt+n"/>
 		<Menu name="Open"/>
 		<Menu type="divider"/>
 		<Menu name="Close"/>
