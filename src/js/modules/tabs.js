@@ -22,11 +22,13 @@
 		switch (event.type) {
 			case "new-file":
 			case "tab-new":
-				file = {
-					base: "New Document",
-					digest: (event.file ? event.file.text : "").sha1(),
-					...event.file,
-				};
+				// file = {
+				// 	base: "New Document",
+				// 	digest: (event.file ? event.file.text : "").sha1(),
+				// 	...event.file,
+				// };
+				file = event.file;
+				file.digest = file.text.sha1();
 				// undo stack
 				undoStack = new window.History;
 

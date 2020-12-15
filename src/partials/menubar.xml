@@ -6,11 +6,12 @@
 	</Menu>
 	<Menu name="File">
 		<Menu name="New" click="new-file" hotkey="alt+n"/>
-		<Menu name="Open"/>
+		<Menu name="Open&#8230;"/>
 		<Menu type="divider"/>
-		<Menu name="Close"/>
 		<Menu name="Save" click="save-file" hotkey="alt+s"/>
 		<Menu name="Save as&#8230;" click="save-file-as"/>
+		<Menu type="divider"/>
+		<Menu name="Close File"/>
 	</Menu>
 	<Menu name="Edit">
 		<Menu name="Undo" click="history-undo" hotkey="meta+z"/>
