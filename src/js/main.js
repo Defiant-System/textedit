@@ -17,6 +17,7 @@ const textEdit = {
 		// this.dispatch({ type: "tab-new" });
 
 		// setTimeout(() => this.dispatch({ type: "save-file-as" }), 700);
+		setTimeout(() => this.dispatch({ type: "open-file" }), 700);
 	},
 	async dispatch(event) {
 		let Self = textEdit,
@@ -29,12 +30,19 @@ const textEdit = {
 				Self.dispatch({ type: "tab-new", file });
 				break;
 			// custom events
+			case "open-file":
+				window.dialog.open({
+					txt: async item => {
+						let file = await item.open({ responseType: "text" });
+						Self.dispatch({ type: "tab-new", file });
+					}
+				});
+				break;
 			case "save-file":
 				file = Self.tabs.active.file;
 				// update file
 				file.text = Self.tabs.active.editor.html();
 				file.save();
-				// window.dialog.save({ ...file, silent: true });
 				break;
 			case "save-file-as":
 				file = Self.tabs.active.file;
