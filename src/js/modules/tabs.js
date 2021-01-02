@@ -26,7 +26,7 @@
 					console.log("Close empty file");
 				}
 
-				file = event.file;
+				file = event.file || new defiant.File();
 				file.digest = file.text.sha1();
 				// undo stack
 				undoStack = new window.History;
