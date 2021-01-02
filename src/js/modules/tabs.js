@@ -22,11 +22,10 @@
 		switch (event.type) {
 			case "new-file":
 			case "tab-new":
-				// file = {
-				// 	base: "New Document",
-				// 	digest: (event.file ? event.file.text : "").sha1(),
-				// 	...event.file,
-				// };
+				if (Self.active && Self.active.file.digest === "".sha1()) {
+					console.log("Close empty file");
+				}
+
 				file = event.file;
 				file.digest = file.text.sha1();
 				// undo stack

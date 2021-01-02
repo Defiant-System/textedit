@@ -11,10 +11,8 @@ const textEdit = {
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 
-		// let file = new new defiant.File();
-		// console.log(file);
-
-		// this.dispatch({ type: "tab-new" });
+		let file = new defiant.File();
+		this.dispatch({ type: "tab-new", file });
 
 		// setTimeout(() => this.dispatch({ type: "save-file-as" }), 700);
 		setTimeout(() => this.dispatch({ type: "open-file" }), 700);
@@ -32,10 +30,12 @@ const textEdit = {
 			// custom events
 			case "open-file":
 				window.dialog.open({
-					txt: async item => {
-						let file = await item.open({ responseType: "text" });
-						Self.dispatch({ type: "tab-new", file });
-					}
+					txt: item =>
+						item.open({ responseType: "text" })
+							.then(file => Self.dispatch({ type: "tab-new", file })),
+					md: item =>
+						item.open({ responseType: "text" })
+							.then(file => Self.dispatch({ type: "tab-new", file }))
 				});
 				break;
 			case "save-file":
