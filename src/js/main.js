@@ -15,7 +15,7 @@ const textEdit = {
 		this.dispatch({ type: "tab-new", file });
 
 		// setTimeout(() => this.dispatch({ type: "save-file-as" }), 700);
-		setTimeout(() => this.dispatch({ type: "open-file" }), 700);
+		// setTimeout(() => this.dispatch({ type: "open-file" }), 700);
 	},
 	async dispatch(event) {
 		let Self = textEdit,
