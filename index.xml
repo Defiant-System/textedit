@@ -7,8 +7,8 @@
 		<meta name="repository" value="https://github.com/Defiant-System/textEdit"/>
 		<meta name="width" value="750" min="500"/>
 		<meta name="height" value="420" min="300"/>
-		<meta name="top" value="260"/>
-		<meta name="left" value="180"/>
+		<meta name="top" value="170"/>
+		<meta name="left" value="340"/>
 		<meta name="clones" value="true"/>
 		<meta name="minimize"/>
 		<meta name="maximize"/>

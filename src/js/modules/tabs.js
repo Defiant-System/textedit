@@ -18,7 +18,8 @@
 			editor,
 			undoStack,
 			tab,
-			index;
+			index,
+			data;
 		switch (event.type) {
 			case "new-file":
 			case "tab-new":
@@ -39,7 +40,8 @@
 				// editor
 				editor = APP.content.append(Self.template.clone());
 				// add file text to editor
-				editor.html( file.kind === "txt" ? file.text : $.md(file.text) );
+				data = file.kind === "txt" ? file.text.replace(/\n/g, "<br>") : $.md(file.text);
+				editor.html(data);
 				// save to files array
 				Self.files.push({ editor, file, undoStack });
 
