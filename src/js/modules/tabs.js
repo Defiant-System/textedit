@@ -28,7 +28,7 @@
 				}
 
 				file = event.file || new defiant.File();
-				file.digest = file.text.sha1();
+				file.digest = file.data.sha1();
 				// undo stack
 				undoStack = new window.History;
 
@@ -40,7 +40,7 @@
 				// editor
 				editor = APP.content.append(Self.template.clone());
 				// add file text to editor
-				data = file.kind === "txt" ? file.text.replace(/\n/g, "<br>") : $.md(file.text);
+				data = file.kind === "txt" ? file.data.replace(/\n/g, "<br>") : $.md(file.data);
 				editor.html(data);
 				// save to files array
 				Self.files.push({ editor, file, undoStack });

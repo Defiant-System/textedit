@@ -41,20 +41,20 @@ const textEdit = {
 			case "save-file":
 				file = Self.tabs.active.file;
 				// update file
-				file.text = Self.tabs.active.editor.html();
+				file.data = Self.tabs.active.editor.html();
 				file.save();
 				break;
 			case "save-file-as":
 				file = Self.tabs.active.file;
 				// update file
-				file.text = Self.tabs.active.editor.html();
+				file.data = Self.tabs.active.editor.html();
 				// pass on available file types
 				window.dialog.saveAs(file, {
-					txt: () => new Blob([file.text.stripHtml()], { type: "text/plain" }),
-					html: () => new Blob([file.text], { type: "text/html" }),
+					txt: () => new Blob([file.data.stripHtml()], { type: "text/plain" }),
+					html: () => new Blob([file.data], { type: "text/html" }),
 					md: () => {
 						let service = new TurndownService();
-						let blob = new Blob([service.turndown(file.text)], { type: "text/markdown" })
+						let blob = new Blob([service.turndown(file.data)], { type: "text/markdown" })
 						return blob;
 					}
 				});
