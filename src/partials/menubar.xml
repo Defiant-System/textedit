@@ -24,10 +24,10 @@
 	</Menu>
 	<Menu name="Format">
 		<Menu name="Font Family" for="font-family">
-			<Menu name="Arial" click="format-fontName" arg="Arial" check-group="textEdit-font-family"/>
-			<Menu name="Times New Roman" click="format-fontName" arg="Times New Roman" check-group="textEdit-font-family" is-checked="1"/>
-			<Menu name="Menlo" click="format-fontName" arg="Menlo" check-group="textEdit-font-family"/>
-			<Menu name="Monaco" click="format-fontName" arg="Monaco" check-group="textEdit-font-family"/>
+			<Menu name="Arial" click="format-fontName" arg="Arial" check-group="textedit-font-family"/>
+			<Menu name="Times New Roman" click="format-fontName" arg="Times New Roman" check-group="textedit-font-family" is-checked="1"/>
+			<Menu name="Menlo" click="format-fontName" arg="Menlo" check-group="textedit-font-family"/>
+			<Menu name="Monaco" click="format-fontName" arg="Monaco" check-group="textedit-font-family"/>
 			<Menu type="divider"/>
 			<Menu name="Show Fonts"/>
 		</Menu>

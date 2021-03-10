@@ -1,10 +1,10 @@
 <Application>
 	<Head>
-		<meta name="id" value="textEdit"/>
+		<meta name="id" value="textedit"/>
 		<meta name="title" value="Text Edit" version="1.1"/>
 		<meta name="author" value="Hakan Bilgin" namespace="ant"/>
 		<meta name="license" value="AGPL-3.0-or-later"/>
-		<meta name="repository" value="https://github.com/Defiant-System/textEdit"/>
+		<meta name="repository" value="https://github.com/Defiant-System/textedit"/>
 		<meta name="width" value="750" min="500"/>
 		<meta name="height" value="420" min="300"/>
 		<meta name="top" value="170"/>

@@ -3,7 +3,7 @@
 @import "./modules/turnDown.js";
 
 
-const textEdit = {
+const textedit = {
 	init() {
 		// fast references
 		this.content = window.find("content");
@@ -18,7 +18,7 @@ const textEdit = {
 		// setTimeout(() => this.dispatch({ type: "open-file" }), 700);
 	},
 	async dispatch(event) {
-		let Self = textEdit,
+		let Self = textedit,
 			file;
 		// console.log(event);
 		switch (event.type) {
@@ -80,4 +80,4 @@ const textEdit = {
 	queryCommand: @import "./modules/queryCommand.js",
 };
 
-window.exports = textEdit;
+window.exports = textedit;

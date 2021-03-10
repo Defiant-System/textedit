@@ -1,5 +1,5 @@
 
-// textEdit.tabs
+// textedit.tabs
 
 {
 	init() {
@@ -12,7 +12,7 @@
 		editor.remove();
 	},
 	dispatch(event) {
-		let APP = textEdit,
+		let APP = textedit,
 			Self = APP.tabs,
 			file,
 			editor,

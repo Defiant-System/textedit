@@ -1,5 +1,5 @@
 
-// textEdit.queryCommand
+// textedit.queryCommand
 
 {
 	init() {
@@ -9,7 +9,7 @@
 		this.format("styleWithCSS", true);
 	},
 	dispatch(event) {
-		let APP = textEdit,
+		let APP = textedit,
 			Self = APP.queryCommand;
 		switch (event.type) {
 			case "window.keyup":
@@ -49,7 +49,7 @@
 		save() {
 			let selection = document.getSelection();
 			if (selection.rangeCount === 0) return;
-			let Active = textEdit.tabs.active,
+			let Active = textedit.tabs.active,
 				editor = Active.editor[0],
 				range = selection.getRangeAt(0),
 				preSelectionRange = range.cloneRange();
