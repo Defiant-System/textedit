@@ -54,39 +54,43 @@
 		<style type="text/css">
 			.st0{fill:#333;}
 		</style>
-		<rect class="st0" x="1" y="1" width="11" height="1"/>
-		<rect class="st0" x="1" y="10" width="8" height="1"/>
-		<rect class="st0" x="1" y="7" width="6" height="1"/>
-		<rect class="st0" x="1" y="4" width="9" height="1"/>
+		<rect x="1" y="2" class="st0" width="11" height="1"/>
+		<rect x="1" y="4" class="st0" width="8" height="1"/>
+		<rect x="1" y="6" class="st0" width="10" height="1"/>
+		<rect x="1" y="8" class="st0" width="8" height="1"/>
+		<rect x="1" y="10" class="st0" width="11" height="1"/>
 	</svg>
 
 	<svg id="icon-justify-center" viewBox="0 0 13 13">
 		<style type="text/css">
 			.st0{fill:#333;}
 		</style>
-		<rect class="st0" x="1" y="1" width="11" height="1"/>
-		<rect class="st0" x="3" y="10" width="7" height="1"/>
-		<rect class="st0" x="4" y="7" width="5" height="1"/>
-		<rect class="st0" x="2" y="4" width="9" height="1"/>
+		<rect x="1" y="2" class="st0" width="11" height="1"/>
+		<rect x="3" y="4" class="st0" width="7" height="1"/>
+		<rect x="2" y="6" class="st0" width="9" height="1"/>
+		<rect x="3" y="8" class="st0" width="7" height="1"/>
+		<rect x="1" y="10" class="st0" width="11" height="1"/>
 	</svg>
 
 	<svg id="icon-justify-right" viewBox="0 0 13 13">
 		<style type="text/css">
 			.st0{fill:#333;}
 		</style>
-		<rect x="1" y="1" class="st0" width="11" height="1"/>
-		<rect x="5" y="10" class="st0" width="7" height="1"/>
-		<rect x="7" y="7" class="st0" width="5" height="1"/>
-		<rect x="3" y="4" class="st0" width="9" height="1"/>
+		<rect x="1" y="2" class="st0" width="11" height="1"/>
+		<rect x="4" y="4" class="st0" width="8" height="1"/>
+		<rect x="2" y="6" class="st0" width="10" height="1"/>
+		<rect x="4" y="8" class="st0" width="8" height="1"/>
+		<rect x="1" y="10" class="st0" width="11" height="1"/>
 	</svg>
 
 	<svg id="icon-justify-full" viewBox="0 0 13 13">
 		<style type="text/css">
 			.st0{fill:#333;}
 		</style>
-		<rect x="1" y="1" class="st0" width="11" height="1"/>
+		<rect x="1" y="2" class="st0" width="11" height="1"/>
 		<rect x="1" y="4" class="st0" width="11" height="1"/>
-		<rect x="1" y="7" class="st0" width="11" height="1"/>
+		<rect x="1" y="6" class="st0" width="11" height="1"/>
+		<rect x="1" y="8" class="st0" width="11" height="1"/>
 		<rect x="1" y="10" class="st0" width="11" height="1"/>
 	</svg>
 </svg>
