@@ -11,6 +11,12 @@ const textedit = {
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 
+		window.fetch("~/dev-files/sample.txt", { responseType: "text" })
+			.then(file => console.log(file));
+
+		// defiant.open("~/mount/sample.txt")
+		// 	.then(file => console.log(file));
+
 		// let file = new defiant.File();
 		// this.dispatch({ type: "tab-new", file });
 
