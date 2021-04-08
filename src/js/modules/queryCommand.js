@@ -1,17 +1,30 @@
 
 // textedit.queryCommand
 
-{
+const QueryCommand = {
 	init() {
 		// fast references
+		this.content = window.find("content");
 		this.tools = window.find("[data-click='format']");
+
+		// bind event handlers
+		this.content.on("keypress", this.dispatch);
 
 		this.format("styleWithCSS", true);
 	},
 	dispatch(event) {
 		let APP = textedit,
-			Self = APP.queryCommand;
+			Self = QueryCommand,
+			selection,
+			str;
 		switch (event.type) {
+			// native events
+			case "keypress":
+				if (event.which === 13) {
+					// insert return key
+					document.execCommand("insertHTML", false, "<br>");
+				}
+				break;
 			case "window.keyup":
 			case "query-command-state":
 				// save selection
@@ -24,7 +37,9 @@
 				Self.format(event.arg);
 				break;
 			case "format-fontSize":
-				Self.format("fontSize", event.arg);
+				selection = document.getSelection();
+				str = `<span style="font-size: ${event.arg};">${selection}</span>`;
+				Self.format("insertHTML", str);
 				break;
 			case "format-fontName":
 				Self.format("fontName", event.arg);
@@ -49,7 +64,7 @@
 		save() {
 			let selection = document.getSelection();
 			if (selection.rangeCount === 0) return;
-			let Active = textedit.tabs.active,
+			let Active = Tabs.active,
 				editor = Active._editor[0],
 				range = selection.getRangeAt(0),
 				preSelectionRange = range.cloneRange();

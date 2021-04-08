@@ -1,3 +1,6 @@
+
+// https://github.com/domchristie/turndown
+
 var TurndownService = (function () {
 	'use strict';
 

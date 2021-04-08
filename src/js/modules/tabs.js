@@ -1,24 +1,24 @@
 
-// textedit.tabs
-
-{
+const Tabs = {
 	init() {
-		let editor = window.find("div[data-id='editor']");
-
 		// fast references
+		this.content = window.find("content");
 		this.files = [];
-		this.template = editor.clone();
 
+		// editor template
+		let editor = window.find("div[data-id='editor']");
+		this.template = editor.clone();
 		editor.remove();
 	},
 	dispatch(event) {
 		let APP = textedit,
-			Self = APP.tabs,
+			Self = Tabs,
 			file,
 			editor,
 			tab,
 			index,
-			data;
+			data,
+			el;
 		switch (event.type) {
 			case "new-file":
 			case "tab-new":
@@ -26,7 +26,8 @@
 					Self.dispatch({ type: "tab-close", index: 0 });
 				}
 				// editor
-				editor = APP.content.append(Self.template.clone());
+				editor = Self.content.append(Self.template.clone());
+
 				// wrap filesystem file with custom File object
 				file = new File(event.file, editor);
 
@@ -56,7 +57,7 @@
 				let selection = Self.active.selection;
 				if (selection) {
 					// restore selection
-					APP.queryCommand.selection.restore(Self.active._editor[0], selection);
+					QueryCommand.selection.restore(Self.active._editor[0], selection);
 				}
 
 				// set window title to active file name
@@ -68,4 +69,4 @@
 				break;
 		}
 	}
-}
+};

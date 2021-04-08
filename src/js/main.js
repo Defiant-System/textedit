@@ -1,7 +1,8 @@
 
-// https://github.com/domchristie/turndown
-@import "./modules/turnDown.js";
+@import "./external/turnDown.js";
+@import "./modules/queryCommand.js"
 @import "./modules/file.js"
+@import "./modules/tabs.js"
 
 
 const textedit = {
@@ -9,14 +10,12 @@ const textedit = {
 		// fast references
 		this.content = window.find("content");
 
-		// init sub objects
-		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
-
-		// bind event handlers
-		this.content.on("keypress", this.dispatch);
+		// init objects
+		QueryCommand.init();
+		Tabs.init();
 
 		// start with blank file
-		this.dispatch({ type: "new-file" });
+		Tabs.dispatch({ type: "new-file" });
 
 		// setTimeout(() => this.dispatch({ type: "save-file-as" }), 700);
 		// setTimeout(() => this.dispatch({ type: "open-file" }), 700);
@@ -27,13 +26,6 @@ const textedit = {
 			blob;
 		// console.log(event);
 		switch (event.type) {
-			// native events
-			case "keypress":
-				if (event.which === 13) {
-					// insert return key
-					document.execCommand("insertHTML", false, "<br>");
-				}
-				break;
 			// system events
 			case "open.file":
 				event.open({ responseType: "text" })
@@ -49,13 +41,13 @@ const textedit = {
 				});
 				break;
 			case "save-file":
-				active = Self.tabs.active;
+				active = Tabs.active;
 				// update file
 				blob = active.toBlob();
 				window.dialog.save(active._file, blob);
 				break;
 			case "save-file-as":
-				active = Self.tabs.active;
+				active = Tabs.active;
 				// pass on available file types
 				window.dialog.saveAs(active._file, {
 					txt:  () => active.toBlob("txt"),
@@ -67,7 +59,7 @@ const textedit = {
 			case "tab-new":
 			case "tab-clicked":
 			case "tab-close":
-				Self.tabs.dispatch(event);
+				Tabs.dispatch(event);
 				break;
 			case "query-command-state":
 			case "format":
@@ -75,13 +67,10 @@ const textedit = {
 			case "format-fontName":
 			case "select-all":
 			case "window.keyup":
-				Self.queryCommand.dispatch(event);
+				QueryCommand.dispatch(event);
 				break;
 		}
-	},
-	tabs:         @import "./modules/tabs.js",
-	undoStack:    @import "./modules/undoStack.js",
-	queryCommand: @import "./modules/queryCommand.js",
+	}
 };
 
 window.exports = textedit;
