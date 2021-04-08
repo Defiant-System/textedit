@@ -47,7 +47,7 @@ const textedit = {
 			case "save-file-as":
 				file = Self.tabs.active;
 				// pass on available file types
-				window.dialog.saveAs(file, {
+				window.dialog.saveAs(file._file, {
 					txt:  () => file.toBlob("txt"),
 					html: () => file.toBlob("html"),
 					md:   () => file.toBlob("md"),
