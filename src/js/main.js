@@ -12,6 +12,9 @@ const textedit = {
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 
+		// bind event handlers
+		this.content.on("keypress", this.dispatch);
+
 		// start with blank file
 		this.dispatch({ type: "new-file" });
 
@@ -20,10 +23,16 @@ const textedit = {
 	},
 	async dispatch(event) {
 		let Self = textedit,
-			file,
+			active,
 			blob;
 		// console.log(event);
 		switch (event.type) {
+			// native events
+			case "keypress":
+				if (event.which === 13) {
+					document.execCommand("insertHTML", false, "<br>");
+				}
+				break;
 			// system events
 			case "open.file":
 				event.open({ responseType: "text" })
@@ -39,18 +48,18 @@ const textedit = {
 				});
 				break;
 			case "save-file":
-				file = Self.tabs.active;
+				active = Self.tabs.active;
 				// update file
-				blob = file.toBlob();
-				window.dialog.save(file._file, blob);
+				blob = active.toBlob();
+				window.dialog.save(active._file, blob);
 				break;
 			case "save-file-as":
-				file = Self.tabs.active;
+				active = Self.tabs.active;
 				// pass on available file types
-				window.dialog.saveAs(file._file, {
-					txt:  () => file.toBlob("txt"),
-					html: () => file.toBlob("html"),
-					md:   () => file.toBlob("md"),
+				window.dialog.saveAs(active._file, {
+					txt:  () => active.toBlob("txt"),
+					html: () => active.toBlob("html"),
+					md:   () => active.toBlob("md"),
 				});
 				break;
 			case "new-file":

@@ -22,7 +22,7 @@
 		switch (event.type) {
 			case "new-file":
 			case "tab-new":
-				if (Self.active && Date.now() - Self.active._bourne < 500) {
+				if (Self.active && Date.now() - Self.active._bourne < 1e3) {
 					Self.dispatch({ type: "tab-close", index: 0 });
 				}
 				// editor
