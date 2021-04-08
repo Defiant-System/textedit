@@ -50,7 +50,7 @@
 			let selection = document.getSelection();
 			if (selection.rangeCount === 0) return;
 			let Active = textedit.tabs.active,
-				editor = Active.editor[0],
+				editor = Active._editor[0],
 				range = selection.getRangeAt(0),
 				preSelectionRange = range.cloneRange();
 			
@@ -59,7 +59,7 @@
 			
 			let start = preSelectionRange.toString().length;
 			// store selection
-			Active.selection = { start, end: start + range.toString().length };
+			Active._selection = { start, end: start + range.toString().length };
 		},
 		restore(editor, saved) {
 			let range = document.createRange(),

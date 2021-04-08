@@ -1,6 +1,7 @@
 
 // https://github.com/domchristie/turndown
 @import "./modules/turnDown.js";
+@import "./modules/file.js"
 
 
 const textedit = {
@@ -11,21 +12,16 @@ const textedit = {
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 
-		window.fetch("~/dev-files/sample.txt", { responseType: "text" })
-			.then(file => console.log(file));
-
-		// defiant.open("~/mount/sample.txt")
-		// 	.then(file => console.log(file));
-
-		// let file = new defiant.File();
-		// this.dispatch({ type: "tab-new", file });
+		// start with blank file
+		this.dispatch({ type: "new-file" });
 
 		// setTimeout(() => this.dispatch({ type: "save-file-as" }), 700);
 		// setTimeout(() => this.dispatch({ type: "open-file" }), 700);
 	},
 	async dispatch(event) {
 		let Self = textedit,
-			file;
+			file,
+			blob;
 		// console.log(event);
 		switch (event.type) {
 			// system events
@@ -47,8 +43,9 @@ const textedit = {
 			case "save-file":
 				file = Self.tabs.active.file;
 				// update file
-				file.data = Self.tabs.active.editor.html();
-				file.save();
+				blob = file.toBlob("text/plain");
+				console.log( blob );
+				// file.save();
 				break;
 			case "save-file-as":
 				file = Self.tabs.active.file;
