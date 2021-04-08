@@ -32,34 +32,25 @@ const textedit = {
 			// custom events
 			case "open-file":
 				window.dialog.open({
-					txt: item =>
-						item.open({ responseType: "text" })
-							.then(file => Self.dispatch({ type: "tab-new", file })),
-					md: item =>
-						item.open({ responseType: "text" })
-							.then(file => Self.dispatch({ type: "tab-new", file }))
+					txt: item => item.open({ responseType: "text" })
+									.then(file => Self.dispatch({ type: "tab-new", file })),
+					md: item => item.open({ responseType: "text" })
+									.then(file => Self.dispatch({ type: "tab-new", file }))
 				});
 				break;
 			case "save-file":
-				file = Self.tabs.active.file;
+				file = Self.tabs.active;
 				// update file
-				blob = file.toBlob("text/plain");
-				console.log( blob );
-				// file.save();
+				blob = file.toBlob();
+				window.dialog.save(file._file, blob);
 				break;
 			case "save-file-as":
-				file = Self.tabs.active.file;
-				// update file
-				file.data = Self.tabs.active.editor.html();
+				file = Self.tabs.active;
 				// pass on available file types
 				window.dialog.saveAs(file, {
-					txt: () => new Blob([file.data.stripHtml()], { type: "text/plain" }),
-					html: () => new Blob([file.data], { type: "text/html" }),
-					md: () => {
-						let service = new TurndownService();
-						let blob = new Blob([service.turndown(file.data)], { type: "text/markdown" })
-						return blob;
-					}
+					txt:  () => file.toBlob("txt"),
+					html: () => file.toBlob("html"),
+					md:   () => file.toBlob("md"),
 				});
 				break;
 			case "new-file":

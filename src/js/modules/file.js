@@ -23,14 +23,41 @@ class File {
 		this.undoStack = new window.History;
 	}
 
-	toBlob(type) {
+	toBlob(kind) {
 		let data = this._editor.html();
-		let blob = new Blob([data], { type });
-		return blob;
+		let type, blob;
+
+		// fallback on file kind
+		kind = kind || this._file.kind;
+
+		switch (kind) {
+			case "txt":
+				type = "text/plain";
+				data = data.stripHtml();
+				break;
+			case "htm":
+			case "html":
+				type = "text/html";
+				break;
+			case "md":
+				type = "text/markdown";
+				data = service.turndown(data);
+				break;
+		}
+
+		return new Blob([data], { type });
 	}
 
 	get isDirty() {
 		return this.digest === this._editor.html().sha1();
+	}
+
+	focus() {
+		
+	}
+
+	blur() {
+		
 	}
 
 	undo() {

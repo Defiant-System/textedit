@@ -22,7 +22,7 @@
 		switch (event.type) {
 			case "new-file":
 			case "tab-new":
-				if (Self.active && Date.now() - Self.active._bourne < 300) {
+				if (Self.active && Date.now() - Self.active._bourne < 500) {
 					Self.dispatch({ type: "tab-close", index: 0 });
 				}
 				// editor
@@ -51,7 +51,7 @@
 				index = event.el.index();
 				Self.active = Self.files[index];
 				Self.active._editor.removeClass("hidden");
-				// Self.active._editor.focus();
+				// Self.active.focus();
 
 				let selection = Self.active.selection;
 				if (selection) {
