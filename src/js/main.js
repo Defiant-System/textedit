@@ -30,6 +30,7 @@ const textedit = {
 			// native events
 			case "keypress":
 				if (event.which === 13) {
+					// insert return key
 					document.execCommand("insertHTML", false, "<br>");
 				}
 				break;
