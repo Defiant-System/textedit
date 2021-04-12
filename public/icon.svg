@@ -1,30 +1,228 @@
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55">
 	<style type="text/css">
-		.st0{fill:url(#SVGID_1_);}
-		.st1{fill:url(#SVGID_2_);filter:url(#defapp-filter-1);}
-		.st2{fill:#E9E9E9;filter:url(#defapp-filter-1);}
+		.st0{fill-rule:evenodd;clip-rule:evenodd;}
+		.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#FFD42B;}
+		.st2{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-4_2_);}
+		.st3{fill-rule:evenodd;clip-rule:evenodd;fill:#F6F6F6;}
+		.st4{fill-rule:evenodd;clip-rule:evenodd;fill:url(#Top_1_);}
+		.st5{fill:#979797;}
+		.st6{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-8_1_);}
+		.st7{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-10_1_);}
+		.st8{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-12_1_);}
+		.st9{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-14_1_);}
+		.st10{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-16_1_);}
+		.st11{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-18_1_);}
+		.st12{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-20_1_);}
+		.st13{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-22_1_);}
+		.st14{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-24_1_);}
+		.st15{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-26_1_);}
+		.st16{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-28_1_);}
+		.st17{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-30_1_);}
+		.st18{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-32_1_);}
+		.st19{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-34_1_);}
+		.st20{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-36_1_);}
+		.st21{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-38_1_);}
+		.st22{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-40_1_);}
+		.st23{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-42_1_);}
+		.st24{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-44_1_);}
+		.st25{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-46_1_);}
+		.st26{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-48_1_);}
+		.st27{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-50_1_);}
+		.st28{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-52_1_);}
+		.st29{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-54_1_);}
+		.st30{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-56_1_);}
+		.st31{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-58_1_);}
+		.st32{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-60_1_);}
+		.st33{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-62_1_);}
+		.st34{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-64_1_);}
+		.st35{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-66_1_);}
+		.st36{fill-rule:evenodd;clip-rule:evenodd;fill:url(#NP-68_1_);}
 	</style>
-	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="27.5" y1="2.9993" x2="27.5" y2="52.0007">
-		<stop offset="0" style="stop-color:#2AC8FA"/>
-		<stop offset="1" style="stop-color:#1F66EB"/>
+	<linearGradient id="NP-8_1_" gradientUnits="userSpaceOnUse" x1="-17.7576" y1="-24.4775" x2="-17.7294" y2="-24.5901" gradientTransform="matrix(5.8489 0 0 -5.9255 91.8172 -209.8951)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
 	</linearGradient>
-	<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="27.5" y1="1.934" x2="27.5" y2="53.066">
-		<stop offset="0" style="stop-color:#eee"/>
-		<stop offset="1" style="stop-color:#bbb"/>
+	<linearGradient id="NP-10_1_" gradientUnits="userSpaceOnUse" x1="-19.3663" y1="-24.7259" x2="-19.3381" y2="-24.8385" gradientTransform="matrix(5.8489 0 0 -5.9255 102.4198 -211.5537)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
 	</linearGradient>
-	<filter filterUnits="objectBoundingBox" id="defapp-filter-1">
-		<feOffset dx="0" dy=".5" in="SourceAlpha" result="defappShadowOffsetOuter1"></feOffset>
-		<feGaussianBlur stdDeviation=".5" in="defappShadowOffsetOuter1" result="defappShadowBlurOuter1"></feGaussianBlur>
-		<feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="defappShadowBlurOuter1" result="defappShadowMatrixOuter1"></feColorMatrix>
-		<feMerge>
-			<feMergeNode in="defappShadowMatrixOuter1"/>
-			<feMergeNode in="SourceGraphic"/>
-		</feMerge>
-	</filter>
-	<circle class="st0" cx="27.5" cy="27.5" r="24.5"/>
-	<path class="st1" d="M27.5,1.9C13.4,1.9,1.9,13.4,1.9,27.5s11.4,25.6,25.6,25.6s25.6-11.4,25.6-25.6S41.6,1.9,27.5,1.9z M27.5,50.9 c-12.9,0-23.4-10.5-23.4-23.4S14.6,4.1,27.5,4.1s23.4,10.5,23.4,23.4S40.4,50.9,27.5,50.9z"/>
-	<path class="st2" d="M42.3,29.4h-5.6l-6.1-10.6c-1.5,0.9-2.3,4.3-1.3,6l8.4,14.6c0.6,1,1.8,1.3,2.8,0.8c1-0.6,1.3-1.8,0.8-2.8 l-2.2-3.8h3.2c1.1,0,2.1-0.9,2.1-2.1C44.4,30.3,43.5,29.4,42.3,29.4z"/>
-	<path class="st2" d="M29.6,29.4H23l9.1-15.7c0.6-1,0.2-2.2-0.7-2.8c-1-0.6-2.2-0.2-2.8,0.7l-1.1,1.8l-1.1-1.8 c-0.6-1-1.8-1.3-2.8-0.8c-1,0.6-1.3,1.8-0.8,2.8l2.2,3.9l-6.9,11.8h-5.6c-1.1,0-2.1,0.9-2.1,2.1c0,1.1,0.9,2.1,2.1,2.1h19.1 C32.9,32.3,31.7,29.5,29.6,29.4z"/>
-	<path class="st2" d="M15.1,34.8l-1.4,2.5c-0.6,1-0.2,2.2,0.7,2.8c1,0.6,2.2,0.2,2.8-0.7l2-3.4C18.4,34.3,15.8,34.4,15.1,34.8z"/>
+	<linearGradient id="NP-12_1_" gradientUnits="userSpaceOnUse" x1="-20.9934" y1="-24.9565" x2="-20.9652" y2="-25.0691" gradientTransform="matrix(5.8489 0 0 -5.9255 113.1444 -213.0933)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-14_1_" gradientUnits="userSpaceOnUse" x1="-22.579" y1="-25.2" x2="-22.5508" y2="-25.3126" gradientTransform="matrix(5.8489 0 0 -5.9255 123.5948 -214.7192)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-16_1_" gradientUnits="userSpaceOnUse" x1="-24.2214" y1="-25.4741" x2="-24.1932" y2="-25.5866" gradientTransform="matrix(5.8489 0 0 -5.9255 134.4199 -216.5492)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-18_1_" gradientUnits="userSpaceOnUse" x1="-25.8301" y1="-25.7225" x2="-25.8019" y2="-25.835" gradientTransform="matrix(5.8489 0 0 -5.9255 145.0226 -218.2079)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-20_1_" gradientUnits="userSpaceOnUse" x1="-27.4573" y1="-26.0049" x2="-27.4291" y2="-26.1174" gradientTransform="matrix(5.8489 0 0 -5.9255 155.7471 -220.0935)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-22_1_" gradientUnits="userSpaceOnUse" x1="-29.029" y1="-26.2327" x2="-29.0007" y2="-26.3453" gradientTransform="matrix(5.8489 0 0 -5.9255 166.106 -221.6146)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-24_1_" gradientUnits="userSpaceOnUse" x1="-30.6714" y1="-26.5032" x2="-30.6432" y2="-26.6157" gradientTransform="matrix(5.8489 0 0 -5.9255 176.9311 -223.4207)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-26_1_" gradientUnits="userSpaceOnUse" x1="-32.28" y1="-26.7516" x2="-32.2518" y2="-26.8641" gradientTransform="matrix(5.8489 0 0 -5.9255 187.5337 -225.0794)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-28_1_" gradientUnits="userSpaceOnUse" x1="-33.9072" y1="-26.9821" x2="-33.879" y2="-27.0947" gradientTransform="matrix(5.8489 0 0 -5.9255 198.2583 -226.6189)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-30_1_" gradientUnits="userSpaceOnUse" x1="-35.4705" y1="-27.244" x2="-35.4423" y2="-27.3566" gradientTransform="matrix(5.8489 0 0 -5.9255 208.5621 -228.3672)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-32_1_" gradientUnits="userSpaceOnUse" x1="-37.1352" y1="-27.4997" x2="-37.107" y2="-27.6123" gradientTransform="matrix(5.8489 0 0 -5.9255 219.5338 -230.0749)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-34_1_" gradientUnits="userSpaceOnUse" x1="-38.7439" y1="-27.7481" x2="-38.7157" y2="-27.8607" gradientTransform="matrix(5.8489 0 0 -5.9255 230.1365 -231.7335)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-36_1_" gradientUnits="userSpaceOnUse" x1="-40.371" y1="-28.0222" x2="-40.3428" y2="-28.1348" gradientTransform="matrix(5.8489 0 0 -5.9255 240.8611 -233.5635)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-38_1_" gradientUnits="userSpaceOnUse" x1="-41.894" y1="-28.2574" x2="-41.8658" y2="-28.37" gradientTransform="matrix(5.8489 0 0 -5.9255 250.8989 -235.1341)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-40_1_" gradientUnits="userSpaceOnUse" x1="-43.5364" y1="-28.5371" x2="-43.5082" y2="-28.6497" gradientTransform="matrix(5.8489 0 0 -5.9255 261.724 -237.002)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-42_1_" gradientUnits="userSpaceOnUse" x1="-45.1451" y1="-28.7856" x2="-45.1169" y2="-28.8981" gradientTransform="matrix(5.8489 0 0 -5.9255 272.3266 -238.6606)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-44_1_" gradientUnits="userSpaceOnUse" x1="-46.7723" y1="-29.0161" x2="-46.7441" y2="-29.1287" gradientTransform="matrix(5.8489 0 0 -5.9255 283.0512 -240.2002)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-46_1_" gradientUnits="userSpaceOnUse" x1="-48.3579" y1="-29.291" x2="-48.3296" y2="-29.4036" gradientTransform="matrix(5.8489 0 0 -5.9255 293.5016 -242.0359)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-48_1_" gradientUnits="userSpaceOnUse" x1="-50.0003" y1="-29.5337" x2="-49.9721" y2="-29.6463" gradientTransform="matrix(5.8489 0 0 -5.9255 304.3267 -243.6561)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-50_1_" gradientUnits="userSpaceOnUse" x1="-51.6089" y1="-29.7821" x2="-51.5807" y2="-29.8947" gradientTransform="matrix(5.8489 0 0 -5.9255 314.9294 -245.3148)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-52_1_" gradientUnits="userSpaceOnUse" x1="-53.2361" y1="-30.0127" x2="-53.2079" y2="-30.1252" gradientTransform="matrix(5.8489 0 0 -5.9255 325.654 -246.8543)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-54_1_" gradientUnits="userSpaceOnUse" x1="-54.8078" y1="-30.2756" x2="-54.7796" y2="-30.3882" gradientTransform="matrix(5.8489 0 0 -5.9255 336.0128 -248.6103)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-56_1_" gradientUnits="userSpaceOnUse" x1="-56.4502" y1="-30.5628" x2="-56.422" y2="-30.6754" gradientTransform="matrix(5.8489 0 0 -5.9255 346.8379 -250.5276)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-58_1_" gradientUnits="userSpaceOnUse" x1="-58.0589" y1="-30.8112" x2="-58.0307" y2="-30.9238" gradientTransform="matrix(5.8489 0 0 -5.9255 357.4405 -252.1863)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-60_1_" gradientUnits="userSpaceOnUse" x1="-59.6861" y1="-31.0418" x2="-59.6578" y2="-31.1543" gradientTransform="matrix(5.8489 0 0 -5.9255 368.1651 -253.7258)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-62_1_" gradientUnits="userSpaceOnUse" x1="-61.2716" y1="-31.3454" x2="-61.2434" y2="-31.458" gradientTransform="matrix(5.8489 0 0 -5.9255 378.6155 -255.7535)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-64_1_" gradientUnits="userSpaceOnUse" x1="-62.9141" y1="-31.5593" x2="-62.8858" y2="-31.6719" gradientTransform="matrix(5.8489 0 0 -5.9255 389.4406 -257.1818)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-66_1_" gradientUnits="userSpaceOnUse" x1="-64.5227" y1="-31.8077" x2="-64.4945" y2="-31.9203" gradientTransform="matrix(5.8489 0 0 -5.9255 400.0433 -258.8404)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-68_1_" gradientUnits="userSpaceOnUse" x1="-16.1152" y1="-24.1914" x2="-16.087" y2="-24.3039" gradientTransform="matrix(5.8489 0 0 -5.9255 80.9921 -207.9844)">
+		<stop offset="0" style="stop-color:#A1A1A1"/>
+		<stop offset="1" style="stop-color:#D6D6D6"/>
+	</linearGradient>
+	<linearGradient id="NP-4_2_" gradientUnits="userSpaceOnUse" x1="12.0076" y1="32.0926" x2="12.0076" y2="32.0831" gradientTransform="matrix(333.2849 -52.7871 -64.9088 -409.8183 -1888.356 13832.7275)">
+		<stop offset="0" style="stop-color:#FFFFFF"/>
+		<stop offset="1" style="stop-color:#BEBEBE"/>
+	</linearGradient>
+	<linearGradient id="Top_1_" gradientUnits="userSpaceOnUse" x1="12.0126" y1="33.1128" x2="12.0126" y2="32.9707" gradientTransform="matrix(337.7287 -53.491 -11.4086 -72.0312 -3655.752 3029.7961)">
+		<stop offset="0" style="stop-color:#000000"/>
+		<stop offset="0" style="stop-color:#000000"/>
+		<stop offset="0" style="stop-color:#FFE068"/>
+		<stop offset="0.9391" style="stop-color:#FAC900"/>
+		<stop offset="1" style="stop-color:#A68A17"/>
+	</linearGradient>
+	
+	<rect id="NP-1" x="8.3" y="3.9" transform="matrix(0.9877 -0.1564 0.1564 0.9877 -3.9634 4.6405)" class="st0" width="38.5" height="47.2"/>
+	<rect id="NP-1_1_" x="8.3" y="3.9" transform="matrix(0.9877 -0.1564 0.1564 0.9877 -3.9634 4.6405)" class="st1" width="38.5" height="47.2"/>
+	<polygon id="NP-4_1_" class="st2" points="5,7.5 42.6,1.5 49.9,47.7 12.3,53.6 "/>
+	<path id="Paper" class="st3" d="M6.3,15.2l37.5-5.9l6,37.6c0,0-10.9,2.1-22.6,3.9c-0.4,0.1-3.8,0.7-7.1,1.1c-4,0.5-7.9,1-7.9,1 L6.3,15.2z"/>
+	<polygon id="Top" class="st4" points="4.8,7.2 42.8,1.2 44.1,9.3 6.1,15.3 "/>
+	<g id="Lines">
+		<polygon class="st5" points="7,19.2 6.9,19 7,19 44.4,13 44.5,13.2 	"/>
+		<path class="st5" d="M11.6,49.7l0-0.2l0.1,0c0.1,0,10.1-1.4,15.1-2.2c7.3-1.2,22.2-3.8,22.4-3.9l0.1,0l0,0.2l-0.1,0 c-0.2,0-15.1,2.7-22.4,3.9C21.7,48.3,11.8,49.7,11.6,49.7L11.6,49.7z"/>
+		<polygon class="st5" points="7.5,22.6 7.5,22.4 45,16.3 45,16.5 44.9,16.5 	"/>
+		<rect x="7.8" y="22.8" transform="matrix(0.9872 -0.1592 0.1592 0.9872 -3.2992 4.5539)" class="st5" width="38" height="0.2"/>
+		<polygon class="st5" points="8.6,29.4 8.5,29.2 8.6,29.2 46,23.1 46.1,23.3 	"/>
+		<polygon class="st5" points="9.1,32.7 9.1,32.5 9.2,32.5 46.6,26.5 46.6,26.7 46.5,26.7 	"/>
+		<polygon class="st5" points="9.6,36.1 9.6,35.9 9.7,35.9 47.1,29.9 47.1,30.1 47,30.1 	"/>
+		<polygon class="st5" points="10.2,39.5 10.2,39.3 10.3,39.3 47.6,33.3 47.6,33.4 47.5,33.5 	"/>
+		<polygon class="st5" points="10.7,42.9 10.7,42.7 10.8,42.7 48.1,36.6 48.2,36.8 48.1,36.8 	"/>
+		<path class="st5" d="M11.3,46.3l0-0.2l0.1,0c0.1,0,10.5-1.5,15.6-2.4c7-1.1,21.4-3.6,21.6-3.6l0.1,0l0,0.2l-0.1,0 c-0.1,0-14.5,2.5-21.6,3.6C21.9,44.7,11.5,46.2,11.3,46.3L11.3,46.3z"/>
+	</g>
+	<g id="Holes" transform="translate(20.538837, 80.687699)">
+		<ellipse id="NP-8" class="st6" cx="-12" cy="-64.5" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-10" class="st7" cx="-10.8" cy="-64.7" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-12" class="st8" cx="-9.6" cy="-64.9" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-14" class="st9" cx="-8.4" cy="-65.1" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-16" class="st10" cx="-7.2" cy="-65.3" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-18" class="st11" cx="-6" cy="-65.5" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-20" class="st12" cx="-4.8" cy="-65.7" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-22" class="st13" cx="-3.6" cy="-65.9" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-24" class="st14" cx="-2.4" cy="-66.1" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-26" class="st15" cx="-1.2" cy="-66.2" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-28" class="st16" cx="0" cy="-66.4" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-30" class="st17" cx="1.2" cy="-66.6" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-32" class="st18" cx="2.4" cy="-66.8" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-34" class="st19" cx="3.6" cy="-67" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-36" class="st20" cx="4.8" cy="-67.2" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-38" class="st21" cx="5.9" cy="-67.4" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-40" class="st22" cx="7.2" cy="-67.6" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-42" class="st23" cx="8.4" cy="-67.8" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-44" class="st24" cx="9.6" cy="-68" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-46" class="st25" cx="10.7" cy="-68.2" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-48" class="st26" cx="12" cy="-68.3" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-50" class="st27" cx="13.1" cy="-68.5" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-52" class="st28" cx="14.4" cy="-68.7" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-54" class="st29" cx="15.5" cy="-68.9" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-56" class="st30" cx="16.7" cy="-69.1" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-58" class="st31" cx="17.9" cy="-69.3" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-60" class="st32" cx="19.1" cy="-69.5" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-62" class="st33" cx="20.3" cy="-69.7" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-64" class="st34" cx="21.5" cy="-69.9" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-66" class="st35" cx="22.7" cy="-70.1" rx="0.3" ry="0.3"/>
+		<ellipse id="NP-68" class="st36" cx="-13.2" cy="-64.3" rx="0.3" ry="0.3"/>
+	</g>
 </svg>
