@@ -25,10 +25,10 @@ class File {
 
 	toBlob(kind) {
 		let data = this._editor.html();
-		let type, blob;
+		let type;
 
 		// fallback on file kind
-		kind = kind || this._file.kind;
+		kind = kind || this._file.kind;
 
 		switch (kind) {
 			case "txt":

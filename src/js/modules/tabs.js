@@ -64,7 +64,7 @@ const Tabs = {
 				window.title = Self.active._file.base;
 				break;
 			case "tab-close":
-				index = event.index ?? event.el.index();
+				index = event.index ?? event.el.index();
 				Self.files.splice(index, 1);
 				break;
 		}
