@@ -4,7 +4,7 @@
 			<Tool symbol="icon-undo" click="history-undo" state="disabled"/>
 			<Tool symbol="icon-redo" click="history-redo" state="disabled"/>
 		</Options>
-		<Select name="Arial" width="103" menu="font-family"></Select>
+		<Select name="Arial" width="103" menu="sys:font-families"></Select>
 		<Select name="14" width="21" menu="font-size"></Select>
 		<Options>
 			<Tool symbol="icon-bold" click="format" arg="bold"/>

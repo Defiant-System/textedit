@@ -1,6 +1,4 @@
 
-// textedit.queryCommand
-
 const QueryCommand = {
 	init() {
 		// fast references
@@ -17,6 +15,7 @@ const QueryCommand = {
 			Self = QueryCommand,
 			selection,
 			str;
+		// console.log(event);
 		switch (event.type) {
 			// native events
 			case "keypress":
@@ -112,4 +111,7 @@ const QueryCommand = {
 			sel.addRange(range);
 		}
 	}
-}
+};
+
+// auto init
+QueryCommand.init();

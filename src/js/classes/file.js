@@ -5,7 +5,7 @@ class File {
 		// save reference to original FS file
 		this._file = fsFile || new defiant.File();
 		this._editor = editor;
-		this._bourne = Date.now();
+		this._selection = null;
 
 		// editor
 		let data = this._file.data || "";
@@ -21,6 +21,16 @@ class File {
 		this.digest = data.sha1();
 		// undo stack
 		this.undoStack = new window.History;
+	}
+
+	dispatch(event) {
+		let APP = textedit,
+			str;
+		switch (event.type) {
+			case "close-file":
+				// check if dirty
+				break;
+		}
 	}
 
 	toBlob(kind) {
