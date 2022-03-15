@@ -66,8 +66,6 @@ const Files = {
 		this.activeFile = this.stack.find(f => f._file.id === id);
 		// show active file
 		this.activeFile._editor.removeClass("hidden");
-		// make atab active
-		window.tabs.setActive(this.activeFile._file.id);
 		// focus editor
 		if (this.activeFile.selection) {
 			// restore selection
@@ -76,6 +74,8 @@ const Files = {
 			// no previous selection - move cursor to begining of file
 			this.activeFile._editor.focus();
 		}
+		// make atab active
+		window.tabs.setActive(this.activeFile._file.id);
 		// set window title to active file name
 		window.title = this.activeFile._file.base;
 	}
