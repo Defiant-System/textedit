@@ -67,9 +67,9 @@ const Files = {
 		// show active file
 		this.activeFile._editor.removeClass("hidden");
 		// focus editor
-		if (this.activeFile.selection) {
+		if (this.activeFile._selection) {
 			// restore selection
-			// QueryCommand.selection.restore(Self.activeFile._editor[0], this.activeFile.selection);
+			// QueryCommand.selection.restore(Self.activeFile._editor[0], this.activeFile._selection);
 		} else {
 			// no previous selection - move cursor to begining of file
 			this.activeFile._editor.focus();
