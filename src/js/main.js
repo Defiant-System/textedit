@@ -21,6 +21,7 @@ const textedit = {
 	async dispatch(event) {
 		let Self = textedit,
 			file = Files.activeFile,
+			fnOpen,
 			active,
 			blob;
 		// console.log(event);
@@ -42,14 +43,17 @@ const textedit = {
 				Files.dispatch({ type: "new-file" });
 				break;
 			case "open-file":
+				fnOpen = item => item.open({ responseType: "text" })
+									.then(file => Files.dispatch({ type: "open-file", file }));
 				window.dialog.open({
-					txt: item => item.open({ responseType: "text" })
-									.then(file => Files.dispatch({ type: "open-file", file })),
-					md: item => item.open({ responseType: "text" })
-									.then(file => Files.dispatch({ type: "open-file", file }))
+					txt: fnOpen,
+					md: fnOpen,
 				});
 				break;
 			case "save-file":
+				if (!file._file.xNode) {
+					return Self.dispatch({ type: "save-file-as" });
+				}
 				// update file
 				blob = file.toBlob();
 				window.dialog.save(file._file, blob);
