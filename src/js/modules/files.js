@@ -16,24 +16,38 @@ const Files = {
 		let APP = textedit,
 			Self = Files,
 			file,
-			editor;
+			name,
+			value,
+			el;
 		switch (event.type) {
 			case "new-file":
 			case "open-file":
-				// editor
-				editor = Self.content.append(Self.template.clone());
+				// editor element
+				el = Self.content.append(Self.template.clone());
 				// wrap filesystem file with custom File object
 				file = event.file || new defiant.File({ kind: event.kind || "txt" });
 				// create new tab if needed
 				window.tabs.add(file.base, file.id);
 				// save to files array
-				Self.open(file, editor);
+				Self.open(file, el);
 				break;
 			case "tab-clicked":
 				Self.select(event.el.data("id"));
 				break;
 			case "tab-close":
 				Self.close(event.el.data("id"));
+				break;
+			case "format":
+				// forward to file
+				name = event.el.data("arg");
+				Self.activeFile._edit.format(name, value);
+				// update toolbar
+				setTimeout(() => Self.activeFile._edit.state(), 10);
+				break;
+			case "query-command-state":
+			case "window.keystroke":
+				// forward to file
+				Self.activeFile._edit.state();
 				break;
 		}
 	},
@@ -53,6 +67,15 @@ const Files = {
 		this.stack.push(file);
 		// select newly added file
 		this.select(fileId);
+
+		// temp
+		setTimeout(() => {
+			let docEl = $(`div[data-id="editor"]`);
+			docEl.html(`Lorem <b>ipsum används ofta</b> som exempeltext inom trycksaksframställning och grafisk design för att visa hur till exempel ett dokument kommer att se ut när väl den riktiga texten är på plats. Lorem ipsum visar hur layout, teckensnitt och typografi samspelar, utan att texten, undermedvetet genom ordens betydelse, ska påverka betraktaren.`);
+
+			let anchor = docEl.find("b")[0],
+				sel = new $election(anchor, 3, 7);
+		}, 100);
 	},
 	close(id) {
 		this.activeFile.dispatch({ type: "close-file" });
@@ -60,19 +83,19 @@ const Files = {
 	select(id) {
 		if (this.activeFile) {
 			// hide current active file
-			this.activeFile._editor.addClass("hidden");
+			this.activeFile._el.addClass("hidden");
 		}
 		// reference to active file
 		this.activeFile = this.stack.find(f => f._file.id === id);
 		// show active file
-		this.activeFile._editor.removeClass("hidden");
+		this.activeFile._el.removeClass("hidden");
 		// focus editor
 		if (this.activeFile._selection) {
 			// restore selection
-			// QueryCommand.selection.restore(Self.activeFile._editor[0], this.activeFile._selection);
+			// QueryCommand.selection.restore(Self.activeFile._el[0], this.activeFile._selection);
 		} else {
 			// no previous selection - move cursor to begining of file
-			this.activeFile._editor.focus();
+			this.activeFile._el.focus();
 		}
 		// make atab active
 		window.tabs.setActive(this.activeFile._file.id);

@@ -5,6 +5,7 @@
 @import "./classes/edit.js"
 @import "./classes/selection.js"
 
+@import "./modules/color.js"
 @import "./modules/files.js"
 // @import1 "./modules/queryCommand.js"
 // @import1 "./modules/tabs.js"
@@ -31,6 +32,10 @@ const textedit = {
 				// show initial view: new file
 				Self.dispatch({ type: "new-file" });
 				break;
+			case "format":
+			case "query-command-state":
+			case "window.keystroke":
+				return Files.dispatch(event);
 			case "open.file":
 				if (!Files.getFileByPath(event.path)) {
 					event.open({ responseType: "text" })

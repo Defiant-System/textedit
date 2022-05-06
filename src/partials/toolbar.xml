@@ -13,7 +13,7 @@
 		</Options>
 		<Options>
 			<Tool symbol="icon-justify-left" click="format" arg="justifyLeft"/>
-			<Tool symbol="icon-justify-center" click="format" arg="justifyCenter" state="active"/>
+			<Tool symbol="icon-justify-center" click="format" arg="justifyCenter"/>
 			<Tool symbol="icon-justify-right" click="format" arg="justifyRight"/>
 			<Tool symbol="icon-justify-full" click="format" arg="justifyFull"/>
 		</Options>

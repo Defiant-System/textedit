@@ -1,11 +1,12 @@
 
 class File {
 
-	constructor(fsFile, editor) {
+	constructor(fsFile, el) {
 		// save reference to original FS file
 		this._file = fsFile || new defiant.File();
-		this._editor = editor;
+		this._el = el;
 		this._selection = null;
+		this._edit = new Edit({ file: this, el });
 
 		// editor
 		let data = this._file.data || "";
@@ -15,7 +16,7 @@ class File {
 			case "txt" : data = data.replace(/\n/g, "<br>"); break;
 			case "md"  : data = $.md(data); break;
 		}
-		this._editor.html(data);
+		this._el.html(data);
 
 		// to keep track if file is dirty
 		this.digest = data.sha1();
@@ -34,7 +35,7 @@ class File {
 	}
 
 	toBlob(kind) {
-		let data = this._editor.html();
+		let data = this._el.html();
 		let type;
 
 		// fallback on file kind
@@ -59,7 +60,7 @@ class File {
 	}
 
 	get isDirty() {
-		return this.digest === this._editor.html().sha1();
+		return this.digest === this._el.html().sha1();
 	}
 
 	focus() {

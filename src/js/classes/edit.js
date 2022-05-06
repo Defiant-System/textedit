@@ -2,8 +2,8 @@
 class Edit {
 
 	constructor(options) {
+		this._file = options.file;
 		this._el = options.el;
-		this._type = options.type;
 		this._keys = {
 				bold: "bold",
 				italic: "italic",
@@ -48,6 +48,19 @@ class Edit {
 	}
 
 	state() {
+		let toolbar = window.find(".win-toolbar_"),
+			bgColor = Color.rgbToHex(document.queryCommandValue("BackColor")),
+			fgColor = Color.rgbToHex(document.queryCommandValue("ForeColor"));
+		// iterate
+		Object.keys(this._keys).map(key => {
+			let name = this._keys[key],
+				value = document.queryCommandState(name);
+			toolbar.find(`[data-arg="${key}"]`).toggleClass("tool-active_", !value);
+		});
+		// console.log( bgColor );
+	}
+
+	state2() {
 		let El = this._el,
 			sel = new $election,
 			el = $(sel.container),
