@@ -1,29 +1,14 @@
 <Application>
 	<Head>
 		<meta name="id" value="textedit"/>
-		<meta name="title" value="Text Edit" version="1.1"/>
+		<meta name="title" value="Text Edit" version="1.2"/>
 		<meta name="author" value="Hakan Bilgin" namespace="ant"/>
 		<meta name="license" value="AGPL-3.0-or-later"/>
 		<meta name="repository" value="https://github.com/Defiant-System/textedit"/>
-		<meta name="width" value="750" min="500"/>
-		<meta name="height" value="420" min="300"/>
-		<meta name="top" value="170"/>
-		<meta name="left" value="340"/>
-		<meta name="minimize"/>
-		<meta name="maximize"/>
-		<meta name="resize"/>
 		<meta name="script" value="src/js/main.js"/>
-		<meta name="style" value="src/css/main.less"/>
 		<meta name="icons" value="src/svg/icons.svg"/>
-		<meta name="content" value="src/partials/content.htm"/>
+		<meta name="spawn" value="src/partials/spawn.xml"/>
 
-		@import "src/partials/toolbar.xml"
 		@import "src/partials/menubar.xml"
 	</Head>
-
-	<Foot>
-		<Group>
-			<Text class="content"></Text>
-		</Group>
-	</Foot>
 </Application>
