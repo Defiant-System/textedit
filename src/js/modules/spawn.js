@@ -3,12 +3,13 @@
 
 {
 	init() {
-		
+
 	},
 	dispatch(event) {
 		let APP = textedit,
 			Self = APP.spawn,
 			Spawn = event.spawn,
+			tabs,
 			file,
 			el;
 		// console.log(event);
@@ -16,18 +17,42 @@
 			// system events
 			case "spawn.open":
 				Spawn.data.tabs = new Tabs(Self, Spawn);
+
+				// temp
+				// setTimeout(() => Self.dispatch({ type: "new-tab", spawn: Spawn }), 300);
+				// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
+				break;
+			case "spawn.focus":
+			case "spawn.blur":
+				console.log(event);
 				break;
 			case "open.file":
-				event.files.map(async fHandle => {
+				(event.files || [event]).map(async fHandle => {
 					let file = await fHandle.open({ responseType: "text" });
 					// auto add first base "tab"
 					Self.dispatch({ ...event, file, type: "new-tab" });
 				});
 				break;
+			case "save-file":
+				tabs = Spawn.data.tabs;
+				if (!tabs.file.xNode) {
+					return Self.dispatch({ ...event, type: "save-file-as" });
+				}
+				window.dialog.save(tabs.file, tabs.toBlob());
+				break;
+			case "save-file-as":
+				tabs = Spawn.data.tabs;
+				// pass on available file types
+				Spawn.dialog.saveAs(tabs.file, {
+					txt:  () => tabs.file.toBlob({ kind: "txt" }),
+					html: () => tabs.file.toBlob({ kind: "html" }),
+					md:   () => tabs.file.toBlob({ kind: "md" }),
+				});
+				break;
 
 			// tab related events
 			case "new-tab":
-				file = event.file || new defiant.File({ kind: "txt" });
+				file = event.file || new defiant.File({ kind: "txt", data: "" });
 				Spawn.data.tabs.add(file);
 				break;
 			case "tab-clicked":

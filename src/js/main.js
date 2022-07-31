@@ -1,7 +1,9 @@
 
-@import "./external/turnDown.js";
-
 @import "./classes/tabs.js"
+
+
+@import "./external/turnDown.js";
+let service = new TurndownService();
 
 
 const textedit = {
