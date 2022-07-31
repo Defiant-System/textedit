@@ -22,9 +22,11 @@
 				// setTimeout(() => Self.dispatch({ type: "new-tab", spawn: Spawn }), 300);
 				// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
 				break;
-			case "spawn.focus":
 			case "spawn.blur":
-				console.log(event);
+				if (Spawn.data) Spawn.data.tabs.saveSelection();
+				break;
+			case "spawn.focus":
+				if (Spawn.data) Spawn.data.tabs.restoreSelection();
 				break;
 			case "open.file":
 				(event.files || [event]).map(async fHandle => {

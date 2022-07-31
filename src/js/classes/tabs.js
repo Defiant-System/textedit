@@ -47,6 +47,8 @@ class Tabs {
 		if (this._active) {
 			// hide blurred body
 			this._active.bodyEl.addClass("hidden");
+			// save selection
+			this.saveSelection(this._active);
 		}
 		// reference to active tab
 		this._active = this._stack[tId];
@@ -78,13 +80,70 @@ class Tabs {
 		return new Blob([data], { type });
 	}
 
+	saveSelection() {
+		let el = document.activeElement,
+			elContent = $(el).parents("content");
+		if (el.isContentEditable && this._content[0] === elContent[0]) {
+			let sel = document.getSelection(),
+				range = sel.getRangeAt(0),
+				clone = range.cloneRange(),
+				start;
+			clone.selectNodeContents(el);
+			clone.setEnd(range.startContainer, range.startOffset);
+			start = clone.toString().length;
+			// store selection
+			this._active.selection = { el, start, end: start + range.toString().length };
+		}
+		// blur active element
+		el.blur();
+	}
+
+	restoreSelection() {
+		if (!this._active.selection) return;
+
+		let saved = this._active.selection,
+			sel = document.getSelection(),
+			range = document.createRange(),
+			nodeStack = [saved.el],
+			foundStart = false,
+			stop = false,
+			charIndex = 0,
+			node;
+		range.setStart(nodeStack[0], 0);
+		range.collapse(true);
+		while (!stop && (node = nodeStack.pop())) {
+			if (node.nodeType == 3) {
+				let nextCharIndex = charIndex + node.length;
+				if (!foundStart && saved.start >= charIndex && saved.start <= nextCharIndex) {
+					range.setStart(node, saved.start - charIndex);
+					foundStart = true;
+				}
+				if (foundStart && saved.end >= charIndex && saved.end <= nextCharIndex) {
+					range.setEnd(node, saved.end - charIndex);
+					stop = true;
+				}
+				charIndex = nextCharIndex;
+			} else {
+				let i = node.childNodes.length;
+				while (i--) {
+					nodeStack.push(node.childNodes[i]);
+				}
+			}
+		}
+		// focus on element when blurred
+		sel.removeAllRanges();
+		sel.addRange(range);
+	}
+
 	update() {
 		let active = this._active;
 		// unhide focused body
 		active.bodyEl.removeClass("hidden");
-
-		active.bodyEl.focus();
-
+		// active.bodyEl.focus();
+		
+		// update spawn window title
 		this._spawn.title = active.file.base;
+		// restore selection
+		this.restoreSelection(active);
 	}
 }
