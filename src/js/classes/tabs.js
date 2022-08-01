@@ -99,50 +99,52 @@ class Tabs {
 	}
 
 	restoreSelection() {
-		if (!this._active.selection) return;
-
-		let saved = this._active.selection,
-			sel = document.getSelection(),
-			range = document.createRange(),
-			nodeStack = [saved.el],
-			foundStart = false,
-			stop = false,
-			charIndex = 0,
-			node;
-		range.setStart(nodeStack[0], 0);
-		range.collapse(true);
-		while (!stop && (node = nodeStack.pop())) {
-			if (node.nodeType == 3) {
-				let nextCharIndex = charIndex + node.length;
-				if (!foundStart && saved.start >= charIndex && saved.start <= nextCharIndex) {
-					range.setStart(node, saved.start - charIndex);
-					foundStart = true;
-				}
-				if (foundStart && saved.end >= charIndex && saved.end <= nextCharIndex) {
-					range.setEnd(node, saved.end - charIndex);
-					stop = true;
-				}
-				charIndex = nextCharIndex;
-			} else {
-				let i = node.childNodes.length;
-				while (i--) {
-					nodeStack.push(node.childNodes[i]);
+		if (this._active.selection) {
+			let saved = this._active.selection,
+				sel = document.getSelection(),
+				range = document.createRange(),
+				nodeStack = [saved.el],
+				foundStart = false,
+				stop = false,
+				charIndex = 0,
+				node;
+			range.setStart(nodeStack[0], 0);
+			range.collapse(true);
+			while (!stop && (node = nodeStack.pop())) {
+				if (node.nodeType == 3) {
+					let nextCharIndex = charIndex + node.length;
+					if (!foundStart && saved.start >= charIndex && saved.start <= nextCharIndex) {
+						range.setStart(node, saved.start - charIndex);
+						foundStart = true;
+					}
+					if (foundStart && saved.end >= charIndex && saved.end <= nextCharIndex) {
+						range.setEnd(node, saved.end - charIndex);
+						stop = true;
+					}
+					charIndex = nextCharIndex;
+				} else {
+					let i = node.childNodes.length;
+					while (i--) {
+						nodeStack.push(node.childNodes[i]);
+					}
 				}
 			}
+			// focus on element when blurred
+			sel.removeAllRanges();
+			sel.addRange(range);
+		} else {
+			this._active.bodyEl.focus();
 		}
-		// focus on element when blurred
-		sel.removeAllRanges();
-		sel.addRange(range);
 	}
 
 	update() {
 		let active = this._active;
 		// unhide focused body
 		active.bodyEl.removeClass("hidden");
-		// active.bodyEl.focus();
-		
+
 		// update spawn window title
 		this._spawn.title = active.file.base;
+		
 		// restore selection
 		this.restoreSelection(active);
 	}
