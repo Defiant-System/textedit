@@ -13,7 +13,7 @@ const textedit = {
 			.filter(i => typeof this[i].init === "function")
 			.map(i => this[i].init());
 	},
-	async dispatch(event) {
+	dispatch(event) {
 		let Self = textedit,
 			spawn,
 			el;
@@ -35,7 +35,7 @@ const textedit = {
 				break;
 		}
 	},
-	spawn: @import "modules/spawn.js",
+	spawn: @import "./modules/spawn.js",
 };
 
 window.exports = textedit;
