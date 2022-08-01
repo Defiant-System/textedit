@@ -45,10 +45,10 @@ class Tabs {
 
 	focus(tId) {
 		if (this._active) {
+			// save selection
+			this.saveSelection();
 			// hide blurred body
 			this._active.bodyEl.addClass("hidden");
-			// save selection
-			this.saveSelection(this._active);
 		}
 		// reference to active tab
 		this._active = this._stack[tId];
