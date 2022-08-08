@@ -22,6 +22,7 @@ const textedit = {
 		
 		switch (event.type) {
 			// system events
+			case "new-spawn":
 			case "window.init":
 				spawn = window.open("spawn");
 				Self.spawn.dispatch({ ...event, type: "spawn.init", spawn });

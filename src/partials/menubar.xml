@@ -2,10 +2,13 @@
 	<Menu name="Text Edit">
 		<Menu name="About Text Edit" shell="win -a"/>
 		<Menu type="divider"/>
+		<Menu name="Close Window" click="close-spawn" hotkey="alt+shift+w"/>
+		<Menu name="Close Tab" click="close-tab" hotkey="alt+w"/>
+		<Menu type="divider"/>
 		<Menu name="Quit Text Edit" shell="win -c"/>
 	</Menu>
 	<Menu name="File">
-		<Menu name="New" click="new-file" hotkey="alt+n"/>
+		<Menu name="New" click="new-spawn" hotkey="alt+n"/>
 		<Menu name="Open&#8230;" click="open-file" hotkey="alt+o"/>
 		<Menu type="divider"/>
 		<Menu name="Save" click="save-file" hotkey="alt+s"/>
@@ -44,7 +47,7 @@
 		<Menu name="Clear Formatting" click="format" arg="removeFormat"/>
 	</Menu>
 	<Menu name="Window">
-		<Menu name="New Window" click="new-clone-window" hotkey="alt+n"/>
+		<Menu name="New Window" click="new-spawn" hotkey="alt+n"/>
 		<Menu name="New Tab" click="new-tab" hotkey="alt+t"/>
 		<Menu name="Merge All Windows" click="merge-all-windows" hotkey="alt+c"/>
 		<Menu type="divider"/>

@@ -17,6 +17,10 @@ class Tabs {
 		return this._active.file;
 	}
 
+	get length() {
+		return Object.keys(this._stack).length;
+	}
+
 	add(file) {
 		let tId = "f"+ Date.now(),
 			history = new window.History,
@@ -33,9 +37,21 @@ class Tabs {
 		bodyEl.attr({ "data-id": tId }).html(data);
 		bodyEl = this._content.append(bodyEl);
 		// save reference to tab
-		this._stack[tId] = { tabEl, bodyEl, history, file };
+		this._stack[tId] = { tId, tabEl, bodyEl, history, file };
 		// focus on file
 		this.focus(tId);
+	}
+
+	merge(ref) {
+		let tId = ref.tId,
+			file = ref.file,
+			history = ref.history,
+			bodyEl = ref.bodyEl.clone(true).addClass("hidden"),
+			tabEl = this._spawn.tabs.add(file.base, tId, true);
+		// clone & append original bodyEl
+		bodyEl = this._content.append(bodyEl);
+		// save reference to this spawns stack
+		this._stack[tId] = { tId, tabEl, bodyEl, history, file };
 	}
 
 	remove(tId) {
