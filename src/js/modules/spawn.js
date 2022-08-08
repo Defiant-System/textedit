@@ -23,6 +23,9 @@
 				// setTimeout(() => Self.dispatch({ type: "new-tab", spawn: Spawn }), 300);
 				// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
 				break;
+			case "spawn.init":
+				Self.dispatch({ ...event, type: "new-tab" });
+				break;
 			case "spawn.blur":
 				if (Spawn.data) Spawn.data.tabs.saveSelection();
 				break;
