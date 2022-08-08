@@ -115,7 +115,9 @@ class Tabs {
 	}
 
 	restoreSelection() {
-		if (this._active && this._active.selection) {
+		if (!this._active) return;
+
+		if (this._active.selection) {
 			let saved = this._active.selection,
 				sel = document.getSelection(),
 				range = document.createRange(),
