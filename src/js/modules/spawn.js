@@ -58,7 +58,7 @@
 
 			// tab related events
 			case "new-tab":
-				file = event.file || new defiant.File({ kind: "txt", data: "" });
+				file = event.file || new karaqu.File({ kind: "txt", data: "" });
 				Spawn.data.tabs.add(file);
 				break;
 			case "tab-clicked":
@@ -92,7 +92,7 @@
 				break;
 			case "close-spawn":
 				// system close window / spawn
-				defiant.shell("win -c");
+				karaqu.shell("win -c");
 				break;
 
 		}
