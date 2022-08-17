@@ -13,6 +13,11 @@ const textedit = {
 			.filter(i => typeof this[i].init === "function")
 			.map(i => this[i].init());
 	},
+	dispose(event) {
+		if (event.spawn) {
+			return this.spawn.dispose(event);
+		}
+	},
 	dispatch(event) {
 		let Self = textedit,
 			spawn,

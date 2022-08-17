@@ -5,6 +5,15 @@
 	init() {
 
 	},
+	dispose(event) {
+		let Spawn = event.spawn;
+		let cmd = { type: "open.file", files: [] };
+		for (let key in Spawn.data.tabs._stack) {
+			let tab = Spawn.data.tabs._stack[key];
+			cmd.files.push(tab.file.path);
+		}
+		return cmd;
+	},
 	dispatch(event) {
 		let APP = textedit,
 			Self = APP.spawn,
