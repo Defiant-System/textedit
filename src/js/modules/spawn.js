@@ -29,11 +29,11 @@
 				Spawn.data.tabs = new Tabs(Self, Spawn);
 
 				// temp
-				// setTimeout(() => Self.dispatch({ type: "new-tab", spawn: Spawn }), 300);
+				// setTimeout(() => Self.dispatch({ type: "tab-new", spawn: Spawn }), 300);
 				// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
 				break;
 			case "spawn.init":
-				Self.dispatch({ ...event, type: "new-tab" });
+				Self.dispatch({ ...event, type: "tab-new" });
 				break;
 			case "spawn.blur":
 				if (Spawn.data) Spawn.data.tabs.saveSelection();
@@ -45,7 +45,7 @@
 				(event.files || [event]).map(async fHandle => {
 					let file = await fHandle.open({ responseType: "text" });
 					// auto add first base "tab"
-					Self.dispatch({ ...event, file, type: "new-tab" });
+					Self.dispatch({ ...event, file, type: "tab-new" });
 				});
 				break;
 			case "save-file":
@@ -66,7 +66,7 @@
 				break;
 
 			// tab related events
-			case "new-tab":
+			case "tab-new":
 				file = event.file || new karaqu.File({ kind: "txt", data: "" });
 				Spawn.data.tabs.add(file);
 				break;
