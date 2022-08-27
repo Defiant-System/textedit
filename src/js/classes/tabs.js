@@ -26,7 +26,7 @@ class Tabs {
 			history = new window.History,
 			tabEl = this._spawn.tabs.add(file.base, tId),
 			bodyEl = this._template.clone(),
-			data = file.data;
+			data = file.data || "";
 
 		switch (file.kind) {
 			case "txt" : data = data.replace(/\n/g, "<br>"); break;

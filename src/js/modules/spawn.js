@@ -10,9 +10,9 @@
 		let cmd = { type: "open.file", files: [] };
 		for (let key in Spawn.data.tabs._stack) {
 			let tab = Spawn.data.tabs._stack[key];
-			cmd.files.push(tab.file.path);
+			if (tab.file.xNode) cmd.files.push(tab.file.path);
 		}
-		return cmd;
+		return cmd.files.length ? cmd : {};
 	},
 	dispatch(event) {
 		let APP = textedit,
@@ -48,6 +48,27 @@
 					Self.dispatch({ ...event, file, type: "tab.new" });
 				});
 				break;
+
+			// tab related events
+			case "tab.new":
+				file = event.file || new karaqu.File({ kind: "txt", data: "" });
+				Spawn.data.tabs.add(file);
+				break;
+			case "tab.clicked":
+				Spawn.data.tabs.focus(event.el.data("id"));
+				break;
+			case "tab.close":
+				Spawn.data.tabs.remove(event.el.data("id"));
+				break;
+
+			// from menubar
+			case "open-file":
+				Spawn.dialog.open({
+					txt: fsItem => Self.dispatch(fsItem),
+					html: fsItem => Self.dispatch(fsItem),
+					md: fsItem => Self.dispatch(fsItem),
+				});
+				break;
 			case "save-file":
 				tabs = Spawn.data.tabs;
 				if (!tabs.file.xNode) {
@@ -64,20 +85,6 @@
 					md:   () => tabs.file.toBlob({ kind: "md" }),
 				});
 				break;
-
-			// tab related events
-			case "tab.new":
-				file = event.file || new karaqu.File({ kind: "txt", data: "" });
-				Spawn.data.tabs.add(file);
-				break;
-			case "tab.clicked":
-				Spawn.data.tabs.focus(event.el.data("id"));
-				break;
-			case "tab.close":
-				Spawn.data.tabs.remove(event.el.data("id"));
-				break;
-
-			// from menubar
 			case "new-spawn":
 				APP.dispatch({ type: "new-spawn" });
 				break;
