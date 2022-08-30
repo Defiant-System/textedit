@@ -13,7 +13,7 @@ const textedit = {
 			.filter(i => typeof this[i].init === "function")
 			.map(i => this[i].init());
 
-		setTimeout(() => this.dispatch({ type: "open-help" }), 250);
+		// setTimeout(() => this.dispatch({ type: "open-help" }), 250);
 	},
 	dispose(event) {
 		if (event.spawn) {
