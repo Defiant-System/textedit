@@ -110,6 +110,9 @@
 				// system close window / spawn
 				karaqu.shell("win -c");
 				break;
+			case "open-help":
+				karaqu.shell("fs -u '~/help/index.md'");
+				break;
 
 		}
 	}

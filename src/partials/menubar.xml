@@ -57,9 +57,7 @@
 		<Menu name="Close Window" click="close-clone-window" hotkey="alt+w"/>
 	</Menu>
 	<Menu name="Help">
-		<Menu name="Send Text Edit Feedback"/>
-		<Menu type="divider"/>
-		<Menu name="Text Edit Help"/>
+		<Menu name="Text Edit Help" click="open-help"/>
 		<Menu type="divider"/>
 		<Menu name="License"/>
 	</Menu>
