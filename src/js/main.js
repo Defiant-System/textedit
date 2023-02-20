@@ -1,5 +1,6 @@
 
 @import "./classes/tabs.js"
+@import "./modules/test.js"
 
 
 @import "./external/turnDown.js";

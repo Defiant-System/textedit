@@ -27,10 +27,10 @@
 			// system events
 			case "spawn.open":
 				Spawn.data.tabs = new Tabs(Self, Spawn);
-
-				// temp
-				// setTimeout(() => Self.dispatch({ type: "tab.new", spawn: Spawn }), 300);
-				// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
+				
+				// DEV-ONLY-START
+				Test.init(Spawn);
+				// DEV-ONLY-END
 				break;
 			case "spawn.init":
 				Self.dispatch({ ...event, type: "tab.new" });
