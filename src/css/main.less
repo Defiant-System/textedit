@@ -36,7 +36,7 @@
 	i {
 		position: absolute;
 		z-index: 3;
-		width: 10px;
+		width: 9px;
 		height: 4px;
 		background: #eee;
 		border: 1px solid #aaa;
@@ -64,6 +64,7 @@
 				border-left: 5px solid transparent;
 				border-right: 5px solid transparent;
 				border-top: 5px solid #aaa;
+				transform: translateX(-0.5px);
 			}
 
 			&:after {
@@ -71,11 +72,12 @@
 				border-left: 4px solid transparent;
 				border-right: 4px solid transparent;
 				border-top: 4px solid #eee;
+				transform: translateX(-0.5px);
 			}
 		}
 
 		&.margin-start {
-			bottom: 0;
+			bottom: -1px;
 			left: 72px;
 
 			&:before {
@@ -83,6 +85,7 @@
 				border-left: 5px solid transparent;
 				border-right: 5px solid transparent;
 				border-bottom: 5px solid #aaa;
+				transform: translateX(-0.5px);
 			}
 
 			&:after {
@@ -90,6 +93,7 @@
 				border-left: 4px solid transparent;
 				border-right: 4px solid transparent;
 				border-bottom: 4px solid #eee;
+				transform: translateX(-0.5px);
 			}
 		}
 
@@ -102,6 +106,7 @@
 				border-left: 5px solid transparent;
 				border-right: 5px solid transparent;
 				border-bottom: 5px solid #aaa;
+				transform: translateX(-0.5px);
 			}
 
 			&:after {
@@ -109,6 +114,7 @@
 				border-left: 4px solid transparent;
 				border-right: 4px solid transparent;
 				border-bottom: 4px solid #eee;
+				transform: translateX(-0.5px);
 			}
 		}
 	}
