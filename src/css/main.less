@@ -42,8 +42,9 @@
 		width: 9px;
 		height: 4px;
 		background: #eee;
-		border: 1px solid #aaa;
+		border: 1px solid #bbb;
 		border-top: 0;
+		cursor: ew-resize;
 
 		&:before,
 		&:after {
@@ -133,13 +134,19 @@
 		white-space: nowrap;
 		overflow: hidden;
 		color: #999;
+		counter-reset: item;
 
 		li {
+			counter-increment: item;
 			display: inline-block;
 			font-size: 10px;
 			text-align: center;
 			padding: 5px 0 0;
 			width: 38px;
+
+			&:before {
+				content: counter(item) "";
+			}
 		}
 	}
 }
