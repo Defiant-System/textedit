@@ -35,13 +35,18 @@ content {
 				&.ruler-indent,
 				&.margin-start,
 				&.margin-end {
-					display: none;
+					display: block;
 				}
 			}
 			ul {
 				right: auto;
-				left: 77px;
-				width: 598px;
+				left: 75px;
+				width: 600px;
+
+				&:before {
+					left: 56px;
+					right: 56px;
+				}
 			}
 		}
 	}
@@ -122,7 +127,7 @@ content {
 	&:after {
 		content: "";
 		position: absolute;
-		left: 0;
+		left: -2px;
 		right: 0;
 		top: 6px;
 		height: 7px;
@@ -144,9 +149,9 @@ content {
 
 	i {
 		position: absolute;
-		z-index: 3;
 		width: 9px;
-		height: 4px;
+		height: 3px;
+		z-index: 3;
 		background: #eee;
 		border: 1px solid #bbb;
 		border-top: 0;
@@ -168,7 +173,7 @@ content {
 		&.ruler-indent {
 			display: none;
 			top: 0;
-			left: 72px;
+			left: 126px;
 
 			&:before {
 				bottom: -5px;
@@ -190,7 +195,7 @@ content {
 		&.margin-start {
 			display: none;
 			bottom: -1px;
-			left: 72px;
+			left: 126px;
 
 			&:before {
 				top: -5px;
@@ -212,7 +217,7 @@ content {
 		&.margin-end {
 			display: none;
 			bottom: -1px;
-			right: 61px;
+			left: 615px;
 
 			&:before {
 				top: -5px;
@@ -234,7 +239,7 @@ content {
 
 	ul {
 		// display: none;
-		background: #fff;
+		// background: #fff;
 		position: relative;
 		left: 0;
 		right: 0;
@@ -245,13 +250,26 @@ content {
 		color: #999;
 		counter-reset: item;
 
+		&:before {
+			content: "";
+			background: #fff;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1;
+		}
+
 		li {
+			position: relative;
 			counter-increment: item;
 			display: inline-block;
 			font-size: 10px;
 			text-align: center;
 			padding: 5px 0 0;
 			width: 38px;
+			z-index: 2;
 
 			&:before {
 				content: counter(item) "";
