@@ -25,7 +25,8 @@ class Tabs {
 		let tId = "f"+ Date.now(),
 			history = new window.History,
 			settings = {
-				showRulers: file.kind === "md",
+				pageView: file.kind === "md",
+				hideRulers: false,
 			},
 			tabEl = this._spawn.tabs.add(file.base, tId),
 			bodyEl = this._template.clone(),
@@ -74,8 +75,10 @@ class Tabs {
 		}
 		// reference to active tab
 		this._active = this._stack[tId];
-		// show/hide ruler
-		this._content.toggleClass("show-ruler", this._active.settings.showRulers);
+		// file UI
+		this._content.toggleClass("web-view", !this._active.settings.pageView);
+		this._content.toggleClass("page-view", this._active.settings.pageView);
+		this._content.toggleClass("show-ruler", this._active.settings.hideRulers);
 		// UI update
 		this.update();
 	}
