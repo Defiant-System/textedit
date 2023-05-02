@@ -24,6 +24,9 @@ class Tabs {
 	add(file) {
 		let tId = "f"+ Date.now(),
 			history = new window.History,
+			settings = {
+				showRulers: file.kind === "md",
+			},
 			tabEl = this._spawn.tabs.add(file.base, tId),
 			bodyEl = this._template.clone(),
 			data = file.data || "";
@@ -37,7 +40,7 @@ class Tabs {
 		bodyEl.attr({ "data-id": tId }).html(data);
 		bodyEl = this._content.append(bodyEl);
 		// save reference to tab
-		this._stack[tId] = { tId, tabEl, bodyEl, history, file };
+		this._stack[tId] = { tId, tabEl, bodyEl, history, settings, file };
 		// focus on file
 		this.focus(tId);
 	}
@@ -71,6 +74,8 @@ class Tabs {
 		}
 		// reference to active tab
 		this._active = this._stack[tId];
+		// show/hide ruler
+		this._content.toggleClass("show-ruler", this._active.settings.showRulers);
 		// UI update
 		this.update();
 	}
