@@ -2,7 +2,11 @@
 // for dark theme
 @import "theme-dark";
 
-background: #eee;
+
+background: #f2f2f2;
+--pW: 600px;
+--pH: 848px;
+
 
 content {
 	position: absolute;
@@ -12,7 +16,15 @@ content {
 	bottom: 0;
 
 	&.web-view {
-
+		> div {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			padding: 1px 5px;
+		}
 	}
 
 	&.page-view {
@@ -22,30 +34,41 @@ content {
 			position: relative;
 			top: auto;
 			left: auto;
-			width: 600px;
-			height: 800px;
+			width: var( --pW );
+			height: var( --pH );
 			display: block;
 			margin: 10px auto;
+			padding: 17px 13px;
 			overflow: initial;
-			box-shadow: 0 0 0 1px rgba(0,0,0,.175);
+			// box-shadow: 0 0 0 1px rgba(0,0,0,.175);
+			outline: 1px solid #c5c5c5;
 		}
 
-		& + .ruler {
+		& + .rulerw {
+			.ruler {
+				width: var( --pW );
+			}
+
 			i {
-				&.ruler-indent,
-				&.margin-start,
+				&.ruler-indent {
+					display: block;
+					left: 0;
+				}
+
+				&.margin-start {
+					display: block;
+					left: 0;
+				}
+
 				&.margin-end {
 					display: block;
+					left: 600px;
 				}
 			}
-			ul {
-				right: auto;
-				left: 75px;
-				width: 600px;
 
+			ul {
 				&:before {
-					left: 56px;
-					right: 56px;
+					
 				}
 			}
 		}
@@ -54,20 +77,13 @@ content {
 	&.show-ruler {
 		top: 19px;
 
-		& + .ruler {
+		& + .rulerw {
 			display: block;
 		}
 	}
 	
 	> div {
 		background: #fff;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		overflow: auto;
-		padding: 1px 3px;
 		// font-family: Times New Roman;
 		font-family: Arial, sans-serif;
 		font-size: 14px;
@@ -113,7 +129,7 @@ content {
 	}
 }
 
-.ruler {
+.rulerw {
 	display: none;
 	position: absolute;
 	top: 0;
@@ -123,28 +139,34 @@ content {
 	background: rgba(0,0,0,.025);
 	border-bottom: 1px solid #ccc;
 
-	&:before,
-	&:after {
-		content: "";
-		position: absolute;
-		left: -2px;
-		right: 0;
-		top: 6px;
-		height: 7px;
-		z-index: 2;
-		background-image: repeating-linear-gradient(90deg, #ccc 0px, #ccc 1px, transparent 1px, transparent 38px);
-	}
+	.ruler {
+		background: #fff;
+		position: relative;
+		margin: 0 auto;
 
-	&:before {
-		top: 7px;
-		height: 5px;
-		background-image: repeating-linear-gradient(90deg,
-				transparent 0px, transparent 9px,
-				#ddd 9px, #ddd 10px,
-				transparent 10px, transparent 28px,
-				#ddd 28px, #ddd 29px,
-				transparent 29px, transparent 38px
-			);
+		&:before,
+		&:after {
+			content: "";
+			position: absolute;
+			top: 6px;
+			right: 0;
+			left: 0;
+			height: 7px;
+			z-index: 2;
+			background-image: repeating-linear-gradient(90deg, #ccc 0px, #ccc 1px, transparent 1px, transparent 38px);
+		}
+
+		&:before {
+			top: 7px;
+			height: 5px;
+			background-image: repeating-linear-gradient(90deg,
+					transparent 0px, transparent 9px,
+					#ddd 9px, #ddd 10px,
+					transparent 10px, transparent 28px,
+					#ddd 28px, #ddd 29px,
+					transparent 29px, transparent 38px
+				);
+		}
 	}
 
 	i {
@@ -153,8 +175,9 @@ content {
 		height: 3px;
 		z-index: 3;
 		background: #eee;
-		border: 1px solid #bbb;
+		border: 1px solid #aaa;
 		border-top: 0;
+		margin-left: -4px;
 		cursor: ew-resize;
 
 		&:before,
@@ -173,13 +196,12 @@ content {
 		&.ruler-indent {
 			display: none;
 			top: 0;
-			left: 126px;
 
 			&:before {
 				bottom: -5px;
 				border-left: 5px solid transparent;
 				border-right: 5px solid transparent;
-				border-top: 5px solid #aaa;
+				border-top: 5px solid #999;
 				transform: translateX(-0.5px);
 			}
 
@@ -195,13 +217,12 @@ content {
 		&.margin-start {
 			display: none;
 			bottom: -1px;
-			left: 126px;
 
 			&:before {
 				top: -5px;
 				border-left: 5px solid transparent;
 				border-right: 5px solid transparent;
-				border-bottom: 5px solid #aaa;
+				border-bottom: 5px solid #999;
 				transform: translateX(-0.5px);
 			}
 
@@ -217,13 +238,12 @@ content {
 		&.margin-end {
 			display: none;
 			bottom: -1px;
-			left: 615px;
 
 			&:before {
 				top: -5px;
 				border-left: 5px solid transparent;
 				border-right: 5px solid transparent;
-				border-bottom: 5px solid #aaa;
+				border-bottom: 5px solid #999;
 				transform: translateX(-0.5px);
 			}
 
@@ -241,18 +261,17 @@ content {
 		// display: none;
 		// background: #fff;
 		position: relative;
-		left: 0;
-		right: 0;
+		width: 100%;
 		height: 18px;
+		margin: 0 auto;
 		font-size: 0;
 		white-space: nowrap;
 		overflow: hidden;
-		color: #999;
+		color: #aaa;
 		counter-reset: item;
 
 		&:before {
 			content: "";
-			background: #fff;
 			position: absolute;
 			top: 0;
 			left: 0;
