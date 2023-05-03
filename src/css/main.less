@@ -25,6 +25,16 @@ content {
 			overflow: auto;
 			padding: 1px 5px;
 		}
+
+		& + .rulerw {
+			i {
+				&.ruler-indent,
+				&.margin-start {
+					display: block;
+					left: 6px;
+				}
+			}
+		}
 	}
 
 	&.page-view {
@@ -50,11 +60,7 @@ content {
 			}
 
 			i {
-				&.ruler-indent {
-					display: block;
-					left: 57px;
-				}
-
+				&.ruler-indent,
 				&.margin-start {
 					display: block;
 					left: 57px;
