@@ -51,24 +51,25 @@ content {
 
 			i {
 				&.ruler-indent {
-					display: block;
-					left: 0;
+					// display: block;
+					left: 57px;
 				}
 
 				&.margin-start {
-					display: block;
-					left: 0;
+					// display: block;
+					left: 57px;
 				}
 
 				&.margin-end {
-					display: block;
-					left: 600px;
+					// display: block;
+					left: 543px;
 				}
 			}
 
 			ul {
 				&:before {
-					
+					// left: 57px;
+					// right: 57px;
 				}
 			}
 		}
@@ -140,7 +141,6 @@ content {
 	border-bottom: 1px solid #ccc;
 
 	.ruler {
-		background: #fff;
 		position: relative;
 		margin: 0 auto;
 
@@ -153,18 +153,21 @@ content {
 			left: 0;
 			height: 7px;
 			z-index: 2;
-			background-image: repeating-linear-gradient(90deg, #ccc 0px, #ccc 1px, transparent 1px, transparent 38px);
+			background-image: repeating-linear-gradient(90deg,
+				#ccc 0px, #ccc 1px,
+				transparent 1px, transparent 56px
+			);
 		}
 
 		&:before {
 			top: 7px;
 			height: 5px;
 			background-image: repeating-linear-gradient(90deg,
-					transparent 0px, transparent 9px,
-					#ddd 9px, #ddd 10px,
-					transparent 10px, transparent 28px,
-					#ddd 28px, #ddd 29px,
-					transparent 29px, transparent 38px
+					transparent 0px, transparent 14px,
+					#ddd 14px, #ddd 15px,
+					transparent 15px, transparent 42px,
+					#ddd 42px, #ddd 43px,
+					transparent 43px, transparent 56px
 				);
 		}
 	}
@@ -272,6 +275,7 @@ content {
 
 		&:before {
 			content: "";
+			background: #fff;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -287,7 +291,7 @@ content {
 			font-size: 10px;
 			text-align: center;
 			padding: 5px 0 0;
-			width: 38px;
+			width: 56px;
 			z-index: 2;
 
 			&:before {
