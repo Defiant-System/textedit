@@ -1,0 +1,6 @@
+
+class Selection {
+	constructor() {
+		
+	}
+}
