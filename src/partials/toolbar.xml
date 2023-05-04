@@ -19,6 +19,6 @@
 		</Options>
 	</Group>
 	<Group>
-		<Tool symbol="icon-cogs" menu="toolbar-config"/>
+		<Tool symbol="icon-cogs"/>
 	</Group>
 </ToolBar>

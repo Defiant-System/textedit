@@ -29,7 +29,7 @@
 				Spawn.data.tabs = new Tabs(Self, Spawn);
 				
 				// DEV-ONLY-START
-				Test.init(Spawn);
+				Test.init(APP, Spawn);
 				// DEV-ONLY-END
 				break;
 			case "spawn.init":
