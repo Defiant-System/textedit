@@ -1,25 +1,23 @@
 
 let Edit = {
 	selectedRange: null,
-	cleanHtml(o) {
-
+	commandState: {
+		bold: false,
+		italic: false,
+		underline: false,
 	},
-	execCommand(editor, commandWithArgs, valueArg) {
-		var commandArr = commandWithArgs.split( " " ),
-			command = commandArr.shift(),
-			args = commandArr.join( " " ) + ( valueArg || "" ),
-			parts = commandWithArgs.split( "-" );
+	updateState() {
+		// update command state
+		Object.keys(this.commandState).map(key => {
+			this.commandState[key] = document.queryCommandState(key);
+		});
+	},
+	execCommand(editor, name, value) {
 
-		if ( parts.length === 1 ) {
-			document.execCommand( command, false, args );
-		} else if ( parts[ 0 ] === "format" && parts.length === 2 ) {
-			document.execCommand( "formatBlock", false, parts[ 1 ] );
-		}
+		document.execCommand( name, false, value );
 
-		editor.trigger( "change" );
-
-		// TODO: updateToolbar
-
+		// trigger event
+		editor.trigger("change");
 	},
 	getCurrentRange() {
 		let sel = window.getSelection(),
@@ -45,5 +43,8 @@ let Edit = {
 			document.execCommand( "hiliteColor", false, color || "transparent" );
 		}
 		this.saveSelection();
+	},
+	cleanHtml(o) {
+
 	}
 };

@@ -51,20 +51,6 @@
 				});
 				break;
 
-			// edit related
-			case "select-text":
-				editorEl = Spawn.data.tabs._active.bodyEl;
-				Spawn.data.tabs.select(editorEl, 7, 10);
-				break;
-			case "spawn.undo":
-			case "spawn.redo":
-				break;
-			case "spawn.format":
-				editorEl = Spawn.data.tabs._active.bodyEl;
-				name = event.arg;
-				Edit.execCommand(editorEl, name);
-				break;
-
 			// tab related events
 			case "tab.new":
 				file = event.file || new karaqu.File({ kind: "txt", data: "" });
@@ -129,7 +115,11 @@
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;
-
+			default:
+				if (event.type.startsWith("editor.")) {
+					// proxy event
+					return Spawn.data.tabs.dispatch(event);
+				}
 		}
 	}
 }

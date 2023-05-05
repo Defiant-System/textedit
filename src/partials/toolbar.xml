@@ -1,21 +1,21 @@
 <ToolBar>
 	<Group>
 		<Options>
-			<Tool symbol="icon-undo" click="spawn.undo" state="disabled"/>
-			<Tool symbol="icon-redo" click="spawn.redo" state="disabled"/>
+			<Tool symbol="icon-undo" click="editor.undo" state="disabled"/>
+			<Tool symbol="icon-redo" click="editor.redo" state="disabled"/>
 		</Options>
 		<Select name="Arial" width="103" menu="sys:font-families"></Select>
 		<Select name="14" width="21" menu="font-size"></Select>
 		<Options type="grouped">
-			<Tool symbol="icon-bold" click="spawn.format" arg="bold"/>
-			<Tool symbol="icon-italic" click="spawn.format" arg="italic"/>
-			<Tool symbol="icon-underline" click="spawn.format" arg="underline"/>
+			<Tool symbol="icon-bold" click="editor.format" arg="bold"/>
+			<Tool symbol="icon-italic" click="editor.format" arg="italic"/>
+			<Tool symbol="icon-underline" click="editor.format" arg="underline"/>
 		</Options>
 		<Options>
-			<Tool symbol="icon-justify-left" click="spawn.format" arg="justifyLeft"/>
-			<Tool symbol="icon-justify-center" click="spawn.format" arg="justifyCenter"/>
-			<Tool symbol="icon-justify-right" click="spawn.format" arg="justifyRight"/>
-			<Tool symbol="icon-justify-full" click="spawn.format" arg="justifyFull"/>
+			<Tool symbol="icon-justify-left" click="editor.format" arg="justifyLeft"/>
+			<Tool symbol="icon-justify-center" click="editor.format" arg="justifyCenter"/>
+			<Tool symbol="icon-justify-right" click="editor.format" arg="justifyRight"/>
+			<Tool symbol="icon-justify-full" click="editor.format" arg="justifyFull"/>
 		</Options>
 	</Group>
 	<Group>

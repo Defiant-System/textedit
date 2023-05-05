@@ -6,6 +6,13 @@ class Tabs {
 		this._stack = {};
 		this._active = null;
 
+		// fast references
+		this.els = {
+			toolBold: spawn.find(`.toolbar-tool_[data-arg="bold"]`),
+			toolItalic: spawn.find(`.toolbar-tool_[data-arg="italic"]`),
+			toolUnderline: spawn.find(`.toolbar-tool_[data-arg="underline"]`),
+		}
+
 		// editor template
 		let editor = spawn.find(`content > div[data-id="editor"]`);
 		this._content = spawn.find("content");
@@ -40,6 +47,8 @@ class Tabs {
 		// add element to DOM + append file contents
 		bodyEl.attr({ "data-id": tId }).html(data);
 		bodyEl = this._content.append(bodyEl);
+		// bind event handler
+		bodyEl.on("change mouseup", e => this.dispatch({ type: "change", spawn: this._spawn }));
 		// save reference to tab
 		this._stack[tId] = { tId, tabEl, bodyEl, history, settings, file };
 		// focus on file
@@ -107,15 +116,16 @@ class Tabs {
 		return new Blob([data], { type });
 	}
 
-	select(el, start, len=0) {
-		let sel = document.getSelection(),
-			range = document.createRange(),
-			node = (el || this._active)[0].childNodes[2];
-		range.setStart(node, start);
-		range.setEnd(node, start + len);
-		// focus on element when blurred
-		sel.removeAllRanges();
-		sel.addRange(range);
+	update() {
+		let active = this._active;
+		// unhide focused body
+		active.bodyEl.removeClass("hidden");
+
+		// update spawn window title
+		this._spawn.title = active.file.base;
+		
+		// restore selection
+		this.restoreSelection(active);
 	}
 
 	saveSelection() {
@@ -177,15 +187,42 @@ class Tabs {
 		}
 	}
 
-	update() {
-		let active = this._active;
-		// unhide focused body
-		active.bodyEl.removeClass("hidden");
+	dispatch(event) {
+		let Spawn = event.spawn,
+			Tabs = Spawn.data.tabs,
+			Active = Tabs._active,
+			editor = Active.bodyEl,
+			name,
+			value;
+		switch (event.type) {
+			// native event
+			case "change":
+				// update command states
+				Edit.updateState();
+				// update toolbar
+				Tabs.els.toolBold.toggleClass("tool-active_", !Edit.commandState.bold);
+				Tabs.els.toolItalic.toggleClass("tool-active_", !Edit.commandState.italic);
+				Tabs.els.toolUnderline.toggleClass("tool-active_", !Edit.commandState.underline);
 
-		// update spawn window title
-		this._spawn.title = active.file.base;
-		
-		// restore selection
-		this.restoreSelection(active);
+				break;
+			// edit related events
+			case "editor.select-text":
+				let sel = document.getSelection(),
+					range = document.createRange();
+				range.setStart(event.node, event.start);
+				range.setEnd(event.node, event.start + event.len);
+				// focus on element when blurred
+				sel.removeAllRanges();
+				sel.addRange(range);
+				break;
+			case "editor.undo":
+			case "editor.redo":
+				break;
+			case "editor.format":
+				name = event.arg;
+				value = event.val;
+				Edit.execCommand(editor, name);
+				break;
+		}
 	}
 }
