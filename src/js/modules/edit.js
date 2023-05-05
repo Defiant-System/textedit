@@ -1,27 +1,14 @@
 
-class Edit {
-	constructor(opt) {
-		this.selectedRange = null;
-	}
-
-	readFileIntoDataUrl(fileInfo) {
-
-	}
-
+let Edit = {
+	selectedRange: null,
 	cleanHtml(o) {
 
-	}
-
-	updateToolbar(editor, toolbarBtnSelector, options) {
-
-	}
-
-	execCommand(commandWithArgs, valueArg, editor, options, toolbarBtnSelector) {
+	},
+	execCommand(editor, commandWithArgs, valueArg) {
 		var commandArr = commandWithArgs.split( " " ),
 			command = commandArr.shift(),
-			args = commandArr.join( " " ) + ( valueArg || "" );
-
-		var parts = commandWithArgs.split( "-" );
+			args = commandArr.join( " " ) + ( valueArg || "" ),
+			parts = commandWithArgs.split( "-" );
 
 		if ( parts.length === 1 ) {
 			document.execCommand( command, false, args );
@@ -29,10 +16,11 @@ class Edit {
 			document.execCommand( "formatBlock", false, parts[ 1 ] );
 		}
 
-		( editor ).trigger( "change" );
-		this.updateToolbar( editor, toolbarBtnSelector, options );
-	}
+		editor.trigger( "change" );
 
+		// TODO: updateToolbar
+
+	},
 	getCurrentRange() {
 		let sel = window.getSelection(),
 			range;
@@ -40,28 +28,17 @@ class Edit {
 			range = sel.getRangeAt( 0 );
 		}
 		return range;
-	}
-
+	},
 	saveSelection() {
 		this.selectedRange = this.getCurrentRange();
-	}
-
+	},
 	restoreSelection() {
 		if ( this.selectedRange ) {
 			let selection = window.getSelection();
 			selection.removeAllRanges();
 			selection.addRange( this.selectedRange );
 		}
-	}
-
-	toggleHtmlEdit(editor) {
-
-	}
-
-	insertFiles(files, options, editor, toolbarBtnSelector) {
-
-	}
-
+	},
 	markSelection(color, options) {
 		this.restoreSelection();
 		if ( document.queryCommandSupported( "hiliteColor" ) ) {
@@ -69,12 +46,4 @@ class Edit {
 		}
 		this.saveSelection();
 	}
-
-	bindToolbar(editor, toolbar, options, toolbarBtnSelector) {
-
-	}
-
-	initFileDrops(editor, options, toolbarBtnSelector) {
-
-	}	
-}
+};

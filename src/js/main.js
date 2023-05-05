@@ -1,13 +1,13 @@
 
-@import "./classes/edit.js"
-@import "./classes/selection.js"
 @import "./classes/tabs.js"
 
+@import "./modules/edit.js"
 @import "./modules/test.js"
 
 // markdown support
 @import "./external/turnDown.js";
 let service = new TurndownService();
+
 
 const textedit = {
 	init() {

@@ -6,7 +6,7 @@ let Test = {
 
 		// setTimeout(() => this.dialog(spawn), 300);
 
-		console.log( spawn );
+		setTimeout(() => APP.dispatch({ type: "select-text", spawn }), 200);
 	},
 	dialog(spawn) {
 		spawn.dialog.open({

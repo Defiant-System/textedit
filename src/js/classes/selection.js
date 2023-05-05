@@ -1,6 +1,0 @@
-
-class Selection {
-	constructor() {
-		
-	}
-}

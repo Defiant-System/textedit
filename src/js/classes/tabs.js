@@ -107,6 +107,17 @@ class Tabs {
 		return new Blob([data], { type });
 	}
 
+	select(el, start, len=0) {
+		let sel = document.getSelection(),
+			range = document.createRange(),
+			node = (el || this._active)[0].childNodes[2];
+		range.setStart(node, start);
+		range.setEnd(node, start + len);
+		// focus on element when blurred
+		sel.removeAllRanges();
+		sel.addRange(range);
+	}
+
 	saveSelection() {
 		let el = document.activeElement,
 			elContent = $(el).parents("content");

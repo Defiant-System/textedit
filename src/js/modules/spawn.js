@@ -20,6 +20,8 @@
 			Spawn = event.spawn,
 			tabs,
 			file,
+			editorEl,
+			name,
 			value,
 			el;
 		// console.log(event);
@@ -47,6 +49,20 @@
 					// auto add first base "tab"
 					Self.dispatch({ ...event, file, type: "tab.new" });
 				});
+				break;
+
+			// edit related
+			case "select-text":
+				editorEl = Spawn.data.tabs._active.bodyEl;
+				Spawn.data.tabs.select(editorEl, 7, 10);
+				break;
+			case "spawn.undo":
+			case "spawn.redo":
+				break;
+			case "spawn.format":
+				editorEl = Spawn.data.tabs._active.bodyEl;
+				name = event.arg;
+				Edit.execCommand(editorEl, name);
 				break;
 
 			// tab related events
