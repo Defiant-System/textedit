@@ -7,10 +7,11 @@ let Test = {
 		// setTimeout(() => this.dialog(spawn), 300);
 
 		setTimeout(() => {
-				let node = spawn.find(`div[contenteditable="true"]`)[0].childNodes[2];
-				APP.dispatch({type: "editor.select-text", spawn, node, start: 7, len: 10 });
-			}, 200);
-		setTimeout(() => APP.dispatch({ type: "editor.format", spawn, arg: "bold" }), 300);
+				// let node = spawn.find(`div[contenteditable="true"]`)[0].childNodes[4].childNodes[0];
+				let node = spawn.find(`div[contenteditable="true"]`)[0].childNodes[2].childNodes[0];
+				APP.dispatch({type: "editor.select-text", spawn, node, start: 3, len: 5 });
+			}, 300);
+		// setTimeout(() => APP.dispatch({ type: "editor.format", spawn, arg: "bold" }), 350);
 	},
 	dialog(spawn) {
 		spawn.dialog.open({

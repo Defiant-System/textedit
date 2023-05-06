@@ -5,6 +5,10 @@ let Edit = {
 		bold: false,
 		italic: false,
 		underline: false,
+		justifyleft: false,
+		justifycenter: false,
+		justifyright: false,
+		justifyfull: false,
 	},
 	updateState() {
 		// update command state
@@ -13,9 +17,8 @@ let Edit = {
 		});
 	},
 	execCommand(editor, name, value) {
-
+		// execute command
 		document.execCommand( name, false, value );
-
 		// trigger event
 		editor.trigger("change");
 	},
@@ -39,8 +42,8 @@ let Edit = {
 	},
 	markSelection(color, options) {
 		this.restoreSelection();
-		if ( document.queryCommandSupported( "hiliteColor" ) ) {
-			document.execCommand( "hiliteColor", false, color || "transparent" );
+		if (document.queryCommandSupported( "hiliteColor")) {
+			document.execCommand("hiliteColor", false, color || "transparent");
 		}
 		this.saveSelection();
 	},

@@ -12,10 +12,10 @@
 			<Tool symbol="icon-underline" click="editor.format" arg="underline"/>
 		</Options>
 		<Options>
-			<Tool symbol="icon-justify-left" click="editor.format" arg="justifyLeft"/>
-			<Tool symbol="icon-justify-center" click="editor.format" arg="justifyCenter"/>
-			<Tool symbol="icon-justify-right" click="editor.format" arg="justifyRight"/>
-			<Tool symbol="icon-justify-full" click="editor.format" arg="justifyFull"/>
+			<Tool symbol="icon-justify-left" click="editor.format" arg="justifyleft"/>
+			<Tool symbol="icon-justify-center" click="editor.format" arg="justifycenter"/>
+			<Tool symbol="icon-justify-right" click="editor.format" arg="justifyright"/>
+			<Tool symbol="icon-justify-full" click="editor.format" arg="justifyfull"/>
 		</Options>
 	</Group>
 	<Group>

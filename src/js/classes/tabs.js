@@ -11,6 +11,10 @@ class Tabs {
 			toolBold: spawn.find(`.toolbar-tool_[data-arg="bold"]`),
 			toolItalic: spawn.find(`.toolbar-tool_[data-arg="italic"]`),
 			toolUnderline: spawn.find(`.toolbar-tool_[data-arg="underline"]`),
+			toolJustifyleft: spawn.find(`.toolbar-tool_[data-arg="justifyleft"]`),
+			toolJustifycenter: spawn.find(`.toolbar-tool_[data-arg="justifycenter"]`),
+			toolJustifyright: spawn.find(`.toolbar-tool_[data-arg="justifyright"]`),
+			toolJustifyfull: spawn.find(`.toolbar-tool_[data-arg="justifyfull"]`),
 		}
 
 		// editor template
@@ -197,6 +201,7 @@ class Tabs {
 		switch (event.type) {
 			// native event
 			case "change":
+			case "update-toolbar":
 				// update command states
 				Edit.updateState();
 				// update toolbar
@@ -204,6 +209,10 @@ class Tabs {
 				Tabs.els.toolItalic.toggleClass("tool-active_", !Edit.commandState.italic);
 				Tabs.els.toolUnderline.toggleClass("tool-active_", !Edit.commandState.underline);
 
+				Tabs.els.toolJustifyleft.toggleClass("tool-active_", !Edit.commandState.justifyleft);
+				Tabs.els.toolJustifycenter.toggleClass("tool-active_", !Edit.commandState.justifycenter);
+				Tabs.els.toolJustifyright.toggleClass("tool-active_", !Edit.commandState.justifyright);
+				Tabs.els.toolJustifyfull.toggleClass("tool-active_", !Edit.commandState.justifyfull);
 				break;
 			// edit related events
 			case "editor.select-text":
@@ -214,6 +223,8 @@ class Tabs {
 				// focus on element when blurred
 				sel.removeAllRanges();
 				sel.addRange(range);
+
+				Tabs.dispatch({ ...event, type: "update-toolbar" });
 				break;
 			case "editor.undo":
 			case "editor.redo":
