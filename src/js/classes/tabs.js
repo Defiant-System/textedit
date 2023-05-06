@@ -8,14 +8,21 @@ class Tabs {
 
 		// fast references
 		this.els = {
+			toolUndo: spawn.find(`.toolbar-tool_[data-click="editor.undo"]`),
+			toolRedo: spawn.find(`.toolbar-tool_[data-click="editor.redo"]`),
+
+			toolSelFamily: spawn.find(`.toolbar-selectbox_[data-menu="sys:font-families"]`),
+			toolSelSize: spawn.find(`.toolbar-selectbox_[data-menu="font-size"]`),
+
 			toolBold: spawn.find(`.toolbar-tool_[data-arg="bold"]`),
 			toolItalic: spawn.find(`.toolbar-tool_[data-arg="italic"]`),
 			toolUnderline: spawn.find(`.toolbar-tool_[data-arg="underline"]`),
+
 			toolJustifyleft: spawn.find(`.toolbar-tool_[data-arg="justifyleft"]`),
 			toolJustifycenter: spawn.find(`.toolbar-tool_[data-arg="justifycenter"]`),
 			toolJustifyright: spawn.find(`.toolbar-tool_[data-arg="justifyright"]`),
 			toolJustifyfull: spawn.find(`.toolbar-tool_[data-arg="justifyfull"]`),
-		}
+		};
 
 		// editor template
 		let editor = spawn.find(`content > div[data-id="editor"]`);
@@ -36,7 +43,7 @@ class Tabs {
 		let tId = "f"+ Date.now(),
 			history = new window.History,
 			settings = {
-				pageView: file.kind === "md",
+				pageView: true, // file.kind === "md",
 				hideRulers: false,
 			},
 			tabEl = this._spawn.tabs.add(file.base, tId),
@@ -89,8 +96,8 @@ class Tabs {
 		// reference to active tab
 		this._active = this._stack[tId];
 		// file UI
-		this._content.toggleClass("web-view", !this._active.settings.pageView);
-		this._content.toggleClass("page-view", this._active.settings.pageView);
+		this._content.toggleClass("web-view", this._active.settings.pageView);
+		this._content.toggleClass("page-view", !this._active.settings.pageView);
 		this._content.toggleClass("show-ruler", this._active.settings.hideRulers);
 		// UI update
 		this.update();
@@ -205,6 +212,9 @@ class Tabs {
 				// update command states
 				Edit.updateState();
 				// update toolbar
+				Tabs.els.toolSelFamily.val(Edit.commandState.fontFamily);
+				Tabs.els.toolSelSize.val(Edit.commandState.fontSize);
+
 				Tabs.els.toolBold.toggleClass("tool-active_", !Edit.commandState.bold);
 				Tabs.els.toolItalic.toggleClass("tool-active_", !Edit.commandState.italic);
 				Tabs.els.toolUnderline.toggleClass("tool-active_", !Edit.commandState.underline);
@@ -223,7 +233,7 @@ class Tabs {
 				// focus on element when blurred
 				sel.removeAllRanges();
 				sel.addRange(range);
-
+				// update toolbar
 				Tabs.dispatch({ ...event, type: "update-toolbar" });
 				break;
 			case "editor.undo":

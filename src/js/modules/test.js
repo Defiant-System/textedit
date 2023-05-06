@@ -9,7 +9,7 @@ let Test = {
 		setTimeout(() => {
 				// let node = spawn.find(`div[contenteditable="true"]`)[0].childNodes[4].childNodes[0];
 				let node = spawn.find(`div[contenteditable="true"]`)[0].childNodes[2].childNodes[0];
-				APP.dispatch({type: "editor.select-text", spawn, node, start: 3, len: 5 });
+				APP.dispatch({type: "editor.select-text", spawn, node, start: 1, len: 3 });
 			}, 300);
 		// setTimeout(() => APP.dispatch({ type: "editor.format", spawn, arg: "bold" }), 350);
 	},

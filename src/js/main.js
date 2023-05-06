@@ -1,6 +1,7 @@
 
 @import "./classes/tabs.js"
 
+@import "./modules/color.js"
 @import "./modules/edit.js"
 @import "./modules/test.js"
 

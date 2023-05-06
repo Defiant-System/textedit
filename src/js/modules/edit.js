@@ -9,12 +9,23 @@ let Edit = {
 		justifycenter: false,
 		justifyright: false,
 		justifyfull: false,
+
+		fontFamily: false,
+		fontSize: false,
 	},
 	updateState() {
 		// update command state
 		Object.keys(this.commandState).map(key => {
 			this.commandState[key] = document.queryCommandState(key);
 		});
+
+		let sel = document.getSelection(),
+			node = sel.baseNode.nodeType === 3 ? sel.baseNode.parentNode : sel.baseNode,
+			cStyle = getComputedStyle(node);
+		
+		this.commandState.fontFamily = cStyle.fontFamily.split(",")[0];
+		this.commandState.fontSize = parseInt(cStyle.fontSize, 10);
+		console.log( Color.rgbToHex( cStyle.color ) );
 	},
 	execCommand(editor, name, value) {
 		// execute command
@@ -23,7 +34,7 @@ let Edit = {
 		editor.trigger("change");
 	},
 	getCurrentRange() {
-		let sel = window.getSelection(),
+		let sel = document.getSelection(),
 			range;
 		if (sel.getRangeAt && sel.rangeCount) {
 			range = sel.getRangeAt( 0 );
@@ -35,7 +46,7 @@ let Edit = {
 	},
 	restoreSelection() {
 		if ( this.selectedRange ) {
-			let selection = window.getSelection();
+			let selection = document.getSelection();
 			selection.removeAllRanges();
 			selection.addRange( this.selectedRange );
 		}
