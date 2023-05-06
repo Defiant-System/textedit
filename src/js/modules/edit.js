@@ -15,23 +15,23 @@ let Edit = {
 	},
 	updateState() {
 		// update command state
-		Object.keys(this.commandState).map(key => {
-			this.commandState[key] = document.queryCommandState(key);
-		});
-
+		Object.keys(this.commandState)
+			.map(key => {
+				this.commandState[key] = document.queryCommandState(key);
+			});
+		// font family & size
 		let sel = document.getSelection(),
 			node = sel.baseNode.nodeType === 3 ? sel.baseNode.parentNode : sel.baseNode,
 			cStyle = getComputedStyle(node);
-		
 		this.commandState.fontFamily = cStyle.fontFamily.split(",")[0];
 		this.commandState.fontSize = parseInt(cStyle.fontSize, 10);
-		console.log( Color.rgbToHex( cStyle.color ) );
+		// console.log( Color.rgbToHex( cStyle.color ) );
 	},
 	execCommand(editor, name, value) {
 		// execute command
 		document.execCommand( name, false, value );
 		// trigger event
-		editor.trigger("change");
+		requestAnimationFrame(() => editor.trigger("change"));
 	},
 	getCurrentRange() {
 		let sel = document.getSelection(),
