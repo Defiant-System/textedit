@@ -51,6 +51,10 @@
 				});
 				break;
 
+			case "before-menu:font-families":
+				console.log(event);
+				break;
+
 			// tab related events
 			case "tab.new":
 				file = event.file || new karaqu.File({ kind: "txt", data: "" });

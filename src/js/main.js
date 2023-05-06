@@ -7,7 +7,9 @@
 
 // markdown support
 @import "./external/turnDown.js";
+@import "./external/turndown-plugin-gfm.js";
 let service = new TurndownService();
+service.use(turndownPluginGfm.gfm);
 
 
 const textedit = {

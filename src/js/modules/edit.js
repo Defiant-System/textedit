@@ -22,8 +22,10 @@ let Edit = {
 		// font family & size
 		let sel = document.getSelection(),
 			node = sel.baseNode.nodeType === 3 ? sel.baseNode.parentNode : sel.baseNode,
-			cStyle = getComputedStyle(node);
-		this.commandState.fontFamily = cStyle.fontFamily.split(",")[0];
+			cStyle = getComputedStyle(node),
+			value = cStyle.fontFamily.split(",")[0];
+		if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);
+		this.commandState.fontFamily = value;
 		this.commandState.fontSize = parseInt(cStyle.fontSize, 10);
 		// console.log( Color.rgbToHex( cStyle.color ) );
 	},
