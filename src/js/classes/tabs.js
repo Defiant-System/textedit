@@ -48,7 +48,8 @@ class Tabs {
 			},
 			tabEl = this._spawn.tabs.add(file.base, tId),
 			bodyEl = this._template.clone(),
-			data = file.data || "";
+			data = file.data || "",
+			fnHandler = e => this.dispatch({ type: "change", spawn: this._spawn });
 
 		switch (file.kind) {
 			case "txt" : data = data.replace(/\n/g, "<br>"); break;
@@ -59,9 +60,9 @@ class Tabs {
 		bodyEl.attr({ "data-id": tId }).html(data);
 		bodyEl = this._content.append(bodyEl);
 		// bind event handler
-		bodyEl.on("change mouseup", e => this.dispatch({ type: "change", spawn: this._spawn }));
+		bodyEl.on("change keyup mouseup", fnHandler);
 		// save reference to tab
-		this._stack[tId] = { tId, tabEl, bodyEl, history, settings, file };
+		this._stack[tId] = { tId, tabEl, bodyEl, fnHandler, history, settings, file };
 		// focus on file
 		this.focus(tId);
 	}
@@ -79,8 +80,11 @@ class Tabs {
 	}
 
 	remove(tId) {
+		let item = this._stack[tId];
+		// unbind event handlers
+		item.bodyEl.off("change keyup mouseup", item.fnHandler);
 		// remove element from DOM tree
-		this._stack[tId].bodyEl.remove();
+		item.bodyEl.remove();
 		// delete references
 		this._stack[tId] = false;
 		delete this._stack[tId];
