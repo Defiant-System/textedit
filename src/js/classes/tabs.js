@@ -243,6 +243,9 @@ class Tabs {
 			case "editor.undo":
 			case "editor.redo":
 				break;
+			case "editor.format-fontSize":
+				console.log(event);
+				break;
 			case "editor.format":
 				name = event.arg;
 				value = event.val;
