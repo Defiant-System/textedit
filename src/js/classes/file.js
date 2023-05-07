@@ -85,9 +85,10 @@ class File {
 			case "md":
 				type = "text/markdown";
 				data = service.turndown(data);
-				console.log( 1, this._file.data );
-				console.log( 2, this._el.html() );
-				console.log( 3, data );
+				// console.log( this._file.data === data );
+				// console.log( 1, this._file.data );
+				// console.log( 2, this._el.html() );
+				// console.log( 3, data );
 				break;
 		}
 		// console.log( data );

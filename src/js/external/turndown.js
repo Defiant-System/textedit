@@ -100,7 +100,7 @@ var TurndownService = (function () {
 					'\n\n' + content + '\n' + underline + '\n\n'
 				)
 			} else {
-				return '\n\n' + repeat('#', hLevel) + ' ' + content + '\n\n'
+				return '\n\n' + repeat('#', hLevel) + ' ' + content + '\n'
 			}
 		}
 	};
@@ -767,7 +767,7 @@ var TurndownService = (function () {
 			if (input === '') return ''
 
 			var output = process.call(this, new RootNode(input));
-			return postProcess.call(this, output)
+			return postProcess.call(this, output) + '\n'
 		},
 
 		/**

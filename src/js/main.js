@@ -7,13 +7,9 @@
 @import "./modules/test.js"
 
 // markdown support
-@import "./external/turnUp.js"
-@import "./external/turnDown.js";
-@import "./external/turndown-plugin-gfm.js";
-let service = new TurndownService();
-service.use(turndownPluginGfm.gfm);
-// service.use(turndownPluginRtf.rtf);
-// service.use(turndownPluginFds.fds);
+@import "./external/turnup.js"
+@import "./external/turndown.js";
+let service = new TurndownService({ br: "\n" });
 // custom extending with "turnup"
 service.turnup = turnup;
 
