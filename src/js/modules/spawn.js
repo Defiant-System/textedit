@@ -81,7 +81,7 @@
 				if (tabs._active.file.isNew) {
 					return Self.dispatch({ ...event, type: "save-file-as" });
 				}
-				// return tabs._active.file.toBlob();
+				return tabs._active.file.toBlob();
 				window.dialog.save(tabs._active.file, tabs._active.file.toBlob());
 				break;
 			case "save-file-as":

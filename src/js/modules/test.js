@@ -7,11 +7,10 @@ let Test = {
 		// setTimeout(() => this.dialog(spawn), 300);
 
 		// return setTimeout(() => spawn.updateTitle({ isDirty: true }), 300);
+		return setTimeout(() => APP.dispatch({ type: "save-file", spawn }), 300);
 
 		return;
 		
-		return setTimeout(() => APP.dispatch({ type: "save-file", spawn }), 300);
-
 		setTimeout(() => {
 				// let node = spawn.find(`div[contenteditable="true"]`)[0].childNodes[4].childNodes[0];
 				let node = spawn.find(`div[contenteditable="true"]`)[0].childNodes[2].childNodes[0];

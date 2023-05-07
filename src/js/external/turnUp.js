@@ -44,12 +44,16 @@ let turnup = (function() {
 		paragraphsTemplate = (m, g1, g2, g3) => `<p>${g1 + g2}</p>`+ g3 ? m + '\n<br>\n' : '\n',
 		horizontalRegExp = /^.*?(?:---|\*\*\*|- - -|\* \* \*)/gm,
 		horizontalTemplate = '<hr>',
-		strongRegExp = /(?:\*)([^\*\n_]+?)(?:\*)/g,
+
+		strongRegExp = /(?:\*\*)([^\*\n_]+?)(?:\*\*)/g,
 		strongTemplate = '<strong>$1</strong>',
-		emphasisRegExp = /(?:\_)([^\*\n_]+?)(?:\_)/g,
+
+		emphasisRegExp = /(?:_)([^\*\n]+?)(?:_)/g,
 		emphasisTemplate = '<em>$1</em>',
+
 		strikeRegExp = /(?:~)([^~]+?)(?:~)/g,
 		strikeTemplate = '<del>$1</del>',
+
 		linksRegExp = /\[(.*?)\]\(([^\t\n ]*)(?:| "(.*)")\)+/gm,
 		linksTemplate = (m, g1, g2, g3) => {
 			let title = g3 ? ` title="${g3.replace(resc, unicode)}"` : '';
