@@ -29,10 +29,16 @@ class File {
 				}
 				break;
 		}
+
+		// console.log( this._file );
 	}
 
 	get kind() {
 		return this._file.kind;
+	}
+
+	get base() {
+		return this._file.base;
 	}
 
 	get isNew() {
