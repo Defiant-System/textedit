@@ -101,12 +101,12 @@ class Tabs {
 		let active = this._active;
 		// unhide focused body
 		active.bodyEl.removeClass("hidden");
-
 		// update spawn window title
 		this._spawn.title = active.file.base;
-		
 		// restore selection
 		this.restoreSelection(active);
+		// update toolbar
+		this.dispatch({ type: "update-toolbar", spawn: this._spawn });
 	}
 
 	saveSelection() {

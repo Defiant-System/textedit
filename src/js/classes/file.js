@@ -3,13 +3,17 @@ class File {
 	constructor(fsFile, el) {
 		// save reference to original FS file
 		this._file = fsFile || new karaqu.File({ kind: "txt" });
-		this._el = el;
+		this._el = el.data({ kind: this.kind });
 
 		this.id = "f"+ Date.now();
 		this.setup = {
 			pageView: true, // file.kind === "md",
 			hideRulers: false,
 		};
+	}
+
+	get kind() {
+		return this._file.kind;
 	}
 
 	get isNew() {
@@ -20,6 +24,13 @@ class File {
 		// TODO:
 	}
 
+	get def() {
+		let str = [];
+		str.push(`<meta name="pageView" value="true"/>`);
+		str.push(`<meta name="hideRulers" value="false"/>`);
+		return `<def>${str.join("")}</def>`;
+	}
+
 	get data() {
 		let data = this._file.data;
 
@@ -28,15 +39,12 @@ class File {
 				data = data.replace(/\n/g, "<br>");
 				break;
 			case "md" :
+				data += this.def; // temp
 				data = service.turnup(data);
 				break;
 		}
 
 		return data || "";
-	}
-
-	get kind() {
-		return this._file.kind;
 	}
 
 	toBlob(opt={}) {
