@@ -7,9 +7,28 @@ class File {
 
 		this.id = "f"+ Date.now();
 		this.setup = {
-			pageView: true, // file.kind === "md",
-			hideRulers: false,
+			pageView: false, // file.kind === "md",
+			hideRulers: true,
 		};
+
+		switch (this.kind) {
+			case "txt": break;
+			case "md":
+				if (this._file.data.endsWith("</def>")) {
+					// parse defs
+					let i = this._file.data.lastIndexOf(`<def>`),
+						def = this._file.data.slice(i);
+					// update file data
+					this._file.data = this._file.data.slice(0, -def.length);
+					// extract defs
+					$(def).find(`meta`).map(meta => {
+						let name = meta.getAttribute("name"),
+							value = meta.getAttribute("value").guessType();
+						this.setup[name] = value;
+					});
+				}
+				break;
+		}
 	}
 
 	get kind() {
@@ -34,14 +53,9 @@ class File {
 	get data() {
 		let data = this._file.data;
 
-		switch (this._file.kind) {
-			case "txt":
-				data = data.replace(/\n/g, "<br>");
-				break;
-			case "md" :
-				data += this.def; // temp
-				data = service.turnup(data);
-				break;
+		switch (this.kind) {
+			case "txt": data = data.replace(/\n/g, "<br>"); break;
+			case "md": data = service.turnup(data); break;
 		}
 
 		return data || "";
@@ -50,7 +64,7 @@ class File {
 	toBlob(opt={}) {
 		let data = this._el.html(),
 			// file kind, if not specified
-			kind = opt.kind || this._file.kind,
+			kind = opt.kind || this.kind,
 			type;
 
 		switch (kind) {
