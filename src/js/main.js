@@ -9,7 +9,7 @@
 // markdown support
 @import "./external/turnup.js"
 @import "./external/turndown.js";
-let service = new TurndownService({ br: "\n" });
+let service = new TurndownService();
 // custom extending with "turnup"
 service.turnup = turnup;
 

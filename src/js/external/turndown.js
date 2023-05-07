@@ -733,7 +733,7 @@ var TurndownService = (function () {
 			strongDelimiter: '**',
 			linkStyle: 'inlined',
 			linkReferenceStyle: 'full',
-			br: '  ',
+			br: '\n',
 			blankReplacement: function (content, node) {
 				return node.isBlock ? '\n\n' : ''
 			},
