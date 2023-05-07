@@ -1,4 +1,5 @@
 
+@import "./classes/file.js"
 @import "./classes/tabs.js"
 
 @import "./modules/color.js"
@@ -10,6 +11,8 @@
 @import "./external/turndown-plugin-gfm.js";
 let service = new TurndownService();
 service.use(turndownPluginGfm.gfm);
+// service.use(turndownPluginRtf.rtf);
+// service.use(turndownPluginFds.fds);
 
 
 const textedit = {

@@ -32,39 +32,33 @@ class Tabs {
 	}
 
 	get file() {
-		return this._active.file;
+		return this._active.file._file;
 	}
 
 	get length() {
 		return Object.keys(this._stack).length;
 	}
 
-	add(file) {
-		let tId = "f"+ Date.now(),
+	add(fsFile) {
+		let file = new File(fsFile),
 			history = new window.History,
 			settings = {
 				pageView: true, // file.kind === "md",
 				hideRulers: false,
 			},
-			tabEl = this._spawn.tabs.add(file.base, tId),
+			tabEl = this._spawn.tabs.add(fsFile.base, file.id),
 			bodyEl = this._template.clone(),
-			data = file.data || "",
 			fnHandler = e => this.dispatch({ type: "change", spawn: this._spawn });
 
-		switch (file.kind) {
-			case "txt" : data = data.replace(/\n/g, "<br>"); break;
-			case "md"  : data = $.md(data); break;
-		}
-
 		// add element to DOM + append file contents
-		bodyEl.attr({ "data-id": tId }).html(data);
+		bodyEl.attr({ "data-id": file.id }).html(file.data);
 		bodyEl = this._content.append(bodyEl);
 		// bind event handler
 		bodyEl.on("change keyup mouseup", fnHandler);
 		// save reference to tab
-		this._stack[tId] = { tId, tabEl, bodyEl, fnHandler, history, settings, file };
+		this._stack[file.id] = { tabEl, bodyEl, fnHandler, history, settings, file };
 		// focus on file
-		this.focus(tId);
+		this.focus(file.id);
 	}
 
 	merge(ref) {
@@ -105,30 +99,6 @@ class Tabs {
 		this._content.toggleClass("show-ruler", this._active.settings.hideRulers);
 		// UI update
 		this.update();
-	}
-
-	toBlob(opt={}) {
-		let data = this._active.bodyEl.html(),
-			// file kind, if not specified
-			kind = opt.kind || this._active.file.kind,
-			type;
-
-		switch (kind) {
-			case "txt":
-				type = "text/plain";
-				data = data.replace(/<br>|<br\/>/g, "\n").stripHtml();
-				break;
-			case "htm":
-			case "html":
-				type = "text/html";
-				break;
-			case "md":
-				type = "text/markdown";
-				data = service.turndown(data);
-				break;
-		}
-
-		return new Blob([data], { type });
 	}
 
 	update() {
@@ -210,7 +180,7 @@ class Tabs {
 			name,
 			value;
 		switch (event.type) {
-			// native event
+			// native events
 			case "change":
 			case "update-toolbar":
 				// update command states

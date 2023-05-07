@@ -78,10 +78,11 @@
 				break;
 			case "save-file":
 				tabs = Spawn.data.tabs;
-				if (!tabs.file.xNode) {
+				return console.log( tabs._active );
+				if (!tabs._active.file.xNode) {
 					return Self.dispatch({ ...event, type: "save-file-as" });
 				}
-				window.dialog.save(tabs.file, tabs.toBlob());
+				// window.dialog.save(tabs.file, tabs.file.toBlob());
 				break;
 			case "save-file-as":
 				tabs = Spawn.data.tabs;
