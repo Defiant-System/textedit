@@ -31,23 +31,19 @@ class Tabs {
 		editor.remove();
 	}
 
-	get file() {
-		return this._active.file._file;
-	}
-
 	get length() {
 		return Object.keys(this._stack).length;
 	}
 
+	toBlob(opt={}) {
+		return this._active.file.toBlob(this._active.bodyEl, opt);
+	}
+
 	add(fsFile) {
-		let file = new File(fsFile),
+		let bodyEl = this._template.clone(),
+			file = new File(fsFile, bodyEl),
 			history = new window.History,
-			settings = {
-				pageView: true, // file.kind === "md",
-				hideRulers: false,
-			},
 			tabEl = this._spawn.tabs.add(fsFile.base, file.id),
-			bodyEl = this._template.clone(),
 			fnHandler = e => this.dispatch({ type: "change", spawn: this._spawn });
 
 		// add element to DOM + append file contents
@@ -56,7 +52,7 @@ class Tabs {
 		// bind event handler
 		bodyEl.on("change keyup mouseup", fnHandler);
 		// save reference to tab
-		this._stack[file.id] = { tabEl, bodyEl, fnHandler, history, settings, file };
+		this._stack[file.id] = { tabEl, bodyEl, fnHandler, history, file };
 		// focus on file
 		this.focus(file.id);
 	}
@@ -94,9 +90,9 @@ class Tabs {
 		// reference to active tab
 		this._active = this._stack[tId];
 		// file UI
-		this._content.toggleClass("web-view", this._active.settings.pageView);
-		this._content.toggleClass("page-view", !this._active.settings.pageView);
-		this._content.toggleClass("show-ruler", this._active.settings.hideRulers);
+		this._content.toggleClass("web-view", this._active.file.setup.pageView);
+		this._content.toggleClass("page-view", !this._active.file.setup.pageView);
+		this._content.toggleClass("show-ruler", this._active.file.setup.hideRulers);
 		// UI update
 		this.update();
 	}
@@ -214,7 +210,7 @@ class Tabs {
 			case "editor.redo":
 				break;
 			case "editor.format-fontSize":
-				console.log(event);
+				// console.log(event);
 				break;
 			case "editor.format":
 				name = event.arg;

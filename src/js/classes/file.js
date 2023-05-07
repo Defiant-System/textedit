@@ -1,13 +1,23 @@
 
 class File {
-	constructor(fsFile, data) {
+	constructor(fsFile, el) {
 		// save reference to original FS file
-		this.id = "f"+ Date.now();
 		this._file = fsFile || new karaqu.File({ kind: "txt" });
+		this._el = el;
+
+		this.id = "f"+ Date.now();
+		this.setup = {
+			pageView: true, // file.kind === "md",
+			hideRulers: false,
+		};
+	}
+
+	get isNew() {
+		return !this._file.xNode;
 	}
 
 	get isDirty() {
-		
+		// TODO:
 	}
 
 	get data() {
@@ -19,7 +29,6 @@ class File {
 				break;
 			case "md" :
 				data = $.md(data);
-				console.log(data);
 				break;
 		}
 
@@ -31,7 +40,7 @@ class File {
 	}
 
 	toBlob(opt={}) {
-		let data = this._active.bodyEl.html(),
+		let data = this._el.html(),
 			// file kind, if not specified
 			kind = opt.kind || this._file.kind,
 			type;
@@ -50,7 +59,7 @@ class File {
 				data = service.turndown(data);
 				break;
 		}
-
+		// console.log( data );
 		return new Blob([data], { type });
 	}
 

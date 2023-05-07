@@ -78,19 +78,19 @@
 				break;
 			case "save-file":
 				tabs = Spawn.data.tabs;
-				return console.log( tabs._active );
-				if (!tabs._active.file.xNode) {
+				if (tabs._active.file.isNew) {
 					return Self.dispatch({ ...event, type: "save-file-as" });
 				}
-				// window.dialog.save(tabs.file, tabs.file.toBlob());
+				// return tabs._active.file.toBlob();
+				window.dialog.save(tabs._active.file, tabs._active.file.toBlob());
 				break;
 			case "save-file-as":
 				tabs = Spawn.data.tabs;
 				// pass on available file types
 				Spawn.dialog.saveAs(tabs.file, {
-					txt:  () => tabs.file.toBlob({ kind: "txt" }),
-					html: () => tabs.file.toBlob({ kind: "html" }),
-					md:   () => tabs.file.toBlob({ kind: "md" }),
+					txt:  () => tabs._active.file.toBlob({ kind: "txt" }),
+					html: () => tabs._active.file.toBlob({ kind: "html" }),
+					md:   () => tabs._active.file.toBlob({ kind: "md" }),
 				});
 				break;
 			case "new-spawn":

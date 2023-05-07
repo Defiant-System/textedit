@@ -6,6 +6,8 @@ let Test = {
 
 		// setTimeout(() => this.dialog(spawn), 300);
 
+		return;
+		
 		return setTimeout(() => APP.dispatch({ type: "save-file", spawn }), 300);
 
 		setTimeout(() => {
