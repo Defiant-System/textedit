@@ -28,7 +28,7 @@ class File {
 				data = data.replace(/\n/g, "<br>");
 				break;
 			case "md" :
-				data = $.md(data);
+				data = service.turnup(data);
 				break;
 		}
 

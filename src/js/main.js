@@ -7,12 +7,15 @@
 @import "./modules/test.js"
 
 // markdown support
+@import "./external/turnUp.js"
 @import "./external/turnDown.js";
 @import "./external/turndown-plugin-gfm.js";
 let service = new TurndownService();
 service.use(turndownPluginGfm.gfm);
 // service.use(turndownPluginRtf.rtf);
 // service.use(turndownPluginFds.fds);
+// custom extending with "turnup"
+service.turnup = turnup;
 
 
 const textedit = {
