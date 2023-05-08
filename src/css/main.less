@@ -228,24 +228,21 @@ content {
 		.block-recent,
 		.block-samples {
 			margin: 10px auto;
-			width: 515px;
-			height: 167px;
+			width: 475px;
+			height: 193px;
 			color: #999;
 
 			.recent-file,
 			.sample {
 				display: inline-block;
 				background-color: #ccc;
-				background-size: 0 0;
 				position: relative;
-				width: 113px;
-				height: 113px;
+				width: 103px;
+				height: 123px;
 				margin: 0 21px 13px 0;
 				text-align: center;
-				border-radius: 9px;
+				border-radius: 5px;
 				cursor: pointer;
-				// box-shadow: 0 0 0 3px #ccc,
-				// 			inset 0 0 0 3px #ccc;
 
 				&:last-child {
 					margin-right: 0;
@@ -254,8 +251,8 @@ content {
 				&:hover {
 					background-color: #489bf770;
 
-					&:after {
-						display: block;
+					&:before {
+						box-shadow: 0 0 0 1px #489bf7;
 					}
 
 					span {
@@ -265,32 +262,14 @@ content {
 
 				&:before {
 					content: "";
+					background: #fff;
 					position: absolute;
-					top: 5px;
-					left: 5px;
-					right: 5px;
-					bottom: 5px;
-					border-radius: 5px;
-					background: linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), white;
-					background-repeat: repeat, repeat;
-					background-position: 0px 0, 6px 6px;
-					background-origin: padding-box, padding-box;
-					background-clip: border-box, border-box;
-					background-size: 12px 12px, 12px 12px;
-					transform: scaleX(1) scaleY(1) scaleZ(1);
+					top: 3px;
+					left: 3px;
+					right: 3px;
+					bottom: 3px;
+					border-radius: 3px;
 					pointer-events: none;
-				}
-
-				&:after {
-					display: none;
-					content: "";
-					position: absolute;
-					top: 5px;
-					left: 5px;
-					right: 5px;
-					bottom: 5px;
-					border-radius: 5px;
-					box-shadow: 0 0 0 1px #489bf7;
 				}
 
 				span {
@@ -303,10 +282,6 @@ content {
 					pointer-events: none;
 				}
 			}
-		}
-
-		.block-recent {
-			
 		}
 	}
 }
