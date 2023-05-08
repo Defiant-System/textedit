@@ -46,6 +46,30 @@
 			case "open-filesystem":
 				APP.spawn.dispatch({ ...event, type: "open-file" });
 				break;
+			case "from-clipboard":
+				// TODO
+				break;
+			case "select-sample":
+				break;
+			case "select-recent-file":
+				el = $(event.target);
+				if (!el.hasClass("recent-file")) return;
+				
+				karaqu.shell(`fs -o '${el.data("path")}' null`)
+					.then(exec => console.log(exec.result));
+					// .then(exec => APP.dispatch(exec.result));
+				break;
+				break;
+			case "add-recent-file":
+				if (!event.file.path) return;
+				let str = `<i kind="${event.file.kind}" name="${event.file.base}" path="${event.file.path}"/>`,
+					xFile = $.nodeFromString(str),
+					xExist = Self.xRecent.selectSingleNode(`//Recents/*[@path="${event.file.path}"]`);
+				// remove entry if already exist
+				if (xExist) xExist.parentNode.removeChild(xExist);
+				// insert new entry at first position
+				Self.xRecent.insertBefore(xFile, Self.xRecent.firstChild);
+				break;
 		}
 	}
 }

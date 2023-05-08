@@ -43,7 +43,7 @@
 	<xsl:for-each select="./Recents/*">
 		<div class="recent-file">
 			<xsl:attribute name="data-kind"><xsl:value-of select="@kind"/></xsl:attribute>
-			<xsl:attribute name="data-url"><xsl:value-of select="@path"/></xsl:attribute>
+			<xsl:attribute name="data-path"><xsl:value-of select="@path"/></xsl:attribute>
 			<span><xsl:value-of select="@name"/></span>
 		</div>
 	</xsl:for-each>
