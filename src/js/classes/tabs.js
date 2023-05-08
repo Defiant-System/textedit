@@ -10,18 +10,16 @@ class Tabs {
 		this.els = {
 			toolUndo: spawn.find(`.toolbar-tool_[data-click="editor.undo"]`),
 			toolRedo: spawn.find(`.toolbar-tool_[data-click="editor.redo"]`),
-
 			toolSelFamily: spawn.find(`.toolbar-selectbox_[data-menu="sys:font-families"]`),
 			toolSelSize: spawn.find(`.toolbar-selectbox_[data-menu="font-size"]`),
-
 			toolBold: spawn.find(`.toolbar-tool_[data-arg="bold"]`),
 			toolItalic: spawn.find(`.toolbar-tool_[data-arg="italic"]`),
 			toolUnderline: spawn.find(`.toolbar-tool_[data-arg="underline"]`),
-
 			toolJustifyleft: spawn.find(`.toolbar-tool_[data-arg="justifyleft"]`),
 			toolJustifycenter: spawn.find(`.toolbar-tool_[data-arg="justifycenter"]`),
 			toolJustifyright: spawn.find(`.toolbar-tool_[data-arg="justifyright"]`),
 			toolJustifyfull: spawn.find(`.toolbar-tool_[data-arg="justifyfull"]`),
+			toolSettings: spawn.find(`.toolbar-tool_[data-click="editor.settings"]`),
 		};
 
 		// editor template
@@ -171,8 +169,8 @@ class Tabs {
 	dispatch(event) {
 		let Spawn = event.spawn,
 			Tabs = Spawn.data.tabs,
-			Active = Tabs._active,
-			editor = Active.bodyEl,
+			Active = Tabs ? Tabs._active : false,
+			editor = Active ? Active.bodyEl : false,
 			name,
 			value;
 		switch (event.type) {
@@ -193,6 +191,14 @@ class Tabs {
 				Tabs.els.toolJustifycenter.toggleClass("tool-active_", !Edit.commandState.justifycenter);
 				Tabs.els.toolJustifyright.toggleClass("tool-active_", !Edit.commandState.justifyright);
 				Tabs.els.toolJustifyfull.toggleClass("tool-active_", !Edit.commandState.justifyfull);
+				break;
+			case "show-blank-view":
+				// update spawn title !?
+				Spawn.title = "Text Edit";
+				// disable toolbar
+				Object.keys(Tabs.els)
+					.filter(key => key.startsWith("tool"))
+					.map(key => Tabs.els[key].removeClass("tool-active_").addClass("tool-disabled_"));
 				break;
 			// edit related events
 			case "editor.select-text":

@@ -58,8 +58,10 @@
 
 			// tab related events
 			case "tab.new":
-				file = event.file || new karaqu.File({ kind: "txt", data: "" });
-				Spawn.data.tabs.add(file);
+				Spawn.data.tabs.dispatch({ ...event, type: "show-blank-view" });
+
+				// file = event.file || new karaqu.File({ kind: "txt", data: "" });
+				// Spawn.data.tabs.add(file);
 				break;
 			case "tab.clicked":
 				Spawn.data.tabs.focus(event.el.data("id"));

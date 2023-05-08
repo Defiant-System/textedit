@@ -1,6 +1,7 @@
 
 let Test = {
 	init(APP, spawn) {
+		return;
 		// setTimeout(() => Self.dispatch({ type: "tab.new", spawn: Spawn }), 300);
 		// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
 
@@ -8,8 +9,6 @@ let Test = {
 
 		// return setTimeout(() => spawn.updateTitle({ isDirty: true }), 300);
 		return setTimeout(() => APP.dispatch({ type: "save-file", spawn }), 300);
-
-		return;
 		
 		setTimeout(() => {
 				// let node = spawn.find(`div[contenteditable="true"]`)[0].childNodes[4].childNodes[0];

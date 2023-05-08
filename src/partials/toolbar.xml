@@ -19,6 +19,6 @@
 		</Options>
 	</Group>
 	<Group>
-		<Tool symbol="icon-cogs"/>
+		<Tool symbol="icon-cogs" click="editor.settings"/>
 	</Group>
 </ToolBar>
