@@ -35,6 +35,9 @@
 					.filter(i => typeof Self[i].init === "function")
 					.map(i => Self[i].init(Spawn));
 
+				// auto show "blank view"
+				Spawn.data.tabs.dispatch({ ...event, type: "show-blank-view" });
+
 				// DEV-ONLY-START
 				Test.init(APP, Spawn);
 				// DEV-ONLY-END
@@ -49,8 +52,6 @@
 				if (Spawn.data) Spawn.data.tabs.restoreSelection();
 				break;
 			case "open.file":
-				console.log("TODO:", event);
-
 				(event.files || [event]).map(async fHandle => {
 					let file = await fHandle.open({ responseType: "text" });
 					// auto add first base "tab"
@@ -64,10 +65,8 @@
 
 			// tab related events
 			case "tab.new":
-				Spawn.data.tabs.dispatch({ ...event, type: "show-blank-view" });
-
-				// file = event.file || new karaqu.File({ kind: "txt", data: "" });
-				// Spawn.data.tabs.add(file);
+				if (event.file) Spawn.data.tabs.add(event.file);
+				else Spawn.data.tabs.add({ new: "Blank" });
 				break;
 			case "tab.clicked":
 				Spawn.data.tabs.focus(event.el.data("id"));

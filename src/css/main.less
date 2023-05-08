@@ -15,16 +15,6 @@ content {
 	right: 0;
 	bottom: 0;
 
-	&.show-blank-view {
-		.blank-view {
-			display: block;
-		}
-
-		> div[contenteditable="true"] {
-			display: none;
-		}
-	}
-
 	&.web-view {
 		> div[contenteditable="true"] {
 			position: absolute;
@@ -102,6 +92,16 @@ content {
 
 		& + .rulerw {
 			display: block;
+		}
+	}
+
+	&.show-blank-view {
+		.blank-view {
+			display: block;
+		}
+
+		> div[contenteditable="true"] {
+			display: none;
 		}
 	}
 	

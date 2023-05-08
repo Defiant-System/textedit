@@ -40,7 +40,7 @@ const textedit = {
 			case "new-spawn":
 			case "window.init":
 				spawn = window.open("spawn");
-				Self.spawn.dispatch({ ...event, type: "spawn.init", spawn });
+				// Self.spawn.dispatch({ ...event, type: "spawn.init", spawn });
 				break;
 			case "open.file":
 				spawn = window.open("spawn");

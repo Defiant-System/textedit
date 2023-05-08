@@ -38,21 +38,30 @@ class Tabs {
 	}
 
 	add(fsFile) {
-		let bodyEl = this._template.clone(),
-			file = new File(fsFile, bodyEl),
-			history = new window.History,
-			tabEl = this._spawn.tabs.add(fsFile.base, file.id),
-			fnHandler = e => this.dispatch({ type: "change", spawn: this._spawn });
+		if (fsFile.new) {
+			let tId = "f"+ Date.now(),
+				// add tab to tab row
+				tabEl = this._spawn.tabs.add(fsFile.new, tId);
 
-		// add element to DOM + append file contents
-		bodyEl.attr({ "data-id": file.id }).html(file.data);
-		bodyEl = this.els.content.append(bodyEl);
-		// bind event handler
-		bodyEl.on("change keyup mouseup", fnHandler);
-		// save reference to tab
-		this._stack[file.id] = { tabEl, bodyEl, fnHandler, history, file };
-		// focus on file
-		this.focus(file.id);
+			this.dispatch({ type: "show-blank-view", spawn: this._spawn });
+
+		} else {
+			let bodyEl = this._template.clone(),
+				file = new File(fsFile, bodyEl),
+				history = new window.History,
+				tabEl = this._spawn.tabs.add(fsFile.base, file.id),
+				fnHandler = e => this.dispatch({ type: "change", spawn: this._spawn });
+
+			// add element to DOM + append file contents
+			bodyEl.attr({ "data-id": file.id }).html(file.data);
+			bodyEl = this.els.content.append(bodyEl);
+			// bind event handler
+			bodyEl.on("change keyup mouseup", fnHandler);
+			// save reference to tab
+			this._stack[file.id] = { tabEl, bodyEl, fnHandler, history, file };
+			// focus on file
+			this.focus(file.id);
+		}
 	}
 
 	merge(ref) {
@@ -90,7 +99,7 @@ class Tabs {
 				.then(blob => {
 					// here the image is a blob
 					file.blob = blob;
-					
+
 					let reader = new FileReader();
 
 					reader.addEventListener("load", () => {
@@ -230,6 +239,10 @@ class Tabs {
 				Tabs.els.content.addClass("show-blank-view");
 				break;
 			case "hide-blank-view":
+				// disable toolbar
+				Object.keys(Tabs.els)
+					.filter(key => key.startsWith("tool"))
+					.map(key => Tabs.els[key].removeClass("tool-disabled_"));
 				// hide blank view
 				Tabs.els.content.removeClass("show-blank-view");
 				break;
