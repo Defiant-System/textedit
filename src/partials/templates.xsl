@@ -32,8 +32,8 @@
 <xsl:template name="sample-list">
 	<xsl:for-each select="./Samples/*">
 		<div class="sample">
-			<xsl:attribute name="style">background-image: url(~/samples/<xsl:value-of select="@path"/>);</xsl:attribute>
-			<xsl:attribute name="data-url"><xsl:value-of select="@path"/></xsl:attribute>
+			<xsl:attribute name="data-kind"><xsl:value-of select="@kind"/></xsl:attribute>
+			<span><xsl:value-of select="@name"/></span>
 		</div>
 	</xsl:for-each>
 </xsl:template>
@@ -42,11 +42,9 @@
 <xsl:template name="recent-list">
 	<xsl:for-each select="./Recents/*">
 		<div class="recent-file">
-			<xsl:attribute name="data-file"><xsl:value-of select="@filepath"/></xsl:attribute>
-			<span class="thumbnail">
-				<xsl:attribute name="style">background-image: url(<xsl:value-of select="@filepath"/>);</xsl:attribute>
-			</span>
-			<span class="name"><xsl:value-of select="@name"/></span>
+			<xsl:attribute name="data-kind"><xsl:value-of select="@kind"/></xsl:attribute>
+			<xsl:attribute name="data-url"><xsl:value-of select="@path"/></xsl:attribute>
+			<span><xsl:value-of select="@name"/></span>
 		</div>
 	</xsl:for-each>
 </xsl:template>

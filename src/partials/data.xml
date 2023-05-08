@@ -1,11 +1,11 @@
 <Data>
 	<Samples>
-		<i path="deep learning.txt"/>
-		<i path="table.md"/>
-		<i path="catamaran.md"/>
-		<i path="stackedit.md"/>
+		<i kind="txt" name="deep learning.txt"/>
+		<i kind="md" name="table.md"/>
+		<i kind="md" name="catamaran.md"/>
+		<i kind="md" name="stackedit.md"/>
 	</Samples>
 	<Recents>
-		<i name="catamaran.md" path="/fs/Desktop/catamaran.md"/>
+		<i kind="md" name="catamaran.md" path="/fs/Desktop/catamaran.md"/>
 	</Recents>
 </Data>

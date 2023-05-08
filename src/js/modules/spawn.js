@@ -3,10 +3,6 @@
 
 {
 	init() {
-		// init all sub-objects
-		Object.keys(this)
-			.filter(i => typeof this[i].init === "function")
-			.map(i => this[i].init(this));
 
 	},
 	dispose(event) {
@@ -34,6 +30,11 @@
 			case "spawn.open":
 				Spawn.data.tabs = new Tabs(Self, Spawn);
 				
+				// init all sub-objects
+				Object.keys(Self)
+					.filter(i => typeof Self[i].init === "function")
+					.map(i => Self[i].init(Spawn));
+					
 				// DEV-ONLY-START
 				Test.init(APP, Spawn);
 				// DEV-ONLY-END

@@ -236,6 +236,10 @@ content {
 			.sample {
 				display: inline-block;
 				background-color: #ccc;
+				// background-image: url(/app/icons/generic-document.png);
+				// background-position: 50% 50%;
+				// background-size: contain;
+				// background-repeat: no-repeat;
 				position: relative;
 				width: 103px;
 				height: 123px;
@@ -243,6 +247,9 @@ content {
 				text-align: center;
 				border-radius: 5px;
 				cursor: pointer;
+
+				&[data-kind="txt"]:after { background-image: url(/app/icons/file-txt.png); }
+				&[data-kind="md"]:after { background-image: url(/app/icons/file-md.png); }
 
 				&:last-child {
 					margin-right: 0;
@@ -272,6 +279,17 @@ content {
 					pointer-events: none;
 				}
 
+				&:after {
+					content: "";
+					background: 50% 50% no-repeat;
+					position: absolute;
+					top: 3px;
+					left: 3px;
+					right: 3px;
+					bottom: 3px;
+					opacity: .3;
+				}
+
 				span {
 					position: absolute;
 					top: 100%;
@@ -280,6 +298,9 @@ content {
 					padding-top: 5px;
 					font-size: 13px;
 					pointer-events: none;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 			}
 		}
