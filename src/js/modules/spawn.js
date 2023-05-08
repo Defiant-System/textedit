@@ -128,6 +128,14 @@
 					// proxy event
 					return Spawn.data.tabs.dispatch(event);
 				}
+				if (event.el) {
+					let pEl = event.el.parents(`div[data-area]`);
+					if (pEl.length) {
+						let name = pEl.data("area");
+						Self[name].dispatch(event);
+					}
+				}
 		}
-	}
+	},
+	blankView: @import "./blank-view.js",
 }
