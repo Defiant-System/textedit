@@ -3,7 +3,12 @@
 
 {
 	init() {
-		
+		// fast references
+		this.els = {
+			doc: $(document),
+			content: window.find("content"),
+			el: window.find(".blank-view"),
+		};
 	},
 	dispatch(event) {
 		let APP = textedit,

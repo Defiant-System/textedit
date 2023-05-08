@@ -225,11 +225,14 @@ content {
 			}
 		}
 
+		.block-recent,
 		.block-samples {
 			margin: 10px auto;
 			width: 515px;
 			height: 167px;
+			color: #999;
 
+			.recent-file,
 			.sample {
 				display: inline-block;
 				background-color: #ccc;
@@ -238,6 +241,7 @@ content {
 				width: 113px;
 				height: 113px;
 				margin: 0 21px 13px 0;
+				text-align: center;
 				border-radius: 9px;
 				cursor: pointer;
 				// box-shadow: 0 0 0 3px #ccc,
@@ -252,6 +256,10 @@ content {
 
 					&:after {
 						display: block;
+					}
+
+					span {
+						color: #666;
 					}
 				}
 
@@ -284,64 +292,8 @@ content {
 					border-radius: 5px;
 					box-shadow: 0 0 0 1px #489bf7;
 				}
-			}
-		}
 
-		.block-recent {
-			margin: 10px auto;
-			width: 515px;
-			// flex: 1;
-
-			.recent-file {
-				background: rgba(0,0,0,.075);
-				display: inline-block;
-				position: relative;
-				width: 113px;
-				height: 113px;
-				margin: 0 21px 13px 0;
-				padding: 5px 0 0;
-				text-align: center;
-				border-radius: 11px;
-				cursor: pointer;
-
-				&:before {
-					content: "";
-					position: absolute;
-					top: 5px;
-					left: 5px;
-					right: 5px;
-					bottom: 5px;
-					border-radius: 7px;
-					// background: rgba(255,255,255,.35);
-					background: linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), white;
-					background-repeat: repeat, repeat;
-					background-position: 0px 0, 6px 6px;
-					background-origin: padding-box, padding-box;
-					background-clip: border-box, border-box;
-					background-size: 12px 12px, 12px 12px;
-					transform: scaleX(1) scaleY(1) scaleZ(1);
-					pointer-events: none;
-				}
-
-				&:hover {
-					box-shadow: 0 0 0 3px #489bf770,
-								inset 0 0 0 2px #489bf7;
-				}
-
-				.thumbnail {
-					position: absolute;
-					top: 5px;
-					left: 5px;
-					right: 5px;
-					bottom: 5px;
-					border-radius: 7px;
-					pointer-events: none;
-					background-position: 50% 50%;
-					background-size: contain;
-					background-repeat: no-repeat;
-				}
-
-				.name {
+				span {
 					position: absolute;
 					top: 100%;
 					left: 0;
@@ -351,6 +303,10 @@ content {
 					pointer-events: none;
 				}
 			}
+		}
+
+		.block-recent {
+			
 		}
 	}
 }
