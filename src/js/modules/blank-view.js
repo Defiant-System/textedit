@@ -50,14 +50,17 @@
 				// TODO
 				break;
 			case "select-sample":
+				el = $(event.target);
+				if (!el.hasClass("sample")) return;
+				// send event to APP for proxy down to spawn
+				APP.dispatch({ ...event, type: "load-samples", names: [el.find("span").text()] });
 				break;
 			case "select-recent-file":
 				el = $(event.target);
 				if (!el.hasClass("recent-file")) return;
 				
 				karaqu.shell(`fs -o '${el.data("path")}' null`)
-					.then(exec => console.log(exec.result));
-					// .then(exec => APP.dispatch(exec.result));
+					.then(exec => APP.dispatch({ ...exec.result, spawn: Spawn }));
 				break;
 				break;
 			case "add-recent-file":

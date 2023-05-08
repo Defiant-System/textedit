@@ -34,7 +34,7 @@
 				Object.keys(Self)
 					.filter(i => typeof Self[i].init === "function")
 					.map(i => Self[i].init(Spawn));
-					
+
 				// DEV-ONLY-START
 				Test.init(APP, Spawn);
 				// DEV-ONLY-END
@@ -49,6 +49,8 @@
 				if (Spawn.data) Spawn.data.tabs.restoreSelection();
 				break;
 			case "open.file":
+				console.log("TODO:", event);
+
 				(event.files || [event]).map(async fHandle => {
 					let file = await fHandle.open({ responseType: "text" });
 					// auto add first base "tab"
@@ -57,8 +59,7 @@
 				break;
 
 			case "before-menu:font-families":
-				// TODO:
-				console.log(event);
+				console.log("TODO:", event);
 				break;
 
 			// tab related events
@@ -73,6 +74,25 @@
 				break;
 			case "tab.close":
 				Spawn.data.tabs.remove(event.el.data("id"));
+				break;
+
+			case "load-samples":
+				// opening image file from application package
+				event.names.map(async name => {
+					// forward event to app
+					let file = await Spawn.data.tabs.openLocal(`~/samples/${name}`);
+					Self.dispatch({ ...event, type: "prepare-file", isSample: true, file });
+				});
+				break;
+			case "prepare-file":
+				if (!event.isSample) {
+					// add file to "recent" list
+					Self.blankView.dispatch({ ...event, type: "add-recent-file" });
+				}
+				// hide blank view
+				Spawn.data.tabs.dispatch({ ...event, type: "hide-blank-view" });
+				// open file with Files
+				Spawn.data.tabs.add(event.file);
 				break;
 
 			// from menubar

@@ -1,11 +1,13 @@
 
 let Test = {
 	init(APP, spawn) {
-		return;
+		// return;
 		// setTimeout(() => Self.dispatch({ type: "tab.new", spawn: Spawn }), 300);
 		// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
 
 		// setTimeout(() => this.dialog(spawn), 300);
+
+		return setTimeout(() => spawn.find(`.sample:nth(2)`).trigger("click"), 300);
 
 		// return setTimeout(() => spawn.updateTitle({ isDirty: true }), 300);
 		return setTimeout(() => APP.dispatch({ type: "save-file", spawn }), 300);

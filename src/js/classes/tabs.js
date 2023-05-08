@@ -8,6 +8,7 @@ class Tabs {
 
 		// fast references
 		this.els = {
+			content: spawn.find(`content`),
 			toolUndo: spawn.find(`.toolbar-tool_[data-click="editor.undo"]`),
 			toolRedo: spawn.find(`.toolbar-tool_[data-click="editor.redo"]`),
 			toolSelFamily: spawn.find(`.toolbar-selectbox_[data-menu="sys:font-families"]`),
@@ -24,7 +25,6 @@ class Tabs {
 
 		// editor template
 		let editor = spawn.find(`content > div[data-id="editor"]`);
-		this._content = spawn.find("content");
 		this._template = editor.clone();
 		editor.remove();
 	}
@@ -46,7 +46,7 @@ class Tabs {
 
 		// add element to DOM + append file contents
 		bodyEl.attr({ "data-id": file.id }).html(file.data);
-		bodyEl = this._content.append(bodyEl);
+		bodyEl = this.els.content.append(bodyEl);
 		// bind event handler
 		bodyEl.on("change keyup mouseup", fnHandler);
 		// save reference to tab
@@ -62,7 +62,7 @@ class Tabs {
 			bodyEl = ref.bodyEl.clone(true).addClass("hidden"),
 			tabEl = this._spawn.tabs.add(file.base, tId, true);
 		// clone & append original bodyEl
-		bodyEl = this._content.append(bodyEl);
+		bodyEl = this.els.content.append(bodyEl);
 		// save reference to this spawns stack
 		this._stack[tId] = { tId, tabEl, bodyEl, history, file };
 	}
@@ -78,6 +78,33 @@ class Tabs {
 		delete this._stack[tId];
 	}
 
+	openLocal(url) {
+		let parts = url.slice(url.lastIndexOf("/") + 1),
+			[ name, kind ] = parts.split("."),
+			file = new karaqu.File({ name, kind });
+		// return promise
+		return new Promise((resolve, reject) => {
+			// fetch image and transform it to a "fake" file
+			fetch(url)
+				.then(resp => resp.blob())
+				.then(blob => {
+					// here the image is a blob
+					file.blob = blob;
+					
+					let reader = new FileReader();
+
+					reader.addEventListener("load", () => {
+						// this will then display a text file
+						file.data = reader.result;
+						resolve(file);
+					}, false);
+
+					reader.readAsText(blob);
+				})
+				.catch(err => reject(err));
+		});
+	}
+
 	focus(tId) {
 		if (this._active) {
 			// save selection
@@ -88,9 +115,9 @@ class Tabs {
 		// reference to active tab
 		this._active = this._stack[tId];
 		// file UI
-		this._content.toggleClass("web-view", this._active.file.setup.pageView);
-		this._content.toggleClass("page-view", !this._active.file.setup.pageView);
-		this._content.toggleClass("show-ruler", this._active.file.setup.hideRulers);
+		this.els.content.toggleClass("web-view", this._active.file.setup.pageView);
+		this.els.content.toggleClass("page-view", !this._active.file.setup.pageView);
+		this.els.content.toggleClass("show-ruler", this._active.file.setup.hideRulers);
 		// UI update
 		this.update();
 	}
@@ -110,7 +137,7 @@ class Tabs {
 	saveSelection() {
 		let el = document.activeElement,
 			elContent = $(el).parents("content");
-		if (el.isContentEditable && this._content[0] === elContent[0]) {
+		if (el.isContentEditable && this.els.content[0] === elContent[0]) {
 			let sel = document.getSelection(),
 				range = sel.getRangeAt(0),
 				clone = range.cloneRange(),
@@ -199,6 +226,12 @@ class Tabs {
 				Object.keys(Tabs.els)
 					.filter(key => key.startsWith("tool"))
 					.map(key => Tabs.els[key].removeClass("tool-active_").addClass("tool-disabled_"));
+				// show blank view
+				Tabs.els.content.addClass("show-blank-view");
+				break;
+			case "hide-blank-view":
+				// hide blank view
+				Tabs.els.content.removeClass("show-blank-view");
 				break;
 			// edit related events
 			case "editor.select-text":
