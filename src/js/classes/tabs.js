@@ -46,6 +46,8 @@ class Tabs {
 			this._stack[tId] = { tabEl };
 			// reset view / show blank view
 			this.dispatch({ type: "show-blank-view", spawn: this._spawn });
+			// reference to active tab
+			this._active = this._stack[tId];
 		} else {
 			let bodyEl = this._template.clone(),
 				file = new File(fsFile, bodyEl),
@@ -75,6 +77,11 @@ class Tabs {
 		bodyEl = this.els.content.append(bodyEl);
 		// save reference to this spawns stack
 		this._stack[tId] = { tId, tabEl, bodyEl, history, file };
+	}
+
+	removeDelayed() {
+		let el = this._active.tabEl;
+		this._spawn.tabs.wait(el);
 	}
 
 	remove(tId) {
@@ -119,7 +126,7 @@ class Tabs {
 		if (this._active) {
 			// save selection
 			this.saveSelection();
-			
+
 			if (this._active.bodyEl) {
 				// hide blurred body
 				this._active.bodyEl.addClass("hidden");

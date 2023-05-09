@@ -134,7 +134,9 @@
 				break;
 			case "close-tab":
 				value = Spawn.data.tabs.length;
-				if (value > 1) {
+				if (event.delayed) {
+					Spawn.data.tabs.removeDelayed();
+				} else if (value > 1) {
 					Spawn.data.tabs._active.tabEl.find(`[sys-click]`).trigger("click");
 				} else if (value === 1) {
 					Self.dispatch({ ...event, type: "close-spawn" });

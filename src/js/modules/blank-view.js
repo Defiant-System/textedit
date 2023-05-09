@@ -52,12 +52,19 @@
 			case "select-sample":
 				el = $(event.target);
 				if (!el.hasClass("sample")) return;
+
+				// close "current tab"
+				APP.spawn.dispatch({ type: "close-tab", spawn: Spawn, delayed: true });
+				
 				// send event to APP for proxy down to spawn
-				APP.dispatch({ ...event, type: "load-samples", names: [el.find("span").text()] });
+				APP.dispatch({ ...event, type: "load-samples", samples: [el.find("span").text()] });
 				break;
 			case "select-recent-file":
 				el = $(event.target);
 				if (!el.hasClass("recent-file")) return;
+
+				// close "current tab"
+				APP.spawn.dispatch({ type: "close-tab", spawn: Spawn, delayed: true });
 				
 				karaqu.shell(`fs -o '${el.data("path")}' null`)
 					.then(exec => APP.dispatch({ ...exec.result, spawn: Spawn }));
