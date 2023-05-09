@@ -46,10 +46,14 @@
 				Self.dispatch({ ...event, type: "tab.new" });
 				break;
 			case "spawn.blur":
-				if (Spawn.data) Spawn.data.tabs.saveSelection();
+				if (Spawn.data && Spawn.data.tabs.active) {
+					Edit.saveSelection(Spawn.data.tabs.active);
+				}
 				break;
 			case "spawn.focus":
-				if (Spawn.data) Spawn.data.tabs.restoreSelection();
+				if (Spawn.data && Spawn.data.tabs.active) {
+					Edit.restoreSelection(Spawn.data.tabs.active);
+				}
 				break;
 			case "open.file":
 				(event.files || [event]).map(async fHandle => {
@@ -104,19 +108,19 @@
 				break;
 			case "save-file":
 				tabs = Spawn.data.tabs;
-				if (tabs._active.file.isNew) {
+				if (tabs.active.file.isNew) {
 					return Self.dispatch({ ...event, type: "save-file-as" });
 				}
-				return tabs._active.file.toBlob();
-				window.dialog.save(tabs._active.file, tabs._active.file.toBlob());
+				return tabs.active.file.toBlob();
+				window.dialog.save(tabs.active.file, tabs.active.file.toBlob());
 				break;
 			case "save-file-as":
 				tabs = Spawn.data.tabs;
 				// pass on available file types
 				Spawn.dialog.saveAs(tabs.file, {
-					txt:  () => tabs._active.file.toBlob({ kind: "txt" }),
-					html: () => tabs._active.file.toBlob({ kind: "html" }),
-					md:   () => tabs._active.file.toBlob({ kind: "md" }),
+					txt:  () => tabs.active.file.toBlob({ kind: "txt" }),
+					html: () => tabs.active.file.toBlob({ kind: "html" }),
+					md:   () => tabs.active.file.toBlob({ kind: "md" }),
 				});
 				break;
 			case "new-spawn":
@@ -137,7 +141,7 @@
 				if (event.delayed) {
 					Spawn.data.tabs.removeDelayed();
 				} else if (value > 1) {
-					Spawn.data.tabs._active.tabEl.find(`[sys-click]`).trigger("click");
+					Spawn.data.tabs.active.tabEl.find(`[sys-click]`).trigger("click");
 				} else if (value === 1) {
 					Self.dispatch({ ...event, type: "close-spawn" });
 				}

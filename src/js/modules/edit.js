@@ -45,14 +45,14 @@ let Edit = {
 		}
 		return range;
 	},
-	saveSelection() {
-		this.selectedRange = this.getCurrentRange();
+	saveSelection(tab) {
+		tab.selectedRange = this.getCurrentRange();
 	},
-	restoreSelection() {
-		if ( this.selectedRange ) {
+	restoreSelection(tab) {
+		if ( tab.selectedRange ) {
 			let selection = document.getSelection();
 			selection.removeAllRanges();
-			selection.addRange( this.selectedRange );
+			selection.addRange( tab.selectedRange );
 		}
 	},
 	markSelection(color, options) {

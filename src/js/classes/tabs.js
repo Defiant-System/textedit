@@ -99,7 +99,7 @@ class Tabs {
 	focus(tId) {
 		if (this._active) {
 			// save selection
-			this.saveSelection();
+			Edit.saveSelection(this._active);
 
 			this.els.content.find(`> div`).map(elem => {
 				let el = $(elem);
@@ -136,68 +136,9 @@ class Tabs {
 		// update spawn window title
 		this._spawn.title = active.file.base;
 		// restore selection
-		this.restoreSelection(active);
+		Edit.restoreSelection(active);
 		// update toolbar
 		this.dispatch({ type: "update-toolbar", spawn: this._spawn });
-	}
-
-	saveSelection() {
-		let el = document.activeElement,
-			elContent = $(el).parents("content");
-		if (el.isContentEditable && this.els.content[0] === elContent[0]) {
-			let sel = document.getSelection(),
-				range = sel.getRangeAt(0),
-				clone = range.cloneRange(),
-				start;
-			clone.selectNodeContents(el);
-			clone.setEnd(range.startContainer, range.startOffset);
-			start = clone.toString().length;
-			// store selection
-			this._active.selection = { el, start, end: start + range.toString().length };
-		}
-		// blur active element
-		el.blur();
-	}
-
-	restoreSelection() {
-		if (!this._active) return;
-
-		if (this._active.selection) {
-			let saved = this._active.selection,
-				sel = document.getSelection(),
-				range = document.createRange(),
-				nodeStack = [saved.el],
-				foundStart = false,
-				stop = false,
-				charIndex = 0,
-				node;
-			range.setStart(nodeStack[0], 0);
-			range.collapse(true);
-			while (!stop && (node = nodeStack.pop())) {
-				if (node.nodeType == 3) {
-					let nextCharIndex = charIndex + node.length;
-					if (!foundStart && saved.start >= charIndex && saved.start <= nextCharIndex) {
-						range.setStart(node, saved.start - charIndex);
-						foundStart = true;
-					}
-					if (foundStart && saved.end >= charIndex && saved.end <= nextCharIndex) {
-						range.setEnd(node, saved.end - charIndex);
-						stop = true;
-					}
-					charIndex = nextCharIndex;
-				} else {
-					let i = node.childNodes.length;
-					while (i--) {
-						nodeStack.push(node.childNodes[i]);
-					}
-				}
-			}
-			// focus on element when blurred
-			sel.removeAllRanges();
-			sel.addRange(range);
-		} else {
-			this._active.bodyEl.focus();
-		}
 	}
 
 	dispatch(event) {
