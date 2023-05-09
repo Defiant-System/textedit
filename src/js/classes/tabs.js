@@ -42,9 +42,10 @@ class Tabs {
 			let tId = "f"+ Date.now(),
 				// add tab to tab row
 				tabEl = this._spawn.tabs.add(fsFile.new, tId);
-
+			// reference to tab element
+			this._stack[tId] = { tabEl };
+			// reset view / show blank view
 			this.dispatch({ type: "show-blank-view", spawn: this._spawn });
-
 		} else {
 			let bodyEl = this._template.clone(),
 				file = new File(fsFile, bodyEl),
@@ -118,17 +119,26 @@ class Tabs {
 		if (this._active) {
 			// save selection
 			this.saveSelection();
-			// hide blurred body
-			this._active.bodyEl.addClass("hidden");
+			
+			if (this._active.bodyEl) {
+				// hide blurred body
+				this._active.bodyEl.addClass("hidden");
+			}
 		}
 		// reference to active tab
 		this._active = this._stack[tId];
-		// file UI
-		this.els.content.toggleClass("web-view", this._active.file.setup.pageView);
-		this.els.content.toggleClass("page-view", !this._active.file.setup.pageView);
-		this.els.content.toggleClass("show-ruler", this._active.file.setup.hideRulers);
-		// UI update
-		this.update();
+
+		if (this._active.file) {
+			// file UI
+			this.els.content.toggleClass("web-view", this._active.file.setup.pageView);
+			this.els.content.toggleClass("page-view", !this._active.file.setup.pageView);
+			this.els.content.toggleClass("show-ruler", this._active.file.setup.hideRulers);
+			// UI update
+			this.update();
+		} else {
+			// reset view / show blank view
+			this.dispatch({ type: "show-blank-view", spawn: this._spawn });
+		}
 	}
 
 	update() {
