@@ -33,6 +33,10 @@ class Tabs {
 		return Object.keys(this._stack).length;
 	}
 
+	get active() {
+		return this._active;
+	}
+
 	toBlob(opt={}) {
 		return this._active.file.toBlob(this._active.bodyEl, opt);
 	}
