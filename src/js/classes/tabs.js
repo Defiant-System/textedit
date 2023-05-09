@@ -40,10 +40,11 @@ class Tabs {
 	add(fsFile) {
 		if (fsFile.new) {
 			let tId = "f"+ Date.now(),
+				bodyEl = this.els.content,
 				// add tab to tab row
 				tabEl = this._spawn.tabs.add(fsFile.new, tId);
 			// reference to tab element
-			this._stack[tId] = { tabEl };
+			this._stack[tId] = { tabEl, bodyEl };
 			// reset view / show blank view
 			this.dispatch({ type: "show-blank-view", spawn: this._spawn });
 			// reference to active tab
@@ -95,33 +96,6 @@ class Tabs {
 		delete this._stack[tId];
 	}
 
-	openLocal(url) {
-		let parts = url.slice(url.lastIndexOf("/") + 1),
-			[ name, kind ] = parts.split("."),
-			file = new karaqu.File({ name, kind });
-		// return promise
-		return new Promise((resolve, reject) => {
-			// fetch image and transform it to a "fake" file
-			fetch(url)
-				.then(resp => resp.blob())
-				.then(blob => {
-					// here the image is a blob
-					file.blob = blob;
-
-					let reader = new FileReader();
-
-					reader.addEventListener("load", () => {
-						// this will then display a text file
-						file.data = reader.result;
-						resolve(file);
-					}, false);
-
-					reader.readAsText(blob);
-				})
-				.catch(err => reject(err));
-		});
-	}
-
 	focus(tId) {
 		if (this._active) {
 			// save selection
@@ -136,6 +110,8 @@ class Tabs {
 		this._active = this._stack[tId];
 
 		if (this._active.file) {
+			// reset view / show blank view
+			this.dispatch({ type: "hide-blank-view", spawn: this._spawn });
 			// file UI
 			this.els.content.toggleClass("web-view", this._active.file.setup.pageView);
 			this.els.content.toggleClass("page-view", !this._active.file.setup.pageView);
@@ -287,5 +263,32 @@ class Tabs {
 				Edit.execCommand(editor, name);
 				break;
 		}
+	}
+
+	openLocal(url) {
+		let parts = url.slice(url.lastIndexOf("/") + 1),
+			[ name, kind ] = parts.split("."),
+			file = new karaqu.File({ name, kind });
+		// return promise
+		return new Promise((resolve, reject) => {
+			// fetch image and transform it to a "fake" file
+			fetch(url)
+				.then(resp => resp.blob())
+				.then(blob => {
+					// here the image is a blob
+					file.blob = blob;
+
+					let reader = new FileReader();
+
+					reader.addEventListener("load", () => {
+						// this will then display a text file
+						file.data = reader.result;
+						resolve(file);
+					}, false);
+
+					reader.readAsText(blob);
+				})
+				.catch(err => reject(err));
+		});
 	}
 }

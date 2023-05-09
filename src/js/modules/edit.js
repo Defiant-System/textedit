@@ -20,8 +20,10 @@ let Edit = {
 				this.commandState[key] = document.queryCommandState(key);
 			});
 		// font family & size
-		let sel = document.getSelection(),
-			node = sel.baseNode.nodeType === 3 ? sel.baseNode.parentNode : sel.baseNode,
+		let sel = document.getSelection();
+		if (!sel.baseNode) return;
+
+		let node = sel.baseNode.nodeType === 3 ? sel.baseNode.parentNode : sel.baseNode,
 			cStyle = getComputedStyle(node),
 			value = cStyle.fontFamily.split(",")[0];
 		if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);
