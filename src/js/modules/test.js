@@ -1,7 +1,7 @@
 
 let Test = {
 	init(APP, spawn) {
-		// return;
+		return;
 		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 300);
 		// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
 

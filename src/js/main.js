@@ -6,12 +6,15 @@
 @import "./modules/edit.js"
 @import "./modules/test.js"
 
+@import "./external/simple-markdown.js"
+
 // markdown support
-@import "./external/turnup.js"
 @import "./external/turndown.js";
+@import "./external/turndown-plugin-gfm.js";
 let service = new TurndownService();
+service.use(turndownPluginGfm.gfm);
 // custom extending with "turnup"
-service.turnup = turnup;
+service.turnup = simpleMarkdown;
 
 
 const textedit = {
@@ -20,8 +23,6 @@ const textedit = {
 		Object.keys(this)
 			.filter(i => typeof this[i].init === "function")
 			.map(i => this[i].init());
-
-		// setTimeout(() => this.dispatch({ type: "open-help" }), 250);
 	},
 	dispose(event) {
 		if (event.spawn) {

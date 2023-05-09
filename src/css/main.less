@@ -134,7 +134,6 @@ content {
 			h4 { font-size: 18px; }
 			h5 { font-size: 14px; }
 			h6 { font-size: 12px; }
-			p { margin: 0.75em 0 1.25em; }
 			em { font-style: italic; }
 			b, strong { font-weight: 600; }
 			code { font-family: monospace; }
@@ -152,8 +151,38 @@ content {
 			}
 
 			blockquote {
-				padding-left: 1em;
+				padding-left: 13px;
 				border-left: 3px solid rgba(0,0,0,0.2);
+			}
+
+			p, blockquote, table, pre {
+				margin: 11px 0;
+			}
+
+			table {
+				border-collapse: collapse;
+				border-spacing: 0;
+				font-size: 100%;
+			}
+
+			table th {
+				font-weight: bold;
+				border: 1px solid #ccc;
+				padding: 6px 13px;
+			}
+
+			table td {
+				border: 1px solid #ccc;
+				padding: 6px 13px;
+			}
+
+			table tr {
+				border-top: 1px solid #ccc;
+				background-color: #fff;
+			}
+			
+			table tr:nth-child(2n) {
+				background-color: #f8f8f8;
 			}
 		}
 	}

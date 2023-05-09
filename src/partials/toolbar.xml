@@ -4,7 +4,7 @@
 			<Tool symbol="icon-undo" click="editor.undo" state="disabled"/>
 			<Tool symbol="icon-redo" click="editor.redo" state="disabled"/>
 		</Options>
-		<Select name="Arial" width="103" menu="sys:font-families"></Select>
+		<Select name="Arial" width="103" menu="font-families"></Select>
 		<Select name="14" width="21" menu="font-size"></Select>
 		<Options type="grouped">
 			<Tool symbol="icon-bold" click="editor.format" arg="bold"/>

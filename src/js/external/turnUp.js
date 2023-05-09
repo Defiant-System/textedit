@@ -72,18 +72,18 @@ let turnup = (function() {
 	 * @param  {string} markdown
 	 * @return {string}
 	 */
-	function md(markdown) {
-		if (!markdown) return '';
+	function md(inStr) {
+		if (!inStr) return '';
 		let code = [],
 			index = 0,
-			length = markdown.length;
+			length = inStr.length;
 		// to allow matching trailing paragraphs
-		if (markdown[length-1] !== '\n' && markdown[length-2] !== '\n') {
-			markdown += '\n\n';
+		if (inStr[length-1] !== '\n' && inStr[length-2] !== '\n') {
+			inStr += '\n\n';
 		}
 		// format, removes tabs, leading and trailing spaces
-		markdown = (
-			markdown
+		let outStr = (
+			inStr
 				// collect code blocks and replace with placeholder
 				// we do this to avoid code blocks matching the paragraph regexp
 				.replace(blockCodeRegExp, function(match, lang, block) {
@@ -143,9 +143,13 @@ let turnup = (function() {
 		for (let i = 0; i < index; i++) {
 			let item = code[i],
 				block = item.block.replace(/\t/g, "&#160;&#160;&#160;&#160;");
-			markdown = markdown.replace(item.regex, match => `<code class="language-${item.lang}">${block}</code>`);
+			outStr = outStr.replace(item.regex, match => `<code class="language-${item.lang}">${block}</code>`);
 		}
-		return markdown.trim();
+
+		// console.log( inStr );
+		// console.log( outStr );
+
+		return outStr.trim();
 	}
 
 	return md;

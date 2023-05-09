@@ -26,7 +26,36 @@
 		<Menu name="Select All" click="select-all" arg="selectAll" hotkey="meta+a"/>
 	</Menu>
 	<Menu name="Format">
-		<Menu name="Font Family" invoke="sys:font-family" />
+		<Menu name="Font Family" for="font-families">
+			<Menu name="Serif" invoke="group-serif"/>
+			<Menu name="Sans-serif" invoke="group-sans-serif"/>
+			<Menu name="Monospace" invoke="group-monospace"/>
+			<Menu name="Script" invoke="group-script"/>
+			<Menu type="divider"/>
+			<Menu name="American Typewriter" group="Serif"/>
+			<Menu name="Andale Mono" group="Monospace"/>
+			<Menu name="Arial" group="Sans-serif"/>
+			<Menu name="Arial Black" group="Sans-serif"/>
+			<Menu name="Bradley Hand" group="Script"/>
+			<Menu name="Brush Script MS" group="Script"/>
+			<Menu name="Comic Sans MS" group="Script"/>
+			<Menu name="Copperplate Gothic" group="Sans-serif"/>
+			<Menu name="Courier" group="Monospace"/>
+			<Menu name="Courier New" group="Monospace"/>
+			<Menu name="Didot" group="Serif"/>
+			<Menu name="Garamond" group="Serif"/>
+			<Menu name="Impact" group="Decorative"/>
+			<Menu name="Georgia" group="Serif"/>
+			<Menu name="Gill Sans" group="Sans-serif"/>
+			<Menu name="Helvetica" group="Sans-serif"/>
+			<Menu name="Luminari" group="Script"/>
+			<Menu name="Optima" group="Sans-serif"/>
+			<Menu name="Verdana" group="Sans-serif"/>
+			<Menu name="Tahoma" group="Sans-serif"/>
+			<Menu name="Rockwell" group="Serif"/>
+			<Menu name="Times New Roman" group="Serif"/>
+			<Menu name="Trebuchet MS" group="Sans-serif"/>
+		</Menu>
 		<Menu name="Font Size" for="font-size" type="thin">
 			<Menu name="9" click="editor.format-fontSize" arg="9"/>
 			<Menu name="10" click="editor.format-fontSize" arg="10"/>
