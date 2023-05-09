@@ -77,7 +77,7 @@
 
 			case "load-samples":
 				// opening image file from application package
-				event.names.map(async name => {
+				event.samples.map(async name => {
 					// forward event to app
 					let file = await Spawn.data.tabs.openLocal(`~/samples/${name}`);
 					Self.dispatch({ ...event, type: "prepare-file", isSample: true, file });

@@ -236,7 +236,7 @@ class Tabs {
 					.filter(key => key.startsWith("tool"))
 					.map(key => Tabs.els[key].removeClass("tool-active_").addClass("tool-disabled_"));
 				// show blank view
-				Tabs.els.content.addClass("show-blank-view");
+				Tabs.els.content.removeClass("web-view page-view show-ruler").addClass("show-blank-view");
 				break;
 			case "hide-blank-view":
 				// disable toolbar
