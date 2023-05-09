@@ -101,9 +101,14 @@ class Tabs {
 			// save selection
 			this.saveSelection();
 
+			this.els.content.find(`> div`).map(elem => {
+				let el = $(elem);
+				if (el.data("id") !== tId) el.addClass("hidden");
+			});
+
 			if (this._active.bodyEl) {
 				// hide blurred body
-				this._active.bodyEl.addClass("hidden");
+				// this._active.bodyEl.addClass("hidden");
 			}
 		}
 		// reference to active tab
