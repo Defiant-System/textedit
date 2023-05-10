@@ -64,7 +64,7 @@
 				break;
 
 			case "before-menu:font-families":
-				console.log("TODO:", event);
+				// console.log("TODO:", event);
 				break;
 
 			// tab related events
