@@ -11,7 +11,7 @@ class Tabs {
 			content: spawn.find(`content`),
 			toolUndo: spawn.find(`.toolbar-tool_[data-click="editor.undo"]`),
 			toolRedo: spawn.find(`.toolbar-tool_[data-click="editor.redo"]`),
-			toolSelFamily: spawn.find(`.toolbar-selectbox_[data-menu="sys:font-families"]`),
+			toolSelFamily: spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`),
 			toolSelSize: spawn.find(`.toolbar-selectbox_[data-menu="font-size"]`),
 			toolBold: spawn.find(`.toolbar-tool_[data-arg="bold"]`),
 			toolItalic: spawn.find(`.toolbar-tool_[data-arg="italic"]`),

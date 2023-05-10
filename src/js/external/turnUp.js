@@ -1,156 +1,312 @@
 
-// rewrite of https://github.com/thysultan/md.js
-let turnup = (function() {
-	let unicode = char => unicodes[char] || char,
-		unicodes = {
-			'<': '&lt;',
-			'>': '&gt;',
-			'"': '&quot;',
-			"'": '&#39;',
-			'&': '&amp;',
-			'[': '&#91;',
-			']': '&#93;',
-			'(': '&#40;',
-			')': '&#41;',
-		},
-		resc = /[<>&\(\)\[\]"']/g,
-		XSSFilterRegExp = /<(script)[^\0]*?>([^\0]+?)<\/(script)>/gmi,
-		XSSFilterTemplate = '&lt;$1&gt;$2&lt;/$3&gt;',
-		XSSFilterInlineJSRegExp = /(<.*? [^\0]*?=[^\0]*?)(javascript:.*?)(.*>)/gmi,
-		XSSFilterInlineJSTemplate = '$1#$2&#58;$3',
-		XSSFilterImageRegExp = /<img([^\0]*?onerror=)([^\0]*?)>/gmi,
-		XSSFilterImageTemplate = (m, g1, g2) => `<img ${g1 + g2.replace(resc, unicode)}>`,
-		removeTabsRegExp = /^[\t ]+|[\t ]$/gm,
-		htmlFilterRegExp = /(<.*>[\t ]*\n^.*)/gm,
-		htmlFilterTemplate = (m, g1) => g1.replace(/^\n|$\n/gm, ''),
-		cssFilterRegExp = /(<style>[^]*<\/style>)/gm,
-		cssFilterTemplate = htmlFilterTemplate,
-		eventsFilterRegExp = /(<[^]+?)(\bon\w+=.*?)(.*>)/gm,
-		eventsFilterTemplate = '$1$3',
-		blockQuotesRegExp = /^[ \t]*> (.*)/gm,
-		blockQuotesTemplate = '<blockquote>$1</blockquote>',
-		inlineCodeRegExp = /`([^`]+?)`/g,
-		inlineCodeTemplate = (m, g1) => `<code>${g1.replace(resc, unicode)}</code>`,
-		blockCodeRegExp = /```(.*)\n([^\0]+?)```(?!```)/gm,
-		imagesRegExp = /!\[(.*)\]\((.*)\)/g,
-		imagesTemplate = (m, g1, g2) => `<img src="${g2.replace(resc, unicode)}" alt="${g1.replace(resc, unicode)}">`,
-		headingsRegExp = /^(#+) +(.*)/gm,
-		headingsTemplate = (m, hash, content) => `<h${hash.length}>${content}</h${hash.length}>`,
-		headingsCommonh2RegExp = /^([^\n\t ])(.*)\n----+/gm,
-		headingsCommonh1RegExp = /^([^\n\t ])(.*)\n====+/gm,
-		headingsCommonh1Template = '<h1>$1$2</h1>',
-		headingsCommonh2Template = '<h2>$1$2</h2>',
-		paragraphsRegExp = /^([^-><#\d\+\_\*\t\n\[\! \{])([^]*?)(|  )(?:\n\n)/gm,
-		paragraphsTemplate = (m, g1, g2, g3) => `<p>${g1 + g2}</p>`+ g3 ? m + '\n<br>\n' : '\n',
-		horizontalRegExp = /^.*?(?:---|\*\*\*|- - -|\* \* \*)/gm,
-		horizontalTemplate = '<hr>',
-		strongRegExp = /(?:\*\*)([^\*\n_]+?)(?:\*\*)/g,
-		strongTemplate = '<strong>$1</strong>',
-		emphasisRegExp = /(?:_)([^\*\n]+?)(?:_)/g,
-		emphasisTemplate = '<em>$1</em>',
-		strikeRegExp = /(?:~)([^~]+?)(?:~)/g,
-		strikeTemplate = '<del>$1</del>',
-		linksRegExp = /\[(.*?)\]\(([^\t\n ]*)(?:| "(.*)")\)+/gm,
-		linksTemplate = (m, g1, g2, g3) => {
-			let title = g3 ? ` title="${g3.replace(resc, unicode)}"` : '';
-			return `<a href="${g2.replace(resc, unicode)}"${title}>${g1.replace(resc, unicode)}</a>`;
-		},
-		listUlRegExp1 = /^[\t ]*?(?:-|\+|\*) (.*)/gm,
-		listUlRegExp2 = /(\<\/ul\>\n(.*)\<ul\>*)+/g,
-		listUlTemplate = '<ul><li>$1</li></ul>',
-		listOlRegExp1 = /^[\t ]*?(?:\d(?:\)|\.)) (.*)/gm,
-		listOlRegExp2 = /(\<\/ol\>\n(.*)\<ol\>*)+/g,
-		listOlTemplate = '<ol><li>$1</li></ol>',
-		lineBreaksRegExp = /\n/g,
-		lineBreaksTemplate = '<br>',
-		checkBoxesRegExp = /\[( |x)\]/g,
-		checkBoxesTemplate = (m, g1) => '<input type="checkbox" disabled'+ (g1.toLowerCase() === 'x' ? ' checked' : '') +'>';
+// https://github.com/moonprism/markdown.js
+let turnUp = (function () {
 
-	/**
-	 * markdown parser
-	 * 
-	 * @param  {string} markdown
-	 * @return {string}
-	 */
-	function md(inStr) {
-		if (!inStr) return '';
-		let code = [],
-			index = 0,
-			length = inStr.length;
-		// to allow matching trailing paragraphs
-		if (inStr[length-1] !== '\n' && inStr[length-2] !== '\n') {
-			inStr += '\n\n';
-		}
-		// format, removes tabs, leading and trailing spaces
-		let outStr = (
-			inStr
-				// collect code blocks and replace with placeholder
-				// we do this to avoid code blocks matching the paragraph regexp
-				.replace(blockCodeRegExp, function(match, lang, block) {
-					let placeholder = '{code-block-'+index+'}',
-						regex = new RegExp('{code-block-'+index+'}', 'g');
-					code[index++] = {lang: lang, block: block.replace(resc, unicode), regex: regex};
+function markdown(text, config = {}) {
+    text = text.replace(/(\r\n|\r)/g, '\n').replace(/\t/g, '  ');
+    var tokens = [];
 
-					return placeholder;
-				})
-				// XSS script tags
-				.replace(XSSFilterRegExp, XSSFilterTemplate)
-				// XSS image onerror
-				.replace(XSSFilterImageRegExp, XSSFilterImageTemplate)
-				// filter events
-				.replace(eventsFilterRegExp, eventsFilterTemplate)
-				// tabs
-				.replace(removeTabsRegExp, '')
-				// blockquotes
-				.replace(blockQuotesRegExp, blockQuotesTemplate)
-				// images
-				.replace(imagesRegExp, imagesTemplate)
-				// headings
-				.replace(headingsRegExp, headingsTemplate)
-				// headings h1 (commonmark)
-				.replace(headingsCommonh1RegExp, headingsCommonh1Template)
-				// headings h2 (commonmark)
-				.replace(headingsCommonh2RegExp, headingsCommonh2Template)
-				// horizontal rule 
-				.replace(horizontalRegExp, horizontalTemplate)
-				// checkboxes
-				.replace(checkBoxesRegExp, checkBoxesTemplate)
-				// filter html
-				.replace(htmlFilterRegExp, htmlFilterTemplate)
-				// filter css
-				.replace(cssFilterRegExp, cssFilterTemplate)
-				// line breaks
-				.replace(lineBreaksRegExp, lineBreaksTemplate)
-				// paragraphs
-				.replace(paragraphsRegExp, paragraphsTemplate)
-				// links
-				.replace(linksRegExp, linksTemplate)
-				// unorderd lists
-				.replace(listUlRegExp1, listUlTemplate).replace(listUlRegExp2, '')
-				// ordered lists
-				.replace(listOlRegExp1, listOlTemplate).replace(listOlRegExp2, '')
-				// strong
-				.replace(strongRegExp, strongTemplate)
-				// emphasis
-				.replace(emphasisRegExp, emphasisTemplate)
-				// strike through
-				.replace(strikeRegExp, strikeTemplate)
-				// filter inline js
-				.replace(XSSFilterInlineJSRegExp, XSSFilterInlineJSTemplate)
-		);
+    const img_cdn = config.imageCDN ? config.imageCDN : '';
+    const link_attr = config.linkTargetBlank ? ' target="_blank" rel="noopener"' : '';
 
-		// replace code block placeholders
-		for (let i = 0; i < index; i++) {
-			let item = code[i],
-				block = item.block.replace(/\t/g, "&#160;&#160;&#160;&#160;");
-			outStr = outStr.replace(item.regex, match => `<code class="language-${item.lang}">${block}</code>`);
-		}
+    function parseCode (str) {
+        return str
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/&lt;(\/?)em&gt;/g, '<$1em>')
+    }
 
-		// console.log( inStr );
-		// console.log( outStr );
+    function parseInline (str) {
+        return str
+            .replace(/\\\\/g, '（｡›口‹｡q')
+            .replace(/\\</g, "&lt;")
+            .replace(/\\>/g, "&gt;")
+            .replace(/(``*)\s*(.+?)\s*\1/g, (match, _, code) => { // for nvim js highlight
+                return '<code>'+parseCode(code)+'</code>'
+            })
+            .replace(/([^\\]|^)!\[([^<]*?)\]\(([^<]*?)\)/g, (match, prefix, alt, img) => {
+                if (!img.match(/^(?:\/|http:|https:)/)) {
+                    img = img_cdn + img
+                }
+                return prefix+'<img alt="'+alt+'" src="'+img+'">'
+            })
+            .replace(/([^\\]|^)\[(.*?)\]\((#[^<]*?)\)/g, '$1<a href="$3">$2</a>')
+            .replace(/([^\\]|^)\[(.*?)\]\(([^<]*?)\)/g, '$1<a' + link_attr + ' href="$3">$2</a>')
+            .replace(/([^\\]|^)(?:<|&lt;)([a-zA-Z]+:.*)(?:>|&gt;)/g, (match, prefix, href) => {
+                if (href.indexOf('<em>') !== -1){
+                    return match
+                }
+                return prefix+'<a '+link_attr+' href="'+href+'">'+href+'</a>'
+            })
+            .replace(/([^\\]|^)\*\*(.+?)\*\*/g, '$1<b>$2</b>')
+            .replace(/([^\\]|^)\*(.+?)\*/g, '$1<i>$2</i>')
+            .replace(/([^\\]|^)~~(.+?)~~/g, '$1<s>$2</s>')
+            .replace(/\\([!\[\*\~``#])/g, '$1')
+            .replace(/（｡›口‹｡q/g, '\\')
+    }
 
-		return outStr.trim();
-	}
+    function parseLists(str) {
+        let re = str.match(/^( *)(\*|\-|\d+\.) .+(\n.+|\n\n  .+)*/)
+        if (re) {
+            let order = re[2] !== '*' && re[2] !== '-'
+            let li = [];
+            if (re[1] !== '') {
+                li = re[0].split(new RegExp('(?:\n|^)'+re[1]+'(?:\\*|\\-|\\d+\\.) '))
+            } else {
+                li = re[0].split(/(?:^|\n)(?:\*|\-|\d+\.) /g)
+            }
+            li.shift()
 
-	return md;
+            tokens.push({type: 'list-open', order})
+
+            li.forEach(s => {
+                tokens.push({type: 'list-item-open'})
+                s = s.trim();
+                if (s.startsWith('[ ]')) {
+                    s = s.substr(3)
+                    tokens.push({type: 'task', done: false})
+                } else if (s.startsWith('[x]')) {
+                    s = s.substr(3)
+                    tokens.push({type: 'task', done: true})
+                }
+                if (s.indexOf('\n') != -1) {
+                    if (s.indexOf('\n\n  ')) {} //todo
+                    parse([parseHeading, parseLists, parseBlockCode, parseBlockquote, parseText, skipEmptyLines], s)
+                } else {
+                    tokens.push({type: 'text', value: s, br: false})
+                }
+                tokens.push({type: 'list-item-close'})
+            })
+            tokens.push({type: 'list-close', order})
+            return re[0].length
+        }
+        return 0
+    }
+
+    function parseText(str) {
+        let re = str.match(/^\s*(.+)(\n|$)/)
+        if (re) {
+            tokens.push({type:'text', value: re[1], br: true})
+            return re[0].length
+        }
+        return 0
+    }
+
+    function parseHeading(str) {
+        let re = str.match(/^(#{1,6})\s+(.*?)(?:\s*|\s*{#([a-zA-Z]\S*)})(?:\n+|$)/)
+        if (re) {
+            tokens.push({
+                type: 'heading',
+                level: re[1].length,
+                id: re[3],
+                text: re[2]
+            });
+            return re[0].length
+        }
+        return 0
+    }
+
+    function parseLineBreak(str) {
+        let re = str.match(/^([*-]){3,}(?:\n+|$)/)
+        if (re) {
+            tokens.push({
+                type: 'br',
+                blank: re[1] === '*',
+            });
+            return re[0].length
+        }
+        return 0
+    }
+
+    function parseBlockCode(str) {
+        let re = str.match(/^ *(``{2,})(?:(\S+)|)\n([\s\S]*?)\n\1/)
+        if (re) {
+            tokens.push({
+                type: 'code',
+                lang: re[2],
+                text: re[3]
+            });
+            return re[0].length
+        }
+        return 0
+    }
+
+    function parseHTML(str) {
+        let re = str.match(/^<([a-zA-Z\-]+)[\s|>][\s\S]*?(?:<\/\1>\s*|\n{2,}|$)/)
+        if (re) {
+            tokens.push({
+                type: 'html',
+                html: re[0],
+                tag: re[1]
+            })
+            return re[0].length
+        }
+        return 0
+    }
+
+    function parseParagraph(str) {
+        let re = str.match(/^.+(\n*)/)
+        if (re) {
+            let token = {
+                type: 'paragraph',
+                text: re[0].trim(),
+                terminal: re[1].length > 1
+            }
+            let last_token = tokens.pop()
+            if (last_token) {
+                if (last_token.type === token.type && !last_token.terminal) {
+                    token.text = last_token.text + '\n' + token.text
+                    tokens.push(token)
+                } else {
+                    tokens.push(last_token, token)
+                }
+            } else {
+                tokens.push(token)
+            }
+            return re[0].length
+        }
+        return 0
+    }
+
+    function parseBlockquote(str) {
+        let re = str.match((/^(\s*)(?:>|&gt;)(?:\s|\[(\S+?)\]\s)([\s\S]*?)(?:\n{2,}|$)/))
+        if (re) {
+            tokens.push({type: 'blockquote-open', class: re[2]})
+            let content = re[3].replace(/\n\s*(>|&gt;) */g, '\n')
+            parse([parseHeading, parseLists, parseBlockquote, parseBlockCode, parseParagraph, skipEmptyLines], content)
+            tokens.push({type: 'blockquote-close'})
+            return re[0].length
+        }
+        return 0
+    }
+
+    function parseTable(str) {
+        let re = str.match(/^\|*(.+\|[^\|^\n]+.*?)\|*\n\|*([-:\| ]+?\|[-:\| ]+?.*?)\|*\n(\|*(?:(?:.+\|[^\|^\n]+.*?)\|*(?:\n|$))*)/)
+        if (re) {
+            let token = {
+                type: "table",
+                header: re[1].split('|').map(item => item.trim()),
+                align: [],
+                cells: [],
+            }
+            // handle align
+            re[2].split('|').forEach((item) => {
+                let align_flag = item.trim();
+                let left_align = align_flag.substring(0, 1) === ':';
+                let right_align = align_flag.substring(align_flag.length - 1) === ':';
+                if (left_align && right_align) {
+                    token.align.push('center');
+                } else if (left_align) {
+                    token.align.push('left');
+                } else if (right_align) {
+                    token.align.push('right');
+                } else {
+                    token.align.push('');
+                }
+            })
+            // lexing cell
+            token.cells = re[3].trim().split('\n').map((item) => item.replace(/^\||\|$/g, '').split('|').map(i => i.trim()))
+            tokens.push(token);
+            return re[0].length
+        }
+        return 0
+    }
+    
+    function skipEmptyLines (str) {
+        let re = str.match(/^\s*\n/)
+        if (re) {
+            return re[0].length
+        }
+        return 0
+    }
+
+    function parse(funcList, str) {
+        while (str) {
+            let i = 0
+            funcList.find(func => {
+                i = func(str)
+                return i !== 0
+            })
+            str = str.substring(i)
+        }
+    }
+
+    parse([parseHeading, parseLineBreak, parseLists, parseBlockCode, parseBlockquote, parseTable, parseHTML, parseParagraph, skipEmptyLines], text)
+
+    if (config.debug) {
+        console.log({...tokens})
+    }
+
+    // parse
+    let _html = ''
+    let token
+    while (token = tokens.shift()) {
+        switch(token.type) {
+            case 'heading':
+                _html += '<h' + token.level + (token.id === undefined ? '' : ' id="' + token.id + '"') + '>' + parseInline(token.text) + '</h' + token.level + '>'
+                break;
+            case 'br':
+                _html += '<' + (token.blank?'br':'hr') + ' />'
+                break;
+            case 'paragraph':
+                _html += '<p>' + parseInline(token.text).replace(/\n/g, '<br />') + '</p>'
+                break;
+            case 'list-open':
+                _html += '<' + (token.order?'ol':'ul') + '>'
+                break;
+            case 'list-close':
+                _html += '</' + (token.order?'ol':'ul') + '>'
+                break;
+            case 'list-item-open':
+                _html += '<li>'
+                break;
+            case 'list-item-close':
+                _html += '</li>'
+                break;
+            case 'text':
+                _html += parseInline(token.value);
+                if (token.br && tokens.length > 0 && tokens[0].type === 'text') {
+                    _html += '<br />'
+                }
+                break;
+            case 'task':
+                _html += '<input' + (token.done ? ' checked' : '') + ' disabled type="checkbox"></input>'
+                break;
+            case 'code':
+                _html += '<pre><code' + (token.lang === undefined ? '' : ' class="language-' + token.lang + '"') + '>' + parseCode(token.text) + '</code></pre>'
+                break;
+            case 'blockquote-open':
+                _html += '<blockquote' + (token.class === undefined ? '' : ' class="' + token.class + '"') + '>'
+                break;
+            case 'blockquote-close':
+                _html += '</blockquote>'
+                break;
+            case 'table':
+                let thead = '<thead><tr>';
+                token.header.forEach((v, i) => {
+                    thead += '<th' + (token.align[i] ? ' align="' + token.align[i] + '"' : '') + '>' + parseInline(v) + '</th>'
+                })
+                thead += '</tr></thead>'
+                let tbody = '<tbody>'
+                token.cells.forEach(v => {
+                    tbody += "<tr>"
+                    v.forEach((v2, i) => {
+                        tbody += '<td' + (token.align[i] ? ' align="' + token.align[i] + '"' : '') + '>' + parseInline(v2) + '</td>'
+                    })
+                    tbody += "</tr>"
+                })
+                tbody += '</tbody>';
+                _html += '<table>' + thead + tbody + '</table>'
+                break;
+            case 'html':
+                _html += token.html
+                break;
+        }
+    }
+    return _html
+}
+
+return markdown;
+
 })();

@@ -1,5 +1,12 @@
 ## Markdown table: How to Create a Great Looking Table
-Markdown tables are not part of the original Markdown spec. Instead, it was suggested to use the HTML <table> tag. Although that works well, it looks messy. Luckily, there are now better options, since subsequent Markdown specs like GitHub Flavoured Markdown (GFM) and Markdown Here do support Markdown tables. In fact, most modern Markdown parsers support tables as described on this page. In case of doubt, my advice is always to simply try if it works.
+Markdown tables are not part of the original Markdown spec. Instead, it was suggested to use the HTML **\<table\>** tag. Although that works well, it looks messy. Luckily, there are now better options, since subsequent Markdown specs like GitHub Flavoured Markdown (GFM) and Markdown Here do support Markdown tables. In fact, most modern Markdown parsers support tables as described on this page. In case of doubt, my advice is always to simply try if it works.
+
+
+### To-do's
+- [ ] Templating example
+- [x] Save sequence for replay
+- [ ] Example connect
+
 
 ### A basic Markdown table
 A table is ‘drawn’ using something resembling ASCII art. You can make it look as pretty or as ugly as you want:
