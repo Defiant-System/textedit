@@ -2,6 +2,7 @@
 let Test = {
 	init(APP, spawn) {
 		// return;
+
 		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 300);
 		// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
 
@@ -15,6 +16,8 @@ let Test = {
 				APP.dispatch({ type: "editor.select-text", spawn, node, start: 2, len: 9 });
 			}, 300);
 		// setTimeout(() => APP.dispatch({ type: "editor.format", spawn, arg: "bold" }), 350);
+
+		setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
 	},
 	dialog(spawn) {
 		spawn.dialog.open({

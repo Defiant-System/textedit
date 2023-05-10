@@ -32,41 +32,42 @@
 			<Menu name="Monospace" filter="group:monospace" is-checked="1"/>
 			<Menu name="Script" filter="group:script" is-checked="1"/>
 			<Menu type="divider"/>
-			<Menu name="American Typewriter" group="serif"/>
-			<Menu name="Andale Mono" group="monospace"/>
-			<Menu name="Arial" group="sans-serif"/>
-			<Menu name="Arial Black" group="sans-serif"/>
-			<Menu name="Bradley Hand" group="script"/>
-			<Menu name="Brush Script MS" group="script"/>
-			<Menu name="Comic Sans MS" group="script"/>
-			<Menu name="Copperplate Gothic" group="sans-serif"/>
-			<Menu name="Courier" group="monospace"/>
-			<Menu name="Courier New" group="monospace"/>
-			<Menu name="Didot" group="serif"/>
-			<Menu name="Garamond" group="serif"/>
-			<Menu name="Impact" group="sans-serif"/>
-			<Menu name="Georgia" group="serif"/>
-			<Menu name="Gill Sans" group="sans-serif"/>
-			<Menu name="Helvetica" group="sans-serif"/>
-			<Menu name="Luminari" group="script"/>
-			<Menu name="Optima" group="sans-serif"/>
-			<Menu name="Verdana" group="sans-serif"/>
-			<Menu name="Tahoma" group="sans-serif"/>
-			<Menu name="Rockwell" group="serif"/>
-			<Menu name="Times New Roman" group="serif"/>
-			<Menu name="Trebuchet MS" group="sans-serif"/>
+			<Menu name="American Typewriter" click="editor.format-fontFamily" group="serif"/>
+			<Menu name="Andale Mono" click="editor.format-fontFamily" group="monospace"/>
+			<Menu name="Arial" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Arial Black" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Bradley Hand" click="editor.format-fontFamily" group="script"/>
+			<Menu name="Brush Script MS" click="editor.format-fontFamily" group="script"/>
+			<Menu name="Comic Sans MS" click="editor.format-fontFamily" group="script"/>
+			<Menu name="Copperplate Gothic" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Courier" click="editor.format-fontFamily" group="monospace"/>
+			<Menu name="Courier New" click="editor.format-fontFamily" group="monospace"/>
+			<Menu name="Didot" click="editor.format-fontFamily" group="serif"/>
+			<Menu name="Garamond" click="editor.format-fontFamily" group="serif"/>
+			<Menu name="Impact" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Georgia" click="editor.format-fontFamily" group="serif"/>
+			<Menu name="Gill Sans" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Helvetica" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Luminari" click="editor.format-fontFamily" group="script"/>
+			<Menu name="Lucida Console" click="editor.format-fontFamily" group="monospace"/>
+			<Menu name="Optima" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Verdana" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Tahoma" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Rockwell" click="editor.format-fontFamily" group="serif"/>
+			<Menu name="Times New Roman" click="editor.format-fontFamily" group="serif"/>
+			<Menu name="Trebuchet MS" click="editor.format-fontFamily" group="sans-serif"/>
 		</Menu>
 		<Menu name="Font Size" for="font-size" type="thin">
-			<Menu name="9" click="editor.format-fontSize" arg="9"/>
-			<Menu name="10" click="editor.format-fontSize" arg="10"/>
-			<Menu name="11" click="editor.format-fontSize" arg="11"/>
-			<Menu name="12" click="editor.format-fontSize" arg="12"/>
-			<Menu name="13" click="editor.format-fontSize" arg="13"/>
-			<Menu name="14" click="editor.format-fontSize" arg="14"/>
-			<Menu name="18" click="editor.format-fontSize" arg="18"/>
-			<Menu name="24" click="editor.format-fontSize" arg="24"/>
-			<Menu name="36" click="editor.format-fontSize" arg="36"/>
-			<Menu name="48" click="editor.format-fontSize" arg="48"/>
+			<Menu name="9" click="editor.format-fontSize"/>
+			<Menu name="10" click="editor.format-fontSize"/>
+			<Menu name="11" click="editor.format-fontSize"/>
+			<Menu name="12" click="editor.format-fontSize"/>
+			<Menu name="13" click="editor.format-fontSize"/>
+			<Menu name="14" click="editor.format-fontSize"/>
+			<Menu name="18" click="editor.format-fontSize"/>
+			<Menu name="24" click="editor.format-fontSize"/>
+			<Menu name="36" click="editor.format-fontSize"/>
+			<Menu name="48" click="editor.format-fontSize"/>
 		</Menu>
 		<Menu type="divider"/>
 		<Menu name="Bold" click="editor.format" arg="bold"/>
