@@ -5,49 +5,25 @@
 		
 	}
 
-	.ruler {
-		background: rgba(255,255,255,.05);
-		border-bottom-color: #3f3f3f;
-
-		&:after {
-			background-image: repeating-linear-gradient(90deg, #555 0px, #555 1px, transparent 1px, transparent 38px);
-		}
-
-		&:before {
-			top: 7px;
-			height: 5px;
-			background-image: repeating-linear-gradient(90deg,
-					transparent 0px, transparent 9px,
-					#666 9px, #666 10px,
-					transparent 10px, transparent 28px,
-					#666 28px, #666 29px,
-					transparent 29px, transparent 38px
-				);
-		}
-
-		i {
-			background: #999;
-			border-color: #444;
-
-			&.ruler-indent {
-				&:before { border-top-color: #444; }
-				&:after { border-top-color: #999; }
-			}
-
-			&.margin-start {
-				&:before { border-bottom-color: #444; }
-				&:after { border-bottom-color: #999; }
-			}
-
-			&.margin-end {
-				&:before { border-bottom-color: #444; }
-				&:after { border-bottom-color: #999; }
+	content {
+		> .file {
+			div[contenteditable="true"] {
+				background: var( --content-bg );
+				color: var( --content-fg );
 			}
 		}
+	}
 
-		ul {
-			background: #888;
-			color: #555;
+	.rulerw {
+		border-bottom-color: rgba(0,0,0,.2);
+
+		.ruler {
+
+			ul {
+				&:before {
+					background: rgba(255,255,255,.05);
+				}
+			}
 		}
 	}
 	

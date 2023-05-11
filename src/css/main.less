@@ -3,7 +3,6 @@
 @import "theme-dark";
 
 
-background: #f2f2f2;
 --pW: 600px;
 --pH: 848px;
 
@@ -39,6 +38,7 @@ content {
 
 	&.page-view {
 		> .file {
+			// background: #f2f2f2;
 			overflow: auto;
 
 			div[contenteditable="true"] {
@@ -54,35 +54,35 @@ content {
 				outline: 1px solid #c5c5c5;
 				box-shadow: 0 1px 7px rgba(0,0,0,.175);
 			}
+		}
 
-			& + .rulerw {
-				.ruler {
-					width: var( --pW );
+		& + .rulerw {
+			.ruler {
+				width: var( --pW );
+			}
+
+			i {
+				&.ruler-indent,
+				&.margin-start {
+					display: block;
+					left: 57px;
 				}
 
-				i {
-					&.ruler-indent,
-					&.margin-start {
-						display: block;
-						left: 57px;
-					}
+				&.margin-end {
+					display: block;
+					left: 543px;
+				}
+			}
 
-					&.margin-end {
-						display: block;
-						left: 543px;
-					}
+			ul {
+				&:before {
+					left: 57px;
+					width: 486px;
 				}
 
-				ul {
-					&:before {
-						left: 57px;
-						width: 486px;
-					}
-
-					li {
-						&:nth-child(11) {
-							opacity: 0;
-						}
+				li {
+					&:nth-child(11) {
+						opacity: 0;
 					}
 				}
 			}
