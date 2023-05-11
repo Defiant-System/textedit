@@ -6,22 +6,58 @@
 	}
 
 	content {
+		&.page-view {
+			> .file {
+				div[contenteditable="true"] {
+					background: rgba(255,255,255,.05);
+					outline: 1px solid #333;
+					box-shadow: 0 1px 7px rgba(0,0,0,.2);
+				}
+			}
+		}
+
 		> .file {
 			div[contenteditable="true"] {
 				background: var( --content-bg );
-				color: var( --content-fg );
+				color: var( --content-text );
+				text-shadow: 0 1px 0 rgba(0,0,0,.125);
 			}
 		}
 	}
 
 	.rulerw {
+		background: rgba(0,0,0,.1);
 		border-bottom-color: rgba(0,0,0,.2);
 
 		.ruler {
+			background-image: linear-gradient(90deg,
+				#222 0px, #222 1px,
+				transparent 1px, transparent 599px,
+				#222 599px, #222 600px
+			);
+
+			&:after {
+				background-image: repeating-linear-gradient(90deg,
+					transparent 0px, transparent 56px,
+					#333 56px, #333 57px
+				);
+			}
+
+			&:before {
+				background-image: repeating-linear-gradient(90deg,
+						transparent 0px, transparent 14px,
+						#555 14px, #555 15px,
+						transparent 15px, transparent 41px,
+						#555 41px, #555 42px,
+						transparent 42px, transparent 57px
+					);
+			}
 
 			ul {
+				color: #333;
+
 				&:before {
-					background: rgba(255,255,255,.05);
+					background: rgba(255,255,255,.125);
 				}
 			}
 		}
