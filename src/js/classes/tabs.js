@@ -192,6 +192,11 @@ class Tabs {
 				break;
 			// edit related events
 			case "editor.select-text":
+				new Selection(event.node, event.start, event.length);
+				// update toolbar
+				Tabs.dispatch({ ...event, type: "update-toolbar" });
+				break;
+			case "editor.select-text---OLD":
 				let sel = document.getSelection(),
 					range = document.createRange();
 				range.setStart(event.node, event.start);

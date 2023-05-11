@@ -21,9 +21,9 @@ let Edit = {
 			});
 		// font family & size
 		let sel = document.getSelection();
-		if (!sel.baseNode) return;
+		if (sel.anchorNode === null) return;
 
-		let node = sel.baseNode.nodeType === 3 ? sel.baseNode.parentNode : sel.baseNode,
+		let node = sel.focusNode.nodeType === 3 ? sel.focusNode.parentNode : sel.focusNode,
 			cStyle = getComputedStyle(node),
 			value = cStyle.fontFamily.split(",")[0];
 		if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);
@@ -35,14 +35,15 @@ let Edit = {
 		// execute command
 		document.execCommand( name, false, value );
 
-		// post command execution fixes
+		// post-command-execution fixes
 		let selection = this.getCurrentRange(),
 			node;
 		switch (name) {
 			case "fontSize":
+				// start container node
 				node = selection.startContainer.parentNode;
 				node.style.fontSize = value +"px";
-
+				// end container node
 				node = selection.endContainer.parentNode;
 				node.style.fontSize = value +"px";
 				break;
