@@ -64,7 +64,8 @@ class Tabs {
 				fnHandler = e => this.dispatch({ type: "change", spawn: this._spawn });
 
 			// add element to DOM + append file contents
-			bodyEl.attr({ "data-id": file.id }).html(file.data);
+			fileEl.data({ id: file.id });
+			bodyEl.html(file.data);
 			// bind event handler
 			bodyEl.on("change keyup mouseup", fnHandler);
 			// save reference to tab
@@ -107,9 +108,9 @@ class Tabs {
 			// save selection
 			Edit.saveSelection(this._active);
 
-			this.els.content.find(`> div`).map(elem => {
+			this.els.content.find(`> .file`).map(elem => {
 				let el = $(elem);
-				if (el.data("id") !== tId) el.parent().addClass("hidden");
+				if (el.data("id") !== tId) el.addClass("hidden");
 			});
 
 			if (this._active.bodyEl) {

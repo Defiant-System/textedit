@@ -38,49 +38,51 @@ content {
 	}
 
 	&.page-view {
-		overflow: auto;
+		> .file {
+			overflow: auto;
 
-		> .file div[contenteditable="true"] {
-			position: relative;
-			top: auto;
-			left: auto;
-			width: var( --pW );
-			height: var( --pH );
-			display: block;
-			margin: 10px auto;
-			padding: 61px 57px;
-			overflow: initial;
-			outline: 1px solid #c5c5c5;
-			box-shadow: 0 1px 7px rgba(0,0,0,.175);
-		}
-
-		& + .rulerw {
-			.ruler {
+			div[contenteditable="true"] {
+				position: relative;
+				top: auto;
+				left: auto;
 				width: var( --pW );
+				height: var( --pH );
+				display: block;
+				margin: 10px auto;
+				padding: 61px 57px;
+				overflow: initial;
+				outline: 1px solid #c5c5c5;
+				box-shadow: 0 1px 7px rgba(0,0,0,.175);
 			}
 
-			i {
-				&.ruler-indent,
-				&.margin-start {
-					display: block;
-					left: 57px;
+			& + .rulerw {
+				.ruler {
+					width: var( --pW );
 				}
 
-				&.margin-end {
-					display: block;
-					left: 543px;
-				}
-			}
+				i {
+					&.ruler-indent,
+					&.margin-start {
+						display: block;
+						left: 57px;
+					}
 
-			ul {
-				&:before {
-					left: 57px;
-					width: 486px;
+					&.margin-end {
+						display: block;
+						left: 543px;
+					}
 				}
 
-				li {
-					&:nth-child(11) {
-						opacity: 0;
+				ul {
+					&:before {
+						left: 57px;
+						width: 486px;
+					}
+
+					li {
+						&:nth-child(11) {
+							opacity: 0;
+						}
 					}
 				}
 			}
@@ -185,7 +187,7 @@ content {
 				background-color: #f8f8f8;
 			}
 		}
-		
+
 		div[contenteditable="true"] {
 			background: #fff;
 			// font-family: Times New Roman;
