@@ -12,10 +12,13 @@ let Test = {
 		// return setTimeout(() => APP.dispatch({ type: "save-file", spawn }), 300);
 		
 		setTimeout(() => {
-				let node = spawn.find(`div[contenteditable="true"]`)[1].childNodes[2].childNodes[0];
-				APP.dispatch({ type: "editor.select-text", spawn, node, start: 5, len: 9 });
+				// let node = spawn.find(`div[contenteditable="true"]`)[1].childNodes[2].childNodes[0];
+				// APP.dispatch({ type: "editor.select-text", spawn, node, start: 5, len: 9 });
+
+				let anchor = spawn.find(`div[contenteditable="true"] p:nth(1)`)[0];
+				new Selection(anchor, 23, 25);
 			}, 300);
-		setTimeout(() => APP.dispatch({ type: "editor.format-fontSize", spawn, value: 10 }), 350);
+		setTimeout(() => APP.dispatch({ type: "editor.format-fontSize", spawn, value: 18 }), 350);
 		// setTimeout(() => APP.dispatch({ type: "editor.format-fontName", spawn, value: "Arial Black" }), 350);
 
 		// setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);

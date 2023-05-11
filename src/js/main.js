@@ -1,4 +1,5 @@
 
+@import "./classes/selection.js"
 @import "./classes/file.js"
 @import "./classes/tabs.js"
 

@@ -34,6 +34,20 @@ let Edit = {
 	execCommand(editor, name, value) {
 		// execute command
 		document.execCommand( name, false, value );
+
+		// post command execution fixes
+		let selection = this.getCurrentRange(),
+			node;
+		switch (name) {
+			case "fontSize":
+				node = selection.startContainer.parentNode;
+				node.style.fontSize = value +"px";
+
+				node = selection.endContainer.parentNode;
+				node.style.fontSize = value +"px";
+				break;
+		}
+
 		// trigger event
 		requestAnimationFrame(() => editor.trigger("change"));
 	},
