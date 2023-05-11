@@ -30,12 +30,14 @@
 			<Menu name="Serif" filter="group:serif" is-checked="1"/>
 			<Menu name="Sans-serif" filter="group:sans-serif" is-checked="1"/>
 			<Menu name="Monospace" filter="group:monospace" is-checked="1"/>
-			<Menu name="Script" filter="group:script" is-checked="1"/>
+			<Menu name="Script" filter="group:script"/>
 			<Menu type="divider"/>
 			<Menu name="American Typewriter" click="editor.format-fontFamily" group="serif"/>
 			<Menu name="Andale Mono" click="editor.format-fontFamily" group="monospace"/>
 			<Menu name="Arial" click="editor.format-fontFamily" group="sans-serif"/>
 			<Menu name="Arial Black" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Arial Narrow" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Baskerville" click="editor.format-fontFamily" group="serif"/>
 			<Menu name="Bradley Hand" click="editor.format-fontFamily" group="script"/>
 			<Menu name="Brush Script MS" click="editor.format-fontFamily" group="script"/>
 			<Menu name="Comic Sans MS" click="editor.format-fontFamily" group="script"/>
@@ -50,10 +52,13 @@
 			<Menu name="Helvetica" click="editor.format-fontFamily" group="sans-serif"/>
 			<Menu name="Luminari" click="editor.format-fontFamily" group="script"/>
 			<Menu name="Lucida Console" click="editor.format-fontFamily" group="monospace"/>
+			<Menu name="Monaco" click="editor.format-fontFamily" group="monospace"/>
 			<Menu name="Optima" click="editor.format-fontFamily" group="sans-serif"/>
+			<Menu name="Palatino" click="editor.format-fontFamily" group="serif"/>
 			<Menu name="Verdana" click="editor.format-fontFamily" group="sans-serif"/>
 			<Menu name="Tahoma" click="editor.format-fontFamily" group="sans-serif"/>
 			<Menu name="Rockwell" click="editor.format-fontFamily" group="serif"/>
+			<Menu name="Tahoma" click="editor.format-fontFamily" group="sans-serif"/>
 			<Menu name="Times New Roman" click="editor.format-fontFamily" group="serif"/>
 			<Menu name="Trebuchet MS" click="editor.format-fontFamily" group="sans-serif"/>
 		</Menu>
