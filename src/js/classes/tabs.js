@@ -25,6 +25,7 @@ class Tabs {
 
 		// editor template
 		let editor = spawn.find(`content > div[data-id="editor"]`);
+		Edit.execCommand(editor, "styleWithCSS", true);
 		this._template = editor.clone();
 		editor.remove();
 	}
@@ -204,15 +205,14 @@ class Tabs {
 			case "editor.undo":
 			case "editor.redo":
 				break;
-			case "editor.format-fontFamily":
-				// console.log(event);
-				break;
 			case "editor.format-fontSize":
-				// console.log(event);
+			case "editor.format-fontName":
+				name = event.type.split("-")[1];
+				value = event.value || event.xMenu.getAttribute("name");
+				Edit.execCommand(editor, name, value);
 				break;
 			case "editor.format":
 				name = event.arg;
-				value = event.val;
 				Edit.execCommand(editor, name);
 				break;
 		}
