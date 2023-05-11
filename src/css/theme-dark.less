@@ -53,6 +53,26 @@
 					);
 			}
 
+			i {
+				background: #666;
+				border-color: #444;
+
+				&.ruler-indent {
+					&:before { border-top: 5px solid #333; }
+					&:after { border-top: 4px solid #666; }
+				}
+
+				&.margin-start {
+					&:before { border-bottom: 5px solid #333; }
+					&:after { border-bottom: 4px solid #666; }
+				}
+
+				&.margin-end {
+					&:before { border-bottom: 5px solid #333; }
+					&:after { border-bottom: 4px solid #666; }
+				}
+			}
+
 			ul {
 				color: #333;
 
