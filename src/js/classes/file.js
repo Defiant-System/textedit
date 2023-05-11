@@ -3,7 +3,7 @@ class File {
 	constructor(fsFile, el) {
 		// save reference to original FS file
 		this._file = fsFile || new karaqu.File({ kind: "txt" });
-		this._el = el.data({ kind: this.kind });
+		this._el = el.parent().data({ kind: this.kind });
 
 		this.id = "f"+ Date.now();
 		this.setup = {
@@ -83,6 +83,7 @@ class File {
 				type = "text/html";
 				break;
 			case "md":
+				// TODO: if in page view mode, concat string from page-elements
 				type = "text/markdown";
 				data = service.turndown(data);
 				// console.log( this._file.data === data );

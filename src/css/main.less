@@ -16,7 +16,7 @@ content {
 	bottom: 0;
 
 	&.web-view {
-		> div[contenteditable="true"] {
+		 > .file div[contenteditable="true"] {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -40,7 +40,7 @@ content {
 	&.page-view {
 		overflow: auto;
 
-		> div[contenteditable="true"] {
+		> .file div[contenteditable="true"] {
 			position: relative;
 			top: auto;
 			left: auto;
@@ -100,25 +100,20 @@ content {
 			display: block;
 		}
 
-		> div[contenteditable="true"] {
+		> .file div[contenteditable="true"] {
 			display: none;
 		}
 	}
 	
-	> div[contenteditable="true"] {
-		background: #fff;
-		// font-family: Times New Roman;
-		font-family: Arial, sans-serif;
-		font-size: 14px;
-		line-height: 1.35;
-		display: inline-block;
+	> .file {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 
 		&.hidden {
 			display: none;
-		}
-
-		::selection {
-		  //background: #ffb7b7;
 		}
 
 		// text file
@@ -189,11 +184,19 @@ content {
 			table tr:nth-child(2n) {
 				background-color: #f8f8f8;
 			}
+		}
+		
+		div[contenteditable="true"] {
+			background: #fff;
+			// font-family: Times New Roman;
+			font-family: Arial, sans-serif;
+			font-size: 14px;
+			line-height: 1.35;
+			display: inline-block;
 
-			// temp
-			// span {
-			// 	color: #88e;
-			// }
+			::selection {
+			  //background: #ffb7b7;
+			}
 		}
 	}
 

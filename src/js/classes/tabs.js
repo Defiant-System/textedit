@@ -24,10 +24,11 @@ class Tabs {
 		};
 
 		// editor template
-		let editor = spawn.find(`content > div[data-id="editor"]`);
+		let file = spawn.find(`content > .file`),
+			editor = file.find(`> div[data-id="editor"]`);
 		Edit.execCommand(editor, "styleWithCSS", true);
-		this._template = editor.clone();
-		editor.remove();
+		this._template = file.clone(true);
+		file.remove();
 	}
 
 	get length() {
@@ -55,7 +56,8 @@ class Tabs {
 			// reference to active tab
 			this._active = this._stack[tId];
 		} else {
-			let bodyEl = this._template.clone(),
+			let fileEl = this.els.content.append(this._template.clone(true)),
+				bodyEl = fileEl.find(`> div[data-id="editor"]`),
 				file = new File(fsFile, bodyEl),
 				history = new window.History,
 				tabEl = this._spawn.tabs.add(fsFile.base, file.id),
@@ -63,7 +65,6 @@ class Tabs {
 
 			// add element to DOM + append file contents
 			bodyEl.attr({ "data-id": file.id }).html(file.data);
-			bodyEl = this.els.content.append(bodyEl);
 			// bind event handler
 			bodyEl.on("change keyup mouseup", fnHandler);
 			// save reference to tab
@@ -77,7 +78,7 @@ class Tabs {
 		let tId = ref.tId,
 			file = ref.file,
 			history = ref.history,
-			bodyEl = ref.bodyEl.clone(true).addClass("hidden"),
+			bodyEl = ref.bodyEl.clone(true).parent().addClass("hidden"),
 			tabEl = this._spawn.tabs.add(file.base, tId, true);
 		// clone & append original bodyEl
 		bodyEl = this.els.content.append(bodyEl);
@@ -108,12 +109,12 @@ class Tabs {
 
 			this.els.content.find(`> div`).map(elem => {
 				let el = $(elem);
-				if (el.data("id") !== tId) el.addClass("hidden");
+				if (el.data("id") !== tId) el.parent().addClass("hidden");
 			});
 
 			if (this._active.bodyEl) {
 				// hide blurred body
-				// this._active.bodyEl.addClass("hidden");
+				// this._active.bodyEl.parent().addClass("hidden");
 			}
 		}
 		// reference to active tab
@@ -137,7 +138,7 @@ class Tabs {
 	update() {
 		let active = this._active;
 		// unhide focused body
-		active.bodyEl.removeClass("hidden");
+		active.bodyEl.parent().removeClass("hidden");
 		// update spawn window title
 		this._spawn.title = active.file.base;
 		// restore selection
@@ -237,13 +238,11 @@ class Tabs {
 					file.blob = blob;
 
 					let reader = new FileReader();
-
 					reader.addEventListener("load", () => {
 						// this will then display a text file
 						file.data = reader.result;
 						resolve(file);
 					}, false);
-
 					reader.readAsText(blob);
 				})
 				.catch(err => reject(err));
