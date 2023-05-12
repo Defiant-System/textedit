@@ -19,6 +19,12 @@
 			.block-recent,
 			.block-samples {
 				color: #bbb;
+
+				.sample {
+					&:after {
+						filter: hue-rotate(135deg) brightness(1.5) drop-shadow(0 1px 0 rgba(0,0,0,.5));
+					}
+				}
 			}
 		}
 	}
@@ -97,7 +103,7 @@
 				}
 				
 				&:after {
-					filter: hue-rotate(135deg) brightness(1.5) drop-shadow(0 1px 0 rgba(0,0,0,.5));
+					filter: hue-rotate(135deg) brightness(1.5);
 				}
 			}
 		}
