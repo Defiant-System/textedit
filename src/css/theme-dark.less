@@ -2,7 +2,25 @@
 &[data-theme="dark"] {
 
 	&.win-body-focused_ {
-		
+		.blank-view {
+			color: #ddd;
+			text-shadow: 0 1px 0 rgba(0,0,0,.125);
+
+			h2 {
+				color: #ddd;
+			}
+
+			> div {
+				> h3 {
+					color: #ddd;
+				}
+			}
+
+			.block-recent,
+			.block-samples {
+				color: #bbb;
+			}
+		}
 	}
 
 	content {
@@ -27,29 +45,37 @@
 
 	.blank-view {
 		background: transparent;
-		color: #ddd;
-		text-shadow: 0 1px 0 rgba(0,0,0,.125);
+		color: #999;
+		text-shadow: 0 0 0;
 
 		h2 {
-			color: #ddd;
+			color: #aaa;
 		}
 
 		> div {
 			> h3 {
-				color: #ddd;
+				color: #aaa;
 			}
 		}
 
 		.block-buttons {
 			.btn {
+				padding-top: 5px;
+				padding-bottom: 5px;
 				background: rgba(0,0,0,.25);
-				box-shadow: inset 0 0 0 2px rgba(255,255,255,.35);
+				box-shadow: inset 0 1px 0 rgba(0,0,0,.075),
+							0 0 0 2px rgba(255,255,255,.35);
+
+				&:hover:not(.disabled_) {
+					box-shadow: 0 0 0 3px #489bf770,
+								0 0 0 2px #489bf7;
+				}
 			}
 		}
 
 		.block-recent,
 		.block-samples {
-			color: #bbb;
+			color: #888;
 
 			.recent-file,
 			.sample {
@@ -63,6 +89,7 @@
 
 				&:before {
 					background: rgba(0,0,0,.25);
+					box-shadow: inset 0 1px 0 rgba(0,0,0,.075);
 				}
 				
 				&:after {
