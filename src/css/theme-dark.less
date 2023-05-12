@@ -27,6 +27,20 @@
 				}
 			}
 		}
+
+		content {
+			&.page-view {
+				> .file {
+					div[contenteditable="true"] {
+						outline-color: #505050;
+					}
+				}
+			}
+		}
+
+		.rulerw {
+			opacity: 1;
+		}
 	}
 
 	content {
@@ -34,7 +48,7 @@
 			> .file {
 				div[contenteditable="true"] {
 					background: rgba(255,255,255,.05);
-					outline: 1px solid #333;
+					outline: 1px solid #606060;
 					box-shadow: 0 1px 7px rgba(0,0,0,.2);
 				}
 			}
@@ -110,6 +124,7 @@
 	}
 
 	.rulerw {
+		opacity: .5;
 		background: rgba(0,0,0,.1);
 		border-bottom-color: rgba(0,0,0,.2);
 
