@@ -55,6 +55,8 @@ class Tabs {
 			this.dispatch({ type: "show-blank-view", spawn: this._spawn });
 			// reference to active tab
 			this._active = this._stack[tId];
+			// focus on file
+			this.focus(tId);
 		} else {
 			let fileEl = this.els.content.append(this._template.clone(true)),
 				bodyEl = fileEl.find(`> div[data-id="editor"]`),
