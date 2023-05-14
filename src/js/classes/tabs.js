@@ -164,8 +164,8 @@ class Tabs {
 				// update command states
 				Edit.updateState();
 				// update toolbar
-				Tabs.els.toolSelFamily.val(Edit.commandState.fontFamily);
-				Tabs.els.toolSelSize.val(Edit.commandState.fontSize);
+				if (Edit.commandState.fontFamily) Tabs.els.toolSelFamily.val(Edit.commandState.fontFamily);
+				if (Edit.commandState.fontSize) Tabs.els.toolSelSize.val(Edit.commandState.fontSize);
 
 				Tabs.els.toolBold.toggleClass("tool-active_", !Edit.commandState.bold);
 				Tabs.els.toolItalic.toggleClass("tool-active_", !Edit.commandState.italic);

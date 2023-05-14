@@ -1,9 +1,11 @@
 
 let Test = {
 	init(APP, spawn) {
-		// return;
+		return;
 
-		return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 250);
+		return setTimeout(() => $(`.def-desktop_`).trigger("mousedown").trigger("mouseup"), 350);
+
+		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 250);
 
 		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 300);
 		// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
@@ -20,7 +22,7 @@ let Test = {
 		// setTimeout(() => APP.dispatch({ type: "editor.format-fontSize", spawn, value: 18 }), 350);
 		// setTimeout(() => APP.dispatch({ type: "editor.format-fontName", spawn, value: "Arial Black" }), 350);
 
-		// setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
+		setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
 	},
 	dialog(spawn) {
 		spawn.dialog.open({
