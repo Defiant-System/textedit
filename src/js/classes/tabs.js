@@ -157,6 +157,7 @@ class Tabs {
 			editor = Active ? Active.bodyEl : false,
 			name,
 			value;
+		// console.log(event);
 		switch (event.type) {
 			// native events
 			case "change":
@@ -195,22 +196,28 @@ class Tabs {
 				Tabs.els.content.removeClass("show-blank-view");
 				break;
 			// edit related events
+			case "editor.set-color":
+				name = "foreColor";
+				value = event.arg;
+				Edit.execCommand(editor, name, value);
+				break;
 			case "editor.select-text":
 				new Selection(event.node, event.start, event.length);
 				// update toolbar
 				Tabs.dispatch({ ...event, type: "update-toolbar" });
 				break;
-			case "editor.select-text---OLD":
-				let sel = document.getSelection(),
-					range = document.createRange();
-				range.setStart(event.node, event.start);
-				range.setEnd(event.node, event.start + event.len);
-				// focus on element when blurred
-				sel.removeAllRanges();
-				sel.addRange(range);
-				// update toolbar
-				Tabs.dispatch({ ...event, type: "update-toolbar" });
-				break;
+			// OLD
+			// case "editor.select-text":
+			// 	let sel = document.getSelection(),
+			// 		range = document.createRange();
+			// 	range.setStart(event.node, event.start);
+			// 	range.setEnd(event.node, event.start + event.len);
+			// 	// focus on element when blurred
+			// 	sel.removeAllRanges();
+			// 	sel.addRange(range);
+			// 	// update toolbar
+			// 	Tabs.dispatch({ ...event, type: "update-toolbar" });
+			// 	break;
 			case "editor.undo":
 			case "editor.redo":
 				break;
