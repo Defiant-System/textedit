@@ -78,14 +78,16 @@
 				break;
 			case "before-menu:file-preferences":
 				// file layout
+				value = Tabs.els.content.hasClass("page-view") ? "page-view" : "web-view";
 				event.xMenu.selectNodes(`./*[@check-group="file-layout"]`).map(xMenu => {
-					xMenu.removeAttribute("is-checked");
+					if (xMenu.getAttribute("arg") === value) xMenu.setAttribute("is-checked", 1);
+					else xMenu.removeAttribute("is-checked");
 				});
 				// toggle ruler
 				xNode = event.xMenu.selectSingleNode(`./*[@click="toggle-ruler"]`);
 				value = Tabs.els.content.hasClass("show-ruler");
-				if (!value) xNode.removeAttribute("is-checked");
-				else xNode.setAttribute("is-checked", 1);
+				if (value) xNode.setAttribute("is-checked", 1);
+				else xNode.removeAttribute("is-checked");
 				break;
 
 			// tab related events
@@ -174,7 +176,7 @@
 				break;
 
 			case "set-layout":
-				console.log( event );
+				Tabs.els.content.removeClass("page-view web-view").addClass(event.arg);
 				break;
 			case "toggle-ruler":
 				value = Tabs.els.content.hasClass("show-ruler");

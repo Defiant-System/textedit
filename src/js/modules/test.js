@@ -1,7 +1,6 @@
 
 let Test = {
 	init(APP, spawn) {
-		return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
 
 		return;
 
@@ -13,6 +12,8 @@ let Test = {
 		// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
 
 		// return setTimeout(() => spawn.find(`.sample:nth(2)`).trigger("click"), 300);
+
+		// return setTimeout(() => APP.dispatch({ type: "set-layout", arg: "page-view", spawn }), 300);
 
 		// return setTimeout(() => spawn.updateTitle({ isDirty: true }), 300);
 		// return setTimeout(() => APP.dispatch({ type: "save-file", spawn }), 300);

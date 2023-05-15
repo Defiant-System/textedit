@@ -3,8 +3,8 @@
 		<Menu name="About Text Edit" shell="win -a"/>
 		<Menu type="divider"/>
 		<Menu name="Preferences" for="file-preferences">
-			<Menu name="Web view" check-group="file-layout" click="set-layout" arg="web"/>
-			<Menu name="Page view" check-group="file-layout" click="set-layout" arg="page"/>
+			<Menu name="Web view" check-group="file-layout" click="set-layout" arg="web-view"/>
+			<Menu name="Page view" check-group="file-layout" click="set-layout" arg="page-view"/>
 			<Menu type="divider"/>
 			<Menu name="Show Ruler" click="toggle-ruler"/>
 		</Menu>
