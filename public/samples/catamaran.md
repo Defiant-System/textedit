@@ -4,4 +4,8 @@ A **catamaran** (_/ˌkætəməˈræn/_) (informally, a "cat") is a [multi-hulled
 Catamarans were invented by the <span style="font-family: 'Arial Black';">Austronesian</span> peoples which enabled their expansion to the islands of the Indian and Pacific Oceans.
 
 Catamarans range in size from small (sailing or rowing vessels) to large (naval ships and roll-on/roll-off car ferries). The structure connecting a catamaran's two hulls ranges from a simple frame strung with webbing to support the crew to a bridging superstructure incorporating extensive cabin and/or cargo space.
-<def><meta name="pageView" value="true"/><meta name="hideRulers" value="false"/></def>
+<def>
+	<meta name="pageView" value="true"/>
+	<meta name="hideRulers" value="false"/>
+	<meta name="indents" value="[0,2,17]"/>
+</def>

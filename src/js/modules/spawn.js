@@ -131,7 +131,6 @@
 			case "open-file":
 				Spawn.dialog.open({
 					txt: fsItem => Self.dispatch(fsItem),
-					html: fsItem => Self.dispatch(fsItem),
 					md: fsItem => Self.dispatch(fsItem),
 				});
 				break;
@@ -146,7 +145,6 @@
 				// pass on available file types
 				Spawn.dialog.saveAs(Tabs.file, {
 					txt:  () => Tabs.active.file.toBlob({ kind: "txt" }),
-					html: () => Tabs.active.file.toBlob({ kind: "html" }),
 					md:   () => Tabs.active.file.toBlob({ kind: "md" }),
 				});
 				break;

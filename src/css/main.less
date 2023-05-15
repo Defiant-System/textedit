@@ -4,8 +4,8 @@
 @import "blank-view";
 
 
---pW: 600px;
---pH: 848px;
+--pW: 603px;
+--pH: 854px;
 
 
 content {
@@ -84,19 +84,19 @@ content {
 				&.ruler-indent,
 				&.margin-start {
 					display: block;
-					left: 57px;
+					left: 72px;
 				}
 
 				&.margin-end {
 					display: block;
-					left: 543px;
+					left: 540px;
 				}
 			}
 
 			ul {
 				&:before {
-					left: 57px;
-					width: 486px;
+					left: 72px;
+					width: 468px;
 				}
 
 				li {
@@ -232,8 +232,8 @@ content {
 		margin: 0 auto;
 		background-image: linear-gradient(90deg,
 			#aaa 0px, #aaa 1px,
-			transparent 1px, transparent 599px,
-			#aaa 599px, #aaa 600px
+			transparent 1px, transparent 602px,
+			#aaa 602px, #aaa 603px
 		);
 
 		&:before,
@@ -242,16 +242,12 @@ content {
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			right: 0;
+			right: 1px;
 			left: 0;
 			z-index: 2;
-			// background-image: repeating-linear-gradient(90deg,
-			// 	#ccc 0px, #ccc 1px,
-			// 	transparent 1px, transparent 57px
-			// );
 			background-image: repeating-linear-gradient(90deg,
-				transparent 0px, transparent 56px,
-				#ccc 56px, #ccc 57px
+				transparent 0px, transparent 71px,
+				#ccc 71px, #ccc 72px
 			);
 		}
 
@@ -259,12 +255,55 @@ content {
 			top: 1px;
 			height: 6px;
 			background-image: repeating-linear-gradient(90deg,
-					transparent 0px, transparent 14px,
-					#ddd 14px, #ddd 15px,
-					transparent 15px, transparent 41px,
-					#ddd 41px, #ddd 42px,
-					transparent 42px, transparent 57px
+					transparent 0px, transparent 8px,
+					#ddd 8px, #ddd 9px,
+					transparent 9px, transparent 17px,
+					#ddd 17px, #ddd 18px,
+					transparent 18px, transparent 26px,
+					#ddd 26px, #ddd 27px,
+					transparent 27px, transparent 36px
 				);
+		}
+	}
+
+	ul {
+		// display: none;
+		position: relative;
+		top: -5px;
+		width: calc( 100% - 1px );
+		height: 18px;
+		margin: 0 auto;
+		font-size: 0;
+		white-space: nowrap;
+		overflow: hidden;
+		color: #aaa;
+		counter-reset: item;
+		counter-increment: item -1;
+		
+		&:before {
+			content: "";
+			background: #ffffff70;
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			z-index: 1;
+		}
+
+		li {
+			position: relative;
+			counter-increment: item +2;
+			display: inline-block;
+			font-size: 10px;
+			text-align: center;
+			padding: 5px 0 0;
+			width: 72px;
+			z-index: 2;
+
+			&:before {
+				content: counter(item) "";
+			}
 		}
 	}
 
@@ -352,47 +391,6 @@ content {
 				border-right: 4px solid transparent;
 				border-bottom: 4px solid #eee;
 				transform: translateX(-0.5px);
-			}
-		}
-	}
-
-	ul {
-		// display: none;
-		position: relative;
-		top: -5px;
-		width: 100%;
-		height: 18px;
-		margin: 0 auto;
-		font-size: 0;
-		white-space: nowrap;
-		overflow: hidden;
-		color: #aaa;
-		counter-reset: item;
-		counter-increment: item -1;
-
-		&:before {
-			content: "";
-			background: #fff;
-			position: absolute;
-			top: 0;
-			left: 0;
-			bottom: 0;
-			width: 100%;
-			z-index: 1;
-		}
-
-		li {
-			position: relative;
-			counter-increment: item +2;
-			display: inline-block;
-			font-size: 10px;
-			text-align: center;
-			padding: 5px 0 0;
-			width: 57px;
-			z-index: 2;
-
-			&:before {
-				content: counter(item) "";
 			}
 		}
 	}
