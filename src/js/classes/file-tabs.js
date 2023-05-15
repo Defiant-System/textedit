@@ -139,6 +139,14 @@ class FileTabs {
 			this.els.content.toggleClass("web-view", this._active.file.setup.pageView);
 			this.els.content.toggleClass("page-view", !this._active.file.setup.pageView);
 			this.els.content.toggleClass("show-ruler", this._active.file.setup.hideRulers);
+
+			// file indents
+			let indents = this._active.file.setup.indents || "2,2,15".split(",");
+			let keys = "iF,iL,iR".split(",");
+			let data = {};
+			indents.map((k,i) => data[`--${keys[i]}`] = +k);
+			this.els.content.parent().css(data);
+
 			// UI update
 			this.update();
 		} else {

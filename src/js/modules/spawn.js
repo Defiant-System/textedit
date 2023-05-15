@@ -144,8 +144,8 @@
 			case "save-file-as":
 				// pass on available file types
 				Spawn.dialog.saveAs(Tabs.file, {
-					txt:  () => Tabs.active.file.toBlob({ kind: "txt" }),
-					md:   () => Tabs.active.file.toBlob({ kind: "md" }),
+					txt: () => Tabs.active.file.toBlob({ kind: "txt" }),
+					md: () => Tabs.active.file.toBlob({ kind: "md" }),
 				});
 				break;
 			case "new-spawn":
