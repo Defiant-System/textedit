@@ -18,9 +18,10 @@
 		let APP = textedit,
 			Self = APP.spawn,
 			Spawn = event.spawn,
-			tabs,
+			Tabs = Spawn.data ? Spawn.data.tabs : false,
 			file,
 			editorEl,
+			xNode,
 			name,
 			value,
 			el;
@@ -28,7 +29,7 @@
 		switch (event.type) {
 			// system events
 			case "spawn.open":
-				Spawn.data.tabs = new Tabs(Self, Spawn);
+				Spawn.data.tabs = new FileTabs(Self, Spawn);
 				
 				// init all sub-objects
 				Object.keys(Self)
@@ -46,18 +47,18 @@
 				Self.dispatch({ ...event, type: "tab.new" });
 				break;
 			case "spawn.blur":
-				if (Spawn.data && Spawn.data.tabs.active) {
-					Edit.saveSelection(Spawn.data.tabs.active);
+				if (Spawn.data && Tabs.active) {
+					Edit.saveSelection(Tabs.active);
 				}
 				// make sure tool obeys window state
-				Spawn.data.tabs.els.toolColor.addClass("blurred");
+				Tabs.els.toolColor.addClass("blurred");
 				break;
 			case "spawn.focus":
-				if (Spawn.data && Spawn.data.tabs.active) {
-					Edit.restoreSelection(Spawn.data.tabs.active);
+				if (Spawn.data && Tabs.active) {
+					Edit.restoreSelection(Tabs.active);
 				}
 				// make sure tool obeys window state
-				Spawn.data.tabs.els.toolColor.removeClass("blurred");
+				Tabs.els.toolColor.removeClass("blurred");
 				break;
 			case "open.file":
 				(event.files || [event]).map(async fHandle => {
@@ -75,24 +76,35 @@
 			case "before-menu:font-families":
 				// console.log("TODO:", event);
 				break;
+			case "before-menu:file-preferences":
+				// file layout
+				event.xMenu.selectNodes(`./*[@check-group="file-layout"]`).map(xMenu => {
+					xMenu.removeAttribute("is-checked");
+				});
+				// toggle ruler
+				xNode = event.xMenu.selectSingleNode(`./*[@click="toggle-ruler"]`);
+				value = Tabs.els.content.hasClass("show-ruler");
+				if (!value) xNode.removeAttribute("is-checked");
+				else xNode.setAttribute("is-checked", 1);
+				break;
 
 			// tab related events
 			case "tab.new":
-				if (event.file) Spawn.data.tabs.add(event.file);
-				else Spawn.data.tabs.add({ new: "Blank" });
+				if (event.file) Tabs.add(event.file);
+				else Tabs.add({ new: "Blank" });
 				break;
 			case "tab.clicked":
-				Spawn.data.tabs.focus(event.el.data("id"));
+				Tabs.focus(event.el.data("id"));
 				break;
 			case "tab.close":
-				Spawn.data.tabs.remove(event.el.data("id"));
+				Tabs.remove(event.el.data("id"));
 				break;
 
 			case "load-samples":
 				// opening image file from application package
 				event.samples.map(async name => {
 					// forward event to app
-					let file = await Spawn.data.tabs.openLocal(`~/samples/${name}`);
+					let file = await Tabs.openLocal(`~/samples/${name}`);
 					Self.dispatch({ ...event, type: "prepare-file", isSample: true, file });
 				});
 				break;
@@ -102,9 +114,9 @@
 					Self.blankView.dispatch({ ...event, type: "add-recent-file" });
 				}
 				// hide blank view
-				Spawn.data.tabs.dispatch({ ...event, type: "hide-blank-view" });
+				Tabs.dispatch({ ...event, type: "hide-blank-view" });
 				// open file with Files
-				Spawn.data.tabs.add(event.file);
+				Tabs.add(event.file);
 				break;
 
 			// from menubar
@@ -116,20 +128,18 @@
 				});
 				break;
 			case "save-file":
-				tabs = Spawn.data.tabs;
-				if (tabs.active.file.isNew) {
+				if (Tabs.active.file.isNew) {
 					return Self.dispatch({ ...event, type: "save-file-as" });
 				}
-				return tabs.active.file.toBlob();
-				window.dialog.save(tabs.active.file, tabs.active.file.toBlob());
+				return Tabs.active.file.toBlob();
+				window.dialog.save(Tabs.active.file, Tabs.active.file.toBlob());
 				break;
 			case "save-file-as":
-				tabs = Spawn.data.tabs;
 				// pass on available file types
-				Spawn.dialog.saveAs(tabs.file, {
-					txt:  () => tabs.active.file.toBlob({ kind: "txt" }),
-					html: () => tabs.active.file.toBlob({ kind: "html" }),
-					md:   () => tabs.active.file.toBlob({ kind: "md" }),
+				Spawn.dialog.saveAs(Tabs.file, {
+					txt:  () => Tabs.active.file.toBlob({ kind: "txt" }),
+					html: () => Tabs.active.file.toBlob({ kind: "html" }),
+					md:   () => Tabs.active.file.toBlob({ kind: "md" }),
 				});
 				break;
 			case "new-spawn":
@@ -137,20 +147,20 @@
 				break;
 			case "merge-all-windows":
 				Spawn.siblings.map(oSpawn => {
-					for (let key in oSpawn.data.tabs._stack) {
-						let ref = oSpawn.data.tabs._stack[key];
-						Spawn.data.tabs.merge(ref);
+					for (let key in oTabs._stack) {
+						let ref = oTabs._stack[key];
+						Tabs.merge(ref);
 					}
 					// close sibling spawn
 					oSpawn.close();
 				});
 				break;
 			case "close-tab":
-				value = Spawn.data.tabs.length;
+				value = Tabs.length;
 				if (event.delayed) {
-					Spawn.data.tabs.removeDelayed();
+					Tabs.removeDelayed();
 				} else if (value > 1) {
-					Spawn.data.tabs.active.tabEl.find(`[sys-click]`).trigger("click");
+					Tabs.active.tabEl.find(`[sys-click]`).trigger("click");
 				} else if (value === 1) {
 					Self.dispatch({ ...event, type: "close-spawn" });
 				}
@@ -162,10 +172,19 @@
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;
+
+			case "set-layout":
+				console.log( event );
+				break;
+			case "toggle-ruler":
+				value = Tabs.els.content.hasClass("show-ruler");
+				Tabs.els.content.toggleClass("show-ruler", value);
+				break;
+
 			default:
 				if (event.type.startsWith("editor.")) {
 					// proxy event
-					return Spawn.data.tabs.dispatch(event);
+					return Tabs.dispatch(event);
 				}
 				if (event.el) {
 					let pEl = event.el.parents(`div[data-area]`);

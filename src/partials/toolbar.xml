@@ -20,6 +20,6 @@
 		</Options>
 	</Group>
 	<Group>
-		<Tool symbol="icon-cogs" click="editor.settings"/>
+		<Tool symbol="icon-cogs" menu="file-preferences"/>
 	</Group>
 </ToolBar>

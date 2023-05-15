@@ -1,7 +1,7 @@
 
 @import "./classes/selection.js"
 @import "./classes/file.js"
-@import "./classes/tabs.js"
+@import "./classes/file-tabs.js"
 
 @import "./modules/color.js"
 @import "./modules/edit.js"

@@ -1,5 +1,5 @@
 
-class Tabs {
+class FileTabs {
 	constructor(parent, spawn) {
 		this._parent = parent;
 		this._spawn = spawn;

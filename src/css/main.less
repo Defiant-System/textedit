@@ -14,6 +14,7 @@ content {
 	left: 0;
 	right: 0;
 	bottom: 0;
+	transition: top 120ms ease-in-out;
 
 	&.web-view {
 		 > .file div[contenteditable="true"] {
@@ -94,7 +95,8 @@ content {
 		top: 19px;
 
 		& + .rulerw {
-			display: block;
+			height: 19px;
+			border-bottom: 1px solid #ccc;
 		}
 	}
 
@@ -205,14 +207,15 @@ content {
 }
 
 .rulerw {
-	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 19px;
+	height: 0;
+	overflow: hidden;
+	border-bottom: 0;
 	background: rgba(0,0,0,.025);
-	border-bottom: 1px solid #ccc;
+	transition: height 120ms ease-in-out;
 
 	.ruler {
 		position: relative;

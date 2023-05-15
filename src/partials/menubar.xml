@@ -2,11 +2,11 @@
 	<Menu name="Text Edit">
 		<Menu name="About Text Edit" shell="win -a"/>
 		<Menu type="divider"/>
-		<Menu name="Preferences">
-			<Menu name="Web view"/>
-			<Menu name="Page view" is-checked="1"/>
+		<Menu name="Preferences" for="file-preferences">
+			<Menu name="Web view" check-group="file-layout" click="set-layout" arg="web"/>
+			<Menu name="Page view" check-group="file-layout" click="set-layout" arg="page"/>
 			<Menu type="divider"/>
-			<Menu name="Show Ruler" is-checked="1"/>
+			<Menu name="Show Ruler" click="toggle-ruler"/>
 		</Menu>
 		<Menu type="divider"/>
 		<Menu name="Quit Text Edit" shell="win -c"/>

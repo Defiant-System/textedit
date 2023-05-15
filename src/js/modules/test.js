@@ -1,6 +1,8 @@
 
 let Test = {
 	init(APP, spawn) {
+		return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
+
 		return;
 
 		return setTimeout(() => $(`.def-desktop_`).trigger("mousedown").trigger("mouseup"), 350);
