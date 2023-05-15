@@ -2,9 +2,6 @@
 	<Menu name="Text Edit">
 		<Menu name="About Text Edit" shell="win -a"/>
 		<Menu type="divider"/>
-		<Menu name="Close Window" click="close-spawn" hotkey="alt+shift+w"/>
-		<Menu name="Close Tab" click="close-tab" hotkey="alt+w"/>
-		<Menu type="divider"/>
 		<Menu name="Preferences">
 			<Menu name="Web view"/>
 			<Menu name="Page view" is-checked="1"/>
@@ -21,7 +18,7 @@
 		<Menu name="Save" click="save-file" hotkey="alt+s"/>
 		<Menu name="Save as&#8230;" click="save-file-as" hotkey="alt+shift+s"/>
 		<Menu type="divider"/>
-		<Menu name="Close File"/>
+		<Menu name="Close File" click="close-tab" hotkey="alt+w"/>
 	</Menu>
 	<Menu name="Edit">
 		<Menu name="Undo" click="history-undo" hotkey="meta+z"/>
@@ -110,7 +107,8 @@
 		<Menu name="Minimize" shell="win -s min"/>
 		<Menu name="Maximize" shell="win -s max"/>
 		<Menu type="divider"/>
-		<Menu name="Close Window" click="close-clone-window" hotkey="alt+w"/>
+		<Menu name="Close Tab" click="close-tab" hotkey="alt+w"/>
+		<Menu name="Close Window" click="close-clone-window" hotkey="alt+shift+w"/>
 	</Menu>
 	<Menu name="Help">
 		<Menu name="Text Edit Help" click="open-help"/>

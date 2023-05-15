@@ -1,6 +1,11 @@
 
 .toolbar-tool_[data-menu="font-color"] {
 	--fg-color: #333;
+
+	&.blurred:after,
+	&.tool-disabled_:after {
+		opacity: .25;
+	}
 	
 	span.icon-font-color {
 		top: 3px;

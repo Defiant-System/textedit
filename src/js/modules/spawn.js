@@ -49,11 +49,15 @@
 				if (Spawn.data && Spawn.data.tabs.active) {
 					Edit.saveSelection(Spawn.data.tabs.active);
 				}
+				// make sure tool obeys window state
+				Spawn.data.tabs.els.toolColor.addClass("blurred");
 				break;
 			case "spawn.focus":
 				if (Spawn.data && Spawn.data.tabs.active) {
 					Edit.restoreSelection(Spawn.data.tabs.active);
 				}
+				// make sure tool obeys window state
+				Spawn.data.tabs.els.toolColor.removeClass("blurred");
 				break;
 			case "open.file":
 				(event.files || [event]).map(async fHandle => {
