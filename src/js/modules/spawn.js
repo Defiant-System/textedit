@@ -39,6 +39,9 @@
 				// auto show "blank view"
 				Spawn.data.tabs.dispatch({ ...event, type: "show-blank-view" });
 
+				// bind event handlers
+				Spawn.find(".rulerw").on("mousedown", Self.);
+
 				// DEV-ONLY-START
 				Test.init(APP, Spawn);
 				// DEV-ONLY-END
@@ -201,5 +204,6 @@
 				}
 		}
 	},
+	ruler: @import "./ruler.js",
 	blankView: @import "./blank-view.js",
 }

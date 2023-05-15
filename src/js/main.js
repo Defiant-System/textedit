@@ -20,10 +20,7 @@ service.turnup = turnUp;
 
 const textedit = {
 	init() {
-		// init all sub-objects
-		Object.keys(this)
-			.filter(i => typeof this[i].init === "function")
-			.map(i => this[i].init());
+		
 	},
 	dispose(event) {
 		if (event.spawn) {
