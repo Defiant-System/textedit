@@ -63,6 +63,11 @@
 				});
 				break;
 
+			case "before-menu:font-color":
+				// simple "reset" for now
+				event.xMenu.selectNodes(`.//Color[@active]`).map(xMenu =>
+					xMenu.removeAttribute("active"));
+				break;
 			case "before-menu:font-families":
 				// console.log("TODO:", event);
 				break;
