@@ -96,14 +96,22 @@ class FileTabs {
 	}
 
 	remove(tId) {
-		let item = this._stack[tId];
-		// unbind event handlers
-		item.bodyEl.off("change keyup mouseup", item.fnHandler);
-		// remove element from DOM tree
-		item.bodyEl.remove();
-		// delete references
-		this._stack[tId] = false;
-		delete this._stack[tId];
+		let item = this._stack[tId],
+			nextTab = item.tabEl.parent().find(`.tabbar-tab_:not([data-id="${tId}"])`);
+		
+		if (item.bodyEl[0] !== this.els.content[0]) {
+			// unbind event handlers
+			item.bodyEl.off("change keyup mouseup", item.fnHandler);
+			// remove element from DOM tree
+			item.bodyEl.remove();
+			// delete references
+			this._stack[tId] = false;
+			delete this._stack[tId];
+		}
+		
+		if (nextTab.length) {
+			this.focus(nextTab.data("id"));
+		}
 	}
 
 	focus(tId) {

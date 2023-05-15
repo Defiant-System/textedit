@@ -92,14 +92,20 @@
 
 			// tab related events
 			case "tab.new":
+				Tabs.els.content.addClass("no-ruler-anim"); // prevent smooth animation
 				if (event.file) Tabs.add(event.file);
 				else Tabs.add({ new: "Blank" });
+				Tabs.els.content.removeClass("no-ruler-anim"); // enable anim
 				break;
 			case "tab.clicked":
+				Tabs.els.content.addClass("no-ruler-anim"); // prevent smooth animation
 				Tabs.focus(event.el.data("id"));
+				Tabs.els.content.removeClass("no-ruler-anim"); // enable anim
 				break;
 			case "tab.close":
+				Tabs.els.content.addClass("no-ruler-anim"); // prevent smooth animation
 				Tabs.remove(event.el.data("id"));
+				Tabs.els.content.removeClass("no-ruler-anim"); // enable anim
 				break;
 
 			case "load-samples":

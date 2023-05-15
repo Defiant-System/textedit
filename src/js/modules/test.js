@@ -1,12 +1,12 @@
 
 let Test = {
 	init(APP, spawn) {
+		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
+		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 250);
 
 		return;
 
 		return setTimeout(() => $(`.def-desktop_`).trigger("mousedown").trigger("mouseup"), 350);
-
-		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 250);
 
 		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 300);
 		// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);

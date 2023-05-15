@@ -16,6 +16,23 @@ content {
 	bottom: 0;
 	transition: top 120ms ease-in-out;
 
+	&.no-ruler-anim {
+		transition: unset;
+
+		& + .rulerw {
+			transition: unset;
+		}
+	}
+
+	&.show-ruler {
+		top: 19px;
+
+		& + .rulerw {
+			height: 19px;
+			border-bottom: 1px solid #ccc;
+		}
+	}
+
 	&.web-view {
 		 > .file div[contenteditable="true"] {
 			position: absolute;
@@ -88,15 +105,6 @@ content {
 					}
 				}
 			}
-		}
-	}
-
-	&.show-ruler {
-		top: 19px;
-
-		& + .rulerw {
-			height: 19px;
-			border-bottom: 1px solid #ccc;
 		}
 	}
 
