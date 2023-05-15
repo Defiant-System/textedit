@@ -6,7 +6,7 @@
 		</Options>
 		<Select name="Arial" width="103" menu="font-families"></Select>
 		<Select name="14" width="21" menu="font-size"></Select>
-		<Tool symbol="icon-font-color" click="editor.format"/>
+		<Tool symbol="icon-font-color" menu="font-color"/>
 		<Options type="grouped">
 			<Tool symbol="icon-bold" click="editor.format" arg="bold"/>
 			<Tool symbol="icon-italic" click="editor.format" arg="italic"/>
