@@ -8,6 +8,7 @@ class FileTabs {
 
 		// fast references
 		this.els = {
+			doc: $(document),
 			content: spawn.find(`content`),
 			toolUndo: spawn.find(`.toolbar-tool_[data-click="editor.undo"]`),
 			toolRedo: spawn.find(`.toolbar-tool_[data-click="editor.redo"]`),

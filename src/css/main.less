@@ -19,6 +19,17 @@ content {
 	bottom: 0;
 	transition: top 120ms ease-in-out;
 
+	&.cover:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 999;
+		background: transparent;
+	}
+
 	&.no-ruler-anim {
 		transition: unset;
 
@@ -33,6 +44,10 @@ content {
 		& + .rulerw {
 			height: 19px;
 			border-bottom: 1px solid #ccc;
+		}
+
+		&.cover:after {
+			top: -19px;
 		}
 	}
 
@@ -49,7 +64,7 @@ content {
 
 		& + .rulerw {
 			i {
-				&.indent-first-line,
+				&.indent-firstline,
 				&.indent-left {
 					display: block;
 					left: 6px;
@@ -86,7 +101,7 @@ content {
 			}
 
 			i {
-				&.indent-first-line {
+				&.indent-firstline {
 					display: block;
 					left: calc( calc( var( --iF ) * 4 ) * 9px );
 				}
@@ -340,7 +355,7 @@ content {
 			left: 0;
 		}
 
-		&.indent-first-line {
+		&.indent-firstline {
 			display: none;
 			top: -5px;
 
