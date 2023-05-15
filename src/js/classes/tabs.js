@@ -13,6 +13,7 @@ class Tabs {
 			toolRedo: spawn.find(`.toolbar-tool_[data-click="editor.redo"]`),
 			toolSelFamily: spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`),
 			toolSelSize: spawn.find(`.toolbar-selectbox_[data-menu="font-size"]`),
+			toolColor: spawn.find(`.toolbar-tool_[data-menu="font-color"]`),
 			toolBold: spawn.find(`.toolbar-tool_[data-arg="bold"]`),
 			toolItalic: spawn.find(`.toolbar-tool_[data-arg="italic"]`),
 			toolUnderline: spawn.find(`.toolbar-tool_[data-arg="underline"]`),
@@ -167,6 +168,8 @@ class Tabs {
 				// update toolbar
 				if (Edit.commandState.fontFamily) Tabs.els.toolSelFamily.val(Edit.commandState.fontFamily);
 				if (Edit.commandState.fontSize) Tabs.els.toolSelSize.val(Edit.commandState.fontSize);
+
+				Tabs.els.toolColor.css({ "--fg-color": Edit.commandState.fgColor || "#333" });
 
 				Tabs.els.toolBold.toggleClass("tool-active_", !Edit.commandState.bold);
 				Tabs.els.toolItalic.toggleClass("tool-active_", !Edit.commandState.italic);

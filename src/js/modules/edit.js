@@ -29,7 +29,7 @@ let Edit = {
 		if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);
 		this.commandState.fontFamily = value;
 		this.commandState.fontSize = parseInt(cStyle.fontSize, 10);
-		// console.log( Color.rgbToHex( cStyle.color ) );
+		this.commandState.fgColor = Color.rgbToHex(cStyle.color);
 	},
 	execCommand(editor, name, value) {
 		// execute command

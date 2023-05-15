@@ -5,6 +5,13 @@
 		<Menu name="Close Window" click="close-spawn" hotkey="alt+shift+w"/>
 		<Menu name="Close Tab" click="close-tab" hotkey="alt+w"/>
 		<Menu type="divider"/>
+		<Menu name="Preferences">
+			<Menu name="Web view"/>
+			<Menu name="Page view" is-checked="1"/>
+			<Menu type="divider"/>
+			<Menu name="Show Ruler" is-checked="1"/>
+		</Menu>
+		<Menu type="divider"/>
 		<Menu name="Quit Text Edit" shell="win -c"/>
 	</Menu>
 	<Menu name="File">

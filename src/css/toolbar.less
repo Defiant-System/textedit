@@ -1,12 +1,14 @@
 
 .toolbar-tool_[data-menu="font-color"] {
+	--fg-color: #333;
+	
 	span.icon-font-color {
 		top: 3px;
 	}
 
 	&:after {
 		content: "";
-		background: #333;
+		background: var(--fg-color);
 		position: absolute;
 		left: 5px;
 		bottom: 3px;
