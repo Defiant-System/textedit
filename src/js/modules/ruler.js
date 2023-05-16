@@ -16,29 +16,39 @@
 		// console.log(event);
 		switch (event.type) {
 			case "mousedown":
-				let el = $(event.target),
-					size = 9,
+				let snap = 9,
+					cEl = Tabs.els.content,
+					el = $(event.target),
 					indent = el.prop("className").split("-")[1],
-					clickX = event.clientX - +el.prop("offsetLeft") - size,
-					pageW = parseInt(Tabs.els.content.cssProp("--pW"), 10),
-					lineEl = Tabs.els.indentLine,
+					clickX = event.clientX - +el.prop("offsetLeft") - snap,
+					pageW = parseInt(cEl.cssProp("--pW"), 10),
 					limit = {},
+					key = "",
 					min_ = Math.min,
-					max_ = Math.max;
+					max_ = Math.max,
+					round_ = Math.round;
 				// calc constraints
 				switch (indent) {
 					case "firstline":
-					case "left":
+						key = "--iF",
 						limit.min = 0;
-						limit.max = pageW - (size * 20);
+						limit.max = pageW - (snap * 19);
+						break;
+					case "left":
+						key = "--iL",
+						limit.min = 0;
+						limit.max = pageW - (snap * 19);
 						break;
 					case "right":
-						limit.min = size * 20;
+						key = "--iR",
+						limit.min = snap * 19;
 						limit.max = pageW;
 						break;
 				}
+				// helper line; add to elements to be moved
+				el.push(Tabs.els.indentLine[0]);
 				// drag object
-				Self.drag = { el, lineEl, indent, clickX, limit, min_, max_ };
+				Self.drag = { el, cEl, key, snap, indent, clickX, limit, min_, max_, round_ };
 				// prevent mouse from triggering mouseover
 				Tabs.els.content.addClass("indent-move");
 				// auto trigger mousemove, in order to show line on mouse down
@@ -48,11 +58,13 @@
 				break;
 			case "mousemove":
 				let left = event.clientX - Drag.clickX;
-				left -= left % 9; // snap math
+				left -= left % Drag.snap; // snap math
 				left = Drag.min_(Drag.max_(left, Drag.limit.min), Drag.limit.max);
 				Drag.el.css({ left });
-				// helper line
-				Drag.lineEl.css({ left });
+				// transfer value to page content
+				let data = {};
+				data[Drag.key] = Drag.round_(left / Drag.snap) / 4;
+				Drag.cEl.css(data);
 				break;
 			case "mouseup":
 				// prevent mouse from triggering mouseover
