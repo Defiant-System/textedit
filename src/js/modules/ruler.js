@@ -17,7 +17,7 @@
 		switch (event.type) {
 			case "mousedown":
 				let snap = 9,
-					cEl = Tabs.els.content,
+					cEl = Tabs.els.content.parent(),
 					el = $(event.target),
 					indent = el.prop("className").split("-")[1],
 					clickX = event.clientX - +el.prop("offsetLeft") - snap,
