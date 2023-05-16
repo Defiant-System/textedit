@@ -17,32 +17,41 @@
 		switch (event.type) {
 			case "mousedown":
 				let el = $(event.target),
+					size = 9,
 					indent = el.prop("className").split("-")[1],
-					clickX = event.clientX - +el.prop("offsetLeft"),
+					clickX = event.clientX - +el.prop("offsetLeft") - size,
+					pageW = parseInt(Tabs.els.content.cssProp("--pW"), 10),
 					lineEl = Tabs.els.indentLine,
-					lineOffset = 138,
-					limit = {
-						snap: 9,
-						min: 0,
-						max: 550
-					},
+					limit = {},
 					min_ = Math.min,
 					max_ = Math.max;
+				// calc constraints
+				switch (indent) {
+					case "firstline":
+					case "left":
+						limit.min = 0;
+						limit.max = pageW - (size * 20);
+						break;
+					case "right":
+						limit.min = size * 20;
+						limit.max = pageW;
+						break;
+				}
 				// drag object
-				Self.drag = { el, lineEl, lineOffset, indent, clickX, limit, min_, max_ };
-
+				Self.drag = { el, lineEl, indent, clickX, limit, min_, max_ };
 				// prevent mouse from triggering mouseover
 				Tabs.els.content.addClass("indent-move");
+				// auto trigger mousemove, in order to show line on mouse down
+				Self.dispatch({ type: "mousemove", clientX: event.clientX });
 				// bind event handlers
 				Tabs.els.doc.on("mousemove mouseup", Self.dispatch);
 				break;
 			case "mousemove":
 				let left = event.clientX - Drag.clickX;
-				left -= left % Drag.limit.snap;
+				left -= left % 9; // snap math
 				left = Drag.min_(Drag.max_(left, Drag.limit.min), Drag.limit.max);
 				Drag.el.css({ left });
-
-				left += Drag.lineOffset;
+				// helper line
 				Drag.lineEl.css({ left });
 				break;
 			case "mouseup":

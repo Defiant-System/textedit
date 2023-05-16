@@ -32,12 +32,6 @@ content {
 		background: transparent;
 	}
 
-	&.indent-move {
-		.move-indent-line {
-			display: block;
-		}
-	}
-
 	&.no-ruler-anim {
 		transition: unset;
 
@@ -74,8 +68,8 @@ content {
 			i {
 				&.indent-firstline,
 				&.indent-left {
-					display: block;
-					left: 6px;
+					// display: block;
+					// left: 6px;
 				}
 			}
 		}
@@ -100,6 +94,10 @@ content {
 				overflow: initial;
 				outline: 1px solid #c5c5c5;
 				box-shadow: 0 1px 7px rgba(0,0,0,.175);
+
+				p {
+					text-indent: calc( calc( calc( var( --iF ) - var( --iL ) ) * 4 ) * 9px );
+				}
 			}
 		}
 
@@ -150,15 +148,29 @@ content {
 		}
 	}
 
-	div.move-indent-line {
+	&.indent-move {
+		.indent-line-w {
+			display: block;
+		}
+	}
+
+	.indent-line-w {
 		display: none;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: -1px;
-		width: 1px;
+		position: relative;
+		width: var( --pW );
+		height: 100%;
+		margin: 0 auto;
 		z-index: 102;
-		background: #ccc;
+
+		.move-indent-line {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: -1px;
+			width: 1px;
+			background: #ccc;
+			margin-left: -1px;
+		}
 	}
 	
 	> .file {
