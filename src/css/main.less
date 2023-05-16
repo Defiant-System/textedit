@@ -54,7 +54,15 @@ content {
 	}
 
 	&.web-view {
-		 > .file div[contenteditable="true"] {
+		.file .page {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+
+		.file div[contenteditable="true"] {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -80,7 +88,8 @@ content {
 			// background: #f2f2f2;
 			overflow: auto;
 
-			div[contenteditable="true"] {
+			.page {
+				// background: red;
 				position: relative;
 				top: auto;
 				left: auto;
@@ -88,15 +97,21 @@ content {
 				height: var( --pH );
 				display: block;
 				margin: 10px auto;
-				padding: 61px 0;
-				padding-left: calc( calc( var( --iL ) * 4 ) * 9px );
-				padding-right: calc( var( --pW ) - calc( calc( var( --iR ) * 4 ) * 9px ) );
 				overflow: initial;
 				outline: 1px solid #c5c5c5;
 				box-shadow: 0 1px 7px rgba(0,0,0,.175);
 
-				p {
-					text-indent: calc( calc( calc( var( --iF ) - var( --iL ) ) * 4 ) * 9px );
+				div[contenteditable="true"] {
+					position: absolute;
+					top: 61px;
+					bottom: 61px;
+					left: calc( calc( var( --iL ) * 4 ) * 9px );
+					right: calc( var( --pW ) - calc( calc( var( --iR ) * 4 ) * 9px ) );
+					overflow: hidden;
+
+					p {
+						text-indent: calc( calc( calc( var( --iF ) - var( --iL ) ) * 4 ) * 9px );
+					}
 				}
 			}
 		}
@@ -143,7 +158,7 @@ content {
 			display: block;
 		}
 
-		> .file div[contenteditable="true"] {
+		> .file .page div[contenteditable="true"] {
 			display: none;
 		}
 	}
@@ -254,16 +269,19 @@ content {
 			}
 		}
 
-		div[contenteditable="true"] {
+		.page {
 			background: #fff;
-			// font-family: Times New Roman;
-			font-family: Arial, sans-serif;
-			font-size: 14px;
-			line-height: 1.35;
-			display: inline-block;
 
-			::selection {
-			  //background: #ffb7b7;
+			div[contenteditable="true"] {
+				// font-family: Times New Roman;
+				font-family: Arial, sans-serif;
+				font-size: 14px;
+				line-height: 1.35;
+				display: inline-block;
+
+				::selection {
+				  //background: #ffb7b7;
+				}
 			}
 		}
 	}

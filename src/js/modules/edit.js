@@ -67,6 +67,11 @@ let Edit = {
 			let selection = document.getSelection();
 			selection.removeAllRanges();
 			selection.addRange( tab.selectedRange );
+		} else {
+			// put cursor at start
+			let Tabs = textedit.spawn.ruler.tabs;
+			let node = tab.fileEl.find(".page > div")[0].selectSingleNode(`.//text()`);
+			Tabs.dispatch({ type: "editor.select-text", spawn: Tabs._spawn, node, start: 0, length: 0 });
 		}
 	},
 	markSelection(color, options) {

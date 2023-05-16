@@ -20,7 +20,6 @@ Two canoes bound together developed directly from minimal raft technologies of t
 This would also explain why older Austronesian populations in Island Southeast Asia tend to favor double outrigger canoes, as it keeps the boats stable when tacking. But they still have small regions where catamarans and single-outrigger canoes are still used. In contrast, more distant outlying descendant populations in Oceania, Madagascar, and the Comoros, retained the double-hull and the single outrigger canoe types, but the technology for double outriggers never reached them (although it exists in western Melanesia). To deal with the problem of the instability of the boat when the outrigger faces leeward when tacking, they instead developed the shunting technique in sailing, in conjunction with reversible single-outriggers.
 
 Despite their being the more "primitive form" of outrigger canoes, they were nonetheless effective, allowing seafaring Polynesians to voyage to distant Pacific islands.
-
 <def>
 	<meta name="pageView" value="true"/>
 	<meta name="hideRulers" value="false"/>

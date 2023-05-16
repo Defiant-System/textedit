@@ -28,7 +28,7 @@ class FileTabs {
 
 		// editor template
 		let file = spawn.find(`content > .file`),
-			editor = file.find(`> div[data-id="editor"]`);
+			editor = file.find(`> .page > div[data-id="editor"]`);
 		Edit.execCommand(editor, "styleWithCSS", true);
 		this._template = file.clone(true);
 		file.remove();
@@ -43,17 +43,17 @@ class FileTabs {
 	}
 
 	toBlob(opt={}) {
-		return this._active.file.toBlob(this._active.bodyEl, opt);
+		return this._active.file.toBlob(this._active.fileEl, opt);
 	}
 
 	add(fsFile) {
 		if (fsFile.new) {
 			let tId = "f"+ Date.now(),
-				bodyEl = this.els.content,
+				fileEl = this.els.content,
 				// add tab to tab row
 				tabEl = this._spawn.tabs.add(fsFile.new, tId);
 			// reference to tab element
-			this._stack[tId] = { tabEl, bodyEl };
+			this._stack[tId] = { tabEl, fileEl };
 			// reset view / show blank view
 			this.dispatch({ type: "show-blank-view", spawn: this._spawn });
 			// reference to active tab
@@ -62,19 +62,20 @@ class FileTabs {
 			this.focus(tId);
 		} else {
 			let fileEl = this.els.content.append(this._template.clone(true)),
-				bodyEl = fileEl.find(`> div[data-id="editor"]`),
-				file = new File(fsFile, bodyEl),
+				pageEl = fileEl.find(`div[data-id="editor"]`),
+				file = new File(fsFile, pageEl),
 				history = new window.History,
 				tabEl = this._spawn.tabs.add(fsFile.base, file.id),
 				fnHandler = e => this.dispatch({ type: "change", spawn: this._spawn });
 
 			// add element to DOM + append file contents
 			fileEl.data({ id: file.id });
-			bodyEl.html(file.data);
+			pageEl.html(file.data);
+
 			// bind event handler
-			bodyEl.on("change keyup mouseup", fnHandler);
+			fileEl.on("change keyup mouseup", fnHandler);
 			// save reference to tab
-			this._stack[file.id] = { tabEl, bodyEl, fnHandler, history, file };
+			this._stack[file.id] = { tabEl, fileEl, fnHandler, history, file };
 			// focus on file
 			this.focus(file.id);
 		}
@@ -84,12 +85,12 @@ class FileTabs {
 		let tId = ref.tId,
 			file = ref.file,
 			history = ref.history,
-			bodyEl = ref.bodyEl.clone(true).parent().addClass("hidden"),
+			fileEl = ref.fileEl.clone(true).parent().addClass("hidden"),
 			tabEl = this._spawn.tabs.add(file.base, tId, true);
-		// clone & append original bodyEl
-		bodyEl = this.els.content.append(bodyEl);
+		// clone & append original fileEl
+		fileEl = this.els.content.append(fileEl);
 		// save reference to this spawns stack
-		this._stack[tId] = { tId, tabEl, bodyEl, history, file };
+		this._stack[tId] = { tId, tabEl, fileEl, history, file };
 	}
 
 	removeDelayed() {
@@ -101,11 +102,11 @@ class FileTabs {
 		let item = this._stack[tId],
 			nextTab = item.tabEl.parent().find(`.tabbar-tab_:not([data-id="${tId}"])`);
 		
-		if (item.bodyEl[0] !== this.els.content[0]) {
+		if (item.fileEl[0] !== this.els.content[0]) {
 			// unbind event handlers
-			item.bodyEl.off("change keyup mouseup", item.fnHandler);
+			item.fileEl.off("change keyup mouseup", item.fnHandler);
 			// remove element from DOM tree
-			item.bodyEl.remove();
+			item.fileEl.remove();
 			// delete references
 			this._stack[tId] = false;
 			delete this._stack[tId];
@@ -126,9 +127,9 @@ class FileTabs {
 				if (el.data("id") !== tId) el.addClass("hidden");
 			});
 
-			if (this._active.bodyEl) {
+			if (this._active.fileEl) {
 				// hide blurred body
-				// this._active.bodyEl.parent().addClass("hidden");
+				// this._active.fileEl.parent().addClass("hidden");
 			}
 		}
 		// reference to active tab
@@ -149,13 +150,13 @@ class FileTabs {
 			indents.map((k,i) => data[`--${keys[i]}`] = +k);
 			this.els.content.parent().css(data);
 
-			this._active.bodyEl[0].selectNodes(`.//text()`).map(textNode => {
-				let range = document.createRange();
-				range.selectNodeContents(textNode);
+			// this._active.fileEl[0].selectNodes(`.//text()`).map(textNode => {
+			// 	let range = document.createRange();
+			// 	range.selectNodeContents(textNode);
 
-				let rect = range.getBoundingClientRect();
-				console.log( textNode, rect );
-			});
+			// 	let rect = range.getBoundingClientRect();
+			// 	console.log( textNode, rect );
+			// });
 
 			// UI update
 			this.update();
@@ -168,7 +169,7 @@ class FileTabs {
 	update() {
 		let active = this._active;
 		// unhide focused body
-		active.bodyEl.parent().removeClass("hidden");
+		active.fileEl.parent().removeClass("hidden");
 		// update spawn window title
 		this._spawn.title = active.file.base;
 		// restore selection
@@ -181,7 +182,7 @@ class FileTabs {
 		let Spawn = event.spawn,
 			Tabs = Spawn.data.tabs,
 			Active = Tabs ? Tabs._active : false,
-			editor = Active ? Active.bodyEl : false,
+			editor = Active ? Active.fileEl : false,
 			name,
 			value;
 		// console.log(event);
