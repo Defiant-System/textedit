@@ -149,6 +149,14 @@ class FileTabs {
 			indents.map((k,i) => data[`--${keys[i]}`] = +k);
 			this.els.content.parent().css(data);
 
+			this._active.bodyEl[0].selectNodes(`.//text()`).map(textNode => {
+				let range = document.createRange();
+				range.selectNodeContents(textNode);
+
+				let rect = range.getBoundingClientRect();
+				console.log( textNode, rect );
+			});
+
 			// UI update
 			this.update();
 		} else {
@@ -227,18 +235,6 @@ class FileTabs {
 				// update toolbar
 				Tabs.dispatch({ ...event, type: "update-toolbar" });
 				break;
-			// OLD
-			// case "editor.select-text":
-			// 	let sel = document.getSelection(),
-			// 		range = document.createRange();
-			// 	range.setStart(event.node, event.start);
-			// 	range.setEnd(event.node, event.start + event.len);
-			// 	// focus on element when blurred
-			// 	sel.removeAllRanges();
-			// 	sel.addRange(range);
-			// 	// update toolbar
-			// 	Tabs.dispatch({ ...event, type: "update-toolbar" });
-			// 	break;
 			case "editor.undo":
 			case "editor.redo":
 				break;
