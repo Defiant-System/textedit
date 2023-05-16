@@ -9,7 +9,6 @@ let Edit = {
 		justifycenter: false,
 		justifyright: false,
 		justifyfull: false,
-
 		fontFamily: false,
 		fontSize: false,
 	},

@@ -72,6 +72,10 @@
 				// simple "reset" for now
 				event.xMenu.selectNodes(`.//Color[@active]`).map(xMenu =>
 					xMenu.removeAttribute("active"));
+				// mark as "active", if color is among palette colors
+				value = Edit.commandState.fgColor;
+				xNode = event.xMenu.selectSingleNode(`.//Color[@arg="${value}"]`);
+				if (xNode) xNode.setAttribute("active", 1);
 				break;
 			case "before-menu:font-families":
 				// console.log("TODO:", event);

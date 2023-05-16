@@ -6,7 +6,7 @@ let Test = {
 
 		return;
 
-		return setTimeout(() => $(`.def-desktop_`).trigger("mousedown").trigger("mouseup"), 350);
+		// return setTimeout(() => $(`.def-desktop_`).trigger("mousedown").trigger("mouseup"), 350);
 
 		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 300);
 		// setTimeout(() => Spawn.find("content > div:nth(1)").html("test"), 310);
@@ -19,13 +19,14 @@ let Test = {
 		// return setTimeout(() => APP.dispatch({ type: "save-file", spawn }), 300);
 		
 		setTimeout(() => {
-				let node = spawn.find(`div[contenteditable="true"] p:nth(1)`)[0];
-				APP.dispatch({ type: "editor.select-text", spawn, node, start: 23, length: 15 });
+				let node = spawn.find(`div[contenteditable="true"] p:nth(1)`)[0].childNodes[1].childNodes[0];
+				APP.dispatch({ type: "editor.select-text", spawn, node, start: 2, length: 5 });
 			}, 300);
 		// setTimeout(() => APP.dispatch({ type: "editor.format-fontSize", spawn, value: 18 }), 350);
 		// setTimeout(() => APP.dispatch({ type: "editor.format-fontName", spawn, value: "Arial Black" }), 350);
 
-		setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
+		setTimeout(() => spawn.find(`.toolbar-tool_[data-menu="font-color"]`).trigger("mousedown"), 310);
+		// setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
 	},
 	dialog(spawn) {
 		spawn.dialog.open({
