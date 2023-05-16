@@ -169,7 +169,7 @@ class FileTabs {
 	update() {
 		let active = this._active;
 		// unhide focused body
-		active.fileEl.parent().removeClass("hidden");
+		active.fileEl.removeClass("hidden");
 		// update spawn window title
 		this._spawn.title = active.file.base;
 		// restore selection

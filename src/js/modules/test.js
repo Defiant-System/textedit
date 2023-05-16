@@ -2,7 +2,7 @@
 let Test = {
 	init(APP, spawn) {
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
-		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 250);
+		return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 1200);
 
 		return;
 
