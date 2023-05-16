@@ -67,6 +67,20 @@ class File {
 		return data || "";
 	}
 
+	autoPageBreak() {
+		if (!this.setup.pageView) return;
+
+		this._el.find(".page > div").map(pageEl => {
+			pageEl.selectNodes(`.//text()`).map(textNode => {
+				let range = document.createRange();
+				range.selectNodeContents(textNode);
+
+				let rect = range.getBoundingClientRect();
+				console.log( textNode, rect );
+			});
+		});
+	}
+
 	toBlob(opt={}) {
 		let data = this._el.html(),
 			// file kind, if not specified

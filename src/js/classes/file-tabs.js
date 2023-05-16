@@ -149,15 +149,8 @@ class FileTabs {
 			let data = {};
 			indents.map((k,i) => data[`--${keys[i]}`] = +k);
 			this.els.content.parent().css(data);
-
-			// this._active.fileEl[0].selectNodes(`.//text()`).map(textNode => {
-			// 	let range = document.createRange();
-			// 	range.selectNodeContents(textNode);
-
-			// 	let rect = range.getBoundingClientRect();
-			// 	console.log( textNode, rect );
-			// });
-
+			// auto add page breaks
+			this._active.file.autoPageBreak();
 			// UI update
 			this.update();
 		} else {
