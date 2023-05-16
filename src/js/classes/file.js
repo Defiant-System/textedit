@@ -70,13 +70,22 @@ class File {
 	autoPageBreak() {
 		if (!this.setup.pageView) return;
 
-		this._el.find(".page > div").map(pageEl => {
-			pageEl.selectNodes(`.//text()`).map(textNode => {
-				let range = document.createRange();
-				range.selectNodeContents(textNode);
+		let pages = this._el.find(".page > div"),
+			range = document.createRange();
+		// console.log( pageRect );
+		pages.map(pageEl => {
+			let pageRect = pages[0].getBoundingClientRect();
 
-				let rect = range.getBoundingClientRect();
-				console.log( textNode, rect );
+			pageEl.selectNodes(`.//text()`).reverse().map(textNode => {
+				range.selectNodeContents(textNode);
+				let textRect = range.getBoundingClientRect(),
+					isOutSide = (pageRect.top + pageRect.height) < (textRect.top + textRect.height);
+				if (isOutSide) {
+					// TODO:
+					// 1. add new page, if needed
+					// 2. prepend this textNode to that page
+					console.log( textNode );
+				}
 			});
 		});
 	}
