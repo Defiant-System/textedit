@@ -44,6 +44,12 @@
 	}
 
 	content {
+		&.show-ruler {
+			& + .rulerw {
+				border-bottom-color: #555;
+			}
+		}
+
 		&.page-view {
 			> .file {
 				div[contenteditable="true"] {
@@ -131,52 +137,54 @@
 		.ruler {
 			background-image: linear-gradient(90deg,
 				#222 0px, #222 1px,
-				transparent 1px, transparent 599px,
-				#222 599px, #222 600px
+				transparent 1px, transparent 602px,
+				#222 602px, #222 603px
 			);
 
 			&:after {
 				background-image: repeating-linear-gradient(90deg,
-					transparent 0px, transparent 56px,
-					#333 56px, #333 57px
+					transparent 0px, transparent 71px,
+					#333 71px, #333 72px
 				);
 			}
 
 			&:before {
 				background-image: repeating-linear-gradient(90deg,
-						transparent 0px, transparent 14px,
-						#555 14px, #555 15px,
-						transparent 15px, transparent 41px,
-						#555 41px, #555 42px,
-						transparent 42px, transparent 57px
+						transparent 0px, transparent 8px,
+						#555 8px, #555 9px,
+						transparent 9px, transparent 17px,
+						#555 17px, #555 18px,
+						transparent 18px, transparent 26px,
+						#555 26px, #555 27px,
+						transparent 27px, transparent 36px
 					);
-			}
-
-			i {
-				background: #666;
-				border-color: #444;
-
-				&.ruler-indent {
-					&:before { border-top: 5px solid #333; }
-					&:after { border-top: 4px solid #666; }
-				}
-
-				&.margin-start {
-					&:before { border-bottom: 5px solid #333; }
-					&:after { border-bottom: 4px solid #666; }
-				}
-
-				&.margin-end {
-					&:before { border-bottom: 5px solid #333; }
-					&:after { border-bottom: 4px solid #666; }
-				}
 			}
 
 			ul {
 				color: #333;
 
 				&:before {
-					background: rgba(255,255,255,.125);
+					background: #777;
+				}
+			}
+
+			i {
+				background: #666;
+				border-color: #444;
+
+				&.indent-firstline {
+					&:before { border-top: 5px solid #333; }
+					&:after { border-top: 4px solid #666; }
+				}
+
+				&.indent-left {
+					&:before { border-bottom: 5px solid #333; }
+					&:after { border-bottom: 4px solid #666; }
+				}
+
+				&.indent-right {
+					&:before { border-bottom: 5px solid #333; }
+					&:after { border-bottom: 4px solid #666; }
 				}
 			}
 		}
