@@ -10,6 +10,7 @@ class FileTabs {
 		this.els = {
 			doc: $(document),
 			content: spawn.find(`content`),
+			indentLine: spawn.find(`.move-indent-line`),
 			toolUndo: spawn.find(`.toolbar-tool_[data-click="editor.undo"]`),
 			toolRedo: spawn.find(`.toolbar-tool_[data-click="editor.redo"]`),
 			toolSelFamily: spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`),

@@ -19,6 +19,7 @@ content {
 	bottom: 0;
 	transition: top 120ms ease-in-out;
 
+	&.indent-move:after,
 	&.cover:after {
 		content: "";
 		position: absolute;
@@ -27,7 +28,14 @@ content {
 		right: 0;
 		bottom: 0;
 		z-index: 999;
+		cursor: none;
 		background: transparent;
+	}
+
+	&.indent-move {
+		.move-indent-line {
+			display: block;
+		}
 	}
 
 	&.no-ruler-anim {
@@ -140,6 +148,17 @@ content {
 		> .file div[contenteditable="true"] {
 			display: none;
 		}
+	}
+
+	div.move-indent-line {
+		display: none;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: -1px;
+		width: 1px;
+		z-index: 102;
+		background: #ccc;
 	}
 	
 	> .file {
