@@ -69,7 +69,10 @@ class File {
 
 	appendPage(pageContent) {
 		let lastPage = pageContent.parentNode,
-			pageCopy = $(lastPage.cloneNode(true));
+			pageCopy = $(lastPage.cloneNode(true)),
+			index = +pageCopy.data("index") + 1;
+		// update page index
+		pageCopy.data({ index });
 		// delete page contents
 		pageCopy.find(`> div > *`).remove();
 		// append after last page
@@ -78,7 +81,35 @@ class File {
 		return pageCopy.childNodes[1]; // <-- first child is white space text node
 	}
 
-	autoPageBreak() {
+	pbContract() {
+		if (!this.setup.pageView) return;
+
+		let range = document.createRange(),
+			pages = this._el.find(".page > div");
+
+		for (let p=0, pl=pages.length; p<pl; p++) {
+			let currPage = pages[p],
+				nextPage = pages[p+1],
+				pageRect = currPage.getBoundingClientRect(),
+				textNodes = currPage.selectNodes(`.//text()`).reverse(), // for performance, start from end
+				textRect;
+
+			if (!nextPage) {
+				break; // for performance; exit loop if text node is visible
+			}
+
+			// put text node in range, in order to measure it
+			range.selectNodeContents(textNodes[0]);
+			textRect = range.getBoundingClientRect();
+
+			let availableSpace = (pageRect.top + pageRect.height) < (textRect.top + textRect.height);
+			console.log( pageRect.top , pageRect.height );
+			console.log( textRect.top , textRect.height );
+			console.log( textNodes[0] );
+		}
+	}
+
+	pbExpand() {
 		if (!this.setup.pageView) return;
 
 		let range = document.createRange(),
@@ -100,7 +131,7 @@ class File {
 					// add new page, if needed
 					if (!nextPage) nextPage = this.appendPage(currPage);
 					// prepend this textNode to that page
-					nextPage.insertBefore(textNodes[t].parentNode, nextPage.lastChild);
+					nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
 					// this is to recursively call this function again
 					checkAgain = true;
 				} else {
@@ -110,7 +141,7 @@ class File {
 		}
 		if (checkAgain) {
 			// there might be more text nodes to be checked
-			this.autoPageBreak();
+			this.pbExpand();
 		}
 	}
 

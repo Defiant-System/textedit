@@ -36,6 +36,7 @@ Roland and Francis Prout experimented with catamarans in 1949 and converted thei
 In the mid-twentieth century, beachcats became a widespread category of sailing catamarans, owing to their ease of launching and mass production. In California, a maker of surfboards, Hobie Alter, produced the 250-pound (110 kg) Hobie 14 in 1967, and two years later the larger and even more successful Hobie 16. As of 2016, the Hobie 16 was still being produced with more than 100,000 having been manufactured.
 
 Catamarans were introduced to Olympic sailing in 1976. The two-handed Tornado catamaran was selected for the multihull discipline in the Olympic Games from 1976 through 2008. It was redesigned in 2000.[24] The foiling Nacra 17 was used in the Tokyo 2020 Olympics, which were held in 2021;[25][26] after the 2015 adoption of the Nacra 15 as a Youth World Championships class and as a new class for the Youth Olympic Games.
+
 <def>
 	<meta name="pageView" value="true"/>
 	<meta name="hideRulers" value="false"/>

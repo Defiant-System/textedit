@@ -272,6 +272,15 @@ content {
 		.page {
 			background: #fff;
 
+			&:before {
+				content: attr(data-index);
+				position: absolute;
+				bottom: 21px;
+				left: 61px;
+				right: 61px;
+				text-align: center;
+			}
+
 			div[contenteditable="true"] {
 				// font-family: Times New Roman;
 				font-family: Arial, sans-serif;
