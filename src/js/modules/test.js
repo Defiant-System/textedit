@@ -31,8 +31,14 @@ let Test = {
 		// setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
 	},
 	selectLargeText(APP, spawn) {
-		let node = spawn.find(`div[contenteditable="true"] p:nth(0)`)[0];
-		APP.dispatch({ type: "editor.select-text", spawn, node, start: 0, length: 699 });
+		// let node = spawn.find(`div[contenteditable="true"] p:nth(0)`)[0];
+		// APP.dispatch({ type: "editor.select-text", spawn, node, start: 0, length: 699 });
+
+		spawn.find(`div[contenteditable="true"] p:nth(2)`).remove();
+		spawn.find(`div[contenteditable="true"] p:nth(1)`).remove();
+		spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
+
+		spawn.data.tabs.dispatch({ type: "page-break-contract", spawn });
 	},
 	dialog(spawn) {
 		spawn.dialog.open({

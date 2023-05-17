@@ -99,17 +99,22 @@ class File {
 				break; // for performance; exit loop if text node is visible
 			}
 			// put text node in range, in order to measure it
-			range.selectNodeContents(textNodes[0]);
+			range.selectNodeContents(textNodes[0].parentNode);
 			textRect = range.getBoundingClientRect();
 
 			let availableSpace = (pageRect.top + pageRect.height) - (textRect.top + textRect.height),
 				nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
-				nextPageFirstItemRect;
+				nextPageFirstItemRect,
+				cStyle = getComputedStyle(nextPageFirstItem.parentNode);
+
+			// add last elements "margin bottom"
+			availableSpace -= parseInt(cStyle.marginBottom, 10);
 
 			range.selectNodeContents(nextPageFirstItem);
 			nextPageFirstItemRect = range.getBoundingClientRect();
 
 			if (availableSpace > nextPageFirstItemRect.height) {
+
 				currPage.appendChild(nextPageFirstItem.parentNode);
 				// delete last page, if empty
 				if (!nextPage.selectSingleNode(`./*`)) {

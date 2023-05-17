@@ -150,7 +150,7 @@ class FileTabs {
 			indents.map((k,i) => data[`--${keys[i]}`] = +k);
 			this.els.content.parent().css(data);
 			// auto add page breaks
-			this._active.file.pbExpand();
+			this.dispatch({ type: "page-break-expand", spawn: this._spawn });
 			// UI update
 			this.update();
 		} else {
@@ -204,6 +204,9 @@ class FileTabs {
 				Tabs.els.toolJustifyfull.toggleClass("tool-active_", !Edit.commandState.justifyfull);
 				break;
 			// custom events
+			case "page-break-expand":
+				Active.file.pbExpand();
+				break;
 			case "page-break-contract":
 				Active.file.pbContract();
 				break;
