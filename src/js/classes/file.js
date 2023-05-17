@@ -97,15 +97,22 @@ class File {
 			if (!nextPage) {
 				break; // for performance; exit loop if text node is visible
 			}
-
+			
 			// put text node in range, in order to measure it
 			range.selectNodeContents(textNodes[0]);
 			textRect = range.getBoundingClientRect();
 
-			let availableSpace = (pageRect.top + pageRect.height) < (textRect.top + textRect.height);
-			console.log( pageRect.top , pageRect.height );
-			console.log( textRect.top , textRect.height );
-			console.log( textNodes[0] );
+			let availableSpace = (pageRect.top + pageRect.height) - (textRect.top + textRect.height);
+
+			let nextPageFirstItem = nextPage.selectSingleNode(`.//text()`);
+			range.selectNodeContents(nextPageFirstItem);
+
+			let nextPageFirstItemRect = range.getBoundingClientRect();
+
+			if (availableSpace > nextPageFirstItemRect.height) {
+				currPage.appendChild(nextPageFirstItem.parentNode);
+				break;
+			}
 		}
 	}
 

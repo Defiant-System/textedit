@@ -1,4 +1,4 @@
-### Catamaran
+## Catamaran
 A **catamaran** (*ˌkætəməˈræn*) (informally, a "cat") is a [multi-hulled](https://en.wikipedia.org/wiki/Catamaran) watercraft featuring two parallel hulls of equal size. It is a geometry-stabilized craft, deriving its stability from its wide beam, rather than from a ballasted keel as with a monohull boat. Catamarans typically have less hull volume, smaller displacement, and shallower draft (*draught*) than monohulls of comparable length. The two hulls combined also often have a smaller hydrodynamic resistance than comparable monohulls, requiring less propulsive power from either sails or motors. The catamaran's wider stance on the water can reduce both heeling and wave-induced motion, as compared with a monohull, and can give reduced wakes.
 
 Catamarans were invented by the <span style="font-family: 'Arial Black';">Austronesian</span> peoples which enabled their expansion to the islands of the Indian and Pacific Oceans.
