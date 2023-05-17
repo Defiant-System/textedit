@@ -205,10 +205,14 @@ class FileTabs {
 				break;
 			// custom events
 			case "page-break-expand":
+				console.time("expand");
 				Active.file.pbExpand();
+				console.timeEnd("expand");
 				break;
 			case "page-break-contract":
+				// console.time("contract");
 				Active.file.pbContract();
+				// console.timeEnd("contract");
 				break;
 			case "show-blank-view":
 				// update spawn title !?

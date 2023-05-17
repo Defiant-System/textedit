@@ -1,4 +1,4 @@
-## Catamaran
+### Catamaran
 A **catamaran** (*ˌkætəməˈræn*) (informally, a "cat") is a [multi-hulled](https://en.wikipedia.org/wiki/Catamaran) watercraft featuring two parallel hulls of equal size. It is a geometry-stabilized craft, deriving its stability from its wide beam, rather than from a ballasted keel as with a monohull boat. Catamarans typically have less hull volume, smaller displacement, and shallower draft (*draught*) than monohulls of comparable length. The two hulls combined also often have a smaller hydrodynamic resistance than comparable monohulls, requiring less propulsive power from either sails or motors. The catamaran's wider stance on the water can reduce both heeling and wave-induced motion, as compared with a monohull, and can give reduced wakes.
 
 Catamarans were invented by the <span style="font-family: 'Arial Black';">Austronesian</span> peoples which enabled their expansion to the islands of the Indian and Pacific Oceans.
@@ -36,7 +36,6 @@ Roland and Francis Prout experimented with catamarans in 1949 and converted thei
 In the mid-twentieth century, beachcats became a widespread category of sailing catamarans, owing to their ease of launching and mass production. In California, a maker of surfboards, Hobie Alter, produced the 250-pound (110 kg) Hobie 14 in 1967, and two years later the larger and even more successful Hobie 16. As of 2016, the Hobie 16 was still being produced with more than 100,000 having been manufactured.
 
 Catamarans were introduced to Olympic sailing in 1976. The two-handed Tornado catamaran was selected for the multihull discipline in the Olympic Games from 1976 through 2008. It was redesigned in 2000.[24] The foiling Nacra 17 was used in the Tokyo 2020 Olympics, which were held in 2021;[25][26] after the 2015 adoption of the Nacra 15 as a Youth World Championships class and as a new class for the Youth Olympic Games.
-
 <def>
 	<meta name="pageView" value="true"/>
 	<meta name="hideRulers" value="false"/>

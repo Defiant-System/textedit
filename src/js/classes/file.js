@@ -104,10 +104,10 @@ class File {
 
 			let availableSpace = (pageRect.top + pageRect.height) - (textRect.top + textRect.height),
 				nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
-				nextPageFirstItemRect,
-				cStyle = getComputedStyle(nextPageFirstItem.parentNode);
-
+				nextPageFirstItemRect;
+			
 			// add last elements "margin bottom"
+			let cStyle = getComputedStyle(nextPageFirstItem.parentNode);
 			availableSpace -= parseInt(cStyle.marginBottom, 10);
 
 			range.selectNodeContents(nextPageFirstItem);

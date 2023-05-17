@@ -1,12 +1,11 @@
 
 let Test = {
 	init(APP, spawn) {
+		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
 		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 500);
 
 		return setTimeout(() => this.selectLargeText(APP, spawn), 500);
-
-		return;
 
 		// return setTimeout(() => $(`.def-desktop_`).trigger("mousedown").trigger("mouseup"), 350);
 
