@@ -109,6 +109,7 @@ class File {
 			}
 		}
 		if (checkAgain) {
+			// there might be more text nodes to be checked
 			this.autoPageBreak();
 		}
 	}

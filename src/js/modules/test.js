@@ -4,6 +4,8 @@ let Test = {
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
 		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 500);
 
+		return setTimeout(() => this.selectLargeText(APP, spawn), 500);
+
 		return;
 
 		// return setTimeout(() => $(`.def-desktop_`).trigger("mousedown").trigger("mouseup"), 350);
@@ -27,6 +29,10 @@ let Test = {
 
 		setTimeout(() => spawn.find(`.toolbar-tool_[data-menu="font-color"]`).trigger("mousedown"), 310);
 		// setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
+	},
+	selectLargeText(APP, spawn) {
+		let node = spawn.find(`div[contenteditable="true"] p:nth(0)`)[0];
+		APP.dispatch({ type: "editor.select-text", spawn, node, start: 0, length: 699 });
 	},
 	dialog(spawn) {
 		spawn.dialog.open({
