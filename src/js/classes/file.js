@@ -85,7 +85,8 @@ class File {
 		if (!this.setup.pageView) return;
 
 		let range = document.createRange(),
-			pages = this._el.find(".page > div");
+			pages = this._el.find(".page > div"),
+			checkAgain = false;
 
 		for (let p=0, pl=pages.length; p<pl; p++) {
 			let currPage = pages[p],
@@ -94,10 +95,10 @@ class File {
 				textNodes = currPage.selectNodes(`.//text()`).reverse(), // for performance, start from end
 				textRect;
 
-			if (!nextPage) {
+			if (!nextPage || !textNodes.length) {
 				break; // for performance; exit loop if text node is visible
 			}
-			
+
 			// put text node in range, in order to measure it
 			range.selectNodeContents(textNodes[0]);
 			textRect = range.getBoundingClientRect();
@@ -111,8 +112,19 @@ class File {
 
 			if (availableSpace > nextPageFirstItemRect.height) {
 				currPage.appendChild(nextPageFirstItem.parentNode);
+
+				// delete last page, if empty
+				if (!nextPage.selectSingleNode(`./*`)) {
+					nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
+				}
+
+				checkAgain = true;
 				break;
 			}
+		}
+		if (checkAgain) {
+			// there might be more text nodes to be checked
+			this.pbContract();
 		}
 	}
 
