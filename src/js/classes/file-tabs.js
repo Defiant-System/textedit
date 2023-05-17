@@ -185,6 +185,9 @@ class FileTabs {
 			case "update-toolbar":
 				// update command states
 				Edit.updateState();
+				// auto disable undo/redo for now
+				Tabs.els.toolUndo.addClass("tool-disabled_");
+				Tabs.els.toolRedo.addClass("tool-disabled_");
 				// update toolbar
 				if (Edit.commandState.fontFamily) Tabs.els.toolSelFamily.val(Edit.commandState.fontFamily);
 				if (Edit.commandState.fontSize) Tabs.els.toolSelSize.val(Edit.commandState.fontSize);
