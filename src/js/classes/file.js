@@ -67,27 +67,50 @@ class File {
 		return data || "";
 	}
 
+	appendPage(pageContent) {
+		let lastPage = pageContent.parentNode,
+			pageCopy = $(lastPage.cloneNode(true));
+		// delete page contents
+		pageCopy.find(`> div > *`).remove();
+		// append after last page
+		pageCopy = lastPage.parentNode.appendChild(pageCopy[0]);
+		// return new page
+		return pageCopy.childNodes[1]; // <-- first child is white space text node
+	}
+
 	autoPageBreak() {
 		if (!this.setup.pageView) return;
 
-		let pages = this._el.find(".page > div"),
-			range = document.createRange();
-		// console.log( pageRect );
-		pages.map(pageEl => {
-			let pageRect = pages[0].getBoundingClientRect();
+		let range = document.createRange(),
+			pages = this._el.find(".page > div"),
+			checkAgain = false;
 
-			pageEl.selectNodes(`.//text()`).reverse().map(textNode => {
-				range.selectNodeContents(textNode);
-				let textRect = range.getBoundingClientRect(),
-					isOutSide = (pageRect.top + pageRect.height) < (textRect.top + textRect.height);
-				if (isOutSide) {
-					// TODO:
-					// 1. add new page, if needed
-					// 2. prepend this textNode to that page
-					console.log( textNode );
+		for (let p=0, pl=pages.length; p<pl; p++) {
+			let currPage = pages[p],
+				nextPage = pages[p+1],
+				pageRect = currPage.getBoundingClientRect(),
+				textNodes = currPage.selectNodes(`.//text()`).reverse(); // for performance, start from end
+
+			for (let t=0, tl=textNodes.length; t<tl; t++) {
+				// put text node in range, in order to measure it
+				range.selectNodeContents(textNodes[t]);
+
+				let textRect = range.getBoundingClientRect();
+				if ((pageRect.top + pageRect.height) < (textRect.top + textRect.height)) {
+					// add new page, if needed
+					if (!nextPage) nextPage = this.appendPage(currPage);
+					// prepend this textNode to that page
+					nextPage.insertBefore(textNodes[t].parentNode, nextPage.lastChild);
+					// this is to recursively call this function again
+					checkAgain = true;
+				} else {
+					break; // for performance; exit loop if text node is visible
 				}
-			});
-		});
+			}
+		}
+		if (checkAgain) {
+			this.autoPageBreak();
+		}
 	}
 
 	toBlob(opt={}) {
