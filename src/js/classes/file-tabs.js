@@ -205,9 +205,9 @@ class FileTabs {
 				break;
 			// custom events
 			case "page-break-expand":
-				console.time("expand");
+				// console.time("expand");
 				Active.file.pbExpand();
-				console.timeEnd("expand");
+				// console.timeEnd("expand");
 				break;
 			case "page-break-contract":
 				// console.time("contract");

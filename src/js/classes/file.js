@@ -82,52 +82,7 @@ class File {
 	}
 
 	pbContract() {
-		if (!this.setup.pageView) return;
 
-		let range = document.createRange(),
-			pages = this._el.find(".page > div"),
-			checkAgain = false;
-
-		for (let p=0, pl=pages.length; p<pl; p++) {
-			let currPage = pages[p],
-				nextPage = pages[p+1],
-				pageRect = currPage.getBoundingClientRect(),
-				textNodes = currPage.selectNodes(`.//text()`).reverse(), // for performance, start from end
-				textRect;
-
-			if (!nextPage || !textNodes.length) {
-				break; // for performance; exit loop if text node is visible
-			}
-			// put text node in range, in order to measure it
-			range.selectNodeContents(textNodes[0].parentNode);
-			textRect = range.getBoundingClientRect();
-
-			let availableSpace = (pageRect.top + pageRect.height) - (textRect.top + textRect.height),
-				nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
-				nextPageFirstItemRect;
-			
-			// add last elements "margin bottom"
-			let cStyle = getComputedStyle(nextPageFirstItem.parentNode);
-			availableSpace -= parseInt(cStyle.marginBottom, 10);
-
-			range.selectNodeContents(nextPageFirstItem);
-			nextPageFirstItemRect = range.getBoundingClientRect();
-
-			if (availableSpace > nextPageFirstItemRect.height) {
-
-				currPage.appendChild(nextPageFirstItem.parentNode);
-				// delete last page, if empty
-				if (!nextPage.selectSingleNode(`./*`)) {
-					nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
-				}
-				checkAgain = true;
-				break;
-			}
-		}
-		if (checkAgain) {
-			// there might be more text nodes to be checked
-			this.pbContract();
-		}
 	}
 
 	pbExpand() {
@@ -151,6 +106,10 @@ class File {
 				if ((pageRect.top + pageRect.height) < (textRect.top + textRect.height)) {
 					// add new page, if needed
 					if (!nextPage) nextPage = this.appendPage(currPage);
+					// split element if it is "paragraph" 
+					if (textNodes[t].parentNode.nodeName === "P") {
+						console.log("split")
+					}
 					// prepend this textNode to that page
 					nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
 					// this is to recursively call this function again
@@ -159,10 +118,6 @@ class File {
 					break; // for performance; exit loop if text node is visible
 				}
 			}
-		}
-		if (checkAgain) {
-			// there might be more text nodes to be checked
-			this.pbExpand();
 		}
 	}
 

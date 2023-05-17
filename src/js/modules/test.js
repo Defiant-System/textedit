@@ -1,6 +1,11 @@
 
 let Test = {
 	init(APP, spawn) {
+		// TODO: Test with TABLE between pages
+
+
+		return setTimeout(() => spawn.find(".file").scrollTop(350), 320);
+
 		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
 		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 500);
