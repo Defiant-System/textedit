@@ -60,9 +60,9 @@
 				// make sure tool obeys window state
 				Tabs.els.toolColor.removeClass("blurred");
 				break;
-			case "spawn.keyup":
+			case "spawn.keystroke":
 				// temp
-				Tabs.dispatch({ ...event, type: "page-break-contract" });
+				Tabs.dispatch({ ...event, type: "auto-page-break" });
 				break;
 			case "open.file":
 				(event.files || [event]).map(async fHandle => {

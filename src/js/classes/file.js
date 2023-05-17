@@ -81,11 +81,7 @@ class File {
 		return pageCopy.childNodes[1]; // <-- first child is white space text node
 	}
 
-	pbContract() {
-
-	}
-
-	pbExpand() {
+	autoPageBreak() {
 		if (!this.setup.pageView) return;
 
 		let range = document.createRange(),
@@ -108,10 +104,15 @@ class File {
 					if (!nextPage) nextPage = this.appendPage(currPage);
 					// split element if it is "paragraph" 
 					if (textNodes[t].parentNode.nodeName === "P") {
-						console.log("split")
+						let oldHeight = textRect.height,
+							len = textNodes[t].length;
+						// range.setEnd(textNodes[t], len - 100);
+						
+						console.log( range.getClientRects() );
+						// console.log( oldHeight, range.getBoundingClientRect().height );
 					}
 					// prepend this textNode to that page
-					nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
+					// nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
 					// this is to recursively call this function again
 					checkAgain = true;
 				} else {

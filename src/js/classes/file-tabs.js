@@ -78,6 +78,8 @@ class FileTabs {
 			this._stack[file.id] = { tabEl, fileEl, fnHandler, history, file };
 			// focus on file
 			this.focus(file.id);
+			// auto add page breaks
+			setTimeout(() => this.dispatch({ type: "auto-page-break", spawn: this._spawn }), 100);
 		}
 	}
 
@@ -149,8 +151,6 @@ class FileTabs {
 			let data = {};
 			indents.map((k,i) => data[`--${keys[i]}`] = +k);
 			this.els.content.parent().css(data);
-			// auto add page breaks
-			this.dispatch({ type: "page-break-expand", spawn: this._spawn });
 			// UI update
 			this.update();
 		} else {
@@ -204,15 +204,10 @@ class FileTabs {
 				Tabs.els.toolJustifyfull.toggleClass("tool-active_", !Edit.commandState.justifyfull);
 				break;
 			// custom events
-			case "page-break-expand":
+			case "auto-page-break":
 				// console.time("expand");
-				Active.file.pbExpand();
+				Active.file.autoPageBreak();
 				// console.timeEnd("expand");
-				break;
-			case "page-break-contract":
-				// console.time("contract");
-				Active.file.pbContract();
-				// console.timeEnd("contract");
 				break;
 			case "show-blank-view":
 				// update spawn title !?
