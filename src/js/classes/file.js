@@ -67,30 +67,53 @@ class File {
 		return data || "";
 	}
 
-	appendPage(pageContent) {
-		let lastPage = pageContent.parentNode,
-			pageCopy = $(lastPage.cloneNode(true)),
-			index = +pageCopy.data("index") + 1;
-		// update page index
-		pageCopy.data({ index });
-		// delete page contents
-		pageCopy.find(`> div > *`).remove();
-		// append after last page
-		pageCopy = lastPage.parentNode.appendChild(pageCopy[0]);
-		// return new page
-		return pageCopy.childNodes[1]; // <-- first child is white space text node
-	}
-
 	autoPageBreak() {
 		if (!this.setup.pageView) return;
 
+		let appendPage = (pageContent) => {
+				let lastPage = pageContent.parentNode,
+					pageCopy = $(lastPage.cloneNode(true)),
+					index = +pageCopy.data("index") + 1,
+					newPage;
+				// update page index
+				pageCopy.data({ index });
+				// delete page contents
+				pageCopy.find(`> div > *`).remove();
+				// append after last page
+				pageCopy = lastPage.parentNode.appendChild(pageCopy[0]);
+				// mutate pages array & for-loop
+				newPage = pageCopy.childNodes[1];
+				pages.push(newPage);
+				pl++;
+				// return page
+				return newPage; // <-- first child is white space text node
+			};
+
 		let range = document.createRange(),
 			pages = this._el.find(".page > div"),
-			checkAgain = false,
-			pl = pages.length,
-			p = 0;
+			p, pl;
 
-		for (; p<pl; p++) {
+		// re-stitch split paragraphs if exists, from previous
+		for (p=0, pl=pages.length; p<pl; p++) {
+			let currPage = pages[p],
+				nextPage = pages[p+1];
+			if (nextPage) {
+				let textNodes = currPage.selectNodes(`.//text()`).reverse(); // for performance, start from end
+				for (let t=0, tl=textNodes.length; t<tl; t++) {
+					// check for (previously) split paragraph
+					if (textNodes[t].parentNode.classList.contains("_split-start_")) {
+						// stitch text node together with original text
+						textNodes[t].parentNode.appendChild(nextPage.firstChild.childNodes[0]);
+						// reset class name
+						textNodes[t].parentNode.classList.remove("_split-start_");
+						// delete split-end paragraph
+						nextPage.removeChild(nextPage.firstChild);
+					}
+				}
+			}
+		}
+
+		for (p=0, pl=pages.length; p<pl; p++) {
 			let currPage = pages[p],
 				nextPage = pages[p+1],
 				pageRect = currPage.getBoundingClientRect(),
@@ -108,15 +131,15 @@ class File {
 
 				if (pageHeight < textRect.top + firstLineHeight) { // <-- expand check 1
 					// add new page, if needed
-					if (!nextPage) nextPage = this.appendPage(currPage);
+					if (!nextPage) {
+						nextPage = appendPage(currPage);
+					}
 					// prepend this textNode to that page
 					nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
-					// this is to recursively call this function again
-					checkAgain = true;
 					break;
 				} else if (pageHeight < (textRect.top + textRect.height)) { // <-- expand check 2
 					// add new page, if needed
-					if (!nextPage) nextPage = this.appendPage(currPage);
+					if (!nextPage) nextPage = appendPage(currPage);
 
 					let cloneStr;
 					// split element if it is "paragraph" 
@@ -147,38 +170,9 @@ class File {
 						clone.classList.add("_split-end_");
 						clone.innerHTML = cloneStr;
 					}
-					// this is to recursively call this function again
-					checkAgain = true;
-					break;
-				} else if (nextPage) {
-				// 	let nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
-				// 		cStyle = getComputedStyle(nextPageFirstItem.parentNode),
-				// 		availableSpace = pageHeight - (textRect.top + textRect.height) - parseInt(cStyle.marginBottom, 10),
-				// 		nextPageFirstItemRect;
-
-				// 	range.selectNodeContents(nextPageFirstItem.parentNode);
-				// 	nextPageFirstItemRect = range.getBoundingClientRect();
-					
-				// 	if (availableSpace > nextPageFirstItemRect.height) {  // <-- contract check 1
-				// 		currPage.appendChild(nextPageFirstItem.parentNode);
-
-				// 		// delete last page, if empty
-				// 		// if (!nextPage.selectSingleNode(`./*`)) {
-				// 		// 	nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
-				// 		// }
-				// 		// checkAgain = true;
-				// 		break;
-				// 	}
-				} else {
 					break;
 				}
 			}
-			// exit loop & recursively call self
-			if (checkAgain) break;
-		}
-		if (checkAgain) {
-			// there might be more text nodes to be checked
-			this.autoPageBreak();
 		}
 	}
 
