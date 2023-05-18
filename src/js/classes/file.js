@@ -100,8 +100,9 @@ class File {
 				// put text node in range, in order to measure it
 				range.selectNodeContents(textNodes[t]);
 
-				let textRect = range.getBoundingClientRect();
-				if (pageHeight < textRect.top) {
+				let textRect = range.getBoundingClientRect(),
+					firstLineHeight = range.getClientRects()[0].height;
+				if (pageHeight < textRect.top + firstLineHeight) {
 					// add new page, if needed
 					if (!nextPage) nextPage = this.appendPage(currPage);
 					// prepend this textNode to that page
