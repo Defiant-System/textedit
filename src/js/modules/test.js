@@ -5,12 +5,12 @@ let Test = {
 
 
 		// return setTimeout(() => spawn.find(".file").scrollTop(350), 320);
+		return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
 
 		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
 		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 500);
 
-		return setTimeout(() => this.selectLargeText(APP, spawn), 500);
 
 		// return setTimeout(() => $(`.def-desktop_`).trigger("mousedown").trigger("mouseup"), 350);
 
@@ -34,15 +34,15 @@ let Test = {
 		setTimeout(() => spawn.find(`.toolbar-tool_[data-menu="font-color"]`).trigger("mousedown"), 310);
 		// setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
 	},
-	selectLargeText(APP, spawn) {
+	deleteParagraphs(APP, spawn) {
 		// let node = spawn.find(`div[contenteditable="true"] p:nth(0)`)[0];
 		// APP.dispatch({ type: "editor.select-text", spawn, node, start: 0, length: 699 });
 
-		spawn.find(`div[contenteditable="true"] p:nth(2)`).remove();
-		spawn.find(`div[contenteditable="true"] p:nth(1)`).remove();
+		// spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
+		// spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
 		spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
 
-		spawn.data.tabs.dispatch({ type: "page-break-contract", spawn });
+		spawn.data.tabs.dispatch({ type: "auto-page-break", spawn });
 	},
 	dialog(spawn) {
 		spawn.dialog.open({

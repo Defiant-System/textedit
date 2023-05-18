@@ -205,9 +205,9 @@ class FileTabs {
 				break;
 			// custom events
 			case "auto-page-break":
-				// console.time("expand");
+				// console.time(event.type);
 				Active.file.autoPageBreak();
-				// console.timeEnd("expand");
+				// console.timeEnd(event.type);
 				break;
 			case "show-blank-view":
 				// update spawn title !?
