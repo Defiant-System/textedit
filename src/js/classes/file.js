@@ -86,37 +86,39 @@ class File {
 
 		let range = document.createRange(),
 			pages = this._el.find(".page > div"),
-			checkAgain = false;
+			checkAgain = false,
+			pl = pages.length,
+			p = 0;
 
-		for (let p=0, pl=pages.length; p<pl; p++) {
+		for (; p<pl; p++) {
 			let currPage = pages[p],
 				nextPage = pages[p+1],
 				pageRect = currPage.getBoundingClientRect(),
 				pageHeight = pageRect.top + pageRect.height,
-				textNodes = currPage.selectNodes(`.//text()`).reverse(); // for performance, start from end
+				textNodes = currPage.selectNodes(`.//text()`).reverse(), // for performance, start from end
+				tl = textNodes.length,
+				t = 0;
 
-			// console.log( "page height: ", pageHeight );
-			for (let t=0, tl=textNodes.length; t<tl; t++) {
+			for (; t<tl; t++) {
 				// put text node in range, in order to measure it
 				range.selectNodeContents(textNodes[t]);
 
 				let textRect = range.getBoundingClientRect(),
 					firstLineHeight = range.getClientRects()[0].height;
-				if (pageHeight < textRect.top + firstLineHeight) {
+
+				if (pageHeight < textRect.top + firstLineHeight) { // <-- expand check 1
 					// add new page, if needed
 					if (!nextPage) nextPage = this.appendPage(currPage);
 					// prepend this textNode to that page
 					nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
 					// this is to recursively call this function again
 					checkAgain = true;
-
-				} else if (pageHeight < (textRect.top + textRect.height)) {
+					break;
+				} else if (pageHeight < (textRect.top + textRect.height)) { // <-- expand check 2
 					// add new page, if needed
 					if (!nextPage) nextPage = this.appendPage(currPage);
 
-					// console.log( "old height: ", textRect.top + textRect.height );
-					let cloneStr = "";
-
+					let cloneStr;
 					// split element if it is "paragraph" 
 					if (textNodes[t].parentNode.nodeName === "P") {
 						let words = textNodes[t].textContent.split(" "),
@@ -138,19 +140,37 @@ class File {
 					}
 					// tag element; has been splited
 					textNodes[t].parentNode.classList.add("_split-start_");
-
-					// prepend this textNode to that page
-					let clone = nextPage.insertBefore(textNodes[t].parentNode.cloneNode(), nextPage.firstChild);
-					clone.classList.add("_split-end_");
-					clone.innerHTML = cloneStr;
+					if (cloneStr) {
+						// prepend this textNode to that page
+						let clone = nextPage.insertBefore(textNodes[t].parentNode.cloneNode(), nextPage.firstChild);
+						clone.classList.add("_split-end_");
+						clone.innerHTML = cloneStr;
+					}
 					// this is to recursively call this function again
 					checkAgain = true;
+					break;
+				} else if (nextPage && nextPage.selectSingleNode(`.//text()`)) {
+					let nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
+						cStyle = getComputedStyle(nextPageFirstItem.parentNode),
+						availableSpace = pageHeight - (textRect.top + textRect.height) - parseInt(cStyle.marginBottom, 10),
+						nextPageFirstItemRect;
+
+					range.selectNodeContents(nextPageFirstItem);
+					nextPageFirstItemRect = range.getBoundingClientRect();
+					
+					if (availableSpace > nextPageFirstItemRect.height) {  // <-- contract check 1
+						currPage.appendChild(nextPageFirstItem.parentNode);
+						// delete last page, if empty
+						if (!nextPage.selectSingleNode(`./*`)) {
+							nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
+						}
+						// checkAgain = true;
+					}
 				} else {
-					break; // for performance; exit loop if text node is visible
+					break;
 				}
 			}
 		}
-		console.log( "checkAgain", checkAgain );
 		if (checkAgain) {
 			// there might be more text nodes to be checked
 			this.autoPageBreak();
