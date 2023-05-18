@@ -85,8 +85,7 @@ class File {
 		if (!this.setup.pageView) return;
 
 		let range = document.createRange(),
-			pages = this._el.find(".page > div"),
-			checkAgain = false;
+			pages = this._el.find(".page > div");
 
 		for (let p=0, pl=pages.length; p<pl; p++) {
 			let currPage = pages[p],
@@ -101,7 +100,13 @@ class File {
 				range.selectNodeContents(textNodes[t]);
 
 				let textRect = range.getBoundingClientRect();
-				if (pageHeight < (textRect.top + textRect.height)) {
+				if (pageHeight < textRect.top) {
+					// add new page, if needed
+					if (!nextPage) nextPage = this.appendPage(currPage);
+					// prepend this textNode to that page
+					nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
+					
+				} else if (pageHeight < (textRect.top + textRect.height)) {
 					// add new page, if needed
 					if (!nextPage) nextPage = this.appendPage(currPage);
 
@@ -116,24 +121,24 @@ class File {
 							newRect = range.getBoundingClientRect();
 						
 						while (pageHeight < (newRect.top + newRect.height)) {
-							cut -= words.pop().length + 1;
+							let word = words.pop();
+							cut -= word.length + 1; // preceding space character
 							range.setEnd(textNodes[t], cut);
 							newRect = range.getBoundingClientRect();
 						}
 
-						range.setStart(textNodes[t], cut);
+						range.setStart(textNodes[t], cut + 1); // removes first space character
 						range.setEnd(textNodes[t], total);
 						cloneStr = range.toString();
 						range.deleteContents();
 					}
-					// TODO: Clone P-element and append to next page with sliced content
+					// tag element; has been splited
+					textNodes[t].parentNode.classList.add("_split-start_");
 
 					// prepend this textNode to that page
 					let clone = nextPage.insertBefore(textNodes[t].parentNode.cloneNode(), nextPage.firstChild);
+					clone.classList.add("_split-end_");
 					clone.innerHTML = cloneStr;
-
-					// this is to recursively call this function again
-					checkAgain = true;
 				} else {
 					break; // for performance; exit loop if text node is visible
 				}
