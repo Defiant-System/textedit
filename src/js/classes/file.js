@@ -70,7 +70,9 @@ class File {
 	autoPageBreak() {
 		if (!this.setup.pageView) return;
 
-		let appendPage = (pageContent) => {
+		let range = document.createRange(),
+			pages = this._el.find(".page > div"),
+			appendPage = (pageContent) => {
 				let lastPage = pageContent.parentNode,
 					pageCopy = $(lastPage.cloneNode(true)),
 					index = +pageCopy.data("index") + 1,
@@ -87,13 +89,10 @@ class File {
 				pl++;
 				// return page
 				return newPage; // <-- first child is white space text node
-			};
-
-		let range = document.createRange(),
-			pages = this._el.find(".page > div"),
+			},
 			p, pl;
 
-		// re-stitch split paragraphs if exists, from previous
+		// restitch split paragraphs if exists, from previous
 		for (p=0, pl=pages.length; p<pl; p++) {
 			let currPage = pages[p],
 				nextPage = pages[p+1];
@@ -109,6 +108,10 @@ class File {
 						// delete split-end paragraph
 						nextPage.removeChild(nextPage.firstChild);
 					}
+				}
+				// delete last page, if empty
+				if (!nextPage.selectSingleNode(`./*`)) {
+					nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
 				}
 			}
 		}

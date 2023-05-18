@@ -38,8 +38,8 @@ let Test = {
 		// let node = spawn.find(`div[contenteditable="true"] p:nth(0)`)[0];
 		// APP.dispatch({ type: "editor.select-text", spawn, node, start: 0, length: 699 });
 
-		// spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
-		// spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
+		spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
+		spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
 		spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
 
 		spawn.data.tabs.dispatch({ type: "auto-page-break", spawn });
