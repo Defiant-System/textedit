@@ -106,6 +106,7 @@ class File {
 					if (!nextPage) nextPage = this.appendPage(currPage);
 
 					// console.log( "old height: ", textRect.top + textRect.height );
+					let cloneStr = "";
 
 					// split element if it is "paragraph" 
 					if (textNodes[t].parentNode.nodeName === "P") {
@@ -122,11 +123,15 @@ class File {
 
 						range.setStart(textNodes[t], cut);
 						range.setEnd(textNodes[t], total);
+						cloneStr = range.toString();
 						range.deleteContents();
 					}
+					// TODO: Clone P-element and append to next page with sliced content
 
 					// prepend this textNode to that page
-					// nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
+					let clone = nextPage.insertBefore(textNodes[t].parentNode.cloneNode(), nextPage.firstChild);
+					clone.innerHTML = cloneStr;
+
 					// this is to recursively call this function again
 					checkAgain = true;
 				} else {
