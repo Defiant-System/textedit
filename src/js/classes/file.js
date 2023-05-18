@@ -85,7 +85,8 @@ class File {
 		if (!this.setup.pageView) return;
 
 		let range = document.createRange(),
-			pages = this._el.find(".page > div");
+			pages = this._el.find(".page > div"),
+			checkAgain = false;
 
 		for (let p=0, pl=pages.length; p<pl; p++) {
 			let currPage = pages[p],
@@ -105,7 +106,9 @@ class File {
 					if (!nextPage) nextPage = this.appendPage(currPage);
 					// prepend this textNode to that page
 					nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
-					
+					// this is to recursively call this function again
+					checkAgain = true;
+
 				} else if (pageHeight < (textRect.top + textRect.height)) {
 					// add new page, if needed
 					if (!nextPage) nextPage = this.appendPage(currPage);
@@ -139,10 +142,17 @@ class File {
 					let clone = nextPage.insertBefore(textNodes[t].parentNode.cloneNode(), nextPage.firstChild);
 					clone.classList.add("_split-end_");
 					clone.innerHTML = cloneStr;
+					// this is to recursively call this function again
+					checkAgain = true;
 				} else {
 					break; // for performance; exit loop if text node is visible
 				}
 			}
+		}
+		console.log( "checkAgain", checkAgain );
+		if (checkAgain) {
+			// there might be more text nodes to be checked
+			this.autoPageBreak();
 		}
 	}
 
