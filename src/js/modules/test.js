@@ -5,7 +5,7 @@ let Test = {
 
 
 		// return setTimeout(() => spawn.find(".file").scrollTop(350), 320);
-		return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
+		// return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
 
 		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);

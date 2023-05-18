@@ -143,33 +143,38 @@ class File {
 					if (cloneStr) {
 						// prepend this textNode to that page
 						let clone = nextPage.insertBefore(textNodes[t].parentNode.cloneNode(), nextPage.firstChild);
+						clone.classList.remove("_split-start_");
 						clone.classList.add("_split-end_");
 						clone.innerHTML = cloneStr;
 					}
 					// this is to recursively call this function again
 					checkAgain = true;
 					break;
-				} else if (nextPage && nextPage.selectSingleNode(`.//text()`)) {
-					let nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
-						cStyle = getComputedStyle(nextPageFirstItem.parentNode),
-						availableSpace = pageHeight - (textRect.top + textRect.height) - parseInt(cStyle.marginBottom, 10),
-						nextPageFirstItemRect;
+				} else if (nextPage) {
+				// 	let nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
+				// 		cStyle = getComputedStyle(nextPageFirstItem.parentNode),
+				// 		availableSpace = pageHeight - (textRect.top + textRect.height) - parseInt(cStyle.marginBottom, 10),
+				// 		nextPageFirstItemRect;
 
-					range.selectNodeContents(nextPageFirstItem);
-					nextPageFirstItemRect = range.getBoundingClientRect();
+				// 	range.selectNodeContents(nextPageFirstItem.parentNode);
+				// 	nextPageFirstItemRect = range.getBoundingClientRect();
 					
-					if (availableSpace > nextPageFirstItemRect.height) {  // <-- contract check 1
-						currPage.appendChild(nextPageFirstItem.parentNode);
-						// delete last page, if empty
-						if (!nextPage.selectSingleNode(`./*`)) {
-							nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
-						}
-						// checkAgain = true;
-					}
+				// 	if (availableSpace > nextPageFirstItemRect.height) {  // <-- contract check 1
+				// 		currPage.appendChild(nextPageFirstItem.parentNode);
+
+				// 		// delete last page, if empty
+				// 		// if (!nextPage.selectSingleNode(`./*`)) {
+				// 		// 	nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
+				// 		// }
+				// 		// checkAgain = true;
+				// 		break;
+				// 	}
 				} else {
 					break;
 				}
 			}
+			// exit loop & recursively call self
+			if (checkAgain) break;
 		}
 		if (checkAgain) {
 			// there might be more text nodes to be checked
