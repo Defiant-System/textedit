@@ -92,25 +92,39 @@ class File {
 			let currPage = pages[p],
 				nextPage = pages[p+1],
 				pageRect = currPage.getBoundingClientRect(),
+				pageHeight = pageRect.top + pageRect.height,
 				textNodes = currPage.selectNodes(`.//text()`).reverse(); // for performance, start from end
 
+			// console.log( "page height: ", pageHeight );
 			for (let t=0, tl=textNodes.length; t<tl; t++) {
 				// put text node in range, in order to measure it
 				range.selectNodeContents(textNodes[t]);
 
 				let textRect = range.getBoundingClientRect();
-				if ((pageRect.top + pageRect.height) < (textRect.top + textRect.height)) {
+				if (pageHeight < (textRect.top + textRect.height)) {
 					// add new page, if needed
 					if (!nextPage) nextPage = this.appendPage(currPage);
+
+					// console.log( "old height: ", textRect.top + textRect.height );
+
 					// split element if it is "paragraph" 
 					if (textNodes[t].parentNode.nodeName === "P") {
-						let oldHeight = textRect.height,
-							len = textNodes[t].length;
-						// range.setEnd(textNodes[t], len - 100);
+						let words = textNodes[t].textContent.split(" "),
+							total = textNodes[t].textContent.length,
+							cut = textNodes[t].textContent.length,
+							newRect = range.getBoundingClientRect();
 						
-						console.log( range.getClientRects() );
-						// console.log( oldHeight, range.getBoundingClientRect().height );
+						while (pageHeight < (newRect.top + newRect.height)) {
+							cut -= words.pop().length + 1;
+							range.setEnd(textNodes[t], cut);
+							newRect = range.getBoundingClientRect();
+						}
+
+						range.setStart(textNodes[t], cut);
+						range.setEnd(textNodes[t], total);
+						range.deleteContents();
 					}
+
 					// prepend this textNode to that page
 					// nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
 					// this is to recursively call this function again
