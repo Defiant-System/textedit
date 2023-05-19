@@ -97,19 +97,24 @@ class File {
 			let currPage = pages[p],
 				nextPage = pages[p+1];
 			if (nextPage) {
-				let textNodes = currPage.selectNodes(`.//text()`).reverse(); // for performance, start from end
-				for (let t=0, tl=textNodes.length; t<tl; t++) {
-					let pNode = textNodes[t].parentNode;
-					// check for (previously) split paragraph
-					if (pNode.classList.contains("_split-start_")) {
-						// reset class name
-						pNode.classList.remove("_split-start_");
-						// stitch text node together with original text
-						let newTextNode = document.createTextNode(textNodes[t].textContent + nextPage.firstChild.childNodes[0].textContent);
-						pNode.replaceChild(newTextNode, pNode.firstChild);
-						// delete split-end paragraph
-						nextPage.removeChild(nextPage.firstChild);
-					}
+				// check for (previously) splited paragraphs
+				let textNodes = currPage.selectNodes(`.//text()`),
+					lastNode = textNodes[textNodes.length-1],
+					pNode = lastNode.parentNode;
+				if (pNode.classList.contains("_split-start_")) {
+					// reset class name
+					pNode.classList.remove("_split-start_");
+					// stitch text node together with original text
+					let newTextNode = document.createTextNode(lastNode.textContent + nextPage.firstChild.childNodes[0].textContent);
+					pNode.replaceChild(newTextNode, pNode.firstChild);
+					// delete split-end paragraph
+					nextPage.removeChild(nextPage.firstChild);
+				}
+				// delete next page, if empty
+				if (!nextPage.childNodes.length) {
+					nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
+					// refresh pages variable
+					pages = this._el.find(".page > div");
 				}
 			}
 		}
