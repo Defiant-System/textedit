@@ -5,7 +5,7 @@ let Test = {
 
 
 		// return setTimeout(() => spawn.find(".file").scrollTop(350), 320);
-		// return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
+		return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
 
 		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
@@ -39,8 +39,8 @@ let Test = {
 		// APP.dispatch({ type: "editor.select-text", spawn, node, start: 0, length: 699 });
 
 		spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
-		spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
-		spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
+		// spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
+		// spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
 
 		spawn.data.tabs.dispatch({ type: "auto-page-break", spawn });
 	},
