@@ -116,7 +116,7 @@ class File {
 					nextPage.removeChild(nextPage.firstChild);
 				}
 
-				if (nextPage.childNodes.length) {
+				while (nextPage.childNodes.length) {
 					// update range, in order to measure textnode
 					range.selectNodeContents(lastNode);
 					
@@ -127,11 +127,33 @@ class File {
 					
 					range.selectNodeContents(nextPageFirstItem);
 					nextPageFirstLineHeight = range.getClientRects()[0].height;
-					if (availableSpace > nextPageFirstLineHeight) {
-						// pull in next page first item
-						currPage.appendChild(nextPageFirstItem.parentNode);
-					}
+
+					if (availableSpace < nextPageFirstLineHeight) break;
+
+					// pull in next page first item
+					currPage.appendChild(nextPageFirstItem.parentNode);
+
+					// update variable references
+					textNodes = currPage.selectNodes(`.//text()`);
+					lastNode = textNodes[textNodes.length-1];
 				}
+
+				// if (nextPage.childNodes.length) {
+				// 	// update range, in order to measure textnode
+				// 	range.selectNodeContents(lastNode);
+					
+				// 	let lastRect = range.getBoundingClientRect(),
+				// 		availableSpace = pageDim - (lastRect.top + lastRect.height),
+				// 		nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
+				// 		nextPageFirstLineHeight;
+					
+				// 	range.selectNodeContents(nextPageFirstItem);
+				// 	nextPageFirstLineHeight = range.getClientRects()[0].height;
+				// 	if (availableSpace > nextPageFirstLineHeight) {
+				// 		// pull in next page first item
+				// 		currPage.appendChild(nextPageFirstItem.parentNode);
+				// 	}
+				// }
 
 				// delete next page, if empty
 				if (!nextPage.childNodes.length) {
