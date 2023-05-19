@@ -3,7 +3,7 @@ let Test = {
 	init(APP, spawn) {
 		// TODO: Test with TABLE between pages
 
-
+		return setTimeout(() => this.setupForCursorPages(APP, spawn), 500);
 		// return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
 
 		return;
@@ -33,6 +33,12 @@ let Test = {
 		setTimeout(() => spawn.find(`.toolbar-tool_[data-menu="font-color"]`).trigger("mousedown"), 310);
 		// setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
 	},
+	setupForCursorPages(APP, spawn) {
+		let node = spawn.find(`div[contenteditable="true"] p:nth(4)`)[0];
+		APP.dispatch({ type: "editor.select-text", spawn, node, start: 230, length: 10 });
+
+		spawn.find(".file").scrollTop(400);
+	},
 	deleteParagraphs(APP, spawn) {
 		// let node = spawn.find(`div[contenteditable="true"] p:nth(0)`)[0];
 		// APP.dispatch({ type: "editor.select-text", spawn, node, start: 0, length: 699 });
@@ -43,7 +49,7 @@ let Test = {
 
 		spawn.data.tabs.dispatch({ type: "auto-page-break", spawn });
 
-		return setTimeout(() => spawn.find(".file").scrollTop(1050), 350);
+		setTimeout(() => spawn.find(".file").scrollTop(1050), 350);
 	},
 	dialog(spawn) {
 		spawn.dialog.open({

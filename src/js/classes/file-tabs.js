@@ -176,6 +176,8 @@ class FileTabs {
 			Tabs = Spawn.data.tabs,
 			Active = Tabs ? Tabs._active : false,
 			editor = Active ? Active.fileEl : false,
+			jumpTo,
+			page,
 			name,
 			value;
 		// console.log(event);
@@ -205,9 +207,24 @@ class FileTabs {
 				break;
 			// custom events
 			case "auto-page-break":
-				// console.time(event.type);
-				Active.file.autoPageBreak();
-				// console.timeEnd(event.type);
+				switch (event.char) {
+					case "up": break;
+					case "left": break;
+					case "right": break;
+					case "down":
+						page = $(event.target.parentNode);
+						jumpTo = page.nextAll(".page:first");
+						if (jumpTo.length) {
+							
+							let node = jumpTo.find(`div[contenteditable="true"] p:nth(0)`)[0];
+							Tabs.dispatch({ ...event, type: "editor.select-text", node, start: 5, length: 0 });
+						}
+						break;
+					default:
+						// console.time(event.type);
+						Active.file.autoPageBreak();
+						// console.timeEnd(event.type);
+				}
 				break;
 			case "show-blank-view":
 				// update spawn title !?
