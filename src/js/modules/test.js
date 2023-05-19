@@ -34,8 +34,13 @@ let Test = {
 		// setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
 	},
 	setupForCursorPages(APP, spawn) {
-		let node = spawn.find(`div[contenteditable="true"] p:nth(4)`)[0];
-		APP.dispatch({ type: "editor.select-text", spawn, node, start: 230, length: 10 });
+		// position: bottom of page 1
+		// let node = spawn.find(`div[contenteditable="true"] p:nth(4)`)[0];
+		// APP.dispatch({ type: "editor.select-text", spawn, node, start: 230, length: 10 });
+
+		// position: top of page 2
+		let node = spawn.find(`div[contenteditable="true"] p:nth(5)`)[0];
+		APP.dispatch({ type: "editor.select-text", spawn, node, start: 13, length: 5 });
 
 		spawn.find(".file").scrollTop(400);
 	},

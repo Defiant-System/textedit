@@ -208,14 +208,28 @@ class FileTabs {
 			// custom events
 			case "auto-page-break":
 				switch (event.char) {
-					case "up": break;
 					case "left": break;
 					case "right": break;
+					case "up":
+						// TODO:
+						// - check if cursor can go "up"
+						// - measure caret X
+						// - move to previous page at same X
+						page = $(event.target.parentNode);
+						jumpTo = page.prevAll(".page:first");
+						if (jumpTo.length) {
+							let node = jumpTo.find(`div[contenteditable="true"] p:last`)[0];
+							Tabs.dispatch({ ...event, type: "editor.select-text", node, start: 231, length: 0 });
+						}
+						break;
 					case "down":
+						// TODO:
+						// - check if cursor can go "down"
+						// - measure caret X
+						// - move to previous page at same X
 						page = $(event.target.parentNode);
 						jumpTo = page.nextAll(".page:first");
 						if (jumpTo.length) {
-							
 							let node = jumpTo.find(`div[contenteditable="true"] p:nth(0)`)[0];
 							Tabs.dispatch({ ...event, type: "editor.select-text", node, start: 5, length: 0 });
 						}
