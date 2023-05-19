@@ -75,8 +75,9 @@ class File {
 		let sTop = this._el.scrollTop();
 		this._el.addClass("freeze-scroll");
 
+		// save cursor position
 		let sel = new Selection;
-		console.log( sel );
+		sel.save();
 
 		let range = document.createRange(),
 			pages = this._el.find(".page > div"),
@@ -209,6 +210,9 @@ class File {
 
 		// unfreeze scrollbar
 		this._el.removeClass("freeze-scroll").scrollTop(sTop);
+
+		// restore cursor position
+		sel.restore();
 	}
 
 	toBlob(opt={}) {
