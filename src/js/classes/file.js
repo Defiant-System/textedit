@@ -116,19 +116,21 @@ class File {
 					nextPage.removeChild(nextPage.firstChild);
 				}
 
-				// update range, in order to measure textnode
-				range.selectNodeContents(lastNode);
-				
-				let lastRect = range.getBoundingClientRect(),
-					availableSpace = pageDim - (lastRect.top + lastRect.height),
-					nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
-					nextPageFirstLineHeight;
-				
-				range.selectNodeContents(nextPageFirstItem);
-				nextPageFirstLineHeight = range.getClientRects()[0].height;
-				if (availableSpace > nextPageFirstLineHeight) {
-					// pull in next page first item
-					currPage.appendChild(nextPageFirstItem.parentNode);
+				if (nextPage.childNodes.length) {
+					// update range, in order to measure textnode
+					range.selectNodeContents(lastNode);
+					
+					let lastRect = range.getBoundingClientRect(),
+						availableSpace = pageDim - (lastRect.top + lastRect.height),
+						nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
+						nextPageFirstLineHeight;
+					
+					range.selectNodeContents(nextPageFirstItem);
+					nextPageFirstLineHeight = range.getClientRects()[0].height;
+					if (availableSpace > nextPageFirstLineHeight) {
+						// pull in next page first item
+						currPage.appendChild(nextPageFirstItem.parentNode);
+					}
 				}
 
 				// delete next page, if empty
@@ -137,7 +139,7 @@ class File {
 				}
 			}
 		}
-		
+
 		// refresh pages variable
 		pages = this._el.find(".page > div");
 
