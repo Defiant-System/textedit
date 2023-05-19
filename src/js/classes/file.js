@@ -71,6 +71,13 @@ class File {
 	autoPageBreak() {
 		if (!this.setup.pageView) return;
 
+		// freeze scrollbar
+		let sTop = this._el.scrollTop();
+		this._el.addClass("freeze-scroll");
+
+		let sel = new Selection;
+		console.log( sel );
+
 		let range = document.createRange(),
 			pages = this._el.find(".page > div"),
 			appendPage = (pageContent) => {
@@ -199,6 +206,9 @@ class File {
 				}
 			}
 		}
+
+		// unfreeze scrollbar
+		this._el.removeClass("freeze-scroll").scrollTop(sTop);
 	}
 
 	toBlob(opt={}) {

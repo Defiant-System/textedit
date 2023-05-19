@@ -4,7 +4,7 @@ let Test = {
 		// TODO: Test with TABLE between pages
 
 
-		return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
+		// return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
 
 		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
