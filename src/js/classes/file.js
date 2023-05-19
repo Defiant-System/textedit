@@ -95,9 +95,12 @@ class File {
 		// restitch split paragraphs if exists, from previous
 		for (p=0, pl=pages.length; p<pl; p++) {
 			let currPage = pages[p],
-				nextPage = pages[p+1];
+				nextPage = pages[p+1],
+				pageRect = currPage.getBoundingClientRect(),
+				pageDim = pageRect.top + pageRect.height;
 			if (nextPage) {
 				// check for (previously) splited paragraphs
+				// ...test only the last node on page
 				let textNodes = currPage.selectNodes(`.//text()`),
 					lastNode = textNodes[textNodes.length-1],
 					pNode = lastNode.parentNode;
@@ -107,23 +110,42 @@ class File {
 					// stitch text node together with original text
 					let newTextNode = document.createTextNode(lastNode.textContent + nextPage.firstChild.childNodes[0].textContent);
 					pNode.replaceChild(newTextNode, pNode.firstChild);
+					// update reference to last node
+					lastNode = newTextNode;
 					// delete split-end paragraph
 					nextPage.removeChild(nextPage.firstChild);
 				}
+
+				// update range, in order to measure textnode
+				range.selectNodeContents(lastNode);
+				
+				let lastRect = range.getBoundingClientRect(),
+					availableSpace = pageDim - (lastRect.top + lastRect.height),
+					nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
+					nextPageFirstLineHeight;
+				
+				range.selectNodeContents(nextPageFirstItem);
+				nextPageFirstLineHeight = range.getClientRects()[0].height;
+				if (availableSpace > nextPageFirstLineHeight) {
+					// pull in next page first item
+					currPage.appendChild(nextPageFirstItem.parentNode);
+				}
+
 				// delete next page, if empty
 				if (!nextPage.childNodes.length) {
 					nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
-					// refresh pages variable
-					pages = this._el.find(".page > div");
 				}
 			}
 		}
+		
+		// refresh pages variable
+		pages = this._el.find(".page > div");
 
 		for (p=0, pl=pages.length; p<pl; p++) {
 			let currPage = pages[p],
 				nextPage = pages[p+1],
 				pageRect = currPage.getBoundingClientRect(),
-				pageHeight = pageRect.top + pageRect.height,
+				pageDim = pageRect.top + pageRect.height,
 				textNodes = currPage.selectNodes(`.//text()`).reverse(), // for performance, start from end
 				tl = textNodes.length,
 				t = 0;
@@ -135,14 +157,14 @@ class File {
 				let textRect = range.getBoundingClientRect(),
 					firstLineHeight = range.getClientRects()[0].height;
 
-				if (pageHeight < textRect.top + firstLineHeight) { // <-- expand check 1
+				if (pageDim < textRect.top + firstLineHeight) { // <-- expand check 1
 					// add new page, if needed
 					if (!nextPage) {
 						nextPage = appendPage(currPage);
 					}
 					// prepend this textNode to that page
 					nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
-				} else if (pageHeight < (textRect.top + textRect.height)) { // <-- expand check 2
+				} else if (pageDim < (textRect.top + textRect.height)) { // <-- expand check 2
 					// add new page, if needed
 					if (!nextPage) nextPage = appendPage(currPage);
 
@@ -154,7 +176,7 @@ class File {
 							cut = textNodes[t].textContent.length,
 							newRect = range.getBoundingClientRect();
 						
-						while (pageHeight < (newRect.top + newRect.height)) {
+						while (pageDim < (newRect.top + newRect.height)) {
 							let word = words.pop();
 							cut -= word.length + 1; // preceding space character
 							range.setEnd(textNodes[t], cut);
