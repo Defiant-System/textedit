@@ -99,19 +99,17 @@ class File {
 			if (nextPage) {
 				let textNodes = currPage.selectNodes(`.//text()`).reverse(); // for performance, start from end
 				for (let t=0, tl=textNodes.length; t<tl; t++) {
+					let pNode = textNodes[t].parentNode;
 					// check for (previously) split paragraph
-					if (textNodes[t].parentNode.classList.contains("_split-start_")) {
-						// stitch text node together with original text
-						textNodes[t].parentNode.appendChild(nextPage.firstChild.childNodes[0]);
+					if (pNode.classList.contains("_split-start_")) {
 						// reset class name
-						textNodes[t].parentNode.classList.remove("_split-start_");
+						pNode.classList.remove("_split-start_");
+						// stitch text node together with original text
+						let newTextNode = document.createTextNode(textNodes[t].textContent + nextPage.firstChild.childNodes[0].textContent);
+						pNode.replaceChild(newTextNode, pNode.firstChild);
 						// delete split-end paragraph
 						nextPage.removeChild(nextPage.firstChild);
 					}
-				}
-				// delete last page, if empty
-				if (!nextPage.selectSingleNode(`./*`)) {
-					nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
 				}
 			}
 		}
@@ -139,7 +137,6 @@ class File {
 					}
 					// prepend this textNode to that page
 					nextPage.insertBefore(textNodes[t].parentNode, nextPage.firstChild);
-					break;
 				} else if (pageHeight < (textRect.top + textRect.height)) { // <-- expand check 2
 					// add new page, if needed
 					if (!nextPage) nextPage = appendPage(currPage);
@@ -173,7 +170,6 @@ class File {
 						clone.classList.add("_split-end_");
 						clone.innerHTML = cloneStr;
 					}
-					break;
 				}
 			}
 		}
