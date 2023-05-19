@@ -53,6 +53,7 @@ class File {
 		let str = [];
 		str.push(`<meta name="pageView" value="true"/>`);
 		str.push(`<meta name="hideRulers" value="false"/>`);
+		str.push(`<meta name="indents" value="[2,2,14.75]"/>`);
 		return `<def>${str.join("")}</def>`;
 	}
 
@@ -91,7 +92,6 @@ class File {
 				return newPage; // <-- first child is white space text node
 			},
 			p, pl;
-
 		// restitch split paragraphs if exists, from previous
 		for (p=0, pl=pages.length; p<pl; p++) {
 			let currPage = pages[p],
@@ -115,56 +115,32 @@ class File {
 					// delete split-end paragraph
 					nextPage.removeChild(nextPage.firstChild);
 				}
-
 				while (nextPage.childNodes.length) {
 					// update range, in order to measure textnode
 					range.selectNodeContents(lastNode);
-					
+					// measure available height
 					let lastRect = range.getBoundingClientRect(),
 						availableSpace = pageDim - (lastRect.top + lastRect.height),
 						nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
 						nextPageFirstLineHeight;
-					
 					range.selectNodeContents(nextPageFirstItem);
 					nextPageFirstLineHeight = range.getClientRects()[0].height;
-
 					if (availableSpace < nextPageFirstLineHeight) break;
-
 					// pull in next page first item
 					currPage.appendChild(nextPageFirstItem.parentNode);
-
 					// update variable references
 					textNodes = currPage.selectNodes(`.//text()`);
 					lastNode = textNodes[textNodes.length-1];
 				}
-
-				// if (nextPage.childNodes.length) {
-				// 	// update range, in order to measure textnode
-				// 	range.selectNodeContents(lastNode);
-					
-				// 	let lastRect = range.getBoundingClientRect(),
-				// 		availableSpace = pageDim - (lastRect.top + lastRect.height),
-				// 		nextPageFirstItem = nextPage.selectSingleNode(`.//text()`),
-				// 		nextPageFirstLineHeight;
-					
-				// 	range.selectNodeContents(nextPageFirstItem);
-				// 	nextPageFirstLineHeight = range.getClientRects()[0].height;
-				// 	if (availableSpace > nextPageFirstLineHeight) {
-				// 		// pull in next page first item
-				// 		currPage.appendChild(nextPageFirstItem.parentNode);
-				// 	}
-				// }
-
 				// delete next page, if empty
 				if (!nextPage.childNodes.length) {
 					nextPage.parentNode.parentNode.removeChild(nextPage.parentNode);
 				}
 			}
 		}
-
 		// refresh pages variable
 		pages = this._el.find(".page > div");
-
+		// loop pages
 		for (p=0, pl=pages.length; p<pl; p++) {
 			let currPage = pages[p],
 				nextPage = pages[p+1],
@@ -180,7 +156,6 @@ class File {
 
 				let textRect = range.getBoundingClientRect(),
 					firstLineHeight = range.getClientRects()[0].height;
-
 				if (pageDim < textRect.top + firstLineHeight) { // <-- expand check 1
 					// add new page, if needed
 					if (!nextPage) {
