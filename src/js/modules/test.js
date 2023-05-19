@@ -4,7 +4,6 @@ let Test = {
 		// TODO: Test with TABLE between pages
 
 
-		// return setTimeout(() => spawn.find(".file").scrollTop(350), 320);
 		return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
 
 		return;
@@ -43,6 +42,8 @@ let Test = {
 		// spawn.find(`div[contenteditable="true"] p:nth(0)`).remove();
 
 		spawn.data.tabs.dispatch({ type: "auto-page-break", spawn });
+
+		return setTimeout(() => spawn.find(".file").scrollTop(1050), 350);
 	},
 	dialog(spawn) {
 		spawn.dialog.open({
