@@ -176,7 +176,7 @@ class FileTabs {
 			Tabs = Spawn.data.tabs,
 			Active = Tabs ? Tabs._active : false,
 			editor = Active ? Active.fileEl : false,
-			selection,
+			sel,
 			jumpTo,
 			page,
 			name,
@@ -209,8 +209,26 @@ class FileTabs {
 			// custom events
 			case "auto-page-break":
 				switch (event.char) {
-					case "left": break;
-					case "right": break;
+					case "left":
+						if (event.isStartColumn) {
+							page = $(event.target.parentNode);
+							jumpTo = page.prevAll(".page:first");
+							if (jumpTo.length) {
+								let node = jumpTo.find(`div[contenteditable="true"] p:last`)[0].childNodes[0];
+								Selection.moveTo(node, "end");
+							}
+						}
+						break;
+					case "right":
+						if (event.isEndColumn) {
+							page = $(event.target.parentNode);
+							jumpTo = page.nextAll(".page:first");
+							if (jumpTo.length) {
+								let node = jumpTo.find(`div[contenteditable="true"] p:first`)[0].childNodes[0];
+								Selection.moveTo(node, "start");
+							}
+						}
+						break;
 					case "up":
 						// TODO:
 						// - check if cursor can go "up"
@@ -223,7 +241,7 @@ class FileTabs {
 						// let rng = sel.getRangeAt(0);
 
 						// console.log( rng.getClientRects()[0].top );
-						console.log(event.isOnFirstLine);
+						// console.log(event.isOnFirstLine);
 						// console.log( Selection.isOnFirstLine(event.target) );
 						
 
@@ -243,12 +261,12 @@ class FileTabs {
 						// - check if cursor can go "down"
 						// - measure caret X
 						// - move to previous page at same X
-						page = $(event.target.parentNode);
-						jumpTo = page.nextAll(".page:first");
-						if (jumpTo.length) {
-							let node = jumpTo.find(`div[contenteditable="true"] p:nth(0)`)[0];
-							Tabs.dispatch({ ...event, type: "editor.select-text", node, start: 5, length: 0 });
-						}
+						// page = $(event.target.parentNode);
+						// jumpTo = page.nextAll(".page:first");
+						// if (jumpTo.length) {
+						// 	let node = jumpTo.find(`div[contenteditable="true"] p:nth(0)`)[0];
+						// 	Tabs.dispatch({ ...event, type: "editor.select-text", node, start: 5, length: 0 });
+						// }
 						break;
 					default:
 						// console.time(event.type);

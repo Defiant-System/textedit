@@ -73,6 +73,16 @@ class Selection {
 		this.select(this._root, this._startOffset, this._endOffset);
 	}
 
+	static moveTo(node, pos) {
+		let sel = document.getSelection(),
+			range = document.createRange(),
+			index = pos === "end" ? node.length : 0;
+		range.setStart(node, index);
+		range.setEnd(node, index);
+		sel.removeAllRanges();
+		sel.addRange(range);
+	}
+
 	select(node, startOffset, endOffset) {
 		let range = document.createRange(),
 			textNodes = node.nodeType === Node.TEXT_NODE ? [node] : this.getOnlyTextNodes(node),
@@ -117,7 +127,7 @@ class Selection {
 			if (range.getClientRects()) {
 				range.collapse(true);
 				let rect = range.getClientRects()[0];
-				if(rect) {
+				if (rect) {
 					y = rect.top;
 					x = rect.left;
 				}
