@@ -108,17 +108,6 @@ class Selection {
 		this._selection.addRange(range);
 	}
 
-	static isOnFirstLine(edit) {
-		let rect = edit.getBoundingClientRect(),
-			r1 = document.createRange(),
-			sel = document.getSelection(),
-			r2 = sel.getRangeAt(0),
-			r1h;
-		r1.selectNodeContents(edit.childNodes[0]);
-		r1h = r1.getClientRects()[0].height;
-		return Math.abs(rect.top - r2.getClientRects()[0].top) < r1h;
-	}
-
 	static getCaretPosition() {
 		let x = 0,
 			y = 0,

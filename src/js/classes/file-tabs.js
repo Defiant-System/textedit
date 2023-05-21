@@ -223,8 +223,8 @@ class FileTabs {
 						// let rng = sel.getRangeAt(0);
 
 						// console.log( rng.getClientRects()[0].top );
-
-						console.log( Selection.isOnFirstLine(event.target) );
+						console.log(event.isOnFirstLine);
+						// console.log( Selection.isOnFirstLine(event.target) );
 						
 
 
