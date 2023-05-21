@@ -35,12 +35,12 @@ let Test = {
 	},
 	setupForCursorPages(APP, spawn) {
 		// position: bottom of page 1
-		// let node = spawn.find(`div[contenteditable="true"] p:nth(4)`)[0];
-		// APP.dispatch({ type: "editor.select-text", spawn, node, start: 230, length: 10 });
+		let node = spawn.find(`div[contenteditable="true"] p:nth(4)`)[0];
+		APP.dispatch({ type: "editor.select-text", spawn, node, start: 230, length: 0 });
 
 		// position: top of page 2
-		let node = spawn.find(`div[contenteditable="true"] p:nth(5)`)[0];
-		APP.dispatch({ type: "editor.select-text", spawn, node, start: 3, length: 0 });
+		// let node = spawn.find(`div[contenteditable="true"] p:nth(5)`)[0];
+		// APP.dispatch({ type: "editor.select-text", spawn, node, start: 3, length: 0 });
 
 		spawn.find(".file").scrollTop(400);
 	},

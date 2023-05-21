@@ -73,10 +73,14 @@ class Selection {
 		this.select(this._root, this._startOffset, this._endOffset);
 	}
 
-	static moveTo(node, pos) {
+	static moveTo(node, pos, index=0) {
 		let sel = document.getSelection(),
-			range = document.createRange(),
-			index = pos === "end" ? node.length : 0;
+			range = document.createRange();
+		switch (pos) {
+			case "end": index = node.length; break;
+			case "start": index = 0; break;
+			case "column": break;
+		}
 		range.setStart(node, index);
 		range.setEnd(node, index);
 		sel.removeAllRanges();
