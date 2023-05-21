@@ -40,7 +40,7 @@ let Test = {
 
 		// position: top of page 2
 		let node = spawn.find(`div[contenteditable="true"] p:nth(5)`)[0];
-		APP.dispatch({ type: "editor.select-text", spawn, node, start: 13, length: 5 });
+		APP.dispatch({ type: "editor.select-text", spawn, node, start: 13, length: 0 });
 
 		spawn.find(".file").scrollTop(400);
 	},

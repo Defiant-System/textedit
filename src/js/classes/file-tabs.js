@@ -176,6 +176,7 @@ class FileTabs {
 			Tabs = Spawn.data.tabs,
 			Active = Tabs ? Tabs._active : false,
 			editor = Active ? Active.fileEl : false,
+			selection,
 			jumpTo,
 			page,
 			name,
@@ -216,11 +217,26 @@ class FileTabs {
 						// - measure caret X
 						// - move to previous page at same X
 						page = $(event.target.parentNode);
-						jumpTo = page.prevAll(".page:first");
-						if (jumpTo.length) {
-							let node = jumpTo.find(`div[contenteditable="true"] p:last`)[0];
-							Tabs.dispatch({ ...event, type: "editor.select-text", node, start: 231, length: 0 });
-						}
+
+
+						// let sel = document.getSelection();
+						// let rng = sel.getRangeAt(0);
+
+						// console.log( rng.getClientRects()[0].top );
+
+						console.log( Selection.isOnFirstLine(event.target) );
+						
+
+
+						// let range = document.createRange();
+						// range.selectNodeContents(page[0]);
+						// console.log( range.getClientRects() );
+
+						// jumpTo = page.prevAll(".page:first");
+						// if (jumpTo.length) {
+						// 	let node = jumpTo.find(`div[contenteditable="true"] p:last`)[0];
+						// 	Tabs.dispatch({ ...event, type: "editor.select-text", node, start: 231, length: 0 });
+						// }
 						break;
 					case "down":
 						// TODO:

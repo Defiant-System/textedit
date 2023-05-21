@@ -22,7 +22,7 @@ let Edit = {
 		let sel = document.getSelection();
 		if (sel.anchorNode === null) return;
 
-		let node = sel.focusNode.nodeType === 3 ? sel.focusNode.parentNode : sel.focusNode,
+		let node = sel.focusNode.nodeType === Node.TEXT_NODE ? sel.focusNode.parentNode : sel.focusNode,
 			cStyle = getComputedStyle(node),
 			value = cStyle.fontFamily.split(",")[0];
 		if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);

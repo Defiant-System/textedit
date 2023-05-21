@@ -76,8 +76,8 @@ class File {
 		this._el.addClass("freeze-scroll");
 
 		// save cursor position
-		let sel = new Selection;
-		sel.save();
+		let selection = new Selection;
+		selection.save();
 
 		let range = document.createRange(),
 			pages = this._el.find(".page > div"),
@@ -212,7 +212,7 @@ class File {
 		this._el.removeClass("freeze-scroll").scrollTop(sTop);
 
 		// restore cursor position
-		sel.restore();
+		selection.restore();
 	}
 
 	toBlob(opt={}) {

@@ -75,7 +75,7 @@ class Selection {
 
 	select(node, startOffset, endOffset) {
 		let range = document.createRange(),
-			textNodes = node.nodeType === 3 ? [node] : this.getOnlyTextNodes(node),
+			textNodes = node.nodeType === Node.TEXT_NODE ? [node] : this.getOnlyTextNodes(node),
 			anchorNode,
 			anchorOffset = startOffset,
 			focusNode,
@@ -106,6 +106,35 @@ class Selection {
 		range.setEnd(focusNode, focusOffset);
 		this._selection.removeAllRanges();
 		this._selection.addRange(range);
+	}
+
+	static isOnFirstLine(edit) {
+		let rect = edit.getBoundingClientRect(),
+			r1 = document.createRange(),
+			sel = document.getSelection(),
+			r2 = sel.getRangeAt(0),
+			r1h;
+		r1.selectNodeContents(edit.childNodes[0]);
+		r1h = r1.getClientRects()[0].height;
+		return Math.abs(rect.top - r2.getClientRects()[0].top) < r1h;
+	}
+
+	static getCaretPosition() {
+		let x = 0,
+			y = 0,
+			sel = document.getSelection();
+		if (sel.rangeCount) {
+			let range = sel.getRangeAt(0).cloneRange();
+			if (range.getClientRects()) {
+				range.collapse(true);
+				let rect = range.getClientRects()[0];
+				if(rect) {
+					y = rect.top;
+					x = rect.left;
+				}
+			}
+		}
+		return { x, y };
 	}
 
 	getOnlyTextNodes(node) {
