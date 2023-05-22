@@ -79,7 +79,27 @@ class Selection {
 		switch (pos) {
 			case "end": index = node.length; break;
 			case "start": index = 0; break;
-			case "column": break;
+			case "column": index -= 1; break;
+			case "last-line":
+				// select node contents
+				range.selectNodeContents(node);
+				// measure last line "top"
+				let lines = range.getClientRects(),
+					llTop = lines[lines.length-1].top;
+				// select range and collapse to end
+				sel.removeAllRanges();
+				sel.addRange(range);
+				sel.collapseToEnd();
+				// go to beginning of last line
+				while (true) {
+					sel.modify("extend", "left", "character");
+					if (sel.getRangeAt(0).getBoundingClientRect().top !== llTop) {
+						break;
+					}
+				}
+				[...Array(index+2)].map(e => sel.modify("extend", "right", "character"));
+				sel.collapseToStart();
+				return;
 		}
 		range.setStart(node, index);
 		range.setEnd(node, index);

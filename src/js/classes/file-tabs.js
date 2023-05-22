@@ -208,10 +208,12 @@ class FileTabs {
 				break;
 			// custom events
 			case "auto-page-break":
+				// get current page
+				if (event.target) page = $(event.target.parentNode);
+				// depending on key pressed
 				switch (event.char) {
 					case "left":
 						if (event.caret.isStartColumn) {
-							page = $(event.target.parentNode);
 							jumpTo = page.prevAll(".page:first");
 							if (jumpTo.length) {
 								let node = jumpTo.find(`div[contenteditable="true"] p:last`)[0].childNodes[0];
@@ -221,7 +223,6 @@ class FileTabs {
 						break;
 					case "right":
 						if (event.caret.isEndColumn) {
-							page = $(event.target.parentNode);
 							jumpTo = page.nextAll(".page:first");
 							if (jumpTo.length) {
 								let node = jumpTo.find(`div[contenteditable="true"] p:first`)[0].childNodes[0];
@@ -230,10 +231,16 @@ class FileTabs {
 						}
 						break;
 					case "up":
+						if (event.caret.isFirstLine) {
+							jumpTo = page.prevAll(".page:first");
+							if (jumpTo.length) {
+								let node = jumpTo.find(`div[contenteditable="true"] p:last`)[0].childNodes[0];
+								Selection.moveTo(node, "last-line", event.caret.column);
+							}
+						}
 						break;
 					case "down":
 						if (event.caret.isEndLine) {
-							page = $(event.target.parentNode);
 							jumpTo = page.nextAll(".page:first");
 							if (jumpTo.length) {
 								let node = jumpTo.find(`div[contenteditable="true"] p:first`)[0].childNodes[0];
