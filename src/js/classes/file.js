@@ -61,6 +61,7 @@ class File {
 		let data = this._file.data;
 
 		switch (this.kind) {
+			case "rtf": data = "parse RTF file"; break;
 			case "txt": data = data.replace(/\n/g, "<br>"); break;
 			case "md": data = service.turnup(data); break;
 		}

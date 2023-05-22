@@ -3,8 +3,8 @@
 		<i kind="txt" name="deep learning.txt"/>
 		<i kind="md" name="catamaran.md"/>
 		<i kind="md" name="lorem ipsum.md"/>
-		<i kind="md" name="table.md"/>
 		<i kind="md" name="stackedit.md"/>
+		<i kind="rtf" name="sample.rtf"/>
 	</Samples>
 	<Recents>
 		<i kind="md" name="catamaran.md" path="/fs/Desktop/catamaran.md"/>
