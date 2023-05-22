@@ -3,6 +3,8 @@
 		<Menu name="About Text Edit" shell="win -a"/>
 		<Menu type="divider"/>
 		<Menu name="Preferences" for="file-preferences">
+			<Menu name="New Tab" click="tab.new" hotkey="alt+t"/>
+			<Menu type="divider"/>
 			<Menu name="Web view" check-group="file-layout" click="set-layout" arg="web-view"/>
 			<Menu name="Page view" check-group="file-layout" click="set-layout" arg="page-view"/>
 			<Menu type="divider"/>
