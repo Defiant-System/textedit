@@ -103,7 +103,7 @@ content {
 				height: var( --pH );
 				display: block;
 				margin: 10px auto;
-				overflow: initial;
+				overflow: hidden;
 				outline: 1px solid #c5c5c5;
 				box-shadow: 0 1px 7px rgba(0,0,0,.175);
 
@@ -115,7 +115,7 @@ content {
 					right: calc( var( --pW ) - calc( calc( var( --iR ) * 4 ) * 9px ) );
 					// overflow: hidden;
 
-					p {
+					p:not(._split-end_) {
 						text-indent: calc( calc( calc( var( --iF ) - var( --iL ) ) * 4 ) * 9px );
 					}
 				}
