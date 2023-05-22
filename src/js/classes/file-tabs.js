@@ -96,6 +96,7 @@ class FileTabs {
 	}
 
 	removeDelayed() {
+		if (!this._active) return;
 		let el = this._active.tabEl;
 		this._spawn.tabs.wait(el);
 	}
@@ -250,7 +251,7 @@ class FileTabs {
 						break;
 					default:
 						// console.time(event.type);
-						Active.file.autoPageBreak();
+						if (Active) Active.file.autoPageBreak();
 						// console.timeEnd(event.type);
 				}
 				break;

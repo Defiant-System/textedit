@@ -3,7 +3,7 @@ let Test = {
 	init(APP, spawn) {
 		// TODO: Test with TABLE between pages
 
-		return setTimeout(() => this.setupForCursorPages(APP, spawn), 500);
+		// return setTimeout(() => this.setupForCursorPages(APP, spawn), 500);
 		// return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
 
 		return;
