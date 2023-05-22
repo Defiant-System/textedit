@@ -17,6 +17,7 @@
 		switch (event.type) {
 			case "mousedown":
 				let snap = 9,
+					file = Tabs._active.file,
 					cEl = Tabs.els.content.parent(),
 					el = $(event.target),
 					indent = el.prop("className").split("-")[1],
@@ -48,7 +49,7 @@
 				// helper line; add to elements to be moved
 				el.push(Tabs.els.indentLine[0]);
 				// drag object
-				Self.drag = { el, cEl, key, snap, indent, clickX, limit, min_, max_, round_ };
+				Self.drag = { el, cEl, file, key, snap, indent, clickX, limit, min_, max_, round_ };
 				// prevent mouse from triggering mouseover
 				Tabs.els.content.addClass("indent-move");
 				// auto trigger mousemove, in order to show line on mouse down
@@ -65,6 +66,8 @@
 				let data = {};
 				data[Drag.key] = Drag.round_(left / Drag.snap) / 4;
 				Drag.cEl.css(data);
+
+				Drag.file.autoPageBreak();
 				break;
 			case "mouseup":
 				// prevent mouse from triggering mouseover
