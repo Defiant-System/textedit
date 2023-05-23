@@ -61,9 +61,9 @@ class File {
 		let data = this._file.data;
 
 		switch (this.kind) {
-			case "rtf": data = "parse RTF file"; break;
 			case "txt": data = data.replace(/\n/g, "<br>"); break;
-			case "md": data = service.turnup(data); break;
+			case "md": data = Markdown.toHTML(data); break;
+			case "rtf": data = Rtf.toHTML(data); break;
 		}
 
 		return data || "";
@@ -234,7 +234,7 @@ class File {
 			case "md":
 				// TODO: if in page view mode, concat string from page-elements
 				type = "text/markdown";
-				data = service.turndown(data);
+				data = Markdown.fromHTML(data);
 				// console.log( this._file.data === data );
 				// console.log( 1, this._file.data );
 				// console.log( 2, this._el.html() );
