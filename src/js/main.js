@@ -8,8 +8,8 @@
 @import "./modules/test.js"
 
 
-@import "./modules/filetype.md.js"
-@import "./modules/filetype.rtf.js"
+@import "./external/filetype.md.js"
+@import "./external/filetype.rtf.js"
 
 
 const textedit = {

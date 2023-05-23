@@ -13,6 +13,11 @@ class File {
 
 		switch (this.kind) {
 			case "txt": break;
+			case "rtf":
+				this.setup.pageView = true;
+				this.setup.hideRulers = false;
+				this.setup.indents = [2,2,14.75];
+				break;
 			case "md":
 				if (this._file.data.endsWith("</def>")) {
 					// parse defs

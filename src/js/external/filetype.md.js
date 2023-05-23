@@ -3,9 +3,9 @@
 let Markdown = (exports => {
 
 // markdown support
-@import "../external/turnup.js"
-@import "../external/turndown.js"
-@import "../external/turndown-plugin-gfm.js"
+@import "./md/turnup.js"
+@import "./md/turndown.js"
+@import "./md/turndown-plugin-gfm.js"
 
 let service = new TurndownService();
 service.use(turndownPluginGfm.gfm);
