@@ -3,6 +3,7 @@
 let Rtf = (exports => {
 
 // RTF to Document object
+@import "./rtf/htmlify.js"
 @import "./rtf/group.js"
 @import "./rtf/color-table.js"
 @import "./rtf/document.js"
@@ -19,7 +20,9 @@ let toHTML = str => {
 	let parser = new RtfParser(interpreter);
 
 	str = '{\\rtf1\\ansi\\b hi there\\b0}';
-	console.log( parser.parse(str) );
+	let htmlify = new RtfHtmlify(parser.parse(str));
+
+	console.log( htmlify.render() );
 
 	return "<p>Parsing...</p>";
 };
