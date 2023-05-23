@@ -174,7 +174,8 @@ class File {
 				range.selectNodeContents(textNodes[t]);
 
 				let textRect = range.getBoundingClientRect(),
-					firstLineHeight = range.getClientRects()[0].height;
+					firstLineHeight = range.getClientRects();
+				firstLineHeight = firstLineHeight.length ? firstLineHeight[0].height : 0;
 				if (pageDim < textRect.top + firstLineHeight) { // <-- expand check 1
 					// add new page, if needed
 					if (!nextPage) {

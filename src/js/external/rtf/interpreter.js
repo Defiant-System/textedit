@@ -207,7 +207,7 @@ class RtfInterpreter {
 		// RTF, for reasons, represents unicode characters as signed integers
 		// thus managing to match literally no one.
 		charBuf.writeInt16LE(num, 0);
-		this.group.addContent(new RtfSpan({value: iconv.decode(charBuf, "ucs2")}));
+		this.group.addContent(new RtfSpan({ value: iconv.decode(charBuf, "ucs2") }));
 	}
 
 	ctrl$super() {
