@@ -71,8 +71,8 @@ class RtfInterpreter {
 		if (this.hexStore.length > 0) {
 			let hexstr = this.hexStore.map(cmd => cmd.value).join("");
 			this.group.addContent(new RtfSpan({
-				value: iconv.decode(
-					Buffer.from(hexstr, "hex"), this.group.get("charset"))
+				// value: iconv.decode(Buffer.from(hexstr, "hex"), this.group.get("charset"))
+				value: hexstr
 			}));
 			this.hexStore.splice(0);
 		}
@@ -207,7 +207,8 @@ class RtfInterpreter {
 		// RTF, for reasons, represents unicode characters as signed integers
 		// thus managing to match literally no one.
 		charBuf.writeInt16LE(num, 0);
-		this.group.addContent(new RtfSpan({ value: iconv.decode(charBuf, "ucs2") }));
+		// this.group.addContent(new RtfSpan({ value: iconv.decode(charBuf, "ucs2") }));
+		this.group.addContent(new RtfSpan({ value: charBuf }));
 	}
 
 	ctrl$super() {
