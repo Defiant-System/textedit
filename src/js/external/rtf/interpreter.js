@@ -2,8 +2,10 @@
 // rewrite from; https://github.com/iarna/rtf-parser
 
 let availableCP = [
-		437, 737, 775, 850, 852, 853, 855, 857, 858, 860, 861, 863, 865, 866,
-		869, 932, 936, 949, 950, 1125, 1250, 1251, 1252, 1253, 1254, 1257
+		437, 737, 775, 850, 852, 853, 855,
+		857, 858, 860, 861, 863, 865, 866,
+		869, 932, 936, 949, 950, 1125, 1250,
+		1251, 1252, 1253, 1254, 1257
 	];
 
 let codeToCP = {
@@ -34,21 +36,23 @@ class RtfInterpreter {
 		this.doc = doc;
 		this.groupStack = [];
 		this.group = null;
-		// this.once("prefinish", () => this.finisher());
 		this.hexStore = [];
 	}
 
-	_write (cmd, encoding, done) {
-		let method = "cmd$" + cmd.type.replace(/-(.)/g, (_, char) => char.toUpperCase());
-		if (this[method]) {
-			this[method](cmd);
-		} else {
-			console.log("error", `Unknown RTF command ${cmd.type}, tried ${method}`);
-		}
-		done()
+	parse(inArr) {
+		inArr.map(cmd => {
+			let method = "cmd$" + cmd.type.replace(/-(.)/g, (_, char) => char.toUpperCase());
+			if (this[method]) {
+				this[method](cmd);
+			} else {
+				console.log("error", `Unknown RTF command ${cmd.type}, tried ${method}`);
+			}
+		});
+		// return rtf document
+		return this.doc;
 	}
 
-	finisher () {
+	finisher() {
 		while (this.groupStack.length) this.cmd$groupEnd();
 		let initialStyle = this.doc.content.length ? this.doc.content[0].style : [];
 		for (let prop of Object.keys(this.doc.style)) {
@@ -63,7 +67,7 @@ class RtfInterpreter {
 		}
 	}
 
-	flushHexStore () {
+	flushHexStore() {
 		if (this.hexStore.length > 0) {
 			let hexstr = this.hexStore.map(cmd => cmd.value).join("");
 			this.group.addContent(new RtfSpan({
@@ -74,23 +78,23 @@ class RtfInterpreter {
 		}
 	}
 
-	cmd$groupStart () {
+	cmd$groupStart() {
 		this.flushHexStore();
 		if (this.group) this.groupStack.push(this.group);
 		this.group = new RtfGroup(this.group || this.doc);
 	}
 
-	cmd$ignorable () {
+	cmd$ignorable() {
 		this.flushHexStore();
 		this.group.ignorable = true;
 	}
 
-	cmd$endParagraph () {
+	cmd$endParagraph() {
 		this.flushHexStore();
 		this.group.addContent(new RtfParagraph());
 	}
 
-	cmd$groupEnd () {
+	cmd$groupEnd() {
 		this.flushHexStore();
 		let endingGroup = this.group;
 		this.group = this.groupStack.pop();
@@ -107,7 +111,7 @@ class RtfInterpreter {
 		}
 	}
 
-	cmd$text (cmd) {
+	cmd$text(cmd) {
 		this.flushHexStore();
 		if (!this.group) { // an RTF fragment, missing the {\rtf1 header
 			this.group = this.doc;
@@ -115,7 +119,7 @@ class RtfInterpreter {
 		this.group.addContent(new RtfSpan(cmd));
 	}
 
-	cmd$controlWord (cmd) {
+	cmd$controlWord(cmd) {
 		this.flushHexStore();
 		if (!this.group.type) this.group.type = cmd.value;
 		let method = "ctrl$" + cmd.value.replace(/-(.)/g, (_, char) => char.toUpperCase());
@@ -126,79 +130,79 @@ class RtfInterpreter {
 		}
 	}
 
-	cmd$hexchar (cmd) {
+	cmd$hexchar(cmd) {
 		this.hexStore.push(cmd);
 	}
 
-	cmd$error (cmd) {
+	cmd$error(cmd) {
 		this.emit("error", new Error("Error: " + cmd.value + (cmd.row && cmd.col ? " at line " + cmd.row + ":" + cmd.col : "") + "."));
 	}
 
-	ctrl$rtf () {
+	ctrl$rtf() {
 		this.group = this.doc;
 	}
 
 	// new line
-	ctrl$line () {
+	ctrl$line() {
 		this.group.addContent(new RtfSpan({ value: "\n" }));
 	}
 
 	// tab
-	ctrl$tab () {
+	ctrl$tab() {
 		this.group.addContent(new RtfSpan({ value: "\t" }));
 	}
 
 	// alignment
-	ctrl$qc () {
+	ctrl$qc() {
 		this.group.style.align = "center";
 	}
 
-	ctrl$qj () {
+	ctrl$qj() {
 		this.group.style.align = "justify";
 	}
 
-	ctrl$ql () {
+	ctrl$ql() {
 		this.group.style.align = "left";
 	}
 
-	ctrl$qr () {
+	ctrl$qr() {
 		this.group.style.align = "right";
 	}
 
 	// text direction
-	ctrl$rtlch () {
+	ctrl$rtlch() {
 		this.group.style.dir = "rtl";
 	}
 
-	ctrl$ltrch () {
+	ctrl$ltrch() {
 		this.group.style.dir = "ltr";
 	}
 
 	// general style
-	ctrl$par () {
+	ctrl$par() {
 		this.group.addContent(new RtfParagraph());
 	}
 
-	ctrl$pard () {
+	ctrl$pard() {
 		this.group.resetStyle();
 	}
 
-	ctrl$plain () {
+	ctrl$plain() {
 		this.group.style.fontSize = this.doc.getStyle("fontSize");
 		this.group.style.bold = this.doc.getStyle("bold");
 		this.group.style.italic = this.doc.getStyle("italic");
 		this.group.style.underline = this.doc.getStyle("underline");
 	}
 
-	ctrl$b (set) {
+	ctrl$b(set) {
 		this.group.style.bold = set !== 0;
 	}
 
-	ctrl$i (set) {
+	ctrl$i(set) {
 		this.group.style.italic = set !== 0;
 	}
 
-	ctrl$u (num) {
+	ctrl$u(num) {
 		var charBuf = Buffer.alloc ? Buffer.alloc(2) : new Buffer(2);
 		// RTF, for reasons, represents unicode characters as signed integers
 		// thus managing to match literally no one.
@@ -206,68 +210,68 @@ class RtfInterpreter {
 		this.group.addContent(new RtfSpan({value: iconv.decode(charBuf, "ucs2")}));
 	}
 
-	ctrl$super () {
+	ctrl$super() {
 		this.group.style.valign = "super";
 	}
 
-	ctrl$sub () {
+	ctrl$sub() {
 		this.group.style.valign = "sub";
 	}
 
-	ctrl$nosupersub () {
+	ctrl$nosupersub() {
 		this.group.style.valign = "normal";
 	}
 
-	ctrl$strike (set) {
+	ctrl$strike(set) {
 		this.group.style.strikethrough = set !== 0;
 	}
 
-	ctrl$ul (set) {
+	ctrl$ul(set) {
 		this.group.style.underline = set !== 0;
 	}
 
-	ctrl$ulnone (set) {
+	ctrl$ulnone(set) {
 		this.group.style.underline = false;
 	}
 
-	ctrl$fi (value) {
+	ctrl$fi(value) {
 		this.group.style.firstLineIndent = value;
 	}
 
-	ctrl$cufi (value) {
+	ctrl$cufi(value) {
 		this.group.style.firstLineIndent = value * 100;
 	}
 
-	ctrl$li (value) {
+	ctrl$li(value) {
 		this.group.style.indent = value;
 	}
 
-	ctrl$lin (value) {
+	ctrl$lin(value) {
 		this.group.style.indent = value;
 	}
 
-	ctrl$culi (value) {
+	ctrl$culi(value) {
 		this.group.style.indent = value * 100;
 	}
 
 	// encodings
-	ctrl$ansi () {
+	ctrl$ansi() {
 		this.group.charset = "ASCII";
 	}
 
-	ctrl$mac () {
+	ctrl$mac() {
 		this.group.charset = "MacRoman";
 	}
 
-	ctrl$pc () {
+	ctrl$pc() {
 		this.group.charset = "CP437";
 	}
 
-	ctrl$pca () {
+	ctrl$pca() {
 		this.group.charset = "CP850";
 	}
 
-	ctrl$ansicpg (codepage) {
+	ctrl$ansicpg(codepage) {
 		if (availableCP.indexOf(codepage) === -1) {
 			this.emit("error", new Error("Codepage " + codepage + " is not available."));
 		} else {
@@ -276,11 +280,11 @@ class RtfInterpreter {
 	}
 
 	// fonts
-	ctrl$fonttbl () {
+	ctrl$fonttbl() {
 		this.group = new FontTable(this.group.parent);
 	}
 
-	ctrl$f (num) {
+	ctrl$f(num) {
 		if (this.group instanceof FontTable) {
 			this.group.currentFont = this.group.table[num] = new Font();
 		} else if (this.group.parent instanceof FontTable) {
@@ -294,55 +298,55 @@ class RtfInterpreter {
 		}
 	}
 
-	ctrl$fnil () {
+	ctrl$fnil() {
 		if (this.group instanceof FontTable || this.group.parent instanceof FontTable) {
 			this.group.get("currentFont").family = "nil";
 		}
 	}
 
-	ctrl$froman () {
+	ctrl$froman() {
 		if (this.group instanceof FontTable || this.group.parent instanceof FontTable) {
 			this.group.get("currentFont").family = "roman";
 		}
 	}
 
-	ctrl$fswiss () {
+	ctrl$fswiss() {
 		if (this.group instanceof FontTable || this.group.parent instanceof FontTable) {
 			this.group.get("currentFont").family = "swiss";
 		}
 	}
 
-	ctrl$fmodern () {
+	ctrl$fmodern() {
 		if (this.group instanceof FontTable || this.group.parent instanceof FontTable) {
 			this.group.get("currentFont").family = "modern";
 		}
 	}
 
-	ctrl$fscript () {
+	ctrl$fscript() {
 		if (this.group instanceof FontTable || this.group.parent instanceof FontTable) {
 			this.group.get("currentFont").family = "script";
 		}
 	}
 
-	ctrl$fdecor () {
+	ctrl$fdecor() {
 		if (this.group instanceof FontTable || this.group.parent instanceof FontTable) {
 			this.group.get("currentFont").family = "decor";
 		}
 	}
 
-	ctrl$ftech () {
+	ctrl$ftech() {
 		if (this.group instanceof FontTable || this.group.parent instanceof FontTable) {
 			this.group.get("currentFont").family = "tech";
 		}
 	}
 
-	ctrl$fbidi () {
+	ctrl$fbidi() {
 		if (this.group instanceof FontTable || this.group.parent instanceof FontTable) {
 			this.group.get("currentFont").family = "bidi";
 		}
 	}
 
-	ctrl$fcharset (code) {
+	ctrl$fcharset(code) {
 		if (this.group instanceof FontTable || this.group.parent instanceof FontTable) {
 			let charset = null;
 			if (code === 1) {
@@ -357,74 +361,74 @@ class RtfInterpreter {
 		}
 	}
 
-	ctrl$fprq (pitch) {
+	ctrl$fprq(pitch) {
 		if (this.group instanceof FontTable || this.group.parent instanceof FontTable) {
 			this.group.get("currentFont").pitch = pitch;
 		}
 	}
 
 	// colors
-	ctrl$colortbl () {
+	ctrl$colortbl() {
 		this.group = new ColorTable(this.group.parent);
 	}
 
-	ctrl$red (value) {
+	ctrl$red(value) {
 		if (this.group instanceof ColorTable) {
 			this.group.red = value;
 		}
 	}
 
-	ctrl$blue (value) {
+	ctrl$blue(value) {
 		if (this.group instanceof ColorTable) {
 			this.group.blue = value;
 		}
 	}
 
-	ctrl$green (value) {
+	ctrl$green(value) {
 		if (this.group instanceof ColorTable) {
 			this.group.green = value;
 		}
 	}
 
-	ctrl$cf (value) {
+	ctrl$cf(value) {
 		this.group.style.foreground = value;
 	}
 
-	ctrl$cb (value) {
+	ctrl$cb(value) {
 		this.group.style.background = value;
 	}
 
-	ctrl$fs (value) {
+	ctrl$fs(value) {
 		this.group.style.fontSize = value;
 	}
 
 	// margins
-	ctrl$margl (value) {
+	ctrl$margl(value) {
 		this.doc.marginLeft = value;
 	}
 
-	ctrl$margr (value) {
+	ctrl$margr(value) {
 		this.doc.marginRight = value;
 	}
 
-	ctrl$margt (value) {
+	ctrl$margt(value) {
 		this.doc.marginTop = value;
 	}
 
-	ctrl$margb (value) {
+	ctrl$margb(value) {
 		this.doc.marginBottom = value;
 	}
 
 	// unsupported (and we need to ignore content)
-	ctrl$stylesheet (value) {
+	ctrl$stylesheet(value) {
 		this.group.ignorable = true;
 	}
 
-	ctrl$info (value) {
+	ctrl$info(value) {
 		this.group.ignorable = true;
 	}
 
-	ctrl$mmathPr (value) {
+	ctrl$mmathPr(value) {
 		this.group.ignorable = true;
 	}
 }

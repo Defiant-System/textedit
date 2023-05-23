@@ -13,12 +13,13 @@ let Rtf = (exports => {
 @import "./rtf/parser.js"
 @import "./rtf/span.js"
 
-let toHTML = instr => {
+let toHTML = str => {
 	let doc = new RtfDocument;
 	let interpreter = new RtfInterpreter(doc);
 	let parser = new RtfParser(interpreter);
 
-	console.log( parser );
+	str = '{\\rtf1\\ansi\\b hi there\\b0}';
+	console.log( parser.parse(str) );
 
 	return "<p>Parsing...</p>";
 };

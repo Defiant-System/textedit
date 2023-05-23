@@ -6,6 +6,7 @@ class RtfParser {
 	constructor(interpreter) {
 		// super({ objectMode: true });
 		this.interpreter = interpreter;
+		this.output = [];
 		this.text = "";
 		this.controlWord = "";
 		this.controlWordParam = "";
@@ -16,24 +17,18 @@ class RtfParser {
 		this.col = 1;
 	}
 
-	_transform(buf, encoding, done) {
-		let text = buf.toString("ascii");
-		for (let ii = 0; ii < text.length; ++ii) {
+	parse(text) {
+		for (let i = 0; i < text.length; ++i) {
 			++this.char;
-			if (text[ii] === "\n") {
+			if (text[i] === "\n") {
 				++this.row;
 				this.col = 1;
 			} else {
 				++this.col;
 			}
-			this.parserState(text[ii]);
+			this.parserState(text[i]);
 		}
-		done();
-	}
-
-	_flush(done) {
-		if (this.text !== "\u0000") this.emitText();
-		done();
+		return this.interpreter.parse(this.output);
 	}
 
 	parseText(char) {
@@ -135,7 +130,7 @@ class RtfParser {
 
 	emitText() {
 		if (this.text === "") return;
-		this.push({ type: "text", value: this.text, pos: this.char, row: this.row, col: this.col });
+		this.output.push({ type: "text", value: this.text, pos: this.char, row: this.row, col: this.col });
 		this.text = "";
 	}
 
@@ -144,7 +139,7 @@ class RtfParser {
 		if (this.controlWord === "") {
 			this.emitError("empty control word");
 		} else {
-			this.push({
+			this.output.push({
 				type: "control-word",
 				value: this.controlWord,
 				param: this.controlWordParam !== "" && Number(this.controlWordParam),
@@ -159,32 +154,32 @@ class RtfParser {
 
 	emitStartGroup() {
 		this.emitText();
-		this.push({ type: "group-start", pos: this.char, row: this.row, col: this.col });
+		this.output.push({ type: "group-start", pos: this.char, row: this.row, col: this.col });
 	}
 
 	emitEndGroup() {
 		this.emitText();
-		this.push({ type: "group-end", pos: this.char, row: this.row, col: this.col });
+		this.output.push({ type: "group-end", pos: this.char, row: this.row, col: this.col });
 	}
 
 	emitIgnorable() {
 		this.emitText();
-		this.push({ type: "ignorable", pos: this.char, row: this.row, col: this.col });
+		this.output.push({ type: "ignorable", pos: this.char, row: this.row, col: this.col });
 	}
 
 	emitHexChar() {
 		this.emitText();
-		this.push({ type: "hexchar", value: this.hexChar, pos: this.char, row: this.row, col: this.col });
+		this.output.push({ type: "hexchar", value: this.hexChar, pos: this.char, row: this.row, col: this.col });
 		this.hexChar = "";
 	}
 
 	emitError(message) {
 		this.emitText();
-		this.push({ type: "error", value: message, row: this.row, col: this.col, char: this.char, stack: new Error().stack });
+		this.output.push({ type: "error", value: message, row: this.row, col: this.col, char: this.char, stack: new Error().stack });
 	}
 
 	emitEndParagraph() {
 		this.emitText();
-		this.push({ type: "end-paragraph", pos: this.char, row: this.row, col: this.col });
+		this.output.push({ type: "end-paragraph", pos: this.char, row: this.row, col: this.col });
 	}
 }
