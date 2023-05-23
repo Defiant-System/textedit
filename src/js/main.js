@@ -8,11 +8,9 @@
 @import "./modules/test.js"
 
 @import "./external/buffer.6.0.3.js"
-
 @import "./external/filetype.md.js"
 @import "./external/filetype.rtf.js"
 
-let Buffer = window.buffer.Buffer;
 
 // let tmp = window.buffer.Buffer.from([0x68, 0x65, 0x6c, 0x6c, 0x6f]);
 // console.log( window.buffer.Buffer.alloc );

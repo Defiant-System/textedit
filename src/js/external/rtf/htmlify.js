@@ -72,7 +72,6 @@ class RtfHtmlify {
 	// }
 
 	render() {
-		console.log( this.doc );
 		let content = this.doc.content
 						.map(para => this.renderPara(para))
 						.filter(html => html != null)
