@@ -7,16 +7,16 @@ class File {
 
 		this.id = "f"+ Date.now();
 		this.setup = {
-			pageView: false, // file.kind === "md",
+			pageView: false,
 			hideRulers: true,
+			indents: [2,2,14.75],
 		};
 
 		switch (this.kind) {
 			case "txt": break;
 			case "rtf":
-				this.setup.pageView = true;
-				this.setup.hideRulers = false;
-				this.setup.indents = [2,2,14.75];
+				// extract defs
+				this.extractDefs(this.def);
 				break;
 			case "md":
 				if (this._file.data.endsWith("</def>")) {
@@ -26,11 +26,7 @@ class File {
 					// update file data
 					this._file.data = this._file.data.slice(0, -def.length);
 					// extract defs
-					$(def).find(`meta`).map(meta => {
-						let name = meta.getAttribute("name"),
-							value = meta.getAttribute("value").guessType();
-						this.setup[name] = value;
-					});
+					this.extractDefs(def);
 				}
 				break;
 		}
@@ -72,6 +68,15 @@ class File {
 		}
 
 		return data || "";
+	}
+
+	extractDefs(def) {
+		// extract defs
+		$(def).find(`meta`).map(meta => {
+			let name = meta.getAttribute("name"),
+				value = meta.getAttribute("value").guessType();
+			this.setup[name] = value;
+		});
 	}
 
 	autoPageBreak() {

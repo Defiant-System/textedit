@@ -19,12 +19,14 @@ let toHTML = str => {
 	let interpreter = new RtfInterpreter(doc);
 	let parser = new RtfParser(interpreter);
 
-	str = '{\\rtf1\\ansi\\b hi there\\b0}';
-	let htmlify = new RtfHtmlify(parser.parse(str));
+	// str = '{\\rtf1\\ansi\\b hi there\\b0}';
+	let rtfdoc = parser.parse(str);
+	let htmlify = new RtfHtmlify(rtfdoc);
 
-	console.log( htmlify.render() );
+	// console.log( rtfdoc );
+	// console.log( htmlify.render() );
 
-	return "<p>Parsing...</p>";
+	return htmlify.render();
 };
 
 exports.toHTML = toHTML;

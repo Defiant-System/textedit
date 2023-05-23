@@ -33,35 +33,54 @@ class RtfHtmlify {
 		};
 	}
 
-	outputTemplate() {
-		let content = this.doc.content
-						.map(para => this.renderPara(para))
-						.filter(html => html != null).join(this.defaults.paraBreaks);
+	// def() {
+	// 	let str = [];
+	// 	str.push(`<meta name="pageView" value="true"/>`);
+	// 	str.push(`<meta name="hideRulers" value="false"/>`);
+	// 	str.push(`<meta name="indents" value="[2,2,14.75]"/>`);
+	// 	return `<def>${str.join("")}</def>`;
+	// }
 
-		return `<!DOCTYPE html>
-			<html>
-				<head>
-					<meta charset="UTF-8">
-					<style>
-					body {
-						margin-left: ${this.doc.marginLeft / 20}pt;
-						margin-right: ${this.doc.marginRight / 20}pt;
-						margin-top: ${this.doc.marginTop / 20}pt;
-						margin-bottom: ${this.doc.marginBottom / 20}pt;
-						font-size: ${this.defaults.fontSize / 2}pt;
-						text-indent: ${this.defaults.firstLineIndent / 20}pt;
-					}
-					</style>
-				</head>
-				<body>
-					--${content.replace(/\n/, '\n    ')}--
-				</body>
-			</html>
-			`;
-	}
+	// outputTemplate() {
+	// 	let content = this.doc.content
+	// 					.map(para => {
+	// 						// console.log( para );
+	// 						return this.renderPara(para);
+	// 					})
+	// 					.filter(html => html != null).join(this.defaults.paraBreaks);
+
+	// 	return `<!DOCTYPE html>
+	// 		<html>
+	// 			<head>
+	// 				<meta charset="UTF-8">
+	// 				<style>
+	// 				body {
+	// 					margin-left: ${this.doc.marginLeft / 20}pt;
+	// 					margin-right: ${this.doc.marginRight / 20}pt;
+	// 					margin-top: ${this.doc.marginTop / 20}pt;
+	// 					margin-bottom: ${this.doc.marginBottom / 20}pt;
+	// 					font-size: ${this.defaults.fontSize / 2}pt;
+	// 					text-indent: ${this.defaults.firstLineIndent / 20}pt;
+	// 				}
+	// 				</style>
+	// 			</head>
+	// 			<body>
+	// 				--${content.replace(/\n/g, '\n    ')}--
+	// 			</body>
+	// 		</html>
+	// 		`;
+	// }
 
 	render() {
-		return this.outputTemplate();
+		console.log( this.doc );
+		let content = this.doc.content
+						.map(para => this.renderPara(para))
+						.filter(html => html != null)
+						.join(this.defaults.paraBreaks);
+		
+		// content += this.def();
+
+		return content;
 	}
 
 	font(ft) {
@@ -71,8 +90,8 @@ class RtfHtmlify {
 		return "font-family: " + name + (family ? `, ${family}` : "");
 	}
 
-	colorEq(aa, bb) {
-		return aa.red === bb.red && aa.blue === bb.blue && aa.green === bb.green;
+	colorEq(a, b) {
+		return a.red === b.red && a.blue === b.blue && a.green === b.green;
 	}
 
 	CSS(chunk) {
