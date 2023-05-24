@@ -6,9 +6,9 @@ let Test = {
 		// return setTimeout(() => this.setupForCursorPages(APP, spawn), 500);
 		// return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
 
-		SpellCheck.load("en_US");
-
-		return setTimeout(() => this.spellCheckTest(APP, spawn), 500);
+		// SpellCheck.load("en_US");
+		// SpellCheck.load("de_DE");
+		// return setTimeout(() => this.spellCheckTest(APP, spawn), 500);
 
 		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
@@ -39,7 +39,8 @@ let Test = {
 	},
 	spellCheckTest(APP, spawn) {
 
-		console.log( SpellCheck.check("world") );
+		// console.log( SpellCheck.check("autostraße") );
+		// console.log( SpellCheck.check("world") );
 		// console.log( SpellCheck.suggest("wordl", 3) );
 
 	},

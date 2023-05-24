@@ -8,10 +8,14 @@
 			<Menu name="Spellcheck&#8230;">
 				<Menu name="None" check-group="file-spellcheck-lang" arg="none" is-checked="1"/>
 				<Menu type="divider"/>
-				<Menu name="English" check-group="file-spellcheck-lang" arg="en_US"/>
-				<Menu name="German" check-group="file-spellcheck-lang" arg="de" disabled="1"/>
-				<Menu name="Swedish" check-group="file-spellcheck-lang" arg="sv" disabled="1"/>
-				<Menu name="Turkish" check-group="file-spellcheck-lang" arg="tr" disabled="1"/>
+				<Menu name="English (US)" check-group="file-spellcheck-lang" arg="en_US"/>
+				<Menu name="English (GB)" check-group="file-spellcheck-lang" arg="en_GB"/>
+				<Menu name="French" check-group="file-spellcheck-lang" arg="fr_FR"/>
+				<Menu name="German" check-group="file-spellcheck-lang" arg="de_DE"/>
+				<Menu name="Italian" check-group="file-spellcheck-lang" arg="it_IT"/>
+				<Menu name="Spanish" check-group="file-spellcheck-lang" arg="es_ES"/>
+				<Menu name="Swedish" check-group="file-spellcheck-lang" arg="sv_SE" disabled="1"/>
+				<Menu name="Turkish" check-group="file-spellcheck-lang" arg="tr_TR" disabled="1"/>
 			</Menu>
 			<Menu type="divider"/>
 			<Menu name="Web view" check-group="file-layout" click="set-layout" arg="web-view"/>
