@@ -5,6 +5,15 @@
 		<Menu name="Preferences" for="file-preferences">
 			<Menu name="New Tab" click="tab.new" hotkey="alt+t"/>
 			<Menu type="divider"/>
+			<Menu name="Spellcheck&#8230;">
+				<Menu name="None" check-group="file-spellcheck-lang" arg="none" is-checked="1"/>
+				<Menu type="divider"/>
+				<Menu name="English" check-group="file-spellcheck-lang" arg="en_US"/>
+				<Menu name="German" check-group="file-spellcheck-lang" arg="de" disabled="1"/>
+				<Menu name="Swedish" check-group="file-spellcheck-lang" arg="sv" disabled="1"/>
+				<Menu name="Turkish" check-group="file-spellcheck-lang" arg="tr" disabled="1"/>
+			</Menu>
+			<Menu type="divider"/>
 			<Menu name="Web view" check-group="file-layout" click="set-layout" arg="web-view"/>
 			<Menu name="Page view" check-group="file-layout" click="set-layout" arg="page-view"/>
 			<Menu type="divider"/>
