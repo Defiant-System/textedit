@@ -1,6 +1,4 @@
 
-let en;
-
 let Test = {
 	init(APP, spawn) {
 		// TODO: Test with TABLE between pages
@@ -8,9 +6,9 @@ let Test = {
 		// return setTimeout(() => this.setupForCursorPages(APP, spawn), 500);
 		// return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
 
-		en = new BJSpell("en_US");
+		SpellCheck.load("en_US");
 
-		return setTimeout(() => this.spellCheckTest(APP, spawn), 1000);
+		return setTimeout(() => this.spellCheckTest(APP, spawn), 500);
 
 		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
@@ -40,7 +38,10 @@ let Test = {
 		// setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
 	},
 	spellCheckTest(APP, spawn) {
-		// en.check("wordl");
+
+		console.log( SpellCheck.check("world") );
+		// console.log( SpellCheck.suggest("wordl", 3) );
+
 	},
 	setupForCursorPages(APP, spawn) {
 		// position: bottom of page 1

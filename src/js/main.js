@@ -3,11 +3,11 @@
 @import "./classes/file.js"
 @import "./classes/file-tabs.js"
 
+@import "./modules/spell-check.js"
 @import "./modules/color.js"
 @import "./modules/edit.js"
 @import "./modules/test.js"
 
-@import "./external/BJSpell.js"
 @import "./external/buffer.6.0.3.js"
 @import "./external/filetype.md.js"
 @import "./external/filetype.rtf.js"
