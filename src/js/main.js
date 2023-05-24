@@ -7,6 +7,7 @@
 @import "./modules/edit.js"
 @import "./modules/test.js"
 
+@import "./external/BJSpell.js"
 @import "./external/buffer.6.0.3.js"
 @import "./external/filetype.md.js"
 @import "./external/filetype.rtf.js"

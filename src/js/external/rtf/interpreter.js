@@ -126,7 +126,9 @@ class RtfInterpreter {
 		if (this[method]) {
 			this[method](cmd.param);
 		} else {
-			if (!this.group.get("ignorable")) console.log("debug", method, cmd.param);
+			if (!this.group.get("ignorable")) {
+				// console.log("debug", method, cmd.param);
+			}
 		}
 	}
 

@@ -5,6 +5,8 @@ let Test = {
 
 		// return setTimeout(() => this.setupForCursorPages(APP, spawn), 500);
 		// return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
+		
+		// return setTimeout(() => this.spellCheckTest(APP, spawn), 500);
 
 		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
@@ -32,6 +34,10 @@ let Test = {
 
 		setTimeout(() => spawn.find(`.toolbar-tool_[data-menu="font-color"]`).trigger("mousedown"), 310);
 		// setTimeout(() => spawn.find(`.toolbar-selectbox_[data-menu="font-families"]`).trigger("mousedown"), 310);
+	},
+	spellCheckTest(APP, spawn) {
+		let en = new BJSpell("en_US");
+		console.log( en.check("hello wordl") );
 	},
 	setupForCursorPages(APP, spawn) {
 		// position: bottom of page 1
