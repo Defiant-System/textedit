@@ -55,7 +55,7 @@ let Edit = {
 		let sel = document.getSelection(),
 			range;
 		if (sel.getRangeAt && sel.rangeCount) {
-			range = sel.getRangeAt( 0 );
+			range = sel.getRangeAt(0);
 		}
 		return range;
 	},
