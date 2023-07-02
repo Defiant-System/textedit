@@ -80,7 +80,8 @@ class File {
 	}
 
 	autoPageBreak() {
-		if (!this.setup.pageView) return;
+		let actEl = document.activeElement;
+		if (!this.setup.pageView || actEl.contentEditable !== "true") return;
 
 		// freeze scrollbar
 		let sTop = this._el.scrollTop();

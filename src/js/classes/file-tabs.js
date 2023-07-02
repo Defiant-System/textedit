@@ -42,6 +42,10 @@ class FileTabs {
 		return this._active;
 	}
 
+	get file() {
+		return this._active.file._file;
+	}
+
 	toBlob(opt={}) {
 		return this._active.file.toBlob(this._active.fileEl, opt);
 	}
