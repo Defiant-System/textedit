@@ -12,6 +12,11 @@ let Test = {
 		// SpellCheck.load("de_DE");
 		// return setTimeout(() => this.spellCheckTest(APP, spawn), 500);
 
+		// return setTimeout(() => APP.dispatch({ type: "open-file", spawn }), 300);
+
+		// setTimeout(() => APP.dispatch({ type: "save-file-as", spawn }), 300);
+		// setTimeout(() => spawn.find(".ant-file_:nth(4)").trigger("click"), 500);
+
 		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
 		// return setTimeout(() => APP.dispatch({ type: "tab.new", spawn }), 500);
