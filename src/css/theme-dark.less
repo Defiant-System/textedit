@@ -1,5 +1,9 @@
 
 &[data-theme="dark"] {
+	--grid-shade: rgba(255,255,255,.15);
+	--grid-l1: rgba(255,255,255,.1);
+	--grid-l2: rgba(255,255,255,.2);
+	--grid-bg: rgba(255,255,255,.025);
 
 	&.win-body-focused_ {
 		.blank-view {
@@ -32,7 +36,7 @@
 			&.page-view {
 				> .file {
 					.page {
-						outline-color: #505050;
+						outline-color: var( --grid-l1 );
 					}
 				}
 			}
@@ -46,14 +50,28 @@
 	content {
 		&.show-ruler {
 			& + .rulerw {
-				border-bottom-color: #555;
+				z-index: 2;
+				border-bottom-color: var( --grid-l1 );
+			}
+
+			&:after {
+				content: "";
+				position: absolute;
+				top: -1px;
+				left: 0;
+				right: 0;
+				height: 1px;
+				z-index: 1;
+				opacity: .2;
+				background: linear-gradient(90deg, transparent 5%, #fff 50%, transparent 95%);
+				pointer-events: none;
 			}
 		}
 
 		&.page-view {
 			> .file {
 				.page {
-					background: rgba(255,255,255,.05);
+					background: var( --grid-bg );
 					outline: 1px solid #606060;
 					box-shadow: 0 1px 7px rgba(0,0,0,.2);
 				}
@@ -140,35 +158,35 @@
 
 		.ruler {
 			background-image: linear-gradient(90deg,
-				#222 0px, #222 1px,
+				var( --grid-l2 ) 0px, var( --grid-l2 ) 1px,
 				transparent 1px, transparent 602px,
-				#222 602px, #222 603px
+				var( --grid-l2 ) 602px, var( --grid-l2 ) 603px
 			);
 
 			&:after {
 				background-image: repeating-linear-gradient(90deg,
 					transparent 0px, transparent 71px,
-					#333 71px, #333 72px
+					var( --grid-l2 ) 71px, var( --grid-l2 ) 72px
 				);
 			}
 
 			&:before {
 				background-image: repeating-linear-gradient(90deg,
 						transparent 0px, transparent 8px,
-						#555 8px, #555 9px,
+						var( --grid-l1 ) 8px, var( --grid-l1 ) 9px,
 						transparent 9px, transparent 17px,
-						#555 17px, #555 18px,
+						var( --grid-l1 ) 17px, var( --grid-l1 ) 18px,
 						transparent 18px, transparent 26px,
-						#555 26px, #555 27px,
+						var( --grid-l1 ) 26px, var( --grid-l1 ) 27px,
 						transparent 27px, transparent 36px
 					);
 			}
 
 			ul {
-				color: #333;
+				color: var( --grid-l2 );
 
 				&:before {
-					background: #777;
+					background: var( --grid-shade );
 				}
 			}
 
