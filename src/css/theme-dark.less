@@ -191,22 +191,22 @@
 			}
 
 			i {
-				background: #666;
+				background: var( --content-bg );
 				border-color: #444;
 
 				&.indent-firstline {
 					&:before { border-top: 5px solid #333; }
-					&:after { border-top: 4px solid #666; }
+					&:after { border-top: 4px solid var( --content-bg ); }
 				}
 
 				&.indent-left {
 					&:before { border-bottom: 5px solid #333; }
-					&:after { border-bottom: 4px solid #666; }
+					&:after { border-bottom: 4px solid var( --content-bg ); }
 				}
 
 				&.indent-right {
 					&:before { border-bottom: 5px solid #333; }
-					&:after { border-bottom: 4px solid #666; }
+					&:after { border-bottom: 4px solid var( --content-bg ); }
 				}
 			}
 		}
