@@ -23,7 +23,7 @@ class FileTabs {
 			toolJustifycenter: spawn.find(`.toolbar-tool_[data-arg="justifycenter"]`),
 			toolJustifyright: spawn.find(`.toolbar-tool_[data-arg="justifyright"]`),
 			toolJustifyfull: spawn.find(`.toolbar-tool_[data-arg="justifyfull"]`),
-			toolSettings: spawn.find(`.toolbar-tool_[data-click="editor.settings"]`),
+			toolSettings: spawn.find(`.toolbar-tool_[data-menu="file-preferences"]`),
 		};
 
 		// editor template
