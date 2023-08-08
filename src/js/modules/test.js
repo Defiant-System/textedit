@@ -3,6 +3,12 @@ let Test = {
 	init(APP, spawn) {
 		// TODO: Test with TABLE between pages
 
+		// this.dialog(spawn);
+
+		// setTimeout(() => spawn.find(`.btn[data-click="open-filesystem"]`).trigger("click"), 400);
+		// setTimeout(() => spawn.find(`.fs-folder-select`).trigger("click"), 800);
+		// setTimeout(() => spawn.find(`.fs-extension-select_`).trigger("click"), 800);
+
 		// setTimeout(() => $(".def-desktop_").trigger("mousedown").trigger("mouseup"), 300);
 
 		// return setTimeout(() => this.setupForCursorPages(APP, spawn), 500);
@@ -11,11 +17,11 @@ let Test = {
 		// SpellCheck.load("en_US");
 		// SpellCheck.load("de_DE");
 		// return setTimeout(() => this.spellCheckTest(APP, spawn), 500);
-
-		// return setTimeout(() => APP.dispatch({ type: "open-file", spawn }), 300);
-
-		// setTimeout(() => APP.dispatch({ type: "save-file-as", spawn }), 300);
 		// setTimeout(() => spawn.find(".ant-file_:nth(4)").trigger("click"), 500);
+
+		// setTimeout(() => APP.dispatch({ type: "open-file", spawn }), 300);
+		// setTimeout(() => APP.dispatch({ type: "save-file-as", spawn }), 300);
+		// setTimeout(() => spawn.dialog.alert("test"), 300);
 
 		return;
 		// return setTimeout(() => APP.dispatch({ type: "toggle-ruler", spawn }), 500);
