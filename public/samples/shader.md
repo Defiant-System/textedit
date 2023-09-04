@@ -2,6 +2,19 @@
 Have you ever looked at a breathtaking digital art piece and deeply wondered how they created that? There are many different approaches to digital art but shaders might be one of the most powerful and versatile when it comes to creative coding. Shaders are like the paint brushes of the digital age. They allow you to turn a blank screen into a stunning animation in real time and they're responsible for the stunning visuals in some of your favorite video games and movies. They can be used by creative developers in order to make 2D and 3D renderings exclusively using code. Their imagination being the only limit shader art coding is all about using mathematical functions and algorithms to manipulate pixels and create incredible visual effects. It's a unique fusion of art and science where creativity and precision collide to produce something truly mesmerizing.
 
 
+```js
+var a = 5;
+
+(function test() {
+    console.log(a--);
+
+    if (a) {
+        setTimeout(test, 1000);
+    }
+})();
+```
+
+
 ### What are shaders?
 But what are shaders you may ask. In essence shaders are small programs that run on your graphics card and are responsible for calculating the color of each pixel on a canvas. Shaders work by taking inputs such as the position of the current pixel and using them to calculate a single final color using the OpenGL Shading Language or **GLSL** in short. It can be seen as a mathematical function that maps a 2D coordinate, the pixel's position represented as X and Y to an output color which in computer graphics is represented by a red green and blue channel. This function is computed in parallel for every pixel on the screen which means that shaders can perform millions of calculations per second to produce stunning real-time graphics. Since discovering shaders about a year ago, I've also made some of my own. It's really fun to learn a new computer graphics technique and make a shader about it. There are so many topics to learn from and so much space for discovery and original creation that it's impossible to get bored. 
 
