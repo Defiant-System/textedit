@@ -75,6 +75,12 @@ class FileTabs {
 			// add element to DOM + append file contents
 			fileEl.data({ id: file.id });
 			pageEl.html(file.data);
+			// file type is "Y", activate codemirror
+			if (file.kind === "y") {
+				pageEl.find(`pre > code[class*="language-"]`).map(el => {
+					console.log(el);
+				});
+			}
 
 			// bind event handler
 			fileEl.on("change keyup mouseup", fnHandler);

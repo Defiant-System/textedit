@@ -18,6 +18,8 @@ class File {
 				// extract defs
 				this.extractDefs(this.def);
 				break;
+			case "y":
+				break;
 			case "md":
 				if (this._file.data.endsWith("</def>")) {
 					// parse defs
@@ -63,8 +65,11 @@ class File {
 
 		switch (this.kind) {
 			case "txt": data = data.replace(/\n/g, "<br>"); break;
-			case "md": data = Markdown.toHTML(data); break;
 			case "rtf": data = Rtf.toHTML(data); break;
+			case "md": data = Markdown.toHTML(data); break;
+			case "y":
+				data = Markdown.toHTML(data);
+				break;
 		}
 
 		return data || "";
@@ -243,14 +248,11 @@ class File {
 			case "html":
 				type = "text/html";
 				break;
+			case "y":
 			case "md":
 				// TODO: if in page view mode, concat string from page-elements
 				type = "text/markdown";
 				data = Markdown.fromHTML(data);
-				// console.log( this._file.data === data );
-				// console.log( 1, this._file.data );
-				// console.log( 2, this._el.html() );
-				// console.log( 3, data );
 				break;
 		}
 		// console.log( data );

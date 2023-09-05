@@ -6,11 +6,15 @@ Have you ever looked at a breathtaking digital art piece and deeply wondered how
 var a = 5;
 
 (function test() {
-    console.log(a--);
+    console.log("test", a);
+})();
+```
 
-    if (a) {
-        setTimeout(test, 1000);
-    }
+```y-js
+var a = 5;
+
+(function test() {
+    console.log("test", a);
 })();
 ```
 
