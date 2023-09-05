@@ -2,6 +2,10 @@
 // for dark theme
 @import "theme-dark";
 @import "blank-view";
+// external
+@import "external/cm";
+@import "external/github-code";
+
 
 
 --pW: 603px;
@@ -240,6 +244,10 @@ content {
 
 				&[class*="language-"] {
 					display: block;
+
+					pre {
+						margin: initial;
+					}
 				}
 			}
 
@@ -264,6 +272,21 @@ content {
 
 			p {
 				margin: 0 0 11px 0;
+			}
+
+			hr {
+				background: linear-gradient(-45deg,
+								transparent 0%, transparent 12.5%,
+								#ccc 12.5%, #ccc 25%,
+								transparent 25%, transparent 37.5%,
+								#ccc 37.5%, #ccc 50%,
+								transparent 50%, transparent 62.5%,
+								#ccc 62.5%, #ccc 75%,
+								transparent 75%, transparent 87.5%,
+								#ccc 87.5%);
+				background-size: 10px 10px;
+				height: 7px;
+				margin: 15px 0;
 			}
 
 			table {

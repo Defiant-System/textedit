@@ -1,4 +1,5 @@
 
+
 @import "./classes/selection.js"
 @import "./classes/file.js"
 @import "./classes/file-tabs.js"
@@ -11,6 +12,12 @@
 @import "./external/buffer.6.0.3.js"
 @import "./external/filetype.md.js"
 @import "./external/filetype.rtf.js"
+
+
+let {
+	CodeMirror,
+} = await window.fetch("~/js/bundle.js");
+
 
 
 // let tmp = window.buffer.Buffer.from([0x68, 0x65, 0x6c, 0x6c, 0x6f]);

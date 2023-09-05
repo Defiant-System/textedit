@@ -1,14 +1,11 @@
+### Preface
+This file is a sample file, demonstrating functionalities of Y-files and its built-in code sections. The contents of this file are transcribed from the [youtube video](https://www.youtube.com/watch?v=f4s1h2YETNY) with the header as below.
+
+---
+
 ## Shader Art Coding Introduction 
 Have you ever looked at a breathtaking digital art piece and deeply wondered how they created that? There are many different approaches to digital art but shaders might be one of the most powerful and versatile when it comes to creative coding. Shaders are like the paint brushes of the digital age. They allow you to turn a blank screen into a stunning animation in real time and they're responsible for the stunning visuals in some of your favorite video games and movies. They can be used by creative developers in order to make 2D and 3D renderings exclusively using code. Their imagination being the only limit shader art coding is all about using mathematical functions and algorithms to manipulate pixels and create incredible visual effects. It's a unique fusion of art and science where creativity and precision collide to produce something truly mesmerizing.
 
-
-```js
-var a = 5;
-
-(function test() {
-    console.log("test", a);
-})();
-```
 
 ```y-js
 var a = 5;

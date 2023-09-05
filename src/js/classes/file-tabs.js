@@ -6,6 +6,20 @@ class FileTabs {
 		this._stack = {};
 		this._active = null;
 
+		// codemirror defaults
+		this._cm = {
+			editors: {},
+			types: {
+				js: "text/javascript",
+			},
+			gutterOptions: ["CodeMirror-linenumbers"],
+			extraKeys: {
+				"Alt-Enter": function(editor) {
+					console.log(editor);
+				}
+			}
+		};
+
 		// fast references
 		this.els = {
 			doc: $(document),
@@ -77,8 +91,22 @@ class FileTabs {
 			pageEl.html(file.data);
 			// file type is "Y", activate codemirror
 			if (file.kind === "y") {
-				pageEl.find(`pre > code[class*="language-"]`).map(el => {
-					console.log(el);
+				pageEl.find(`pre > code[class*="language-y-"]`).map(el => {
+					let [a, b, lang] = el.className.split('-'),
+						code = el.textContent,
+						cmOptions = {
+					        mode: this._cm.types[lang],
+					        gutters: this._cm.gutterOptions,
+							extraKeys: this._cm.extraKeys,
+							lineWrapping: false,
+							lineNumbers: true,
+						};
+					console.log( el );
+					el.innerHTML = `<textarea>${code}</textarea>
+									<div data-click="active-play-toggle"></div>
+									<sidebar><div class="rows"></div></sidebar>`;
+					let textarea = el.querySelector('textarea');
+					let editor = CodeMirror.fromTextArea(textarea, cmOptions);
 				});
 			}
 

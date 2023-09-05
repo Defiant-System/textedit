@@ -7,11 +7,7 @@
 // You can find some technical background for some of the code below
 // at http://marijnhaverbeke.nl/blog/#cm-internals .
 
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global.CodeMirror = factory());
-}(this, (function () { 'use strict';
+let CodeMirror = (function (global) { 'use strict';
 
 // Kludges for bugs and behavior differences that can't be feature
 // detected are enabled based on userAgent etc sniffing.
@@ -9689,4 +9685,4 @@ CodeMirror.version = "5.40.1"
 
 return CodeMirror;
 
-})));
+})(window);
