@@ -101,12 +101,11 @@ class FileTabs {
 							lineWrapping: false,
 							lineNumbers: true,
 						};
-					console.log( el );
-					el.innerHTML = `<textarea>${code}</textarea>
-									<div data-click="active-play-toggle"></div>
-									<sidebar><div class="rows"></div></sidebar>`;
-					let textarea = el.querySelector('textarea');
-					let editor = CodeMirror.fromTextArea(textarea, cmOptions);
+					el = $(el).html(`<textarea>${code}</textarea>`);
+					
+					let editor = CodeMirror.fromTextArea(el.find("textarea")[0], cmOptions);
+
+					// el.append(`<div data-click="toggle-code"></div>`);
 				});
 			}
 
