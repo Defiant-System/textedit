@@ -255,7 +255,7 @@ class FileTabs {
 						break;
 					default:
 						// console.time(event.type);
-						if (Active) Active.file.autoPageBreak();
+						if (Active && Active.file) Active.file.autoPageBreak();
 						// console.timeEnd(event.type);
 				}
 				break;
