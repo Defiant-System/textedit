@@ -11,6 +11,7 @@ class FileTabs {
 			editors: {},
 			types: {
 				js: "text/javascript",
+				glsl: "text/x-glsl",
 			},
 			gutterOptions: ["CodeMirror-linenumbers"],
 			extraKeys: {

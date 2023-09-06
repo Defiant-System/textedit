@@ -7,12 +7,18 @@ This file is a sample file, demonstrating functionalities of Y-files and its bui
 Have you ever looked at a breathtaking digital art piece and deeply wondered how they created that? There are many different approaches to digital art but shaders might be one of the most powerful and versatile when it comes to creative coding. Shaders are like the paint brushes of the digital age. They allow you to turn a blank screen into a stunning animation in real time and they're responsible for the stunning visuals in some of your favorite video games and movies. They can be used by creative developers in order to make 2D and 3D renderings exclusively using code. Their imagination being the only limit shader art coding is all about using mathematical functions and algorithms to manipulate pixels and create incredible visual effects. It's a unique fusion of art and science where creativity and precision collide to produce something truly mesmerizing.
 
 
-```y-js
-var a = 5;
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord/iResolution.xy;
 
-(function test() {
-    console.log("test", a);
-})();
+    // Time varying pixel color
+    vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+
+    // Output to screen
+    fragColor = vec4(col,1.0);
+}
 ```
 
 
@@ -21,6 +27,14 @@ But what are shaders you may ask. In essence shaders are small programs that run
 
 While they're great at rendering stunning 3D scenes and even 4D for the particularly brave developers, shaders also excel at rendering 2D images and animations. They usually run blazing fast compared to some heavy 3D shaders that require more performant GPUs and compute power. For over a year now I've been sharing my own trippy animations online mostly in 2D in order for shader coding to get known by a larger audience. Doing so I've received many requests for tutorials and explanations about how to create such visuals using code. In this video I will walk you through the creation of this shader animation from scratch, to give you some insights about how to start making digital art using shaders. Additionally I will provide some useful references and tools that can assist you on your artistic journey and that will be listed in the description I assume a basic knowledge of programming but don't worry if you don't know anything about code. I'll explain every step of the process including the mathematical aspects using visuals that by the way are also made with code.
 
+
+```y-js
+var a = 5;
+
+(function test() {
+    console.log("test", a);
+})();
+```
 
 ### Shadertoy
 If you want to follow along with this video you can head over to [shadertoy.com](https://www.shadertoy.com). It's a platform where you can easily start writing your own shaders and share them with others and it's a mine of inspiration and knowledge about computer graphics and digital art. I will start from the most basic Shader that gets automatically generated when you click on new. Actually I'll remove all of this to explain from the very beginning what is going on. 
