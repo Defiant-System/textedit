@@ -105,7 +105,10 @@ class FileTabs {
 					
 					let editor = CodeMirror.fromTextArea(el.find("textarea")[0], cmOptions);
 
-					// el.append(`<div data-click="toggle-code"></div>`);
+					el.append(`<div class="block-tools">
+							<div data-click="run-code"></div>
+							<div data-click="reset-code"></div>
+						</div>`);
 				});
 			}
 

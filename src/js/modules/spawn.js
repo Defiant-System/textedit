@@ -195,6 +195,11 @@
 				Tabs.els.content.toggleClass("show-ruler", value);
 				break;
 
+			case "run-code":
+			case "reset-code":
+				console.log(event);
+				break;
+
 			default:
 				if (event.type.startsWith("editor.")) {
 					// proxy event

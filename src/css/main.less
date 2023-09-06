@@ -65,7 +65,7 @@ content {
 			.page {
 				position: relative;
 				display: block;
-				margin: 17px 13px;
+				margin: 17px 31px 21px 13px;
 				padding: 17px 17px;
 				outline: 1px solid #c5c5c5;
 				box-shadow: 0 1px 7px rgba(0,0,0,.175);
@@ -265,9 +265,57 @@ content {
 					position: relative;
 					display: block;
 					padding: 0;
+					margin-right: 13px;
 
 					pre {
 						margin: initial;
+					}
+
+					.block-tools {
+						position: absolute;
+						top: 50%;
+						right: -14px;
+						width: 27px;
+						font-size: 0;
+						padding: 7px 5px;
+						border-radius: 31px;
+						transform: translateY(-50%);
+						z-index: 999;
+						background: #fff;
+						box-shadow: 0 0 5px rgba(#000,.1),
+									0 1px 7px rgba(#000,.25);
+
+						> div {
+							position: relative;
+							width: 17px;
+							height: 17px;
+							border-radius: 50%;
+							// border: 1px solid rgba(#000,.25);
+							cursor: pointer;
+
+							&:hover:before {
+								opacity: 1;
+							}
+
+							&:not(:last-child) {
+								margin-bottom: 7px;
+							}
+
+							&:before {
+								content: "";
+								opacity: .5;
+								position: absolute;
+								top: 0;
+								left: 0;
+								right: 0;
+								bottom: 0;
+								cursor: inherit;
+								background: 50% 50%/contain no-repeat;
+							}
+
+							&[data-click="run-code"]:before { background-image: url(~/icons/icon-run-code.png); }
+							&[data-click="reset-code"]:before { background-image: url(~/icons/icon-reset-code.png); }
+						}
 					}
 
 					div[data-click="toggle-code"] {
