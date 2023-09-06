@@ -188,7 +188,7 @@
 				break;
 
 			case "set-layout":
-				Tabs.els.content.removeClass("page-view web-view").addClass(event.arg);
+				Tabs.els.content.removeClass("page-view web-view y-book").addClass(event.arg);
 				break;
 			case "toggle-ruler":
 				value = Tabs.els.content.hasClass("show-ruler");

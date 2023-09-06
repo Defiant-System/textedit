@@ -10,7 +10,7 @@ Nibh venenatis cras sed felis eget velit. Morbi enim nunc faucibus a pellentesqu
 
 Maecenas accumsan lacus vel facilisis volutpat est velit. Nec feugiat in fermentum posuere urna. Tempor id eu nisl nunc. Et tortor at risus viverra adipiscing at in. Amet mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Eget mi proin sed libero enim sed faucibus turpis in. Vestibulum sed arcu non odio euismod lacinia at quis. Pharetra massa massa ultricies mi quis hendrerit dolor magna eget. Ut enim blandit volutpat maecenas volutpat blandit.
 <def>
-	<meta name="pageView" value="true"/>
+	<meta name="view" value="page"/>
 	<meta name="hideRulers" value="false"/>
 	<meta name="indents" value="[2,2,14.75]"/>
 </def>

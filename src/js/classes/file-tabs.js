@@ -176,15 +176,17 @@ class FileTabs {
 		this._active = this._stack[tId];
 
 		if (this._active.file) {
+			let setup = this._active.file.setup;
 			// reset view / show blank view
 			this.dispatch({ type: "hide-blank-view", spawn: this._spawn });
 			// file UI
-			this.els.content.toggleClass("web-view", this._active.file.setup.pageView);
-			this.els.content.toggleClass("page-view", !this._active.file.setup.pageView);
-			this.els.content.toggleClass("show-ruler", this._active.file.setup.hideRulers);
+			this.els.content.toggleClass("y-book", setup.view !== "ybook");
+			this.els.content.toggleClass("web-view", setup.view !== "web");
+			this.els.content.toggleClass("page-view", setup.view !== "page");
+			this.els.content.toggleClass("show-ruler", setup.hideRulers);
 
 			// file indents
-			let indents = this._active.file.setup.indents || "2,2,15".split(",");
+			let indents = setup.indents || "2,2,15".split(",");
 			let keys = "iF,iL,iR".split(",");
 			let data = {};
 			indents.map((k,i) => data[`--${keys[i]}`] = +k);
@@ -301,7 +303,7 @@ class FileTabs {
 					.filter(key => key.startsWith("tool"))
 					.map(key => Tabs.els[key].removeClass("tool-active_").addClass("tool-disabled_"));
 				// show blank view
-				Tabs.els.content.removeClass("web-view page-view show-ruler").addClass("show-blank-view");
+				Tabs.els.content.removeClass("web-view page-view y-book show-ruler").addClass("show-blank-view");
 				break;
 			case "hide-blank-view":
 				// disable toolbar

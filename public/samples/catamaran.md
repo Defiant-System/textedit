@@ -37,7 +37,7 @@ In the mid-twentieth century, beachcats became a widespread category of sailing 
 
 Catamarans were introduced to Olympic sailing in 1976. The two-handed Tornado catamaran was selected for the multihull discipline in the Olympic Games from 1976 through 2008. It was redesigned in 2000.[24] The foiling Nacra 17 was used in the Tokyo 2020 Olympics, which were held in 2021;[25][26] after the 2015 adoption of the Nacra 15 as a Youth World Championships class and as a new class for the Youth Olympic Games.
 <def>
-	<meta name="pageView" value="true"/>
+	<meta name="view" value="page"/>
 	<meta name="hideRulers" value="false"/>
 	<meta name="indents" value="[2,2,14.75]"/>
 </def>

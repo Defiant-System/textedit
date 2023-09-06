@@ -7,7 +7,7 @@ class File {
 
 		this.id = "f"+ Date.now();
 		this.setup = {
-			pageView: false,
+			view: "web", // web, page, ybook
 			hideRulers: true,
 			indents: [2,2,14.75],
 		};
@@ -19,6 +19,7 @@ class File {
 				this.extractDefs(this.def);
 				break;
 			case "y":
+				this.setup.view = "ybook";
 				break;
 			case "md":
 				if (this._file.data.endsWith("</def>")) {
@@ -86,7 +87,7 @@ class File {
 
 	autoPageBreak() {
 		let actEl = document.activeElement;
-		if (!this.setup.pageView || actEl.contentEditable !== "true") return;
+		if (this.setup.view !== "page" || actEl.contentEditable !== "true") return;
 
 		// freeze scrollbar
 		let sTop = this._el.scrollTop();

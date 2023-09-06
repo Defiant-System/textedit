@@ -20,6 +20,7 @@
 			<Menu type="divider"/>
 			<Menu name="Web view" check-group="file-layout" click="set-layout" arg="web-view"/>
 			<Menu name="Page view" check-group="file-layout" click="set-layout" arg="page-view"/>
+			<Menu name="Y-book" check-group="file-layout" click="set-layout" arg="y-book"/>
 			<Menu type="divider"/>
 			<Menu name="Show Ruler" click="toggle-ruler"/>
 		</Menu>
