@@ -248,6 +248,7 @@ class FileTabs {
 			case "auto-page-break":
 				// get current page
 				if (event.target) page = $(event.target.parentNode);
+				if (page && !page.hasClass("page")) return;
 				// depending on key pressed
 				switch (event.char) {
 					case "left":
