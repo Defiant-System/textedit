@@ -313,8 +313,10 @@ content {
 								background: 50% 50%/contain no-repeat;
 							}
 
-							&[data-click="run-code"]:before { background-image: url(~/icons/icon-run-code.png); }
+
+							&.running:before { background-image: url(~/icons/icon-pause-code.png); }
 							&[data-click="reset-code"]:before { background-image: url(~/icons/icon-reset-code.png); }
+							&[data-click="run-code"]:before { background-image: url(~/icons/icon-run-code.png); }
 						}
 					}
 
