@@ -93,7 +93,8 @@ class FileTabs {
 			// file type is "Y", activate codemirror
 			if (file.kind === "y") {
 				pageEl.find(`pre > code[class*="language-y-"]`).map(el => {
-					let [a, b, lang] = el.className.split('-'),
+					let uuid = $.uuidv4(),
+						[a, b, lang] = el.className.split('-'),
 						code = el.textContent,
 						cmOptions = {
 					        mode: this._cm.types[lang],
@@ -102,10 +103,11 @@ class FileTabs {
 							lineWrapping: false,
 							lineNumbers: true,
 						};
-					el = $(el).html(`<textarea>${code}</textarea>`);
-					
-					let editor = CodeMirror.fromTextArea(el.find("textarea")[0], cmOptions);
-
+					// append textarea
+					el = $(el).data({ uuid }).html(`<textarea>${code}</textarea>`);
+					// save reference to editor in file
+					file._editors[uuid] = CodeMirror.fromTextArea(el.find("textarea")[0], cmOptions);
+					// "remote" controls
 					el.append(`<div class="block-tools">
 							<div data-click="run-code"></div>
 							<div data-click="reset-code"></div>

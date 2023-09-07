@@ -4,6 +4,7 @@ class File {
 		// save reference to original FS file
 		this._file = fsFile || new karaqu.File({ kind: "txt" });
 		this._el = el.parent().parent().data({ kind: this.kind });
+		this._editors = {};
 
 		this.id = "f"+ Date.now();
 		this.setup = {

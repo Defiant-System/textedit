@@ -20,6 +20,7 @@
 			Spawn = event.spawn,
 			Tabs = Spawn.data ? Spawn.data.tabs : false,
 			file,
+			editor,
 			editorEl,
 			xNode,
 			name,
@@ -196,8 +197,31 @@
 				break;
 
 			case "run-code":
+				el = event.el.parents("code");
+				editor = Tabs.active.file._editors[el.data("uuid")];
+				value = editor.doc.getValue();
+
+				if (!Self.shaderPipe) {
+					// start yshader in the background
+					karaqu.shell(`win -o ant:yshader 998`)
+						.then(ready => {
+							karaqu.shell(`yshader -p`)
+								.then(pipe => {
+									Self.shaderPipe = pipe.result;
+									// pipe code to yShader function
+									Self.shaderPipe(value);
+								})
+						});
+				} else {
+					// pipe code to yShader function
+					Self.shaderPipe(value);
+				}
+				break;
 			case "reset-code":
-				console.log(event);
+				el = event.el.parents("code");
+				editor = Tabs.active.file._editors[el.data("uuid")];
+				value = editor.getTextArea().value;
+				editor.doc.setValue(value);
 				break;
 
 			default:
