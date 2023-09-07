@@ -25,6 +25,7 @@
 			xNode,
 			name,
 			value,
+			data,
 			el;
 		// console.log(event);
 		switch (event.type) {
@@ -197,24 +198,35 @@
 				break;
 
 			case "run-code":
+				if (event.el.hasClass("running")) {
+					// restore icon
+					event.el.removeClass("running");
+					// signal pause to yShader
+					Self.yShaderDispatch({ type: "pause-shader" });
+					return;
+				}
+				// change icon
+				event.el.addClass("running");
+				// prepare yShader for new shader code
 				el = event.el.parents("code");
 				editor = Tabs.active.file._editors[el.data("uuid")];
-				value = editor.doc.getValue();
+				data = {
+					type: "run-shader",
+					code: editor.doc.getValue(),
+				};
 
-				if (!Self.shaderPipe) {
+				if (!Self.yShaderDispatch) {
 					// start yshader in the background
 					karaqu.shell(`win -o ant:yshader 998`)
-						.then(ready => {
-							karaqu.shell(`yshader -p`)
-								.then(pipe => {
-									Self.shaderPipe = pipe.result;
-									// pipe code to yShader function
-									Self.shaderPipe(value);
-								})
+						.then(resp => {
+							// yShader dispatch function
+							Self.yShaderDispatch = resp.result;
+							// pipe code to yShader function
+							Self.yShaderDispatch(data);
 						});
 				} else {
 					// pipe code to yShader function
-					Self.shaderPipe(value);
+					Self.yShaderDispatch(data);
 				}
 				break;
 			case "reset-code":
