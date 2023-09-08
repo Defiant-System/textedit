@@ -142,6 +142,7 @@
 				Spawn.dialog.open({
 					txt: fsItem => Self.dispatch(fsItem),
 					md: fsItem => Self.dispatch(fsItem),
+					y: fsItem => Self.dispatch(fsItem),
 				});
 				break;
 			case "save-file":
@@ -156,6 +157,7 @@
 				Spawn.dialog.saveAs(Tabs.file, {
 					txt: () => Tabs.active.file.toBlob({ kind: "txt" }),
 					md: () => Tabs.active.file.toBlob({ kind: "md" }),
+					y: () => Tabs.active.file.toBlob({ kind: "y" }),
 				});
 				break;
 			case "new-spawn":
@@ -197,6 +199,13 @@
 				Tabs.els.content.toggleClass("show-ruler", value);
 				break;
 
+			case "yshader-close":
+				// restore icon
+				event.el.removeClass("running");
+				// delete referemce
+				delete Self.yShaderDispatch;
+				break;
+
 			case "run-code":
 				if (event.el.hasClass("running")) {
 					// restore icon
@@ -213,6 +222,9 @@
 				data = {
 					type: "run-shader",
 					code: editor.doc.getValue(),
+					callback: Self.dispatch,
+					spawn: Spawn,
+					el: event.el,
 				};
 
 				if (!Self.yShaderDispatch) {
