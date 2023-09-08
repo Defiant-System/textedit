@@ -242,6 +242,13 @@ content {
 		}
 
 		// markdown file
+		&[data-kind="y"] {
+			.page > div[contenteditable="true"] {
+				position: relative;
+				display: block;
+			}
+		}
+
 		&[data-kind="y"],
 		&[data-kind="md"] {
 			h1 { font-size: 40px; }
@@ -254,6 +261,12 @@ content {
 			b, strong { font-weight: 600; }
 			ul { list-style-type: disc; }
 			ol { list-style-type: decimal; }
+
+			pre {
+				position: relative;
+				width: 100%;
+			}
+
 			code {
 				font-family: monospace;
 				padding: 0 5px;
@@ -269,6 +282,7 @@ content {
 
 					pre {
 						margin: initial;
+						width: auto;
 					}
 
 					.block-tools {
@@ -317,40 +331,6 @@ content {
 							&[data-click="reset-code"]:before { background-image: url(~/icons/icon-reset-code.png); }
 							&[data-click="run-code"]:before { background-image: url(~/icons/icon-run-code.png); }
 							&.running:before { background-image: url(~/icons/icon-pause-code.png); }
-						}
-					}
-
-					div[data-click="toggle-code"] {
-						//display: none;
-						position: absolute;
-						top: 7px;
-						right: 7px;
-						width: 27px;
-						height: 27px;
-						background: #fff;
-						border: 1px solid rgba(0,0,0,0.15);
-						border-radius: 50%;
-						cursor: pointer;
-						z-index: 99999;
-
-						&:hover {
-							&:before {
-								border-left-color: #333;
-								border-right-color: #333;
-							}
-						}
-
-						&:before {
-							content: '';
-							position: absolute;
-							top: 6.5px;
-							left: 8.5px;
-							display: block;
-							width: 0;
-							height: 0;
-							border-top: 6px solid transparent;
-							border-bottom: 6px solid transparent;
-							border-left: 10px solid #666;
 						}
 					}
 				}

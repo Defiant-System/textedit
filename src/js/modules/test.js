@@ -3,12 +3,18 @@ let Test = {
 	init(APP, spawn) {
 		// TODO: Test with TABLE between pages
 
+		return;
 		// this.dialog(spawn);
 
 		// setTimeout(() => spawn.find(`.btn[data-click="open-filesystem"]`).trigger("click"), 400);
 		// setTimeout(() => spawn.find(`.fs-folder-select`).trigger("click"), 800);
 		// setTimeout(() => spawn.find(`.fs-extension-select_`).trigger("click"), 800);
-		setTimeout(() => spawn.find(`code .block-tools div[data-click="run-code"]`).trigger("click"), 500);
+		setTimeout(() => {
+			spawn.find(`code .block-tools div[data-click="run-code"]`).trigger("click")
+
+			setTimeout(() => spawn.find(`code .block-tools div[data-click="run-code"]`).trigger("click"), 1500);
+		}, 500);
+		
 
 		// setTimeout(() => $(".def-desktop_").trigger("mousedown").trigger("mouseup"), 300);
 
