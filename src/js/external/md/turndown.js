@@ -97,7 +97,8 @@ var TurndownService = (function () {
 			if (options.headingStyle === 'setext' && hLevel < 3) {
 				var underline = repeat((hLevel === 1 ? '=' : '-'), content.length);
 				return (
-					'\n\n' + content + '\n' + underline + '\n\n'
+					// '\n\n' + content + '\n' + underline + '\n\n'
+					'\n\n## ' + content + '\n'
 				)
 			} else {
 				return '\n\n' + repeat('#', hLevel) + ' ' + content + '\n'

@@ -193,13 +193,19 @@
 			case "toggle-view-mode":
 				value = event.el.hasClass("tool-active_");
 				if (value) {
-					console.log("preview");
+					el = Tabs.active.file._el
+							.removeClass("md-mode")
+							.find(".page div[data-id]");
+					data = Markdown.toHTML(el.find(" > pre").text());
+					el.html(data);
 				} else {
 					Tabs.active.file
 						.toBlob({ kind: "y" })
 						.text().then(text => {
-							// Tabs.active.file.el
-							console.log(text);
+							Tabs.active.file._el
+								.addClass("md-mode")
+								.find(".page div[data-id]")
+								.html(`<pre>${text}</pre>`);
 						});
 				}
 				return !value;

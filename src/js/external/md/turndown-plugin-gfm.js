@@ -36,6 +36,15 @@ function strikethrough (turndownService) {
 	});
 }
 
+function horizontalRule (turndownService) {
+	turndownService.addRule('horizontalRule', {
+		filter: ['hr'],
+		replacement: function () {
+			return '---'
+		}
+	});
+}
+
 var indexOf = Array.prototype.indexOf;
 var every = Array.prototype.every;
 var rules = {};
@@ -149,6 +158,7 @@ function gfm (turndownService) {
 	turndownService.use([
 		highlightedCodeBlock,
 		strikethrough,
+		horizontalRule,
 		tables,
 		taskListItems
 	]);
@@ -157,6 +167,7 @@ function gfm (turndownService) {
 exports.gfm = gfm;
 exports.highlightedCodeBlock = highlightedCodeBlock;
 exports.strikethrough = strikethrough;
+exports.horizontalRule = horizontalRule;
 exports.tables = tables;
 exports.taskListItems = taskListItems;
 
