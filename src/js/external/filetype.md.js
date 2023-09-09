@@ -11,8 +11,9 @@ let service = new TurndownService();
 service.use(turndownPluginGfm.gfm);
 
 exports.toHTML = turnUp;
-exports.fromHTML = service.turndown;
+exports.fromHTML = service.turndown.bind(service);
 
 return exports;
 
 })({});
+

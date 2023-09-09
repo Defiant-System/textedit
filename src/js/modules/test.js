@@ -3,6 +3,7 @@ let Test = {
 	init(APP, spawn) {
 		// TODO: Test with TABLE between pages
 
+		setTimeout(() => spawn.find(`.toolbar-tool_[data-click="toggle-view-mode"]`).trigger("click"), 500);
 		return;
 		// this.dialog(spawn);
 

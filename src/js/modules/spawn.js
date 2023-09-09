@@ -150,7 +150,7 @@
 					return Self.dispatch({ ...event, type: "save-file-as" });
 				}
 				return Tabs.active.file.toBlob();
-				window.dialog.save(Tabs.active.file, Tabs.active.file.toBlob());
+				// window.dialog.save(Tabs.active.file, Tabs.active.file.toBlob());
 				break;
 			case "save-file-as":
 				// pass on available file types
@@ -190,7 +190,19 @@
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;
-
+			case "toggle-view-mode":
+				value = event.el.hasClass("tool-active_");
+				if (value) {
+					console.log("preview");
+				} else {
+					Tabs.active.file
+						.toBlob({ kind: "y" })
+						.text().then(text => {
+							// Tabs.active.file.el
+							console.log(text);
+						});
+				}
+				return !value;
 			case "set-layout":
 				Tabs.els.content.removeClass("page-view web-view y-book").addClass(event.arg);
 				break;
