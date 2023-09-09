@@ -18,6 +18,8 @@
 			<Tool symbol="icon-justify-right" click="editor.format" arg="justifyright"/>
 			<Tool symbol="icon-justify-full" click="editor.format" arg="justifyfull"/>
 		</Options>
+		<Divider />
+		<Tool symbol="icon-code" click="toggle-code-view"/>
 	</Group>
 	<Group>
 		<Tool symbol="icon-cogs" menu="file-preferences"/>

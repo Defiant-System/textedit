@@ -7,7 +7,8 @@
 // You can find some technical background for some of the code below
 // at http://marijnhaverbeke.nl/blog/#cm-internals .
 
-let CodeMirror = (function (global) { 'use strict';
+let CodeMirror = (function (global) {
+	'use strict';
 
 // Kludges for bugs and behavior differences that can't be feature
 // detected are enabled based on userAgent etc sniffing.

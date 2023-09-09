@@ -101,6 +101,15 @@
 		<rect x="1" y="10" class="st0" width="11" height="1"/>
 	</svg>
 
+	<svg id="icon-code" viewBox="0 0 13 13">
+		<style type="text/css">
+			.st0{fill:#333;}
+		</style>
+		<path class="st0" d="M8.6,8.9l1,1L13,6.5L9.6,3l-1,1l2.4,2.4L8.6,8.9z"/>
+		<path class="st0" d="M4.4,4.1l-1-1L0,6.5L3.4,10l1-1L2.1,6.5L4.4,4.1z"/>
+		<path class="st0" d="M7.2,2.6l0.7,0.2l-2.1,7.7l-0.7-0.2L7.2,2.6L7.2,2.6z"/>
+	</svg>
+
 	<svg id="icon-cogs" viewBox="0 0 13 13">
 		<style type="text/css">
 			.st0{fill:#333;}
