@@ -1,5 +1,20 @@
 /* BASICS */
 
+&[data-theme="dark"] {
+	.CodeMirror {
+		background: rgba(#fff,.075);
+		color: #ddd;
+	}
+
+	/* GUTTER */
+	.CodeMirror-gutters {
+		border-right-color: #111;
+	}
+	.CodeMirror-linenumber {
+		color: #111;
+	}
+}
+
 .CodeMirror {
 	/* Set height, width, borders, and global font properties here */
 	font-family: monospace;
@@ -26,7 +41,6 @@
 }
 
 /* GUTTER */
-
 .CodeMirror-gutters {
 	border-right: 1px solid #ddd;
 	white-space: nowrap;
