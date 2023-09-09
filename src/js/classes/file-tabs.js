@@ -65,6 +65,30 @@ class FileTabs {
 		return this._active.file.toBlob(this._active.fileEl, opt);
 	}
 
+	applyCodeBlocks(file, page) {
+		page.find(`pre > code[class*="language-y-"]`).map(el => {
+			let uuid = $.uuidv4(),
+				[a, b, lang] = el.className.split('-'),
+				code = el.textContent,
+				cmOptions = {
+			        mode: this._cm.types[lang],
+			        gutters: this._cm.gutterOptions,
+					extraKeys: this._cm.extraKeys,
+					lineWrapping: false,
+					lineNumbers: true,
+				};
+			// append textarea
+			el = $(el).data({ uuid }).html(`<textarea>${code}</textarea>`);
+			// save reference to editor in file
+			file._editors[uuid] = CodeMirror.fromTextArea(el.find("textarea")[0], cmOptions);
+			// "remote" controls
+			el.append(`<div class="block-tools">
+					<div data-click="run-code"></div>
+					<div data-click="reset-code"></div>
+				</div>`);
+		});
+	}
+
 	add(fsFile) {
 		if (fsFile.new) {
 			let tId = "f"+ Date.now(),
@@ -92,27 +116,7 @@ class FileTabs {
 			pageEl.html(file.data);
 			// file type is "Y", activate codemirror
 			if (file.kind === "y") {
-				pageEl.find(`pre > code[class*="language-y-"]`).map(el => {
-					let uuid = $.uuidv4(),
-						[a, b, lang] = el.className.split('-'),
-						code = el.textContent,
-						cmOptions = {
-					        mode: this._cm.types[lang],
-					        gutters: this._cm.gutterOptions,
-							extraKeys: this._cm.extraKeys,
-							lineWrapping: false,
-							lineNumbers: true,
-						};
-					// append textarea
-					el = $(el).data({ uuid }).html(`<textarea>${code}</textarea>`);
-					// save reference to editor in file
-					file._editors[uuid] = CodeMirror.fromTextArea(el.find("textarea")[0], cmOptions);
-					// "remote" controls
-					el.append(`<div class="block-tools">
-							<div data-click="run-code"></div>
-							<div data-click="reset-code"></div>
-						</div>`);
-				});
+				this.applyCodeBlocks(file, pageEl);
 			}
 
 			// bind event handler

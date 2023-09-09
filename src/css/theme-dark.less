@@ -90,6 +90,25 @@
 				color: var( --content-text );
 				text-shadow: 0 1px 0 rgba(0,0,0,.125);
 			}
+
+			&[data-kind="y"],
+			&[data-kind="md"] {
+				hr {
+					// background-image: linear-gradient(-45deg,
+					// 	transparent 0%, transparent 12.5%,
+					// 	#555 12.5%, #555 25%,
+					// 	transparent 25%, transparent 37.5%,
+					// 	#555 37.5%, #555 50%,
+					// 	transparent 50%, transparent 62.5%,
+					// 	#555 62.5%, #555 75%,
+					// 	transparent 75%, transparent 87.5%,
+					// 	#555 87.5%);
+
+					&:before {
+						display: none;
+					}
+				}
+			}
 		}
 	}
 

@@ -7,7 +7,12 @@ let Markdown = (exports => {
 @import "./md/turndown.js"
 @import "./md/turndown-plugin-gfm.js"
 
-let service = new TurndownService();
+let opt = {
+		hr: "---",
+		fence: "```",
+		codeBlockStyle: "fenced",
+	};
+let service = new TurndownService(opt);
 service.use(turndownPluginGfm.gfm);
 
 exports.toHTML = turnUp;

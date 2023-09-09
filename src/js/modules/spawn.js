@@ -191,20 +191,29 @@
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;
 			case "toggle-view-mode":
+				file = Tabs.active.file;
 				value = event.el.hasClass("tool-active_");
 				if (value) {
-					el = Tabs.active.file._el
+					el = file._el
 							.removeClass("md-mode")
-							.find(".page div[data-id]");
+							.find(".page > div[data-id]");
 					data = Markdown.toHTML(el.find(" > pre").text());
 					el.html(data);
+					// apply y-book code blocks
+					Tabs.applyCodeBlocks(file, el);
 				} else {
-					Tabs.active.file
+					// first revert codemirror code
+					file._el.find(`pre > code[class*="language-y-"]`).map(elem => {
+						let uuid = elem.getAttribute("data-uuid");
+						elem.innerHTML = file._editors[uuid].doc.getValue();
+					});
+					// now, change HTML to markdown
+					file
 						.toBlob({ kind: "y" })
 						.text().then(text => {
-							Tabs.active.file._el
+							file._el
 								.addClass("md-mode")
-								.find(".page div[data-id]")
+								.find(".page > div[data-id]")
 								.html(`<pre>${text}</pre>`);
 						});
 				}
