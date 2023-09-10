@@ -264,7 +264,7 @@ class FileTabs {
 				// depending on key pressed
 				switch (event.char) {
 					case "left":
-						if (event.caret.isStartColumn) {
+						if (event.caret && event.caret.isStartColumn) {
 							jumpTo = page.prevAll(".page:first");
 							if (jumpTo.length) {
 								let node = jumpTo.find(`div[contenteditable="true"] p:last`)[0].childNodes[0];
@@ -273,7 +273,7 @@ class FileTabs {
 						}
 						break;
 					case "right":
-						if (event.caret.isEndColumn) {
+						if (event.caret && event.caret.isEndColumn) {
 							jumpTo = page.nextAll(".page:first");
 							if (jumpTo.length) {
 								let node = jumpTo.find(`div[contenteditable="true"] p:first`)[0].childNodes[0];
@@ -282,7 +282,7 @@ class FileTabs {
 						}
 						break;
 					case "up":
-						if (event.caret.isFirstLine) {
+						if (event.caret && event.caret.isFirstLine) {
 							jumpTo = page.prevAll(".page:first");
 							if (jumpTo.length) {
 								let node = jumpTo.find(`div[contenteditable="true"] p:last`)[0].childNodes[0];
@@ -291,7 +291,7 @@ class FileTabs {
 						}
 						break;
 					case "down":
-						if (event.caret.isEndLine) {
+						if (event.caret && event.caret.isEndLine) {
 							jumpTo = page.nextAll(".page:first");
 							if (jumpTo.length) {
 								let node = jumpTo.find(`div[contenteditable="true"] p:first`)[0].childNodes[0];
