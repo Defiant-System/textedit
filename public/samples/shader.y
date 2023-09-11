@@ -6,7 +6,6 @@ This file is a sample file, demonstrating functionalities of Y-files and its bui
 ## Shader Art Coding Introduction 
 Have you ever looked at a breathtaking digital art piece and deeply wondered how they created that? There are many different approaches to digital art but shaders might be one of the most powerful and versatile when it comes to creative coding. Shaders are like the paint brushes of the digital age. They allow you to turn a blank screen into a stunning animation in real time and they're responsible for the stunning visuals in some of your favorite video games and movies. They can be used by creative developers in order to make 2D and 3D renderings exclusively using code. Their imagination being the only limit shader art coding is all about using mathematical functions and algorithms to manipulate pixels and create incredible visual effects. It's a unique fusion of art and science where creativity and precision collide to produce something truly mesmerizing.
 
-
 ### What are shaders?
 But what are shaders you may ask. In essence shaders are small programs that run on your graphics card and are responsible for calculating the color of each pixel on a canvas. Shaders work by taking inputs such as the position of the current pixel and using them to calculate a single final color using the OpenGL Shading Language or **GLSL** in short. It can be seen as a mathematical function that maps a 2D coordinate, the pixel's position represented as X and Y to an output color which in computer graphics is represented by a red green and blue channel. This function is computed in parallel for every pixel on the screen which means that shaders can perform millions of calculations per second to produce stunning real-time graphics. Since discovering shaders about a year ago, I've also made some of my own. It's really fun to learn a new computer graphics technique and make a shader about it. There are so many topics to learn from and so much space for discovery and original creation that it's impossible to get bored. 
 
@@ -84,7 +83,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     vec2 uv = fragCoord / iResolution.xy * 2.0 - 1.0;
     
     float d = length(uv);
-  
+    
     fragColor = vec4(d, 0.0, 0.0, 1.0);
 }
 ```
@@ -100,7 +99,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     uv.x *= iResolution.x / iResolution.y;
     
     float d = length(uv);
-  
+    
     fragColor = vec4(d, 0.0, 0.0, 1.0);
 }
 ```
@@ -116,7 +115,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     
     float d = length(uv);
     d -= 0.5;
-  
+    d = abs(d);
+    
     fragColor = vec4(d, d, d, 1.0);
 }
 ```
@@ -126,24 +126,134 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 To achieve a sharper transition we can utilize the `step` function. It accepts two input parameters a threshold and a value and its output can only have two states. It will always return **0** when the value is less than the threshold and **1** otherwise. By applying the step function to the `d` value with a threshold of **0.1** all pixels with a `d` value less than **0.1** will be assigned the color black. While all other pixels will be assigned the color white creating a distinct ring shape.
 
 
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    
+    float d = length(uv);
+    d -= 0.5;
+    d = abs(d);
+    d = step(0.1, d);
+    
+    fragColor = vec4(d, d, d, 1.0);
+}
+```
+
+
 ### smoothstep()
 However if we want a smoother transition between black and white we can utilize the wonderful and magical `smoothstep` function. It is similar to the step function but this time takes two threshold values. It assigns the color black when the parameter is below the first threshold and white when it exceeds the second threshold. Within the threshold range it smoothly interpolates the values between **0** and **1**. This gives us complete control over the range and sharpness of the transition. By using this function we can achieve a seamless gradient from black to white between the values of **0** and **0.1**.
+
+
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    
+    float d = length(uv);
+    d -= 0.5;
+    d = abs(d);
+    d = smoothstep(0.0, 0.1, d);
+    
+    fragColor = vec4(d, d, d, 1.0);
+}
+```
 
 
 ### sin() and iTime
 Now instead of subtracting **0.5** from the original distance, I will apply the `sin` function to it in order to create a radial repetition of the rings. Currently it only displays a single dot because the sign of a value between **0** and **1** is very close to the original value resulting in minimal change. However when we increase the frequency of the input value we can better see the oscillating pattern of the `sin` function which ranges from **-1** to **1**, and it allows us to generate repeating rings around the center of the image. Note that multiplying The distance by **8** before applying the sine function stretches the space and alters the color intensity requiring a corresponding division of the output by the same factor. One interesting characteristic of the `sin` function is its repetitive nature. By introducing a **time** component and offsetting the distance before applying the `sin` function we can create an infinite loop of rings that continuously shrink towards the center. In this case I am utilizing a global constant called `iTime` which is an ever increasing float representing the number of seconds that have passed since the beginning of the animation.
 
 
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    
+    float d = length(uv);
+    d = sin(d * 8. + iTime) / 8.;
+    d = abs(d);
+    d = smoothstep(0.0, 0.1, d);
+    
+    fragColor = vec4(d, d, d, 1.0);
+}
+```
+
+
 ### 1/x
 Now that we have a moving pattern let's focus on improving the visual aspect in colors. I really like to use neon colors and the inverse function `1/x` is perfect for achieving that aesthetic. Instead of calculating the final color using the `smoothstep` function on the `d` value, I will take the inverse of `d`. As a result the screen will become entirely white. So let's take a closer look at the graph of the function to understand what's happening. The graph shows a curve with extremely high outputs for low input values, that gradually diminishes as the values increase. Since we are working in clip space any output value greater than one will be displayed as white and the curve tells us that this is happening if we're taking the inverse of any number that is less than one. However after passing through the sine and absolute functions `d` now ranges strictly from **0** to **1**. Consequently the output can only ever be white. To address this issue we can scale down the inverse function to ensure that the falloff is visible within our desired range of **0** to **1**. It's still a bit much so let's scale it down even further and now we can see a pleasant glow emanating from the rings.
 
 
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    
+    float d = length(uv);
+    d = sin(d * 8. + iTime) / 8.;
+    d = abs(d);
+    d = 0.02 / d;
+    
+    fragColor = vec4(d, d, d, 1.0);
+}
+```
+
+
 ### Add colors
-Now let's introduce some color into the composition. I will create a new `VEC3` variable that will initially contain red. By multiplying this color variable with the value of `d` and making it the new shader output. The black areas will remain black, while the white areas will be tinted with the corresponding color value. Also here our calculations are not limited to the **0** **1** range. We can intensify the colors by setting certain components to higher values. In this case the blue channel has the highest value which produces a vibrant blue tint in the final result. To add even more variety to the colors, I will use a very nice function that you can also find on the previous website, and that allows you to create infinitely various color gradients using the power of trigonometry. It produces a color output based on four control parameters of type `VEC3` which are passed as inputs. These per parameters dictate the composition of the gradient, enabling you to customize the colors to suit your preferences. While the function may appear complex with its total of **12** parameters, another website exists that has a user-friendly interface allowing you to visually create your own palettes, and gain a better understanding of how the function operates. After playing for a bit I found a specific palette that I like and I can use the values provided at the bottom of the page to update my code. These values correspond to the `a` `b` `c` and `d` parameters in our palette function. Instead of passing these parameters as inputs to the function I will declare them directly inside the function by creating four new vectors that correspond to the palette I created. With this modification I can replace our constant color with the palette function. It takes our original distance to the center of the screen as input before any transformations. This simple adjustment already adds a captivating and dynamic range of colors to our composition. To enhance readability I will hide the palette function. Afterward I will proceed to adjust the input to the palette by adding a time offset to it. This modification will bring additional dynamism to the colors as the gradient will continuously shift and evolve.
+Now let's introduce some color into the composition. I will create a new `VEC3` variable that will initially contain red. By multiplying this color variable with the value of `d` and making it the new shader output. The black areas will remain black, while the white areas will be tinted with the corresponding color value. Also here our calculations are not limited to the **0** **1** range. We can intensify the colors by setting certain components to higher values. In this case the blue channel has the highest value which produces a vibrant blue tint in the final result. To add even more variety to the colors, I will use a very nice function that you can also find on the previous website, and that allows you to create infinitely various color gradients using the power of trigonometry. It produces a color output based on four control parameters of type `VEC3` which are passed as inputs. These per parameters dictate the composition of the gradient, enabling you to customize the colors to suit your preferences. While the function may appear complex with its total of **12** parameters, another [website exists](http://dev.thi.ng/gradients/) that has a user-friendly interface allowing you to visually create your own palettes, and gain a better understanding of how the function operates. After playing for a bit I found a specific palette that I like and I can use the values provided at the bottom of the page to update my code. These values correspond to the `a` `b` `c` and `d` parameters in our palette function. Instead of passing these parameters as inputs to the function I will declare them directly inside the function by creating four new vectors that correspond to the palette I created. With this modification I can replace our constant color with the palette function. It takes our original distance to the center of the screen as input before any transformations. This simple adjustment already adds a captivating and dynamic range of colors to our composition. To enhance readability I will hide the palette function. Afterward I will proceed to adjust the input to the palette by adding a time offset to it. This modification will bring additional dynamism to the colors as the gradient will continuously shift and evolve.
+
+
+```y-glsl
+vec3 palette( float t ) {
+    vec3 a = vec3(0.5, 0.5, 0.5);
+    vec3 b = vec3(0.5, 0.5, 0.5);
+    vec3 c = vec3(1.0, 1.0, 1.0);
+    vec3 d = vec3(0.263, 0.416, 0.557);
+
+    return a + b * cos( 6.28318 * (c * t + d) );
+}
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    float d = length(uv);
+    vec3 col = palette(d + iTime);
+    
+    d = sin(d * 8. + iTime) / 8.;
+    d = abs(d);
+    d = 0.02 / d;
+    
+    col *= d;
+    
+    fragColor = vec4(col, 1.0);
+}
+```
 
 
 ### fract()
 Now let's introduce spatial repetition using the `fract` function which is perfect for this purpose. The `fract` function simply returns the fractional part of its input, extracting only the digits after the decimal point. As a result, its output ranges from **0** to **1**. But even if the space has been repeated it seems that something is not working as expected. To understand the issue let's display back only the value of our UV variable. We successfully achieved repetition by creating four smaller versions of our original UV coordinates. However each repetition is now confined within the **0** **1** range instead of the desired clip space. To resolve this we can apply the same solution as before. Scaling the UV's first and then subtracting **0.5** to center them. We finally have nicely repeated the space and we can also shorten all these operations into a single line for brevity. Now `d` represents the local distance relative to the center of each repetition but I'd like to keep track of the original distance to the center of the canvas. I will create a new `VEC2` called `uv0` and assign it the value of our UV coordinates before space repetition has been applied. This will allow us to replace `d` inside the palette by the length of our original UV coordinates which will break the local gradient repetition. It's now time to add the final touch that will give our composition its fractal appearance iterations. Before we proceed, let's slightly rewrite the code for what will follow up. I will create a new `VEC3` variable called final `color` and initialize it with black. Instead of updating the call value directly I will add the result of this operation to our new `color` variable. Finally we will output this final color as the result of our shader. This modification doesn't change the visuals but it sets the stage for adding iterations to our code.
+
+
+```y-glsl
+vec3 palette( float t ) {
+    vec3 a = vec3(0.5, 0.5, 0.5);
+    vec3 b = vec3(0.5, 0.5, 0.5);
+    vec3 c = vec3(1.0, 1.0, 1.0);
+    vec3 d = vec3(0.263, 0.416, 0.557);
+
+    return a + b * cos( 6.28318 * (c * t + d) );
+}
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    uv = fract(uv);
+    
+    float d = length(uv);
+    vec3 col = palette(d + iTime);
+    
+    d = sin(d * 8. + iTime) / 8.;
+    d = abs(d);
+    d = 0.02 / d;
+    
+    col *= d;
+    
+    fragColor = vec4(col, 1.0);
+}
+```
 
 
 ### Iterations
@@ -157,6 +267,37 @@ I will multiply `d` which is the local distance to the center of each repetition
 ### pow()
 As a final touch let's utilize the power function to enhance the overall contrast of the image. When the input ranges from **0** to **1** the `pow` function effectively accentuates the darker colors closer to zero while having a lesser effect on the lighter shades. Although taking the power of two may seem excessive, smaller values such as **1.2** can significantly improve the contrast and visual impact of the composition.
 
+
+```y-glsl
+vec3 palette( float t ) {
+    vec3 a = vec3(0.5, 0.5, 0.5);
+    vec3 b = vec3(0.5, 0.5, 0.5);
+    vec3 c = vec3(1.0, 1.0, 1.0);
+    vec3 d = vec3(0.263, 0.416, 0.557);
+
+    return a + b * cos( 6.28318 * (c * t + d) );
+}
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    vec2 uv0 = uv;
+    vec3 finalColor = vec3(0.0);
+    
+    for (float i = 0.0; i < 4.0; i++) {
+        uv = fract(uv * 1.5) - 0.5;
+        float d = length(uv) * exp(-length(uv0));
+        vec3 col = palette(length(uv0) + i * .4 + iTime * .4);
+
+        d = sin(d * 8. + iTime) / 8.;
+        d = abs(d);
+        d = pow(0.01 / d, 1.2);
+
+        finalColor += col * d;
+    }
+        
+    fragColor = vec4(finalColor, 1.0);
+}
+```
 
 ### Conclusion
 We could go on and on introducing new functions and new variations to our animation as the **GLSL** language offers limitless possibilities. But I'm happy with these results and sometimes it is also important to recognize when to pause. Take a moment to appreciate what we have created. Reflect on what we have learned and approach new ideas with a fresh and blank canvas.
