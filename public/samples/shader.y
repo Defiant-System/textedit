@@ -240,11 +240,11 @@ vec3 palette( float t ) {
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
-    uv = fract(uv);
-    
+    vec2 uv0 = uv;
+    uv = fract(uv * 2.0) - 0.5;
+
     float d = length(uv);
-    vec3 col = palette(d + iTime);
-    
+    vec3 col = palette(length(uv0) + iTime);
     d = sin(d * 8. + iTime) / 8.;
     d = abs(d);
     d = 0.02 / d;
@@ -260,8 +260,72 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 To achieve this we will utilize a `for` loop which is a common algorithmic structure found in many programming languages that allows us to repeat instructions. We will encapsulate our entire color calculation code within this loop. At this stage this simple loop won't produce any visible changes in the visuals as it will exit after just one iteration. By increasing the number of iterations we can observe the emergence of additional layers and intricate details in our fractal pattern. However as the complexity intensifies it may become visually overwhelming. To mitigate this I will reduce the frequency of the time offset. Iterating this code generates interesting patterns because each iteration involves scaling and repeating the space using the fract function and adds the resulting colors together. However the perfect matching of repetitions caused by multiplying by exactly two makes these repetitions match up a bit too well. To introduce more visual interest I will break this symmetry by multiplying with a decimal number instead. I will make use of the exponential function to increase the variations further.
 
 
+```y-glsl
+vec3 palette( float t ) {
+    vec3 a = vec3(0.5, 0.5, 0.5);
+    vec3 b = vec3(0.5, 0.5, 0.5);
+    vec3 c = vec3(1.0, 1.0, 1.0);
+    vec3 d = vec3(0.263, 0.416, 0.557);
+
+    return a + b * cos( 6.28318 * (c * t + d) );
+}
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    vec2 uv0 = uv;
+    vec3 finalColor = vec3(0.0);
+
+    for (float i = 0.0; i < 2.0; i++) {
+        uv = fract(uv * 1.5) - 0.5;
+
+        float d = length(uv) * exp(-length(uv0));
+        vec3 col = palette(length(uv0) + iTime);
+        d = sin(d * 8. + iTime) / 8.;
+        d = abs(d);
+        d = 0.01 / d;
+        
+        finalColor += col * d;
+    }
+
+    fragColor = vec4(finalColor, 1.0);
+}
+```
+
+
 ### exp()
 I will multiply `d` which is the local distance to the center of each repetition by an exponential function depending on the global distance to the center of the canvas. To try and understand how this works I will make use of yet another website called [graph toy](https://graphtoy.com/) that was specifically designed to graph **GLSL** functions. I will display the identity function as a reference along with the exponential function. Actually we're interested in the exponential of negative `x` we can see that it displays a similar behavior to `1/x` that we used earlier but this time doesn't go to infinity at zero. By multiplying the original `x` value with this function we introduce a smooth and distinctive behavior to our final curve which blends well with the other effects in our current animation. Considering the current brightness intensity I will further reduce the fall off of the inverse function to achieve a more balanced effect. Additionally let's explore the idea of incorporating `i` into the loops calculations. This will introduce additional variation to each layer. To achieve this I will include `i` as part of the input to our color palette function resulting in slight color offsets after each iteration. With the improved visual quality I believe it is appropriate to introduce an additional iteration to enhance the creation of smaller details.
+
+
+```y-glsl
+vec3 palette( float t ) {
+    vec3 a = vec3(0.5, 0.5, 0.5);
+    vec3 b = vec3(0.5, 0.5, 0.5);
+    vec3 c = vec3(1.0, 1.0, 1.0);
+    vec3 d = vec3(0.263, 0.416, 0.557);
+
+    return a + b * cos( 6.28318 * (c * t + d) );
+}
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    vec2 uv0 = uv;
+    vec3 finalColor = vec3(0.0);
+
+    for (float i = 0.0; i < 2.0; i++) {
+        uv = fract(uv * 1.5) - 0.5;
+
+        float d = length(uv) * exp(-length(uv0));
+        vec3 col = palette(length(uv0) + i * 0.4 + iTime);
+        d = sin(d * 8. + iTime) / 8.;
+        d = abs(d);
+        d = pow(0.01 / d, 1.2);
+        
+        finalColor += col * d;
+    }
+
+    fragColor = vec4(finalColor, 1.0);
+}
+```
 
 
 ### pow()
