@@ -7,21 +7,6 @@ This file is a sample file, demonstrating functionalities of Y-files and its bui
 Have you ever looked at a breathtaking digital art piece and deeply wondered how they created that? There are many different approaches to digital art but shaders might be one of the most powerful and versatile when it comes to creative coding. Shaders are like the paint brushes of the digital age. They allow you to turn a blank screen into a stunning animation in real time and they're responsible for the stunning visuals in some of your favorite video games and movies. They can be used by creative developers in order to make 2D and 3D renderings exclusively using code. Their imagination being the only limit shader art coding is all about using mathematical functions and algorithms to manipulate pixels and create incredible visual effects. It's a unique fusion of art and science where creativity and precision collide to produce something truly mesmerizing.
 
 
-```y-glsl
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
-{
-    // Normalized pixel coordinates (from 0 to 1)
-    vec2 uv = fragCoord / iResolution.xy;
-
-    // Time varying pixel color
-    vec3 col = 0.5 + 0.5 * cos(iTime + uv.xyx + vec3(0, 2, 4));
-
-    // Output to screen
-    fragColor = vec4(col, 1.0);
-}
-```
-
-
 ### What are shaders?
 But what are shaders you may ask. In essence shaders are small programs that run on your graphics card and are responsible for calculating the color of each pixel on a canvas. Shaders work by taking inputs such as the position of the current pixel and using them to calculate a single final color using the OpenGL Shading Language or **GLSL** in short. It can be seen as a mathematical function that maps a 2D coordinate, the pixel's position represented as X and Y to an output color which in computer graphics is represented by a red green and blue channel. This function is computed in parallel for every pixel on the screen which means that shaders can perform millions of calculations per second to produce stunning real-time graphics. Since discovering shaders about a year ago, I've also made some of my own. It's really fun to learn a new computer graphics technique and make a shader about it. There are so many topics to learn from and so much space for discovery and original creation that it's impossible to get bored. 
 
@@ -39,6 +24,13 @@ Each shader is defined inside the `mainImage` function and has only two paramete
 ### Display colors
 `fragColor` is the output parameter and it is of type `VEC4`, because it holds the red green and blue channels as well as an additional alpha channel which stands for the transparency of the pixel. Let's assign a value to that output parameter here we set `fragColor` to a vector of four components using the `VEC4` keyword, then specifying each component's value. The fourth value is the alpha channel. It has no effect in Shadertoy, so I'll keep it to one. In **GLSL** the output color is normalized meaning that each channel ranges from 0 to 1. By setting all channels to zero the output is full black.
 
+
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    fragColor = vec4(0.0, 0.0, 0.0, 1.0);
+}
+```
+
 Remember that this code is ran for every pixel to determine its color. Here the output color is a constant so it will display a uniform black color across the screen. Similarly by setting all three channels to one we can display full white. By playing with all the possible values for all three channels we can produce millions of unique colors. I should also mention that there is a nice chrome extension for Shadertoy that provides some useful features like this color picker that allow you to convert colors to vectors easily. It's called the Shadertoy unofficial plugin.
 
 
@@ -50,24 +42,84 @@ Now let's use the value of the input parameter in order to start seeing some bet
 Fortunately there's a global constant provided by Shadertoy called `iResolution`. It's a vector of three components holding the current canvas size in pixels. The first two components are the width and height of the output texture and the third component is the depth and is only used when rendering to 3D textures. As we're rendering on a 2d canvas we won't use the depth here and the `.xy` syntax is used to isolate the width and height components of the resolution. So that the division happens between vectors of the same size. I'd like to pause for a second here to discuss an important concept widely used in **GLSL** called swizzling. Writing `iRresolution.xy` is equivalent to creating a new `VEC2` and assigning to it the `x` and `y` components of `iResolution` respectively. This concept can be extended further. For instance if we wanted to create a new vector containing only the `y` and `z` components, but in reverse order we could simply write `iResolution.zy`. These swizzling syntaxes are valid in **GLSL** and allow you to easily create arrange and reorder vectors into new ones. It's also important to note that applying the same operation to every corresponding component of the vectors. So let's check if it worked.
 
 
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = fragCoord / iResolution.xy;
+    
+    fragColor = vec4(uv.x, 0.0, 0.0, 1.0);
+}
+```
+
 ### UV Coordinates
 I will display the `x` value of this new vector in the red channel only keeping green and blue to zero. We can observe a red gradient that aligns with the fact that the UV `.x` value linearly ranges from 0 to 1 as we move from the left to the right side of the canvas. In a similar way if we display the y-coordinate this time in the green channel only we'll see a green gradient going from the bottom to the top. Now let's display both components at the same time in the red and green channels respectively. The bottom left corner is black because both components are zero and in the top right corner both red and green channels are at one which produces yellow. All other pixel colors contain nuances of red and green that visually represent the value of the UV coordinates. Note that in **GLSL** we can simplify the following expression by merging the first two channels into one and directly writing UV as it contains two values. Now let's start to transform the space in a way that is more convenient to work with.
 
 
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = fragCoord / iResolution.xy;
+    
+    fragColor = vec4(uv.x, uv.y, 0.0, 1.0);
+}
+```
+
 ### Center UVs
 Right now our UV coordinates range between **0** and **1**. Meaning that the center pixel coordinate is **0.5**, **0.5**. But it would be preferable to have it exactly at zero zero so the center of the canvas matches with the center of our coordinate space. In order to fix that we can first subtract **0.5** to each component of our `uvVector`. This will shift the space to the upper right and effectively center it. However the corners of the canvas now range from **-0.5** to **0.5** instead of ranging from **-1** to **1**, like we wanted at the start. To achieve this we can multiply the coordinates by 2, resulting in the center remaining at **0** **0** while doubling the UV values of all other pixels to ensure they fit within clip space. As a final step we can clean up the code by condensing it into a single line and eliminating the parentheses. Now that we have this foundation our objective will be to write instructions based on the current pixel coordinate display interesting renderings. There are a multitude of **GLSL** functions at our disposal and in this tutorial we will explore a selection of them.
+
+
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = fragCoord / iResolution.xy * 2.0 - 1.0;;
+
+    fragColor = vec4(uv, 0.0, 1.0);
+}
+```
 
 
 ### length()
 We will start by exploring the `length` function. This function takes a vector as its input and calculates the magnitude of that vector. Essentially it calculates the distance between the vector and the origin. Since we have centered our origin we can utilize the `length` function to calculate the distance between any given pixel and the center of the screen by passing in our `uvVector`. This can prove to be extremely useful when creating complex and dynamic renderings. I will create a float value which unlike vectors contains one single decimal number and assign the length of our UV coordinates to it. By setting the red channel of the output color to this value, we can observe a radial gradient expanding from the center. It represents the distance between each pixel and the origin of the canvas transitioning from black to red. Alternatively we can assign this value to all three color channels, creating a grayscale gradient.
 
 
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = fragCoord / iResolution.xy * 2.0 - 1.0;
+    
+    float d = length(uv);
+  
+    fragColor = vec4(d, 0.0, 0.0, 1.0);
+}
+```
+
+
 ### Fix aspect ratio
 But before continuing we need to address an issue with the current code. Everything works fine because our canvas is a square and has an aspect ratio of **1**, meaning the width and height are equal. However if we were to change the aspect ratio by making the canvas wider for example we would notice that the circle gets stretched horizontally. This occurs because our UV values always range from 0 to 1 regardless of the canvas's width and height. To fix this issue we need to multiply the X component of our UVS by the current aspect ratio of the canvas, which is its width divided by its height. This adjustment ensures that we avoid any unwanted stretching or distortion effects even when dealing with different canvas sizes and aspect ratios. To really be efficient we can combine our previous UV transformations with this new fix and rewrite it on a single line using basic math simplifications. Now I will subtract **0.5** from this distance.
 
 
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = fragCoord / iResolution.xy * 2.0 - 1.0;
+    uv.x *= iResolution.x / iResolution.y;
+    
+    float d = length(uv);
+  
+    fragColor = vec4(d, 0.0, 0.0, 1.0);
+}
+```
+
+
 ### Signed Distance Functions
-The expression length UV minus **0.5** actually represents the sine distance function of a circle with a radius of **0.5**. A sign distance function or **SDF** is a term used to describe a function that takes a position in space as input and returns the distance from that position to a given shape. It is called signed because the distance is positive outside the shape negative inside the shape and exactly zero at the boundary of the shape. You can find distance functions for a lot of shapes or even make your own. I've linked in the description this article that provides a collection of useful 2D SDF's for various shapes and this website in general is also a mine of useful tutorials about shader coding. So the gradient we're observing represents the signed distance to a circle with a radius of **0.5**. The values are positive outside the circle's edge which creates a gradient but they are negative inside the circle resulting in black. To verify this let's take the absolute value of this distance using the `ABS` function. This will convert the negative values to positive and now we can observe that the distance increases as we move further away from the circle's edge in both directions.
+The expression length UV minus **0.5** actually represents the sine distance function of a circle with a radius of **0.5**. A sign distance function or **SDF** is a term used to describe a function that takes a position in space as input and returns the distance from that position to a given shape. It is called signed because the distance is positive outside the shape negative inside the shape and exactly zero at the boundary of the shape. You can find distance functions for a lot of shapes or even make your own. I've [linked](https://iquilezles.org/articles/distfunctions2d/) in the description this article that provides a collection of useful 2D SDF's for various shapes and this website in general is also a mine of useful tutorials about shader coding. So the gradient we're observing represents the signed distance to a circle with a radius of **0.5**. The values are positive outside the circle's edge which creates a gradient but they are negative inside the circle resulting in black. To verify this let's take the absolute value of this distance using the `ABS` function. This will convert the negative values to positive and now we can observe that the distance increases as we move further away from the circle's edge in both directions.
+
+
+```y-glsl
+void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    
+    float d = length(uv);
+    d -= 0.5;
+  
+    fragColor = vec4(d, d, d, 1.0);
+}
+```
 
 
 ### step()
