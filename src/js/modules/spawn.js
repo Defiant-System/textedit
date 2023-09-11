@@ -226,6 +226,9 @@
 				Tabs.els.content.toggleClass("show-ruler", value);
 				break;
 
+			case "yshader-play-toggle":
+				event.el.toggleClass("running", !event.play);
+				break;
 			case "yshader-close":
 				// restore icon
 				event.el.removeClass("running");
