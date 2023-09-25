@@ -19,7 +19,7 @@
 			<Tool symbol="icon-justify-full" click="editor.format" arg="justifyfull"/>
 		</Options>
 		<Divider />
-		<Tool symbol="icon-code" click="toggle-view-mode"/>
+		<Tool symbol="icon-code" click="toggle-view-mode" state="disabled"/>
 	</Group>
 	<Group>
 		<Tool symbol="icon-cogs" menu="file-preferences"/>
