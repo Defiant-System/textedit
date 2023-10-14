@@ -302,7 +302,7 @@ class FileTabs {
 						break;
 					default:
 						// console.time(event.type);
-						if (Active && Active.file) Active.file.autoPageBreak();
+						if (Active && Active.file) requestAnimationFrame(() => Active.file.autoPageBreak());
 						// console.timeEnd(event.type);
 				}
 				break;

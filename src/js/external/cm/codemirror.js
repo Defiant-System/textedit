@@ -56,85 +56,104 @@ var rmClass = function(node, cls) {
 }
 
 function removeChildren(e) {
-	for (var count = e.childNodes.length; count > 0; --count)
-		{ e.removeChild(e.firstChild) }
-	return e
+	for (var count = e.childNodes.length; count > 0; --count) {
+		e.removeChild(e.firstChild);
+	}
+	return e;
 }
 
 function removeChildrenAndAdd(parent, e) {
-	return removeChildren(parent).appendChild(e)
+	return removeChildren(parent).appendChild(e);
 }
 
 function elt(tag, content, className, style) {
-	var e = document.createElement(tag)
-	if (className) { e.className = className }
-	if (style) { e.style.cssText = style }
-	if (typeof content == "string") { e.appendChild(document.createTextNode(content)) }
-	else if (content) { for (var i = 0; i < content.length; ++i) { e.appendChild(content[i]) } }
-	return e
+	var e = document.createElement(tag);
+	if (className) e.className = className;
+	if (style) e.style.cssText = style;
+	if (typeof content == "string") e.appendChild(document.createTextNode(content));
+	else if (content) {
+		for (var i = 0; i < content.length; ++i) {
+			e.appendChild(content[i]);
+		}
+	}
+	return e;
 }
 // wrapper for elt, which removes the elt from the accessibility tree
 function eltP(tag, content, className, style) {
-	var e = elt(tag, content, className, style)
-	e.setAttribute("role", "presentation")
-	return e
+	var e = elt(tag, content, className, style);
+	e.setAttribute("role", "presentation");
+	return e;
 }
 
 var range
-if (document.createRange) { range = function(node, start, end, endNode) {
-	var r = document.createRange()
-	r.setEnd(endNode || node, end)
-	r.setStart(node, start)
-	return r
-} }
-else { range = function(node, start, end) {
-	var r = document.body.createTextRange()
-	try { r.moveToElementText(node.parentNode) }
-	catch(e) { return r }
-	r.collapse(true)
-	r.moveEnd("character", end)
-	r.moveStart("character", start)
-	return r
-} }
+if (document.createRange) {
+	range = function(node, start, end, endNode) {
+		var r = document.createRange();
+		r.setEnd(endNode || node, end);
+		r.setStart(node, start);
+		return r;
+	}
+} else {
+	range = function(node, start, end) {
+		var r = document.body.createTextRange();
+		try { r.moveToElementText(node.parentNode); }
+		catch(e) { return r; }
+		r.collapse(true);
+		r.moveEnd("character", end);
+		r.moveStart("character", start);
+		return r;
+	}
+}
 
 function contains(parent, child) {
-	if (child.nodeType == 3) // Android browser always returns false when child is a textnode
-		{ child = child.parentNode }
-	if (parent.contains)
-		{ return parent.contains(child) }
+	if (child.nodeType == 3) {
+		// Android browser always returns false when child is a textnode
+		child = child.parentNode;
+	}
+	if (parent.contains) return parent.contains(child);
 	do {
-		if (child.nodeType == 11) { child = child.host }
-		if (child == parent) { return true }
-	} while (child = child.parentNode)
+		if (child.nodeType == 11) child = child.host;
+		if (child == parent) return true;
+	} while (child = child.parentNode);
 }
 
 function activeElt() {
 	// IE and Edge may throw an "Unspecified Error" when accessing document.activeElement.
 	// IE < 10 will throw when accessed while the page is loading or in an iframe.
 	// IE > 9 and Edge will throw when accessed in an iframe if document.body is unavailable.
-	var activeElement
+	var activeElement;
 	try {
-		activeElement = document.activeElement
+		activeElement = document.activeElement;
 	} catch(e) {
-		activeElement = document.body || null
+		activeElement = document.body || null;
 	}
-	while (activeElement && activeElement.shadowRoot && activeElement.shadowRoot.activeElement)
-		{ activeElement = activeElement.shadowRoot.activeElement }
-	return activeElement
+	while (activeElement && activeElement.shadowRoot && activeElement.shadowRoot.activeElement) {
+		activeElement = activeElement.shadowRoot.activeElement;
+	}
+	return activeElement;
 }
 
 function addClass(node, cls) {
-	var current = node.className
-	if (!classTest(cls).test(current)) { node.className += (current ? " " : "") + cls }
-}
-function joinClasses(a, b) {
-	var as = a.split(" ")
-	for (var i = 0; i < as.length; i++)
-		{ if (as[i] && !classTest(as[i]).test(b)) { b += " " + as[i] } }
-	return b
+	var current = node.className;
+	if (!classTest(cls).test(current)) {
+		node.className += (current ? " " : "") + cls;
+	}
 }
 
-var selectInput = function(node) { node.select() }
+function joinClasses(a, b) {
+	var as = a.split(" ");
+	for (var i = 0; i < as.length; i++) {
+		if (as[i] && !classTest(as[i]).test(b)) {
+			b += " " + as[i];
+		}
+	}
+	return b;
+}
+
+var selectInput = function(node) {
+	node.select();
+}
+
 if (ios) // Mobile Safari apparently has a bug where select() is broken.
 	{ selectInput = function(node) { node.selectionStart = 0; node.selectionEnd = node.value.length } }
 else if (ie) // Suppress mysterious IE10 errors
@@ -1167,8 +1186,14 @@ function signal(emitter, type /*, values...*/) {
 // registering a (non-DOM) handler on the editor for the event name,
 // and preventDefault-ing the event in that handler.
 function signalDOMEvent(cm, e, override) {
-	if (typeof e == "string")
-		{ e = {type: e, preventDefault: function() { this.defaultPrevented = true }} }
+	if (typeof e == "string") {
+		e = {
+			type: e,
+			preventDefault: function() {
+				this.defaultPrevented = true
+			}
+		}
+	}
 	signal(cm, override || e.type, cm, e)
 	return e_defaultPrevented(e) || e.codemirrorIgnore
 }
@@ -3746,8 +3771,9 @@ function startOperation(cm) {
 function endOperation(cm) {
 	var op = cm.curOp
 	finishOperation(op, function (group) {
-		for (var i = 0; i < group.ops.length; i++)
-			{ group.ops[i].cm.curOp = null }
+		for (var i = 0; i < group.ops.length; i++) {
+			group.ops[i].cm.curOp = null
+		}
 		endOperations(group)
 	})
 }
@@ -3769,27 +3795,29 @@ function endOperations(group) {
 }
 
 function endOperation_R1(op) {
-	var cm = op.cm, display = cm.display
-	maybeClipScrollbars(cm)
-	if (op.updateMaxLine) { findMaxLine(cm) }
+	var cm = op.cm,
+		display = cm.display;
+	maybeClipScrollbars(cm);
+	if (op.updateMaxLine) findMaxLine(cm);
 
 	op.mustUpdate = op.viewChanged || op.forceUpdate || op.scrollTop != null ||
 		op.scrollToPos && (op.scrollToPos.from.line < display.viewFrom ||
-											 op.scrollToPos.to.line >= display.viewTo) ||
+								op.scrollToPos.to.line >= display.viewTo) ||
 		display.maxLineChanged && cm.options.lineWrapping
 	op.update = op.mustUpdate &&
-		new DisplayUpdate(cm, op.mustUpdate && {top: op.scrollTop, ensure: op.scrollToPos}, op.forceUpdate)
+		new DisplayUpdate(cm, op.mustUpdate && { top: op.scrollTop, ensure: op.scrollToPos }, op.forceUpdate);
 }
 
 function endOperation_W1(op) {
-	op.updatedDisplay = op.mustUpdate && updateDisplayIfNeeded(op.cm, op.update)
+	op.updatedDisplay = op.mustUpdate && updateDisplayIfNeeded(op.cm, op.update);
 }
 
 function endOperation_R2(op) {
-	var cm = op.cm, display = cm.display
-	if (op.updatedDisplay) { updateHeightsInViewport(cm) }
+	var cm = op.cm,
+		display = cm.display;
+	if (op.updatedDisplay) updateHeightsInViewport(cm);
 
-	op.barMeasure = measureForScrollbars(cm)
+	op.barMeasure = measureForScrollbars(cm);
 
 	// If the max line changed since it was last measured, measure it,
 	// and ensure the document's width matches it.
@@ -3802,8 +3830,9 @@ function endOperation_R2(op) {
 		op.maxScrollLeft = Math.max(0, display.sizer.offsetLeft + op.adjustWidthTo - displayWidth(cm))
 	}
 
-	if (op.updatedDisplay || op.selectionChanged)
-		{ op.preparedSelection = display.input.prepareSelection() }
+	if (op.updatedDisplay || op.selectionChanged) {
+		op.preparedSelection = display.input.prepareSelection();
+	}
 }
 
 function endOperation_W2(op) {
@@ -3832,7 +3861,9 @@ function endOperation_W2(op) {
 }
 
 function endOperation_finish(op) {
-	var cm = op.cm, display = cm.display, doc = cm.doc
+	var cm = op.cm,
+		display = cm.display,
+		doc = cm.doc;
 
 	if (op.updatedDisplay) { postUpdateDisplay(cm, op.update) }
 
@@ -5902,14 +5933,16 @@ function markText(doc, from, to, options, type) {
 	if (marker.addToHistory)
 		{ addChangeToHistory(doc, {from: from, to: to, origin: "markText"}, doc.sel, NaN) }
 
-	var curLine = from.line, cm = doc.cm, updateMaxLine
+	var curLine = from.line,
+		cm = doc.cm,
+		updateMaxLine;
 	doc.iter(curLine, to.line + 1, function (line) {
 		if (cm && marker.collapsed && !cm.options.lineWrapping && visualLine(line) == cm.display.maxLine)
 			{ updateMaxLine = true }
 		if (marker.collapsed && curLine != from.line) { updateLineHeight(line, 0) }
 		addMarkedSpan(line, new MarkedSpan(marker,
-																			 curLine == from.line ? from.ch : null,
-																			 curLine == to.line ? to.ch : null))
+			 curLine == from.line ? from.ch : null,
+			 curLine == to.line ? to.ch : null))
 		++curLine
 	})
 	// lineIsHidden depends on the presence of the spans, so needs a second pass
@@ -7346,7 +7379,9 @@ function leftButtonStartDrag(cm, event, pos, behavior) {
 	cm.state.draggingText = dragEnd
 	dragEnd.copy = !behavior.moveOnDrag
 	// IE's approach to draggable
-	if (display.scroller.dragDrop) { display.scroller.dragDrop() }
+	if (display.scroller.dragDrop) {
+		display.scroller.dragDrop()
+	}
 	on(display.wrapper.ownerDocument, "mouseup", dragEnd)
 	on(display.wrapper.ownerDocument, "mousemove", mouseMove)
 	on(display.scroller, "dragstart", dragStart)
@@ -7587,7 +7622,11 @@ function themeChanged(cm) {
 	clearCaches(cm)
 }
 
-var Init = {toString: function(){return "CodeMirror.Init"}}
+var Init = {
+	toString: function() {
+		return "CodeMirror.Init"
+	}
+};
 
 var defaults = {}
 var optionHandlers = {}
@@ -7822,17 +7861,25 @@ function CodeMirror(place, options) {
 	else
 		{ onBlur(this) }
 
-	for (var opt in optionHandlers) { if (optionHandlers.hasOwnProperty(opt))
-		{ optionHandlers[opt](this$1, options[opt], Init) } }
+	for (var opt in optionHandlers) {
+		if (optionHandlers.hasOwnProperty(opt)) {
+			optionHandlers[opt](this$1, options[opt], Init)
+		}
+	}
 	maybeUpdateLineNumberWidth(this)
-	if (options.finishInit) { options.finishInit(this) }
-	for (var i = 0; i < initHooks.length; ++i) { initHooks[i](this$1) }
+	if (options.finishInit) {
+		options.finishInit(this)
+	}
+	for (var i = 0; i < initHooks.length; ++i) {
+		initHooks[i](this$1)
+	}
 	endOperation(this)
 	// Suppress optimizelegibility in Webkit, since it breaks text
 	// measuring on line wrapping boundaries.
 	if (webkit && options.lineWrapping &&
-			getComputedStyle(display.lineDiv).textRendering == "optimizelegibility")
-		{ display.lineDiv.style.textRendering = "auto" }
+			getComputedStyle(display.lineDiv).textRendering == "optimizelegibility") {
+		display.lineDiv.style.textRendering = "auto"
+	}
 }
 
 // The default configuration options.
@@ -7844,22 +7891,17 @@ CodeMirror.optionHandlers = optionHandlers
 function registerEventHandlers(cm) {
 	var d = cm.display
 	on(d.scroller, "mousedown", operation(cm, onMouseDown))
-	// Older IE's will not fire a second mousedown for a double click
-	if (ie && ie_version < 11)
-		{ on(d.scroller, "dblclick", operation(cm, function (e) {
-			if (signalDOMEvent(cm, e)) { return }
-			var pos = posFromMouse(cm, e)
-			if (!pos || clickInGutter(cm, e) || eventInWidget(cm.display, e)) { return }
-			e_preventDefault(e)
-			var word = cm.findWordAt(pos)
-			extendSelection(cm.doc, word.anchor, word.head)
-		})) }
-	else
-		{ on(d.scroller, "dblclick", function (e) { return signalDOMEvent(cm, e) || e_preventDefault(e); }) }
+	
+	on(d.scroller, "dblclick", function (e) {
+		return signalDOMEvent(cm, e) || e_preventDefault(e);
+	})
+	
 	// Some browsers fire contextmenu *after* opening the menu, at
 	// which point we can't mess with it anymore. Context menu is
 	// handled in onMouseDown for these browsers.
-	if (!captureRightClick) { on(d.scroller, "contextmenu", function (e) { return onContextMenu(cm, e); }) }
+	// if (!captureRightClick) {
+	// 	on(d.scroller, "contextmenu", function (e) { return onContextMenu(cm, e); })
+	// }
 
 	// Used to suppress mouse event handling when a touch happens
 	var touchFinished, prevTouch = {end: 0}
@@ -7880,41 +7922,6 @@ function registerEventHandlers(cm) {
 		var dx = other.left - touch.left, dy = other.top - touch.top
 		return dx * dx + dy * dy > 20 * 20
 	}
-	on(d.scroller, "touchstart", function (e) {
-		if (!signalDOMEvent(cm, e) && !isMouseLikeTouchEvent(e) && !clickInGutter(cm, e)) {
-			d.input.ensurePolled()
-			clearTimeout(touchFinished)
-			var now = +new Date
-			d.activeTouch = {start: now, moved: false,
-											 prev: now - prevTouch.end <= 300 ? prevTouch : null}
-			if (e.touches.length == 1) {
-				d.activeTouch.left = e.touches[0].pageX
-				d.activeTouch.top = e.touches[0].pageY
-			}
-		}
-	})
-	on(d.scroller, "touchmove", function () {
-		if (d.activeTouch) { d.activeTouch.moved = true }
-	})
-	on(d.scroller, "touchend", function (e) {
-		var touch = d.activeTouch
-		if (touch && !eventInWidget(d, e) && touch.left != null &&
-				!touch.moved && new Date - touch.start < 300) {
-			var pos = cm.coordsChar(d.activeTouch, "page"), range
-			if (!touch.prev || farAway(touch, touch.prev)) // Single tap
-				{ range = new Range(pos, pos) }
-			else if (!touch.prev.prev || farAway(touch, touch.prev.prev)) // Double tap
-				{ range = cm.findWordAt(pos) }
-			else // Triple tap
-				{ range = new Range(Pos(pos.line, 0), clipPos(cm.doc, Pos(pos.line + 1, 0))) }
-			cm.setSelection(range.anchor, range.head)
-			cm.focus()
-			e_preventDefault(e)
-		}
-		finishTouch()
-	})
-	on(d.scroller, "touchcancel", finishTouch)
-
 	// Sync scrolling between fake scrollbars and real scrollable
 	// area, ensure viewport is updated when scrolling.
 	on(d.scroller, "scroll", function () {
@@ -7930,7 +7937,9 @@ function registerEventHandlers(cm) {
 	on(d.scroller, "DOMMouseScroll", function (e) { return onScrollWheel(cm, e); })
 
 	// Prevent wrapper from ever scrolling
-	on(d.wrapper, "scroll", function () { return d.wrapper.scrollTop = d.wrapper.scrollLeft = 0; })
+	on(d.wrapper, "scroll", function () {
+		return d.wrapper.scrollTop = d.wrapper.scrollLeft = 0;
+	});
 
 	d.dragFunctions = {
 		enter: function (e) {if (!signalDOMEvent(cm, e)) { e_stop(e) }},
@@ -9587,10 +9596,11 @@ function fromTextArea(textarea, options) {
 		}
 	}
 
-	textarea.style.display = "none"
-	var cm = CodeMirror(function (node) { return textarea.parentNode.insertBefore(node, textarea.nextSibling); },
-		options)
-	return cm
+	textarea.style.display = "none";
+	var cm = CodeMirror(function (node) {
+			return textarea.parentNode.insertBefore(node, textarea.nextSibling);
+		}, options);
+	return cm;
 }
 
 function addLegacyProps(CodeMirror) {
@@ -9644,8 +9654,9 @@ defineOptions(CodeMirror)
 addEditorMethods(CodeMirror)
 
 // Set up methods on CodeMirror's prototype to redirect to the editor's document.
-var dontDelegate = "iter insert remove copy getEditor constructor".split(" ")
-for (var prop in Doc.prototype) { if (Doc.prototype.hasOwnProperty(prop) && indexOf(dontDelegate, prop) < 0)
+var dontDelegate = "iter insert remove copy getEditor constructor".split(" ");
+for (var prop in Doc.prototype) {
+	if (Doc.prototype.hasOwnProperty(prop) && indexOf(dontDelegate, prop) < 0)
 	{ CodeMirror.prototype[prop] = (function(method) {
 		return function() {return method.apply(this.doc, arguments)}
 	})(Doc.prototype[prop]) } }
@@ -9653,8 +9664,10 @@ for (var prop in Doc.prototype) { if (Doc.prototype.hasOwnProperty(prop) && inde
 eventMixin(Doc)
 
 // INPUT HANDLING
-
-CodeMirror.inputStyles = {"textarea": TextareaInput, "contenteditable": ContentEditableInput}
+CodeMirror.inputStyles = {
+	"textarea": TextareaInput,
+	"contenteditable": ContentEditableInput,
+}
 
 // MODE DEFINITION AND QUERYING
 
@@ -9673,7 +9686,6 @@ CodeMirror.defineMode("null", function () { return ({token: function (stream) { 
 CodeMirror.defineMIME("text/plain", "null")
 
 // EXTENSIONS
-
 CodeMirror.defineExtension = function (name, func) {
 	CodeMirror.prototype[name] = func
 }

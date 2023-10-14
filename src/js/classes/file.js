@@ -228,6 +228,9 @@ class File {
 			}
 		}
 
+		// tag all pages with attribute
+		this._el.find(".page").data({ page: "break" });
+
 		// unfreeze scrollbar
 		this._el.removeClass("freeze-scroll").scrollTop(sTop);
 
