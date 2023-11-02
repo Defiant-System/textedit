@@ -4,6 +4,8 @@ let Test = {
 		// TODO: Test with TABLE between pages
 
 		return;
+		// setTimeout(() => $(".def-desktop_").trigger("mousedown").trigger("mouseup"), 600);
+		
 		setTimeout(() => spawn.find(`.toolbar-tool_[data-click="toggle-view-mode"]`).trigger("click"), 500);
 		// this.dialog(spawn);
 
@@ -16,9 +18,6 @@ let Test = {
 			setTimeout(() => spawn.find(`code .block-tools div[data-click="run-code"]`).trigger("click"), 1500);
 		}, 500);
 		
-
-		// setTimeout(() => $(".def-desktop_").trigger("mousedown").trigger("mouseup"), 300);
-
 		// return setTimeout(() => this.setupForCursorPages(APP, spawn), 500);
 		// return setTimeout(() => this.deleteParagraphs(APP, spawn), 500);
 
