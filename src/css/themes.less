@@ -6,6 +6,26 @@
 
 	.win-body_ content {
 		&.show-ruler:after { opacity: .2; }
+
+		.CodeMirror {
+			filter: hue-rotate(205deg) saturate(1.25);
+		}
+
+		&.y-book,
+		&.page-view {
+			> .file {
+				&[data-kind="y"],
+				&[data-kind="md"] {
+					code .CodeMirror {
+						background: #565656;
+					}
+
+					.block-tools {
+						background: #838383;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -17,6 +37,26 @@
 		&.show-ruler + .rulerw {
 			border-bottom-color: #4e402e;
 		}
+
+		.CodeMirror {
+			filter: hue-rotate(205deg) saturate(1.25);
+		}
+
+		&.y-book,
+		&.page-view {
+			> .file {
+				&[data-kind="y"],
+				&[data-kind="md"] {
+					hr {
+						filter: sepia(1) hue-rotate(305deg) saturate(5) opacity(0.35);
+					}
+
+					.block-tools {
+						background: #6f604d;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -25,7 +65,17 @@
 	--slider-fg: #817eb9;
 	
 	.win-body_ content {
-		
+		&.y-book,
+		&.page-view {
+			> .file {
+				&[data-kind="y"],
+				&[data-kind="md"] {
+					.block-tools {
+						background: #5f5b9e;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -34,7 +84,25 @@
 	--slider-fg: #5d8258;
 	
 	.win-body_ content {
-		
+		.CodeMirror {
+			filter: saturate(1.35) hue-rotate(245deg);
+		}
+
+		&.y-book,
+		&.page-view {
+			> .file {
+				&[data-kind="y"],
+				&[data-kind="md"] {
+					hr {
+						filter: sepia(1) hue-rotate(65deg) saturate(5) opacity(0.25);
+					}
+
+					.block-tools {
+						background: #476a4f;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -43,7 +111,21 @@
 	--slider-fg: #8a55ad;
 	
 	.win-body_ content {
-		
+		.CodeMirror {
+			filter: hue-rotate(85deg);
+		}
+
+		&.y-book,
+		&.page-view {
+			> .file {
+				&[data-kind="y"],
+				&[data-kind="md"] {
+					.block-tools {
+						background: #7e6586;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -111,6 +193,24 @@
 		&.page-view > .file .page {
 			background: rgba(#fff,.25);
 			outline: 1px solid rgba(#fff,.3);
+		}
+
+		.CodeMirror {
+			filter: invert(1) hue-rotate(275deg);
+		}
+
+		&.y-book,
+		&.page-view {
+			> .file {
+				&[data-kind="y"],
+				&[data-kind="md"] {
+					.block-tools {
+						background: #ffd3fb;
+
+						> div { filter: invert(1); }
+					}
+				}
+			}
 		}
 	}
 }

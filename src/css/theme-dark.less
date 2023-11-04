@@ -32,18 +32,6 @@
 			}
 		}
 
-		content {
-			&.y-book,
-			&.page-view {
-				> .file {
-					.page {
-						background: rgba(#fff,.075);
-						outline-color: var( --grid-l1 );
-					}
-				}
-			}
-		}
-
 		.rulerw {
 			opacity: 1;
 		}
@@ -76,6 +64,33 @@
 					background: var( --grid-bg );
 					outline: 1px solid #606060;
 					box-shadow: 0 1px 7px rgba(#000,.2);
+				}
+			}
+		}
+
+		&.y-book,
+		&.page-view {
+			> .file {
+				.page {
+					background: rgba(#fff,.075);
+					outline-color: var( --grid-l1 );
+				}
+
+				&[data-kind="y"],
+				&[data-kind="md"] {
+					code {
+						border: 0;
+					}
+					
+					hr {
+						filter: opacity(.5);
+					}
+
+					.block-tools {
+						> div:before {
+							filter: grayscale(1) invert(1) brightness(1.5);
+						}
+					}
 				}
 			}
 		}

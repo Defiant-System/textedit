@@ -2,19 +2,42 @@
 
 &[data-theme="dark"] {
 	.CodeMirror {
-		background: #222;
-		color: #ddd;
+		background: #002240;
+		color: #eee;
 	}
 
 	/* GUTTER */
 	.CodeMirror-gutters {
-		border-right-color: #666;
+		border-right-color: rgba(#444,.5);
 	}
 
 	.CodeMirror-linenumber {
-		background: #222;
-		color: #aaa;
+		// background: #222;
+		color: #d0d0d0;
 	}
+
+	.cm-s-default .cm-keyword {color: #ffee80;}
+	.cm-s-default .cm-atom {color: #845dc4;}
+	.cm-s-default .cm-number {color: #ff80e1;}
+	.cm-s-default .cm-def {color: #fff;}
+	.cm-s-default .cm-variable,
+	.cm-s-default .cm-punctuation,
+	.cm-s-default .cm-property {color: #955;}
+	.cm-s-default .cm-operator {}
+	.cm-s-default .cm-variable-2 {color: #9effff;}
+	.cm-s-default .cm-variable-3 {color: #fff;}
+	.cm-s-default .cm-comment {color: #08f;}
+	.cm-s-default .cm-string {color: #3ad900;}
+	.cm-s-default .cm-string-2 {color: #f50;}
+	.cm-s-default .cm-meta {color: #ff9d00;}
+	.cm-s-default .cm-qualifier {color: #955;}
+	.cm-s-default .cm-builtin {color: #ff9e59;}
+	.cm-s-default .cm-bracket {color: #d8d8d8;}
+	.cm-s-default .cm-tag {color: #9effff;}
+	.cm-s-default .cm-attribute {color: #ff80e1;}
+	.cm-s-default .cm-hr {color: #999;}
+	.cm-s-default .cm-link {color: #845dc4;}
+	.cm-s-default .cm-error {color: #9d1e15;}
 }
 
 .CodeMirror {
@@ -53,7 +76,7 @@
 	padding: 0 5px 0 17px;
 	min-width: 20px;
 	text-align: right;
-	background: #fff;
+	// background: #fff;
 	color: #bbb;
 	white-space: nowrap;
 	margin-left: -1px;
@@ -165,9 +188,9 @@
 .cm-s-default .cm-attribute {color: #00c;}
 .cm-s-default .cm-hr {color: #999;}
 .cm-s-default .cm-link {color: #00c;}
+.cm-s-default .cm-error {color: #f00;}
 .cm-s-default .matched-json { background: #ff990050; }
 
-.cm-s-default .cm-error {color: #f00;}
 .cm-invalidchar {color: #f00;}
 
 .CodeMirror-composing {
