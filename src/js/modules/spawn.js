@@ -259,7 +259,7 @@
 
 				if (!Self.yShaderDispatch) {
 					// start yshader in the background
-					karaqu.shell(`win -o ant:yshader 998`)
+					karaqu.shell(`win -o sys:yshader 998`)
 						.then(resp => {
 							// yShader dispatch function
 							Self.yShaderDispatch = resp.result;
