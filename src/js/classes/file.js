@@ -247,7 +247,7 @@ class File {
 		switch (kind) {
 			case "txt":
 				type = "text/plain";
-				data = data.replace(/<br>|<br\/>/g, "\n").stripHtml();
+				data = data.replace(/<br>|<br\/>/g, "\n").stripHtml().trim();
 				break;
 			case "htm":
 			case "html":
