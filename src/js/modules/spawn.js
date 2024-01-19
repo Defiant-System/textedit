@@ -49,15 +49,15 @@
 				Self.dispatch({ ...event, type: "tab.new" });
 				break;
 			case "spawn.blur":
-				if (Spawn.data && Tabs._active) {
-					Edit.saveSelection(Tabs._active);
+				if (Spawn.data && Tabs.active) {
+					Edit.saveSelection(Tabs.active);
 				}
 				// make sure tool obeys window state
 				Tabs.els.toolColor.addClass("blurred");
 				break;
 			case "spawn.focus":
-				if (Spawn.data && Tabs._active) {
-					Edit.restoreSelection(Tabs._active);
+				if (Spawn.data && Tabs.active) {
+					Edit.restoreSelection(Tabs.active);
 				}
 				// make sure tool obeys window state
 				Tabs.els.toolColor.removeClass("blurred");
@@ -146,18 +146,18 @@
 				});
 				break;
 			case "save-file":
-				if (Tabs._active.file.isNew) {
+				if (Tabs.file.isNew) {
 					return Self.dispatch({ ...event, type: "save-file-as" });
 				}
 				// remember; system file is wrapped with custom file class
-				window.dialog.save(Tabs._active.file._file, Tabs._active.file.toBlob());
+				window.dialog.save(Tabs.file._file, Tabs.file.toBlob());
 				break;
 			case "save-file-as":
 				// pass on available file types
 				Spawn.dialog.saveAs(Tabs.file, {
-					txt: () => Tabs._active.file.toBlob({ kind: "txt" }),
-					md: () => Tabs._active.file.toBlob({ kind: "md" }),
-					y: () => Tabs._active.file.toBlob({ kind: "y" }),
+					txt: () => Tabs.file.toBlob({ kind: "txt" }),
+					md: () => Tabs.file.toBlob({ kind: "md" }),
+					y: () => Tabs.file.toBlob({ kind: "y" }),
 				});
 				break;
 			case "new-spawn":
@@ -178,7 +178,7 @@
 				if (event.delayed) {
 					Tabs.removeDelayed();
 				} else if (value > 1) {
-					Tabs._active.tabEl.find(`[sys-click]`).trigger("click");
+					Tabs.active.tabEl.find(`[sys-click]`).trigger("click");
 				} else if (value === 1) {
 					Self.dispatch({ ...event, type: "close-spawn" });
 				}
@@ -191,7 +191,7 @@
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;
 			case "toggle-view-mode":
-				file = Tabs._active.file;
+				file = Tabs.active.file;
 				value = event.el.hasClass("tool-active_");
 				if (value) {
 					el = file._el
@@ -248,7 +248,7 @@
 				event.el.addClass("running");
 				// prepare yShader for new shader code
 				el = event.el.parents("code");
-				editor = Tabs._active.file._editors[el.data("uuid")];
+				editor = Tabs.active.file._editors[el.data("uuid")];
 				data = {
 					type: "run-shader",
 					code: editor.doc.getValue(),
@@ -273,7 +273,7 @@
 				break;
 			case "reset-code":
 				el = event.el.parents("code");
-				editor = Tabs._active.file._editors[el.data("uuid")];
+				editor = Tabs.active.file._editors[el.data("uuid")];
 				value = editor.getTextArea().value;
 				editor.doc.setValue(value);
 				break;
