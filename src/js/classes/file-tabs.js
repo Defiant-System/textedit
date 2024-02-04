@@ -135,7 +135,7 @@ class FileTabs {
 		let tId = ref.tId,
 			file = ref.file,
 			history = ref.history,
-			fileEl = ref.fileEl.clone(true).parent().addClass("hidden"),
+			fileEl = ref.fileEl.addClass("hidden").clone(true),
 			tabEl = this._spawn.tabs.add(file.base, tId, true);
 		// clone & append original fileEl
 		fileEl = this.els.content.append(fileEl);
