@@ -1,4 +1,5 @@
 # textedit
+<img src="public/icon.svg" width=200 height=200>
 
 ## TODO
 [x] Jump caret between two pages
