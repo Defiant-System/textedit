@@ -43,11 +43,11 @@
 			el;
 		// console.log(event);
 		switch (event.type) {
-			case "open-filesystem":
-				APP.spawn.dispatch({ ...event, type: "open-file" });
-				break;
 			case "new-file":
 				APP.spawn.dispatch({ ...event, type: "new-file" });
+				break;
+			case "open-filesystem":
+				APP.spawn.dispatch({ ...event, type: "open-file" });
 				break;
 			case "from-clipboard":
 				// TODO
