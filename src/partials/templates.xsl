@@ -5,9 +5,10 @@
 
 	<div class="block-buttons">
 		<div class="btn" data-click="new-file">
-			<i class="icon-folder-open"></i>
-			New&#8230;
+			<i class="icon-new-file"></i>
+			New
 		</div>
+		
 		<div class="btn" data-click="open-filesystem">
 			<i class="icon-folder-open"></i>
 			Open&#8230;
