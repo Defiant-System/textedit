@@ -136,10 +136,12 @@ class Selection {
 			focusNode = anchorNode;
 			focusOffset = anchorOffset;
 		}
-		range.setStart(anchorNode, anchorOffset);
-		range.setEnd(focusNode, focusOffset);
-		this._selection.removeAllRanges();
-		this._selection.addRange(range);
+		if (range) {
+			range.setStart(anchorNode, anchorOffset);
+			range.setEnd(focusNode, focusOffset);
+			this._selection.removeAllRanges();
+			this._selection.addRange(range);
+		}
 	}
 
 	static getCaretPosition() {
