@@ -138,6 +138,16 @@
 				break;
 
 			// from menubar
+			case "new-file":
+				// blank file
+				data = `<def>
+							<meta name="view" value="page"/>
+							<meta name="hideRulers" value="false"/>
+							<meta name="indents" value="[2,2,14.75]"/>
+						</def>`;
+				file = new karaqu.File({ kind: "md", data });
+				Self.dispatch({ ...event, type: "prepare-file", file });
+				break;
 			case "open-file":
 				Spawn.dialog.open({
 					txt: fsItem => Self.dispatch(fsItem),

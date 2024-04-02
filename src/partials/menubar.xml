@@ -129,6 +129,6 @@
 	<Menu name="Help">
 		<Menu name="Text Edit Help" click="open-help"/>
 		<Menu type="divider"/>
-		<Menu name="License"/>
+		<Menu name="License" shell="win -al"/>
 	</Menu>
 </MenuBar>

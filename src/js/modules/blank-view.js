@@ -46,6 +46,9 @@
 			case "open-filesystem":
 				APP.spawn.dispatch({ ...event, type: "open-file" });
 				break;
+			case "new-file":
+				APP.spawn.dispatch({ ...event, type: "new-file" });
+				break;
 			case "from-clipboard":
 				// TODO
 				break;
@@ -71,7 +74,7 @@
 				break;
 				break;
 			case "add-recent-file":
-				if (!event.file.path) return;
+				if (!event.file.path || !event.file.xNode) return;
 				let str = `<i kind="${event.file.kind}" name="${event.file.base}" path="${event.file.path}"/>`,
 					xFile = $.nodeFromString(str),
 					xExist = Self.xRecent.selectSingleNode(`//Recents/*[@path="${event.file.path}"]`);
