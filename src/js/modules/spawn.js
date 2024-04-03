@@ -122,7 +122,7 @@
 				// opening image file from application package
 				event.samples.map(async name => {
 					// forward event to app
-					let file = await Tabs.openLocal(`~/samples/${name}`);
+					let file = await Tabs.openLocal(`/cdn/samples/text/${name}`);
 					Self.dispatch({ ...event, type: "prepare-file", isSample: true, file });
 				});
 				break;
