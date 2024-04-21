@@ -1,6 +1,6 @@
 <Spawn id="spawn">
 	<Head>
-		<meta name="title" value="New File"/>
+		<meta name="title" value="Text Edit"/>
 		<meta name="width" value="840" min="580"/>
 		<meta name="height" value="560" min="300"/>
 		<meta name="top" value="170"/>
