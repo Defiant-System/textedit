@@ -177,11 +177,6 @@ class FileTabs {
 				let el = $(elem);
 				if (el.data("id") !== tId) el.addClass("hidden");
 			});
-
-			if (this._active.fileEl) {
-				// hide blurred body
-				// this._active.fileEl.parent().addClass("hidden");
-			}
 		}
 		// reference to active tab
 		this._active = this._stack[tId];
