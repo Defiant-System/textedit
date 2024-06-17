@@ -38,6 +38,7 @@
 	<xsl:for-each select="./Samples/*">
 		<div class="sample">
 			<xsl:attribute name="data-kind"><xsl:value-of select="@kind"/></xsl:attribute>
+			<xsl:attribute name="data-path"><xsl:value-of select="@path"/></xsl:attribute>
 			<span><xsl:value-of select="@name"/></span>
 		</div>
 	</xsl:for-each>

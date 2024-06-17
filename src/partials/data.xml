@@ -1,10 +1,10 @@
 <Data>
 	<Samples>
-		<i kind="txt" name="deep learning.txt"/>
-		<i kind="md" name="catamaran.md"/>
-		<i kind="md" name="stackedit.md"/>
-		<i kind="y" name="shader.y"/>
-		<i kind="rtf" name="sample.rtf"/>
+		<i kind="txt" path="/cdn/samples/text/" name="deep learning.txt"/>
+		<i kind="md" path="/cdn/samples/text/" name="catamaran.md"/>
+		<i kind="y" path="~/samples/" name="cool-shaders.y"/>
+		<i kind="y" path="/cdn/samples/text/" name="shader.y"/>
+		<i kind="rtf" path="/cdn/samples/text/" name="sample.rtf"/>
 	</Samples>
 	<Recents>
 		<i kind="md" name="catamaran.md" path="/fs/Desktop/catamaran.md"/>

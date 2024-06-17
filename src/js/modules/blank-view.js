@@ -60,7 +60,8 @@
 				APP.spawn.dispatch({ type: "close-tab", spawn: Spawn, delayed: true });
 				
 				// send event to APP for proxy down to spawn
-				APP.dispatch({ ...event, type: "load-samples", samples: [el.find("span").text()] });
+				let filepath = el.data("path") + el.find("span").text();
+				APP.dispatch({ ...event, type: "load-samples", samples: [filepath] });
 				break;
 			case "select-recent-file":
 				el = $(event.target);
