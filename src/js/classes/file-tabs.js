@@ -199,6 +199,8 @@ class FileTabs {
 			this.els.content.parent().css(data);
 			// UI update
 			this.update();
+			// focus cursor
+			Edit.restoreSelection(this._active);
 		} else {
 			// reset view / show blank view
 			this.dispatch({ type: "show-blank-view", spawn: this._spawn });

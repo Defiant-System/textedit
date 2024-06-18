@@ -63,14 +63,18 @@ let Edit = {
 		tab.selectedRange = this.getCurrentRange();
 	},
 	restoreSelection(tab) {
-		if ( tab.selectedRange ) {
+		if (tab.selectedRange) {
 			let selection = document.getSelection();
 			selection.removeAllRanges();
-			selection.addRange( tab.selectedRange );
+			selection.addRange(tab.selectedRange);
 		} else {
 			// put cursor at start
 			let Tabs = textedit.spawn.ruler.tabs;
 			let node = tab.fileEl.find(".page > div")[0].selectSingleNode(`.//text()`);
+			if (!node) {
+				tab.fileEl.find(".page > div")[0].textContent = " ";
+				node = tab.fileEl.find(".page > div")[0].selectSingleNode(`.//text()`);
+			}
 			Tabs.dispatch({ type: "editor.select-text", spawn: Tabs._spawn, node, start: 0, length: 0 });
 		}
 	},

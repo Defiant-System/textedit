@@ -183,7 +183,7 @@ class Selection {
 		let node = this._selection.baseNode;
 		if (!node) return;
 		// climb to root node
-		while (node.nodeType !== Node.ELEMENT_NODE || !node.getAttribute("contenteditable")) {
+		while (node && node.nodeType !== Node.ELEMENT_NODE || !node.getAttribute("contenteditable")) {
 			node = node.parentNode;
 		}
 		return node;
