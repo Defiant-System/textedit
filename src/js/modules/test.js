@@ -2,8 +2,11 @@
 let Test = {
 	init(APP, spawn) {
 		// TODO: Test with TABLE between pages
-
 		return;
+
+		// setTimeout(() => APP.dispatch({ type: "save-file-as", spawn }), 300);
+		// setTimeout(() => spawn.find(`button[sys-click="save-dialog-close"]`).trigger("click"), 1000);
+
 		// setTimeout(() => $(".def-desktop_").trigger("mousedown").trigger("mouseup"), 600);
 		
 		setTimeout(() => spawn.find(`.toolbar-tool_[data-click="toggle-view-mode"]`).trigger("click"), 500);
@@ -27,7 +30,6 @@ let Test = {
 		// setTimeout(() => spawn.find(".ant-file_:nth(4)").trigger("click"), 500);
 
 		// setTimeout(() => APP.dispatch({ type: "open-file", spawn }), 300);
-		// setTimeout(() => APP.dispatch({ type: "save-file-as", spawn }), 300);
 		// setTimeout(() => spawn.dialog.alert("test"), 300);
 
 		return;
