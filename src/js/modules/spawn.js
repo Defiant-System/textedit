@@ -121,6 +121,9 @@
 			case "load-samples":
 				// opening image file from application package
 				event.samples.map(async name => {
+					// let samples check
+					let check = window.bluePrint.selectSingleNode(`//Data/Samples/*[@name="${name}"]`);
+					if (check) name = check.getAttribute("path") + name;
 					// forward event to app
 					let file = await Tabs.openLocal(name);
 					Self.dispatch({ ...event, type: "prepare-file", isSample: true, file });
