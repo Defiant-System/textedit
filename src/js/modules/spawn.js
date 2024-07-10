@@ -163,14 +163,14 @@
 					return Self.dispatch({ ...event, type: "save-file-as" });
 				}
 				// remember; system file is wrapped with custom file class
-				window.dialog.save(Tabs.file._file, Tabs.file.toBlob());
+				window.dialog.save(Tabs.file._file, Tabs.toBlob());
 				break;
 			case "save-file-as":
 				// pass on available file types
 				Spawn.dialog.saveAs(Tabs.file, {
-					txt: () => Tabs.file.toBlob({ kind: "txt" }),
-					md: () => Tabs.file.toBlob({ kind: "md" }),
-					y: () => Tabs.file.toBlob({ kind: "y" }),
+					txt: () => Tabs.toBlob({ kind: "txt" }),
+					md: () => Tabs.toBlob({ kind: "md" }),
+					y: () => Tabs.toBlob({ kind: "y" }),
 				});
 				break;
 			case "new-spawn":

@@ -3,8 +3,9 @@ let Test = {
 	init(APP, spawn) {
 		// TODO: Test with TABLE between pages
 		return;
+		
+		setTimeout(() => APP.dispatch({ type: "save-file-as", spawn }), 300);
 
-		// setTimeout(() => APP.dispatch({ type: "save-file-as", spawn }), 300);
 		// setTimeout(() => spawn.find(`button[sys-click="save-dialog-close"]`).trigger("click"), 1000);
 
 		// setTimeout(() => $(".def-desktop_").trigger("mousedown").trigger("mouseup"), 600);
