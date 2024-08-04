@@ -242,21 +242,21 @@ class File {
 		let data = this._el.html(),
 			// file kind, if not specified
 			kind = opt.kind || this.kind,
-			type;
+			type = karaqu.File.getMime(kind);
 
 		switch (kind) {
 			case "txt":
-				type = "text/plain";
+				// type = "text/plain";
 				data = data.replace(/<br>|<br\/>/g, "\n").stripHtml().trim();
 				break;
 			case "htm":
 			case "html":
-				type = "text/html";
+				// type = "text/html";
 				break;
 			case "y":
 			case "md":
 				// TODO: if in page view mode, concat string from page-elements
-				type = "text/markdown";
+				// type = "text/markdown";
 				data = Markdown.fromHTML(data);
 				break;
 		}
