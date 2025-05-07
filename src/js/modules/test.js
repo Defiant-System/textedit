@@ -3,6 +3,10 @@ let Test = {
 	init(APP, spawn) {
 		// TODO: Test with TABLE between pages
 		return;
+
+		return setTimeout(() => spawn.find(`.selectbox-selected_:nth(0)`).trigger("mousedown"), 300);
+
+		return setTimeout(() => spawn.find(`.sample:nth(1)`).trigger("click"), 300);
 		
 		setTimeout(() => APP.dispatch({ type: "save-file-as", spawn }), 300);
 

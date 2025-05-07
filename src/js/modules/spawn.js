@@ -292,7 +292,7 @@
 				break;
 
 			default:
-				if (event.type.startsWith("editor.")) {
+				if (event.type && event.type.startsWith("editor.")) {
 					// proxy event
 					return Tabs.dispatch(event);
 				}
