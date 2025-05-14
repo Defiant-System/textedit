@@ -4,6 +4,14 @@ let Test = {
 		// TODO: Test with TABLE between pages
 		return;
 
+		return setTimeout(() => {
+			spawn.data.tabs.els.content.find(`div[data-id="editor"]`).html("Testing 12231");
+			// console.log( spawn.data.tabs.els.content.find(`div[data-id="editor"]`) );
+
+			APP.dispatch({ type: "save-file", spawn });
+		}, 1000);
+
+
 		return setTimeout(() => spawn.find(`.selectbox-selected_:nth(0)`).trigger("mousedown"), 300);
 
 		return setTimeout(() => spawn.find(`.sample:nth(1)`).trigger("click"), 300);

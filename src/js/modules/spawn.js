@@ -163,7 +163,7 @@
 					return Self.dispatch({ ...event, type: "save-file-as" });
 				}
 				// remember; system file is wrapped with custom file class
-				window.dialog.save(Tabs.file._file, Tabs.toBlob());
+				Spawn.dialog.save(Tabs.file, Tabs.toBlob());
 				break;
 			case "save-file-as":
 				// pass on available file types
