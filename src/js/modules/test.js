@@ -4,8 +4,15 @@ let Test = {
 		// TODO: Test with TABLE between pages
 		return;
 
+		
 		return setTimeout(() => {
-			spawn.data.tabs.els.content.find(`div[data-id="editor"]`).html("Testing 12231");
+			spawn.find(`.blank-view .btn[data-click="new-file"]`).trigger("click");
+			setTimeout(() => spawn.data.tabs.els.content.find(`div[data-id="editor"]`).html("Testing more "+ Date.now()), 300);
+			setTimeout(() => APP.dispatch({ type: "save-file", spawn }), 700);
+		}, 300);
+
+		return setTimeout(() => {
+			spawn.data.tabs.els.content.find(`div[data-id="editor"]`).html("Testing more "+ Date.now());
 			// console.log( spawn.data.tabs.els.content.find(`div[data-id="editor"]`) );
 
 			APP.dispatch({ type: "save-file", spawn });

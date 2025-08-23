@@ -159,7 +159,7 @@
 				});
 				break;
 			case "save-file":
-				if (Tabs.file.isNew) {
+				if (Tabs._active.file.isNew) {
 					return Self.dispatch({ ...event, type: "save-file-as" });
 				}
 				// remember; system file is wrapped with custom file class
