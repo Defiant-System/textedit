@@ -2,7 +2,10 @@
 let Test = {
 	init(APP, spawn) {
 		// TODO: Test with TABLE between pages
+		
 		return;
+
+		// return setTimeout(() => spawn.find(`.sample:nth(1)`).trigger("click"), 300);
 
 		
 		return setTimeout(() => {
